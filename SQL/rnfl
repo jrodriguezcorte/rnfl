@@ -1,0 +1,3945 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.11
+-- Dumped by pg_dump version 9.1.9
+-- Started on 2014-10-12 15:47:14 VET
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 208 (class 3079 OID 11716)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2253 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 172 (class 1259 OID 129016)
+-- Dependencies: 5
+-- Name: actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE actividad (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    ejecutada boolean,
+    cantidad_participantes_m integer,
+    cantidad_participantes_f integer,
+    alcanzo_tiempo boolean,
+    causas_incumplimiento text,
+    observaciones text,
+    id_tipo_actividad integer,
+    observacion_tipo_actividad character varying,
+    fecha date,
+    hora timestamp without time zone,
+    facilitador character varying,
+    id_feria integer
+);
+
+
+ALTER TABLE public.actividad OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 129014)
+-- Dependencies: 5 172
+-- Name: actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE actividad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.actividad_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2254 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE actividad_id_seq OWNED BY actividad.id;
+
+
+--
+-- TOC entry 174 (class 1259 OID 129027)
+-- Dependencies: 5
+-- Name: estado; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE estado (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    id_pais integer
+);
+
+
+ALTER TABLE public.estado OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 129025)
+-- Dependencies: 174 5
+-- Name: estado_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE estado_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.estado_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2255 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: estado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE estado_id_seq OWNED BY estado.id;
+
+
+--
+-- TOC entry 199 (class 1259 OID 129249)
+-- Dependencies: 5
+-- Name: expositor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE expositor (
+    id bigint NOT NULL,
+    nombre character varying,
+    apellido character varying,
+    cedula character varying,
+    rif character varying,
+    id_pais integer
+);
+
+
+ALTER TABLE public.expositor OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 129310)
+-- Dependencies: 5
+-- Name: expositor_feria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE expositor_feria (
+    id bigint NOT NULL,
+    id_feria integer,
+    id_expositor integer,
+    nombe_empresa character varying,
+    nombre_director character varying,
+    nombre_ejecutivo_feria character varying,
+    direccion character varying,
+    ciudad character varying,
+    id_pais integer,
+    telefono_local character varying,
+    telefono_celular character varying,
+    fax character varying,
+    email character varying,
+    sitio_web character varying,
+    tipo_expositor character varying,
+    otro_tipo_expositor character varying,
+    numero_stand integer,
+    costo_stand numeric,
+    metros_stand integer,
+    otro_linea_editorial character varying,
+    libro_mas_vendido character varying,
+    costo_libro numeric,
+    cantidad_libro_vendido integer,
+    observaciones text
+);
+
+
+ALTER TABLE public.expositor_feria OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 129308)
+-- Dependencies: 203 5
+-- Name: expositor_feria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE expositor_feria_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.expositor_feria_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2256 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: expositor_feria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE expositor_feria_id_seq OWNED BY expositor_feria.id;
+
+
+--
+-- TOC entry 198 (class 1259 OID 129247)
+-- Dependencies: 5 199
+-- Name: expositor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE expositor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.expositor_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2257 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: expositor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE expositor_id_seq OWNED BY expositor.id;
+
+
+--
+-- TOC entry 201 (class 1259 OID 129282)
+-- Dependencies: 5
+-- Name: expositor_selloeditorial; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE expositor_selloeditorial (
+    id bigint NOT NULL,
+    id_feria integer,
+    id_expositor integer,
+    id_sello_editorial integer
+);
+
+
+ALTER TABLE public.expositor_selloeditorial OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 129280)
+-- Dependencies: 201 5
+-- Name: expositor_sello_editorial_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE expositor_sello_editorial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.expositor_sello_editorial_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2258 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: expositor_sello_editorial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE expositor_sello_editorial_id_seq OWNED BY expositor_selloeditorial.id;
+
+
+--
+-- TOC entry 176 (class 1259 OID 129035)
+-- Dependencies: 5
+-- Name: feria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE feria (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    descripcion character varying(255),
+    fecha_inicio date,
+    fecha_fin date,
+    id_pais integer,
+    id_estado integer,
+    id_municipio integer,
+    id_parroquia integer,
+    id_region integer,
+    costo numeric,
+    libro_mas_vendido character varying(255),
+    autor_libro_mas_vendido character varying(255),
+    extension_superficie numeric
+);
+
+
+ALTER TABLE public.feria OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 129033)
+-- Dependencies: 5 176
+-- Name: feria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE feria_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.feria_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2259 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: feria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE feria_id_seq OWNED BY feria.id;
+
+
+--
+-- TOC entry 178 (class 1259 OID 129046)
+-- Dependencies: 5
+-- Name: feria_selloeditorial; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE feria_selloeditorial (
+    id bigint NOT NULL,
+    id_feria integer,
+    id_selloeditorial integer
+);
+
+
+ALTER TABLE public.feria_selloeditorial OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 129044)
+-- Dependencies: 178 5
+-- Name: feria_selloeditorial_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE feria_selloeditorial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.feria_selloeditorial_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2260 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: feria_selloeditorial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE feria_selloeditorial_id_seq OWNED BY feria_selloeditorial.id;
+
+
+--
+-- TOC entry 205 (class 1259 OID 129319)
+-- Dependencies: 5
+-- Name: linea_editorial; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE linea_editorial (
+    id bigint NOT NULL,
+    nombre character varying,
+    observaciones text
+);
+
+
+ALTER TABLE public.linea_editorial OWNER TO postgres;
+
+--
+-- TOC entry 207 (class 1259 OID 129362)
+-- Dependencies: 5
+-- Name: linea_editorial_exposior_feria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE linea_editorial_exposior_feria (
+    id bigint NOT NULL,
+    id_expositor_feria integer,
+    id_linea_editorial integer
+);
+
+
+ALTER TABLE public.linea_editorial_exposior_feria OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1259 OID 129360)
+-- Dependencies: 5 207
+-- Name: linea_editorial_exposior_feria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE linea_editorial_exposior_feria_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.linea_editorial_exposior_feria_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2261 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: linea_editorial_exposior_feria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE linea_editorial_exposior_feria_id_seq OWNED BY linea_editorial_exposior_feria.id;
+
+
+--
+-- TOC entry 204 (class 1259 OID 129317)
+-- Dependencies: 5 205
+-- Name: linea_editorial_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE linea_editorial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.linea_editorial_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2262 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: linea_editorial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE linea_editorial_id_seq OWNED BY linea_editorial.id;
+
+
+--
+-- TOC entry 180 (class 1259 OID 129054)
+-- Dependencies: 5
+-- Name: municipio; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE municipio (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    id_estado integer
+);
+
+
+ALTER TABLE public.municipio OWNER TO postgres;
+
+--
+-- TOC entry 179 (class 1259 OID 129052)
+-- Dependencies: 5 180
+-- Name: municipio_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE municipio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.municipio_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2263 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: municipio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE municipio_id_seq OWNED BY municipio.id;
+
+
+--
+-- TOC entry 182 (class 1259 OID 129062)
+-- Dependencies: 5
+-- Name: pais; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pais (
+    id bigint NOT NULL,
+    nombre character varying(255)
+);
+
+
+ALTER TABLE public.pais OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 129060)
+-- Dependencies: 5 182
+-- Name: pais_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pais_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pais_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2264 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: pais_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pais_id_seq OWNED BY pais.id;
+
+
+--
+-- TOC entry 184 (class 1259 OID 129070)
+-- Dependencies: 5
+-- Name: parroquia; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE parroquia (
+    id bigint NOT NULL,
+    nombre character varying(255) NOT NULL,
+    id_municipio integer
+);
+
+
+ALTER TABLE public.parroquia OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 129068)
+-- Dependencies: 184 5
+-- Name: parroquia_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE parroquia_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.parroquia_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2265 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: parroquia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE parroquia_id_seq OWNED BY parroquia.id;
+
+
+--
+-- TOC entry 195 (class 1259 OID 129194)
+-- Dependencies: 5
+-- Name: ponente; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ponente (
+    id bigint NOT NULL,
+    nombre character varying,
+    apellido character varying,
+    cedula character varying,
+    rif character varying,
+    sexo character varying,
+    nacionalidad integer,
+    telefono_local character varying,
+    telefono_celular character varying,
+    email character varying,
+    observaciones text
+);
+
+
+ALTER TABLE public.ponente OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 129229)
+-- Dependencies: 5
+-- Name: ponente_actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ponente_actividad (
+    id bigint NOT NULL,
+    id_ponente integer,
+    id_actividad integer,
+    id_feria integer
+);
+
+
+ALTER TABLE public.ponente_actividad OWNER TO postgres;
+
+--
+-- TOC entry 194 (class 1259 OID 129192)
+-- Dependencies: 195 5
+-- Name: ponente_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ponente_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ponente_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2266 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: ponente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ponente_id_seq OWNED BY ponente.id;
+
+
+--
+-- TOC entry 196 (class 1259 OID 129227)
+-- Dependencies: 5 197
+-- Name: ponente_rel_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ponente_rel_actividad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ponente_rel_actividad_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2267 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: ponente_rel_actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ponente_rel_actividad_id_seq OWNED BY ponente_actividad.id;
+
+
+--
+-- TOC entry 185 (class 1259 OID 129076)
+-- Dependencies: 5
+-- Name: region; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE region (
+    id integer NOT NULL,
+    nombre character varying(255)
+);
+
+
+ALTER TABLE public.region OWNER TO postgres;
+
+--
+-- TOC entry 187 (class 1259 OID 129083)
+-- Dependencies: 5
+-- Name: sello_editorial; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sello_editorial (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    id_pais integer
+);
+
+
+ALTER TABLE public.sello_editorial OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 129081)
+-- Dependencies: 187 5
+-- Name: sello_editorial_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sello_editorial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sello_editorial_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2268 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: sello_editorial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sello_editorial_id_seq OWNED BY sello_editorial.id;
+
+
+--
+-- TOC entry 162 (class 1259 OID 128919)
+-- Dependencies: 5
+-- Name: sf_guard_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_group (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.sf_guard_group OWNER TO postgres;
+
+--
+-- TOC entry 161 (class 1259 OID 128917)
+-- Dependencies: 162 5
+-- Name: sf_guard_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sf_guard_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sf_guard_group_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2269 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: sf_guard_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sf_guard_group_id_seq OWNED BY sf_guard_group.id;
+
+
+--
+-- TOC entry 165 (class 1259 OID 128943)
+-- Dependencies: 5
+-- Name: sf_guard_group_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_group_permission (
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_group_permission OWNER TO postgres;
+
+--
+-- TOC entry 164 (class 1259 OID 128932)
+-- Dependencies: 5
+-- Name: sf_guard_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.sf_guard_permission OWNER TO postgres;
+
+--
+-- TOC entry 163 (class 1259 OID 128930)
+-- Dependencies: 5 164
+-- Name: sf_guard_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sf_guard_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sf_guard_permission_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2270 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: sf_guard_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sf_guard_permission_id_seq OWNED BY sf_guard_permission.id;
+
+
+--
+-- TOC entry 170 (class 1259 OID 128974)
+-- Dependencies: 5
+-- Name: sf_guard_remember_key; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_remember_key (
+    user_id integer NOT NULL,
+    remember_key character varying(32),
+    ip_address character varying(50) NOT NULL,
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.sf_guard_remember_key OWNER TO postgres;
+
+--
+-- TOC entry 167 (class 1259 OID 128950)
+-- Dependencies: 2077 2078 2079 5
+-- Name: sf_guard_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_user (
+    id integer NOT NULL,
+    username character varying(128) NOT NULL,
+    algorithm character varying(128) DEFAULT 'sha1'::character varying NOT NULL,
+    salt character varying(128) NOT NULL,
+    password character varying(128) NOT NULL,
+    created_at timestamp without time zone,
+    last_login timestamp without time zone,
+    is_active boolean DEFAULT true NOT NULL,
+    is_super_admin boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_user OWNER TO postgres;
+
+--
+-- TOC entry 169 (class 1259 OID 128969)
+-- Dependencies: 5
+-- Name: sf_guard_user_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_user_group (
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_user_group OWNER TO postgres;
+
+--
+-- TOC entry 166 (class 1259 OID 128948)
+-- Dependencies: 5 167
+-- Name: sf_guard_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sf_guard_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sf_guard_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2271 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: sf_guard_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sf_guard_user_id_seq OWNED BY sf_guard_user.id;
+
+
+--
+-- TOC entry 168 (class 1259 OID 128964)
+-- Dependencies: 5
+-- Name: sf_guard_user_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_user_permission (
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_user_permission OWNER TO postgres;
+
+--
+-- TOC entry 189 (class 1259 OID 129091)
+-- Dependencies: 5
+-- Name: tipo_actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tipo_actividad (
+    id bigint NOT NULL,
+    nombre character varying(255)
+);
+
+
+ALTER TABLE public.tipo_actividad OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 129089)
+-- Dependencies: 189 5
+-- Name: tipo_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tipo_actividad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipo_actividad_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2272 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: tipo_actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tipo_actividad_id_seq OWNED BY tipo_actividad.id;
+
+
+--
+-- TOC entry 191 (class 1259 OID 129099)
+-- Dependencies: 5
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    apellido character varying(255),
+    cedula character varying(255),
+    isbn character varying(255),
+    login character varying(255),
+    contrasena character varying(255),
+    sf_guard_user integer,
+    sexo boolean,
+    sf_guard_user_group integer,
+    correo character varying(255),
+    telefono character varying(255)
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 129097)
+-- Dependencies: 191 5
+-- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE usuario_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.usuario_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2273 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: usuario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE usuario_id_seq OWNED BY usuario.id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 129110)
+-- Dependencies: 5
+-- Name: visitante; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE visitante (
+    id bigint NOT NULL,
+    fecha date,
+    numero integer,
+    id_feria integer
+);
+
+
+ALTER TABLE public.visitante OWNER TO postgres;
+
+--
+-- TOC entry 192 (class 1259 OID 129108)
+-- Dependencies: 5 193
+-- Name: visitante_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE visitante_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.visitante_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2274 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: visitante_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE visitante_id_seq OWNED BY visitante.id;
+
+
+--
+-- TOC entry 2080 (class 2604 OID 129019)
+-- Dependencies: 171 172 172
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actividad ALTER COLUMN id SET DEFAULT nextval('actividad_id_seq'::regclass);
+
+
+--
+-- TOC entry 2081 (class 2604 OID 129030)
+-- Dependencies: 173 174 174
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY estado ALTER COLUMN id SET DEFAULT nextval('estado_id_seq'::regclass);
+
+
+--
+-- TOC entry 2093 (class 2604 OID 129252)
+-- Dependencies: 199 198 199
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor ALTER COLUMN id SET DEFAULT nextval('expositor_id_seq'::regclass);
+
+
+--
+-- TOC entry 2095 (class 2604 OID 129313)
+-- Dependencies: 202 203 203
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria ALTER COLUMN id SET DEFAULT nextval('expositor_feria_id_seq'::regclass);
+
+
+--
+-- TOC entry 2094 (class 2604 OID 129285)
+-- Dependencies: 201 200 201
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_selloeditorial ALTER COLUMN id SET DEFAULT nextval('expositor_sello_editorial_id_seq'::regclass);
+
+
+--
+-- TOC entry 2082 (class 2604 OID 129038)
+-- Dependencies: 175 176 176
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria ALTER COLUMN id SET DEFAULT nextval('feria_id_seq'::regclass);
+
+
+--
+-- TOC entry 2083 (class 2604 OID 129049)
+-- Dependencies: 178 177 178
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria_selloeditorial ALTER COLUMN id SET DEFAULT nextval('feria_selloeditorial_id_seq'::regclass);
+
+
+--
+-- TOC entry 2096 (class 2604 OID 129322)
+-- Dependencies: 205 204 205
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY linea_editorial ALTER COLUMN id SET DEFAULT nextval('linea_editorial_id_seq'::regclass);
+
+
+--
+-- TOC entry 2097 (class 2604 OID 129365)
+-- Dependencies: 207 206 207
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY linea_editorial_exposior_feria ALTER COLUMN id SET DEFAULT nextval('linea_editorial_exposior_feria_id_seq'::regclass);
+
+
+--
+-- TOC entry 2084 (class 2604 OID 129057)
+-- Dependencies: 179 180 180
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY municipio ALTER COLUMN id SET DEFAULT nextval('municipio_id_seq'::regclass);
+
+
+--
+-- TOC entry 2085 (class 2604 OID 129065)
+-- Dependencies: 182 181 182
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pais ALTER COLUMN id SET DEFAULT nextval('pais_id_seq'::regclass);
+
+
+--
+-- TOC entry 2086 (class 2604 OID 129073)
+-- Dependencies: 183 184 184
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY parroquia ALTER COLUMN id SET DEFAULT nextval('parroquia_id_seq'::regclass);
+
+
+--
+-- TOC entry 2091 (class 2604 OID 129197)
+-- Dependencies: 195 194 195
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente ALTER COLUMN id SET DEFAULT nextval('ponente_id_seq'::regclass);
+
+
+--
+-- TOC entry 2092 (class 2604 OID 129232)
+-- Dependencies: 197 196 197
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad ALTER COLUMN id SET DEFAULT nextval('ponente_rel_actividad_id_seq'::regclass);
+
+
+--
+-- TOC entry 2087 (class 2604 OID 129086)
+-- Dependencies: 186 187 187
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sello_editorial ALTER COLUMN id SET DEFAULT nextval('sello_editorial_id_seq'::regclass);
+
+
+--
+-- TOC entry 2074 (class 2604 OID 128922)
+-- Dependencies: 162 161 162
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_group ALTER COLUMN id SET DEFAULT nextval('sf_guard_group_id_seq'::regclass);
+
+
+--
+-- TOC entry 2075 (class 2604 OID 128935)
+-- Dependencies: 164 163 164
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_permission ALTER COLUMN id SET DEFAULT nextval('sf_guard_permission_id_seq'::regclass);
+
+
+--
+-- TOC entry 2076 (class 2604 OID 128953)
+-- Dependencies: 167 166 167
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user ALTER COLUMN id SET DEFAULT nextval('sf_guard_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 2088 (class 2604 OID 129094)
+-- Dependencies: 188 189 189
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tipo_actividad ALTER COLUMN id SET DEFAULT nextval('tipo_actividad_id_seq'::regclass);
+
+
+--
+-- TOC entry 2089 (class 2604 OID 129102)
+-- Dependencies: 190 191 191
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usuario ALTER COLUMN id SET DEFAULT nextval('usuario_id_seq'::regclass);
+
+
+--
+-- TOC entry 2090 (class 2604 OID 129113)
+-- Dependencies: 192 193 193
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY visitante ALTER COLUMN id SET DEFAULT nextval('visitante_id_seq'::regclass);
+
+
+--
+-- TOC entry 2210 (class 0 OID 129016)
+-- Dependencies: 172 2246
+-- Data for Name: actividad; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY actividad (id, nombre, ejecutada, cantidad_participantes_m, cantidad_participantes_f, alcanzo_tiempo, causas_incumplimiento, observaciones, id_tipo_actividad, observacion_tipo_actividad, fecha, hora, facilitador, id_feria) FROM stdin;
+2	retetertr	\N	4	5	\N		<p><strong style="font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">Lorem Ipsum</strong><span style="font-family: Arial, Helvetica, sans; font-size: 11px; line-height: 14px; text-align: justify;">&nbsp;es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno est&aacute;ndar de las industrias desde el a&ntilde;o 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido us&oacute; una galer&iacute;a de textos y los mezcl&oacute; de tal manera que logr&oacute; hacer un libro de textos especimen. No s&oacute;lo sobrevivi&oacute; 500 a&ntilde;os, sino que tambien ingres&oacute; como texto de relleno en documentos electr&oacute;nicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creaci&oacute;n de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y m&aacute;s recientemente con software de autoedici&oacute;n, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</span></p>	1		2014-10-04	2014-10-04 00:00:00		\N
+\.
+
+
+--
+-- TOC entry 2275 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: actividad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('actividad_id_seq', 2, true);
+
+
+--
+-- TOC entry 2212 (class 0 OID 129027)
+-- Dependencies: 174 2246
+-- Data for Name: estado; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY estado (id, nombre, id_pais) FROM stdin;
+1	DTTO. CAPITAL	1
+2	ANZOATEGUI	1
+3	APURE	1
+4	ARAGUA	1
+5	BARINAS	1
+6	BOLIVAR	1
+7	CARABOBO	1
+8	COJEDES	1
+9	FALCON	1
+10	GUARICO	1
+11	LARA	1
+12	MERIDA	1
+13	MIRANDA	1
+14	MONAGAS	1
+15	NUEVA ESPARTA	1
+16	PORTUGUESA	1
+17	SUCRE	1
+18	TACHIRA	1
+19	TRUJILLO	1
+20	YARACUY	1
+21	ZULIA	1
+22	AMAZONAS	1
+23	DELTA AMACURO	1
+24	VARGAS	1
+\.
+
+
+--
+-- TOC entry 2276 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: estado_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('estado_id_seq', 25, true);
+
+
+--
+-- TOC entry 2237 (class 0 OID 129249)
+-- Dependencies: 199 2246
+-- Data for Name: expositor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY expositor (id, nombre, apellido, cedula, rif, id_pais) FROM stdin;
+2	ddd	dsede	V-1111	V-1111	1
+3	qwerty	erwererewr	V-1234566	J-1222222	1
+4	qwerty	erwererewr	V-1234566	J-1222222	1
+\.
+
+
+--
+-- TOC entry 2241 (class 0 OID 129310)
+-- Dependencies: 203 2246
+-- Data for Name: expositor_feria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY expositor_feria (id, id_feria, id_expositor, nombe_empresa, nombre_director, nombre_ejecutivo_feria, direccion, ciudad, id_pais, telefono_local, telefono_celular, fax, email, sitio_web, tipo_expositor, otro_tipo_expositor, numero_stand, costo_stand, metros_stand, otro_linea_editorial, libro_mas_vendido, costo_libro, cantidad_libro_vendido, observaciones) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2277 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: expositor_feria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('expositor_feria_id_seq', 1, false);
+
+
+--
+-- TOC entry 2278 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: expositor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('expositor_id_seq', 4, true);
+
+
+--
+-- TOC entry 2279 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: expositor_sello_editorial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('expositor_sello_editorial_id_seq', 1, false);
+
+
+--
+-- TOC entry 2239 (class 0 OID 129282)
+-- Dependencies: 201 2246
+-- Data for Name: expositor_selloeditorial; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY expositor_selloeditorial (id, id_feria, id_expositor, id_sello_editorial) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2214 (class 0 OID 129035)
+-- Dependencies: 176 2246
+-- Data for Name: feria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY feria (id, nombre, descripcion, fecha_inicio, fecha_fin, id_pais, id_estado, id_municipio, id_parroquia, id_region, costo, libro_mas_vendido, autor_libro_mas_vendido, extension_superficie) FROM stdin;
+1	Feria del Libro	<p>Feria del Libro&nbsp;Feria del Libro&nbsp;Feria del Libro<strong>&nbsp;</strong><strong>Feria del Libro</strong></p>	2014-10-01	2014-10-31	1	1	1	1	1	\N			\N
+2	PRuEBA	<p>dfdfggdhshthta</p>	2014-10-05	2014-10-05	1	9	94	306	1	\N			\N
+3	edewdwewe	<p>wddqdwfwrrf4f</p>	2014-10-05	2014-10-05	1	1	1	11	1	\N			\N
+4	6y454	<p>3g3q3q4</p>	2014-10-07	2014-10-31	1	1	1	11	1	\N			\N
+5	3333	<p>wfwdffwf</p>	2014-08-14	2014-10-28	1	13	178	612	1	\N			\N
+6	asEFEF	<p>afafafafafa</p>	2014-10-05	2014-10-05	1	1	1	11	1	\N			\N
+7	asffsfaffff	<p>asfdfff</p>	2014-10-05	2014-10-05	1	1	1	11	1	\N			\N
+8	44444444444	<p>2rgrqg5g</p>	2014-10-05	2014-10-05	1	1	1	11	1	\N			\N
+\.
+
+
+--
+-- TOC entry 2280 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: feria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('feria_id_seq', 8, true);
+
+
+--
+-- TOC entry 2216 (class 0 OID 129046)
+-- Dependencies: 178 2246
+-- Data for Name: feria_selloeditorial; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY feria_selloeditorial (id, id_feria, id_selloeditorial) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2281 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: feria_selloeditorial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('feria_selloeditorial_id_seq', 1, false);
+
+
+--
+-- TOC entry 2243 (class 0 OID 129319)
+-- Dependencies: 205 2246
+-- Data for Name: linea_editorial; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY linea_editorial (id, nombre, observaciones) FROM stdin;
+1	Administración y gerencia	
+2	Arquitectura y diseño	
+3	Arte	
+4	Artesanía y Manualidades	
+5	Astrología, metafísica y espiritualidad	
+6	Auto-ayuda y superación	
+7	Best-Sellers	
+8	Ciencia y Tecnología	
+9	Ciencias Sociales y Comunicación	
+10	Cine y fotografía	
+11	Cocina, alimentación, salud	
+12	Computación e informática	
+13	Deporte y recreación	
+14	Derecho	
+15	Diccionarios, enciclopedias, atlas	
+16	Economía	
+17	Educación y pedagogía	
+18	Filosofía	
+19	Historia y geografía	
+20	Humanidades	
+21	Humor y comics	
+22	Idiomas	
+23	Infantiles	
+24	Literatura	
+25	Medicina	
+26	Música y folklore	
+27	Naturaleza, ecología, turismo	
+28	Política	
+29	Psicología	
+30	Religión	
+31	Técnicos y profesionales	
+32	Textos educativos	
+33	Textos Universitarios	
+34	Otro	
+\.
+
+
+--
+-- TOC entry 2245 (class 0 OID 129362)
+-- Dependencies: 207 2246
+-- Data for Name: linea_editorial_exposior_feria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY linea_editorial_exposior_feria (id, id_expositor_feria, id_linea_editorial) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2282 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: linea_editorial_exposior_feria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('linea_editorial_exposior_feria_id_seq', 1, false);
+
+
+--
+-- TOC entry 2283 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: linea_editorial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('linea_editorial_id_seq', 1, false);
+
+
+--
+-- TOC entry 2218 (class 0 OID 129054)
+-- Dependencies: 180 2246
+-- Data for Name: municipio; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY municipio (id, nombre, id_estado) FROM stdin;
+1	LIBERTADOR	1
+2	ANACO	2
+3	ARAGUA	2
+4	BOLIVAR	2
+5	BRUZUAL	2
+6	CAJIGAL	2
+7	FREITES	2
+8	INDEPENDENCIA	2
+9	LIBERTAD	2
+10	MIRANDA	2
+11	MONAGAS	2
+12	PEÑALVER	2
+13	SIMON RODRIGUEZ	2
+14	SOTILLO	2
+15	GUANIPA	2
+16	GUANTA	2
+17	PIRITU	2
+18	M.L/DIEGO BAUTISTA U	2
+19	CARVAJAL	2
+20	SANTA ANA	2
+21	MC GREGOR	2
+22	S JUAN CAPISTRANO	2
+23	ACHAGUAS	3
+24	MUÑOZ	3
+25	PAEZ	3
+26	PEDRO CAMEJO	3
+27	ROMULO GALLEGOS	3
+28	SAN FERNANDO	3
+29	BIRUACA	3
+30	GIRARDOT	4
+31	SANTIAGO MARIÑO	4
+32	JOSE FELIX RIVAS	4
+33	SAN CASIMIRO	4
+34	SAN SEBASTIAN	4
+35	SUCRE	4
+36	URDANETA	4
+37	ZAMORA	4
+38	LIBERTADOR	4
+39	JOSE ANGEL LAMAS	4
+40	BOLIVAR	4
+41	SANTOS MICHELENA	4
+42	MARIO B IRAGORRY	4
+43	TOVAR	4
+44	CAMATAGUA	4
+45	JOSE R REVENGA	4
+46	FRANCISCO LINARES A.	4
+47	M.OCUMARE D LA COSTA	4
+48	ARISMENDI	5
+49	BARINAS	5
+50	BOLIVAR	5
+51	EZEQUIEL ZAMORA	5
+52	OBISPOS	5
+53	PEDRAZA	5
+54	ROJAS	5
+55	SOSA	5
+56	ALBERTO ARVELO T	5
+57	A JOSE DE SUCRE	5
+58	CRUZ PAREDES	5
+59	ANDRES E. BLANCO	5
+60	CARONI	6
+61	CEDEÑO	6
+62	HERES	6
+63	PIAR	6
+64	ROSCIO	6
+65	SUCRE	6
+66	SIFONTES	6
+67	RAUL LEONI	6
+68	GRAN SABANA	6
+69	EL CALLAO	6
+70	PADRE PEDRO CHIEN	6
+71	BEJUMA	7
+72	CARLOS ARVELO	7
+73	DIEGO IBARRA	7
+74	GUACARA	7
+75	MONTALBAN	7
+76	JUAN JOSE MORA	7
+77	PUERTO CABELLO	7
+78	SAN JOAQUIN	7
+79	VALENCIA	7
+80	MIRANDA	7
+81	LOS GUAYOS	7
+82	NAGUANAGUA	7
+83	SAN DIEGO	7
+84	LIBERTADOR	7
+85	ANZOATEGUI	8
+86	FALCON	8
+87	GIRARDOT	8
+88	MP PAO SN J BAUTISTA	8
+89	RICAURTE	8
+90	SAN CARLOS	8
+91	TINACO	8
+92	LIMA BLANCO	8
+93	ROMULO GALLEGOS	8
+94	ACOSTA	9
+95	BOLIVAR	9
+96	BUCHIVACOA	9
+97	CARIRUBANA	9
+98	COLINA	9
+99	DEMOCRACIA	9
+100	FALCON	9
+101	FEDERACION	9
+102	MAUROA	9
+103	MIRANDA	9
+104	PETIT	9
+105	SILVA	9
+106	ZAMORA	9
+107	DABAJURO	9
+108	MONS. ITURRIZA	9
+109	LOS TAQUES	9
+110	PIRITU	9
+111	UNION	9
+112	SAN FRANCISCO	9
+113	JACURA	9
+114	CACIQUE MANAURE	9
+115	PALMA SOLA	9
+116	SUCRE	9
+117	URUMACO	9
+118	TOCOPERO	9
+119	INFANTE	10
+120	MELLADO	10
+121	MIRANDA	10
+122	MONAGAS	10
+123	RIBAS	10
+124	ROSCIO	10
+125	ZARAZA	10
+126	CAMAGUAN	10
+127	S JOSE DE GUARIBE	10
+128	LAS MERCEDES	10
+129	EL SOCORRO	10
+130	ORTIZ	10
+131	S MARIA DE IPIRE	10
+132	CHAGUARAMAS	10
+133	SAN GERONIMO DE G	10
+134	CRESPO	11
+135	IRIBARREN	11
+136	JIMENEZ	11
+137	MORAN	11
+138	PALAVECINO	11
+139	TORRES	11
+140	URDANETA	11
+141	ANDRES E BLANCO	11
+142	SIMON PLANAS	11
+143	ALBERTO ADRIANI	12
+144	ANDRES BELLO	12
+145	ARZOBISPO CHACON	12
+146	CAMPO ELIAS	12
+147	GUARAQUE	12
+148	JULIO CESAR SALAS	12
+149	JUSTO BRICEÑO	12
+150	LIBERTADOR	12
+151	SANTOS MARQUINA	12
+152	MIRANDA	12
+153	ANTONIO PINTO S.	12
+154	OB. RAMOS DE LORA	12
+155	CARACCIOLO PARRA	12
+156	CARDENAL QUINTERO	12
+157	PUEBLO LLANO	12
+158	RANGEL	12
+159	RIVAS DAVILA	12
+160	SUCRE	12
+161	TOVAR	12
+162	TULIO F CORDERO	12
+163	PADRE NOGUERA	12
+164	ARICAGUA	12
+165	ZEA	12
+166	ACEVEDO	13
+167	BRION	13
+168	GUAICAIPURO	13
+169	INDEPENDENCIA	13
+170	LANDER	13
+171	PAEZ	13
+172	PAZ CASTILLO	13
+173	PLAZA	13
+174	SUCRE	13
+175	URDANETA	13
+176	ZAMORA	13
+177	CRISTOBAL ROJAS	13
+178	LOS SALIAS	13
+179	ANDRES BELLO	13
+180	SIMON BOLIVAR	13
+181	BARUTA	13
+182	CARRIZAL	13
+183	CHACAO	13
+184	EL HATILLO	13
+185	BUROZ	13
+186	PEDRO GUAL	13
+187	ACOSTA	14
+188	BOLIVAR	14
+189	CARIPE	14
+190	CEDEÑO	14
+191	EZEQUIEL ZAMORA	14
+192	LIBERTADOR	14
+193	MATURIN	14
+194	PIAR	14
+195	PUNCERES	14
+196	SOTILLO	14
+197	AGUASAY	14
+198	SANTA BARBARA	14
+199	URACOA	14
+200	ARISMENDI	15
+201	DIAZ	15
+202	GOMEZ	15
+203	MANEIRO	15
+204	MARCANO	15
+205	MARIÑO	15
+206	PENIN. DE MACANAO	15
+207	VILLALBA(I.COCHE)	15
+208	TUBORES	15
+209	ANTOLIN DEL CAMPO	15
+210	GARCIA	15
+211	ARAURE	16
+212	ESTELLER	16
+213	GUANARE	16
+214	GUANARITO	16
+215	OSPINO	16
+216	PAEZ	16
+217	SUCRE	16
+218	TUREN	16
+219	M.JOSE V DE UNDA	16
+220	AGUA BLANCA	16
+221	PAPELON	16
+222	GENARO BOCONOITO	16
+223	S RAFAEL DE ONOTO	16
+224	SANTA ROSALIA	16
+225	ARISMENDI	17
+226	BENITEZ	17
+227	BERMUDEZ	17
+228	CAJIGAL	17
+229	MARIÑO	17
+230	MEJIA	17
+231	MONTES	17
+232	RIBERO	17
+233	SUCRE	17
+234	VALDEZ	17
+235	ANDRES E BLANCO	17
+236	LIBERTADOR	17
+237	ANDRES MATA	17
+238	BOLIVAR	17
+239	CRUZ S ACOSTA	17
+240	AYACUCHO	18
+241	BOLIVAR	18
+242	INDEPENDENCIA	18
+243	CARDENAS	18
+244	JAUREGUI	18
+245	JUNIN	18
+246	LOBATERA	18
+247	SAN CRISTOBAL	18
+248	URIBANTE	18
+249	CORDOBA	18
+250	GARCIA DE HEVIA	18
+251	GUASIMOS	18
+252	MICHELENA	18
+253	LIBERTADOR	18
+254	PANAMERICANO	18
+255	PEDRO MARIA UREÑA	18
+256	SUCRE	18
+257	ANDRES BELLO	18
+258	FERNANDEZ FEO	18
+259	LIBERTAD	18
+260	SAMUEL MALDONADO	18
+261	SEBORUCO	18
+262	ANTONIO ROMULO C	18
+263	FCO DE MIRANDA	18
+264	JOSE MARIA VARGA	18
+265	RAFAEL URDANETA	18
+266	SIMON RODRIGUEZ	18
+267	TORBES	18
+268	SAN JUDAS TADEO	18
+269	RAFAEL RANGEL	19
+270	BOCONO	19
+271	CARACHE	19
+272	ESCUQUE	19
+273	TRUJILLO	19
+274	URDANETA	19
+275	VALERA	19
+276	CANDELARIA	19
+277	MIRANDA	19
+278	MONTE CARMELO	19
+279	MOTATAN	19
+280	PAMPAN	19
+281	S RAFAEL CARVAJAL	19
+282	SUCRE	19
+283	ANDRES BELLO	19
+284	BOLIVAR	19
+285	JOSE F M CAÑIZAL	19
+286	JUAN V CAMPO ELI	19
+287	LA CEIBA	19
+288	PAMPANITO	19
+289	BOLIVAR	20
+290	BRUZUAL	20
+291	NIRGUA	20
+292	SAN FELIPE	20
+293	SUCRE	20
+294	URACHICHE	20
+295	PEÑA	20
+296	JOSE ANTONIO PAEZ	20
+297	LA TRINIDAD	20
+298	COCOROTE	20
+299	INDEPENDENCIA	20
+300	ARISTIDES BASTID	20
+301	MANUEL MONGE	20
+302	VEROES	20
+303	BARALT	21
+304	SANTA RITA	21
+305	COLON	21
+306	MARA	21
+307	MARACAIBO	21
+308	MIRANDA	21
+309	PAEZ	21
+310	MACHIQUES DE P	21
+311	SUCRE	21
+312	LA CAÑADA DE U.	21
+313	LAGUNILLAS	21
+314	CATATUMBO	21
+315	M/ROSARIO DE PERIJA	21
+316	CABIMAS	21
+317	VALMORE RODRIGUEZ	21
+318	JESUS E LOSSADA	21
+319	ALMIRANTE P	21
+320	SAN FRANCISCO	21
+321	JESUS M SEMPRUN	21
+322	FRANCISCO J PULG	21
+323	SIMON BOLIVAR	21
+324	ATURES	22
+325	ATABAPO	22
+326	MAROA	22
+327	RIO NEGRO	22
+328	AUTANA	22
+329	MANAPIARE	22
+330	ALTO ORINOCO	22
+331	TUCUPITA	23
+332	PEDERNALES	23
+333	ANTONIO DIAZ	23
+334	CASACOIMA	23
+335	VARGAS	24
+\.
+
+
+--
+-- TOC entry 2284 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: municipio_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('municipio_id_seq', 337, true);
+
+
+--
+-- TOC entry 2220 (class 0 OID 129062)
+-- Dependencies: 182 2246
+-- Data for Name: pais; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY pais (id, nombre) FROM stdin;
+1	Venezuela
+4	Albania
+\.
+
+
+--
+-- TOC entry 2285 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: pais_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pais_id_seq', 4, true);
+
+
+--
+-- TOC entry 2222 (class 0 OID 129070)
+-- Dependencies: 184 2246
+-- Data for Name: parroquia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY parroquia (id, nombre, id_municipio) FROM stdin;
+1	Altagracia	1
+2	Candelaria	1
+3	Catedral	1
+5	San Agustin	1
+6	San Jose	1
+7	San Juan	1
+8	Santa Rosalia	1
+9	Santa Teresa	1
+10	Sucre	1
+11	23 De Enero	1
+12	Antimano	1
+13	El Recreo	1
+14	El Valle	1
+15	La Vega	1
+16	Macarao	1
+17	Caricuao	1
+18	El Junquito	1
+19	Coche	1
+20	San Pedro	1
+21	San Bernardino	1
+22	El Paraiso	1
+23	Anaco	2
+24	San Joaquin	2
+25	Cm. Aragua De Barcelona	3
+26	Cachipo	3
+27	El Carmen	4
+28	San Cristobal	4
+29	Bergantin	4
+30	Caigua	4
+31	El Pilar	4
+32	Naricual	4
+33	Cm. Clarines	5
+34	Guanape	5
+35	Sabana De Uchire	5
+36	Cm. Onoto	6
+37	San Pablo	6
+38	Cm. Cantaura	7
+39	Libertador	7
+40	Santa Rosa	7
+41	Urica	7
+42	Cm. Soledad	8
+43	Mamo	8
+44	Cm. San Mateo	9
+45	El Carito	9
+46	Santa Ines	9
+47	Cm. Pariaguan	10
+48	Atapirire	10
+49	Boca Del Pao	10
+50	El Pao	10
+51	Cm. Mapire	11
+52	Piar	11
+53	Sn Diego De Cabrutica	11
+54	Santa Clara	11
+55	Uverito	11
+56	Zuata	11
+57	Cm. Puerto Piritu	12
+58	San Miguel	12
+59	Sucre	12
+60	Cm. El Tigre	13
+61	Pozuelos	14
+62	Cm Pto. La Cruz	14
+63	Cm. San Jose De Guanipa	15
+64	Guanta	16
+65	Chorreron	16
+66	Piritu	17
+67	San Francisco	17
+68	Lecherias	18
+69	El Morro	18
+70	Valle Guanape	19
+71	Santa Barbara	19
+72	Santa Ana	20
+73	Pueblo Nuevo	20
+74	El Chaparro	21
+75	Tomas Alfaro Calatrava	21
+76	Boca Uchire	22
+77	Boca De Chavez	22
+78	Achaguas	23
+79	Apurito	23
+80	El Yagual	23
+81	Guachara	23
+82	Mucuritas	23
+83	Queseras Del Medio	23
+84	Bruzual	24
+85	Mantecal	24
+86	Quintero	24
+87	San Vicente	24
+88	Rincon Hondo	24
+89	Guasdualito	25
+90	Aramendi	25
+91	El Amparo	25
+92	San Camilo	25
+93	Urdaneta	25
+94	San Juan De Payara	26
+95	Codazzi	26
+96	Cunaviche	26
+97	Elorza	27
+98	La Trinidad	27
+99	San Fernando	28
+100	Peñalver	28
+101	El Recreo	28
+102	Sn Rafael De Atamaica	28
+103	Biruaca	29
+104	Cm. Las Delicias	30
+105	Choroni	30
+106	Madre Ma De San Jose	30
+107	Joaquin Crespo	30
+108	Pedro Jose Ovalles	30
+109	Jose Casanova Godoy	30
+110	Andres Eloy Blanco	30
+111	Los Tacariguas	30
+112	Cm. Turmero	31
+113	Saman De Guere	31
+114	Alfredo Pacheco M	31
+115	Chuao	31
+116	Arevalo Aponte	31
+117	Cm. La Victoria	32
+118	Zuata	32
+119	Pao De Zarate	32
+120	Castor Nieves Rios	32
+121	Las Guacamayas	32
+122	Cm. San Casimiro	33
+123	Valle Morin	33
+124	Guiripa	33
+125	Ollas De Caramacate	33
+126	Cm. San Sebastian	34
+127	Cm. Cagua	35
+128	Bella Vista	35
+129	Cm. Barbacoas	36
+130	San Francisco De Cara	36
+131	Taguay	36
+132	Las Peñitas	36
+133	Cm. Villa De Cura	37
+134	Magdaleno	37
+135	San Francisco De Asis	37
+136	Valles De Tucutunemo	37
+137	Pq Augusto Mijares	37
+138	Cm. Palo Negro	38
+139	San Martin De Porres	38
+140	Cm. Santa Cruz	39
+141	Cm. San Mateo	40
+142	Cm. Las Tejerias	41
+143	Tiara	41
+144	Cm. El Limon	42
+145	Ca A De Azucar	42
+146	Cm. Colonia Tovar	43
+147	Cm. Camatagua	44
+148	Carmen De Cura	44
+149	Cm. El Consejo	45
+150	Cm. Santa Rita	46
+151	Francisco De Miranda	46
+152	Mons Feliciano G	46
+153	Ocumare De La Costa	47
+154	Arismendi	48
+155	Guadarrama	48
+156	La Union	48
+157	San Antonio	48
+158	Alfredo A Larriva	49
+159	Barinas	49
+160	San Silvestre	49
+161	Santa Ines	49
+162	Santa Lucia	49
+163	Torunos	49
+164	El Carmen	49
+165	Romulo Betancourt	49
+166	Corazon De Jesus	49
+167	Ramon I Mendez	49
+168	Alto Barinas	49
+169	Manuel P Fajardo	49
+170	Juan A Rodriguez D	49
+171	Dominga Ortiz P	49
+172	Altamira	50
+173	Barinitas	50
+174	Calderas	50
+175	Santa Barbara	51
+176	Jose Ignacio Del Pumar	51
+177	Ramon Ignacio Mendez	51
+178	Pedro Briceño Mendez	51
+179	El Real	52
+180	La Luz	52
+181	Obispos	52
+182	Los Guasimitos	52
+183	Ciudad Bolivia	53
+184	Ignacio Briceño	53
+185	Paez	53
+186	Jose Felix Ribas	53
+187	Dolores	54
+188	Libertad	54
+189	Palacio Fajardo	54
+190	Santa Rosa	54
+191	Ciudad De Nutrias	55
+192	El Regalo	55
+193	Puerto De Nutrias	55
+194	Santa Catalina	55
+195	Rodriguez Dominguez	56
+196	Sabaneta	56
+197	Ticoporo	57
+198	Nicolas Pulido	57
+199	Andres Bello	57
+200	Barrancas	58
+201	El Socorro	58
+202	Masparrito	58
+203	El Canton	59
+204	Santa Cruz De Guacas	59
+205	Puerto Vivas	59
+206	Simon Bolivar	60
+207	Once De Abril	60
+208	Vista Al Sol	60
+209	Chirica	60
+210	Dalla Costa	60
+211	Cachamay	60
+212	Universidad	60
+213	Unare	60
+214	Yocoima	60
+215	Pozo Verde	60
+216	Cm. Caicara Del Orinoco	61
+217	Ascension Farreras	61
+218	Altagracia	61
+219	La Urbana	61
+220	Guaniamo	61
+221	Pijiguaos	61
+222	Catedral	62
+223	Agua Salada	62
+224	La Sabanita	62
+225	Vista Hermosa	62
+226	Marhuanta	62
+227	Jose Antonio Paez	62
+228	Orinoco	62
+229	Panapana	62
+230	Zea	62
+231	Cm. Upata	63
+232	Andres Eloy Blanco	63
+233	Pedro Cova	63
+234	Cm. Guasipati	64
+235	Salom	64
+236	Cm. Maripa	65
+237	Aripao	65
+238	Las Majadas	65
+239	Moitaco	65
+240	Guarataro	65
+241	Cm. Tumeremo	66
+242	Dalla Costa	66
+243	San Isidro	66
+244	Cm. Ciudad Piar	67
+245	San Francisco	67
+246	Barceloneta	67
+247	Santa Barbara	67
+248	Cm. Santa Elena De Uairen	68
+249	Ikabaru	68
+250	Cm. El Callao	69
+251	Cm. El Palmar	70
+252	Bejuma	71
+253	Canoabo	71
+254	Simon Bolivar	71
+255	Guigue	72
+256	Belen	72
+257	Tacarigua	72
+258	Mariara	73
+259	Aguas Calientes	73
+260	Guacara	74
+261	Ciudad Alianza	74
+262	Yagua	74
+263	Montalban	75
+264	Moron	76
+265	Urama	76
+266	Democracia	77
+267	Fraternidad	77
+268	Goaigoaza	77
+269	Juan Jose Flores	77
+270	Bartolome Salom	77
+271	Union	77
+272	Borburata	77
+273	Patanemo	77
+274	San Joaquin	78
+275	Candelaria	79
+276	Catedral	79
+277	El Socorro	79
+278	Miguel Peña	79
+279	San Blas	79
+280	San Jose	79
+281	Santa Rosa	79
+282	Rafael Urdaneta	79
+283	Negro Primero	79
+284	Miranda	80
+285	U Los Guayos	81
+286	Naguanagua	82
+287	Urb San Diego	83
+288	U Tocuyito	84
+289	U Independencia	84
+290	Cojedes	85
+291	Juan De Mata Suarez	85
+292	Tinaquillo	86
+293	El Baul	87
+294	Sucre	87
+295	El Pao	88
+296	Libertad De Cojedes	89
+297	El Amparo	89
+298	San Carlos De Austria	90
+299	Juan Angel Bravo	90
+300	Manuel Manrique	90
+301	Grl/Jefe Jose L Silva	91
+302	Macapo	92
+303	La Aguadita	92
+304	Romulo Gallegos	93
+305	San Juan De Los Cayos	94
+306	Capadare	94
+307	La Pastora	94
+308	Libertador	94
+309	San Luis	95
+310	Aracua	95
+311	La Peña	95
+312	Capatarida	96
+313	Borojo	96
+314	Seque	96
+315	Zazarida	96
+316	Bariro	96
+317	Guajiro	96
+318	Norte	97
+319	Carirubana	97
+320	Punta Cardon	97
+321	Santa Ana	97
+322	La Vela De Coro	98
+323	Acurigua	98
+324	Guaibacoa	98
+325	Macoruca	98
+326	Las Calderas	98
+327	Pedregal	99
+328	Agua Clara	99
+329	Avaria	99
+330	Piedra Grande	99
+331	Purureche	99
+332	Pueblo Nuevo	100
+333	Adicora	100
+334	Baraived	100
+335	Buena Vista	100
+336	Jadacaquiva	100
+337	Moruy	100
+338	El Vinculo	100
+339	El Hato	100
+340	Adaure	100
+341	Churuguara	101
+342	Agua Larga	101
+343	Independencia	101
+344	Maparari	101
+345	El Pauji	101
+346	Mene De Mauroa	102
+347	Casigua	102
+348	San Felix	102
+349	San Antonio	103
+350	San Gabriel	103
+351	Santa Ana	103
+352	Guzman Guillermo	103
+353	Mitare	103
+354	Sabaneta	103
+355	Rio Seco	103
+356	Cabure	104
+357	Curimagua	104
+358	Colina	104
+359	Tucacas	105
+360	Boca De Aroa	105
+361	Puerto Cumarebo	106
+362	La Cienaga	106
+363	La Soledad	106
+364	Pueblo Cumarebo	106
+365	Zazarida	106
+366	Cm. Dabajuro	107
+367	Chichiriviche	108
+368	Boca De Tocuyo	108
+369	Tocuyo De La Costa	108
+370	Los Taques	109
+371	Judibana	109
+372	Piritu	110
+373	San Jose De La Costa	110
+374	Sta.Cruz De Bucaral	111
+375	El Charal	111
+376	Las Vegas Del Tuy	111
+377	Cm. Mirimire	112
+378	Jacura	113
+379	Agua Linda	113
+380	Araurima	113
+381	Cm. Yaracal	114
+382	Cm. Palma Sola	115
+383	Sucre	116
+384	Pecaya	116
+385	Urumaco	117
+386	Bruzual	117
+387	Cm. Tocopero	118
+388	Valle De La Pascua	119
+389	Espino	119
+390	El Sombrero	120
+391	Sosa	120
+392	Calabozo	121
+393	El Calvario	121
+394	El Rastro	121
+395	Guardatinajas	121
+396	Altagracia De Orituco	122
+397	Lezama	122
+398	Libertad De Orituco	122
+399	San Fco De Macaira	122
+400	San Rafael De Orituco	122
+401	Soublette	122
+402	Paso Real De Macaira	122
+403	Tucupido	123
+404	San Rafael De Laya	123
+405	San Juan De Los Morros	124
+406	Parapara	124
+407	Cantagallo	124
+408	Zaraza	125
+409	San Jose De Unare	125
+410	Camaguan	126
+411	Puerto Miranda	126
+412	Uverito	126
+413	San Jose De Guaribe	127
+414	Las Mercedes	128
+415	Sta Rita De Manapire	128
+416	Cabruta	128
+417	El Socorro	129
+418	Ortiz	130
+419	San Fco. De Tiznados	130
+420	San Jose De Tiznados	130
+421	S Lorenzo De Tiznados	130
+422	Santa Maria De Ipire	131
+423	Altamira	131
+424	Chaguaramas	132
+425	Guayabal	133
+426	Cazorla	133
+427	Freitez	134
+428	Jose Maria Blanco	134
+429	Catedral	135
+430	La Concepcion	135
+431	Santa Rosa	135
+432	Union	135
+433	El Cuji	135
+434	Tamaca	135
+435	Juan De Villegas	135
+436	Aguedo F. Alvarado	135
+437	Buena Vista	135
+438	Juarez	135
+439	Juan B Rodriguez	136
+440	Diego De Lozada	136
+441	San Miguel	136
+442	Cuara	136
+443	Paraiso De San Jose	136
+444	Tintorero	136
+445	Jose Bernardo Dorante	136
+446	Crnel. Mariano Peraza	136
+447	Bolivar	137
+448	Anzoategui	137
+449	Guarico	137
+450	Humocaro Alto	137
+451	Humocaro Bajo	137
+452	Moran	137
+453	Hilario Luna Y Luna	137
+454	La Candelaria	137
+455	Cabudare	138
+456	Jose G. Bastidas	138
+457	Agua Viva	138
+458	Trinidad Samuel	139
+459	Antonio Diaz	139
+460	Camacaro	139
+461	Castañeda	139
+462	Chiquinquira	139
+463	Espinoza Los Monteros	139
+464	Lara	139
+465	Manuel Morillo	139
+466	Montes De Oca	139
+467	Torres	139
+468	El Blanco	139
+469	Monta A Verde	139
+470	Heriberto Arroyo	139
+471	Las Mercedes	139
+472	Cecilio Zubillaga	139
+473	Reyes Vargas	139
+474	Altagracia	139
+475	Siquisique	140
+476	San Miguel	140
+477	Xaguas	140
+478	Moroturo	140
+479	Pio Tamayo	141
+480	Yacambu	141
+481	Qbda. Honda De Guache	141
+482	Sarare	142
+483	Gustavo Vegas Leon	142
+484	Buria	142
+485	Gabriel Picon G.	143
+486	HECTOR Amable Mora	143
+487	Jose Nucete Sardi	143
+488	Pulido Mendez	143
+489	Pte. Romulo Gallegos	143
+490	Presidente Betancourt	143
+491	Presidente Paez	143
+492	Cm. La Azulita	144
+493	Cm. Canagua	145
+494	Capuri	145
+495	Chacanta	145
+496	El Molino	145
+497	Guaimaral	145
+498	Mucutuy	145
+499	Mucuchachi	145
+500	Acequias	146
+501	Jaji	146
+502	La Mesa	146
+503	San Jose	146
+504	Montalban	146
+505	Matriz	146
+506	Fernandez Peña	146
+507	Cm. Guaraque	147
+508	Mesa De Quintero	147
+509	Rio Negro	147
+510	Cm. Arapuey	148
+511	Palmira	148
+512	Cm. Torondoy	149
+513	San Cristobal De T	149
+514	Arias	150
+515	Sagrario	150
+516	Milla	150
+517	El Llano	150
+518	Juan Rodriguez Suarez	150
+519	Jacinto Plaza	150
+520	Domingo Peña	150
+521	Gonzalo Picon Febres	150
+522	Osuna Rodriguez	150
+523	Lasso De La Vega	150
+524	Caracciolo Parra P	150
+525	Mariano Picon Salas	150
+526	Antonio Spinetti Dini	150
+527	El Morro	150
+528	Los Nevados	150
+529	Cm. Tabay	151
+530	Cm. Timotes	152
+531	Andres Eloy Blanco	152
+532	Piñango	152
+533	La Venta	152
+534	Cm. Sta Cruz De Mora	153
+535	Mesa Bolivar	153
+536	Mesa De Las Palmas	153
+537	Cm. Sta Elena De Arenales	154
+538	Eloy Paredes	154
+539	Pq R De Alcazar	154
+540	Cm. Tucani	155
+541	Florencio Ramirez	155
+542	Cm. Santo Domingo	156
+543	Las Piedras	156
+544	Cm. Pueblo Llano	157
+545	Cm. Mucuchies	158
+546	Mucuruba	158
+547	San Rafael	158
+548	Cacute	158
+549	La Toma	158
+550	Cm. Bailadores	159
+551	Geronimo Maldonado	159
+552	Cm. Lagunillas	160
+553	Chiguara	160
+554	Estanques	160
+555	San Juan	160
+556	Pueblo Nuevo Del Sur	160
+557	La Trampa	160
+558	El Llano	161
+559	Tovar	161
+560	El Amparo	161
+561	San Francisco	161
+562	Cm. Nueva Bolivia	162
+563	Independencia	162
+564	Maria C Palacios	162
+565	Santa Apolonia	162
+566	Cm. Sta Maria De Caparo	163
+567	Cm. Aricagua	164
+568	San Antonio	164
+569	Cm. Zea	165
+570	Caño El Tigre	165
+571	Caucagua	166
+572	Araguita	166
+573	Arevalo Gonzalez	166
+574	Capaya	166
+575	Panaquire	166
+576	Ribas	166
+577	El Cafe	166
+578	Marizapa	166
+579	Higuerote	167
+580	Curiepe	167
+581	Tacarigua	167
+582	Los Teques	168
+583	Cecilio Acosta	168
+584	Paracotos	168
+585	San Pedro	168
+586	Tacata	168
+587	El Jarillo	168
+588	Altagracia De La M	168
+589	Sta Teresa Del Tuy	169
+590	El Cartanal	169
+591	Ocumare Del Tuy	170
+592	La Democracia	170
+593	Santa Barbara	170
+594	Rio Chico	171
+595	El Guapo	171
+596	Tacarigua De La Laguna	171
+597	Paparo	171
+598	Sn Fernando Del Guapo	171
+599	Santa Lucia	172
+600	Guarenas	173
+601	Petare	174
+602	Leoncio Martinez	174
+603	Caucaguita	174
+604	Filas De Mariches	174
+605	La Dolorita	174
+606	Cua	175
+607	Nueva Cua	175
+608	Guatire	176
+609	Bolivar	176
+610	Charallave	177
+611	Las Brisas	177
+612	San Antonio Los Altos	178
+613	San Jose De Barlovento	179
+614	Cumbo	179
+615	San Fco De Yare	180
+616	S Antonio De Yare	180
+617	Baruta	181
+618	El Cafetal	181
+619	Las Minas De Baruta	181
+620	Carrizal	182
+621	Chacao	183
+622	El Hatillo	184
+623	Mamporal	185
+624	Cupira	186
+625	Machurucuto	186
+626	Cm. San Antonio	187
+627	San Francisco	187
+628	Cm. Caripito	188
+629	Cm. Caripe	189
+630	Teresen	189
+631	El Guacharo	189
+632	San Agustin	189
+633	La Guanota	189
+634	Sabana De Piedra	189
+635	Cm. Caicara	190
+636	Areo	190
+637	San Felix	190
+638	Viento Fresco	190
+639	Cm. Punta De Mata	191
+640	El Tejero	191
+641	Cm. Temblador	192
+642	Tabasca	192
+643	Las Alhuacas	192
+644	Chaguaramas	192
+645	El Furrial	193
+646	Jusepin	193
+647	El Corozo	193
+648	San Vicente	193
+649	La Pica	193
+650	Alto De Los Godos	193
+651	Boqueron	193
+652	Las Cocuizas	193
+653	Santa Cruz	193
+654	San Simon	193
+655	Cm. Aragua	194
+656	Chaguaramal	194
+657	Guanaguana	194
+658	Aparicio	194
+659	Taguaya	194
+660	El Pinto	194
+661	La Toscana	194
+662	Cm. Quiriquire	195
+663	Cachipo	195
+664	Cm. Barrancas	196
+665	Los Barrancos De Fajardo	196
+666	Cm. Aguasay	197
+667	Cm. Santa Barbara	198
+668	Cm. Uracoa	199
+669	Cm. La Asuncion	200
+670	Cm. San Juan Bautista	201
+671	Zabala	201
+672	Cm. Santa Ana	202
+673	Guevara	202
+674	Matasiete	202
+675	Bolivar	202
+676	Sucre	202
+677	Cm. Pampatar	203
+678	Aguirre	203
+679	Cm. Juan Griego	204
+680	Adrian	204
+681	Cm. Porlamar	205
+682	Cm. Boca Del Rio	206
+683	San Francisco	206
+684	Cm. San Pedro De Coche	207
+685	Vicente Fuentes	207
+686	Cm. Punta De Piedras	208
+687	Los Barales	208
+688	Cm.La Plaza De Paraguachi	209
+689	Cm. Valle Esp Santo	210
+690	Francisco Fajardo	210
+691	Cm. Araure	211
+692	Rio Acarigua	211
+693	Cm. Piritu	212
+694	Uveral	212
+695	Cm. Guanare	213
+696	Cordoba	213
+697	San Juan Guanaguanare	213
+698	Virgen De La Coromoto	213
+699	San Jose De La Montaña	213
+700	Cm. Guanarito	214
+701	Trinidad De La Capilla	214
+702	Divina Pastora	214
+703	Cm. Ospino	215
+704	Aparicion	215
+705	La Estacion	215
+706	Cm. Acarigua	216
+707	Payara	216
+708	Pimpinela	216
+709	Ramon Peraza	216
+710	Cm. Biscucuy	217
+711	Concepcion	217
+712	San Rafael Palo Alzado	217
+713	Uvencio A Velasquez	217
+714	San Jose De Saguaz	217
+715	Villa Rosa	217
+716	Cm. Villa Bruzual	218
+717	Canelones	218
+718	Santa Cruz	218
+719	San Isidro Labrador	218
+720	Cm. Chabasquen	219
+721	Peña Blanca	219
+722	Cm. Agua Blanca	220
+723	Cm. Papelon	221
+724	Caño Delgadito	221
+725	Cm. Boconoito	222
+726	Antolin Tovar Aquino	222
+727	Cm. San Rafael De Onoto	223
+728	Santa Fe	223
+729	Thermo Morles	223
+730	Cm. El Playon	224
+731	Florida	224
+732	Rio Caribe	225
+733	San Juan Galdonas	225
+734	Puerto Santo	225
+735	El Morro De Pto Santo	225
+736	Antonio Jose De Sucre	225
+737	El Pilar	226
+738	El Rincon	226
+739	Guaraunos	226
+740	Tunapuicito	226
+741	Union	226
+742	Gral Fco. A Vasquez	226
+743	Santa Catalina	227
+744	Santa Rosa	227
+745	Santa Teresa	227
+746	Bolivar	227
+747	Macarapana	227
+748	Yaguaraparo	228
+749	Libertad	228
+750	Paujil	228
+751	Irapa	229
+752	Campo Claro	229
+753	Soro	229
+754	San Antonio De Irapa	229
+755	Marabal	229
+756	Cm. San Ant Del Golfo	230
+757	Cumanacoa	231
+758	Arenas	231
+759	Aricagua	231
+760	Cocollar	231
+761	San Fernando	231
+762	San Lorenzo	231
+763	Cariaco	232
+764	Catuaro	232
+765	Rendon	232
+766	Santa Cruz	232
+767	Santa Maria	232
+768	Altagracia	233
+769	Ayacucho	233
+770	Santa Ines	233
+771	Valentin Valiente	233
+772	San Juan	233
+773	Gran Mariscal	233
+774	Raul Leoni	233
+775	Guiria	234
+776	Cristobal Colon	234
+777	Punta De Piedra	234
+778	Bideau	234
+779	Mariño	235
+780	Romulo Gallegos	235
+781	Tunapuy	236
+782	Campo Elias	236
+783	San Jose De Areocuar	237
+784	Tavera Acosta	237
+785	Cm. Mariguitar	238
+786	Araya	239
+787	Manicuare	239
+788	Chacopata	239
+789	Cm. Colon	240
+790	Rivas Berti	240
+791	San Pedro Del Rio	240
+792	Cm. San Ant Del Tachira	241
+793	Palotal	241
+794	Juan Vicente Gomez	241
+795	Isaias Medina Angarit	241
+796	Cm. Capacho Nuevo	242
+797	Juan German Roscio	242
+798	Roman Cardenas	242
+799	Cm. Tariba	243
+800	La Florida	243
+801	Amenodoro Rangel Lamu	243
+802	Cm. La Grita	244
+803	Emilio C. Guerrero	244
+804	Mons. Miguel A Salas	244
+805	Cm. Rubio	245
+806	Bramon	245
+807	La Petrolea	245
+808	Quinimari	245
+809	Cm. Lobatera	246
+810	Constitucion	246
+811	La Concordia	247
+812	Pedro Maria Morantes	247
+813	Sn Juan Bautista	247
+814	San Sebastian	247
+815	Dr. Fco. Romero Lobo	247
+816	Cm. Pregonero	248
+817	Cardenas	248
+818	Potosi	248
+819	Juan Pablo Peñaloza	248
+820	Cm. Sta. Ana  Del Tachira	249
+821	Cm. La Fria	250
+822	Boca De Grita	250
+823	Jose Antonio Paez	250
+824	Cm. Palmira	251
+825	Cm. Michelena	252
+826	Cm. Abejales	253
+827	San Joaquin De Navay	253
+828	Doradas	253
+829	Emeterio Ochoa	253
+830	Cm. Coloncito	254
+831	La Palmita	254
+832	Cm. Ureña	255
+833	Nueva Arcadia	255
+834	Cm. Queniquea	256
+835	San Pablo	256
+836	Eleazar Lopez Contrera	256
+837	Cm. Cordero	257
+838	Cm.San Rafael Del Pinal	258
+839	Santo Domingo	258
+840	Alberto Adriani	258
+841	Cm. Capacho Viejo	259
+842	Cipriano Castro	259
+843	Manuel Felipe Rugeles	259
+844	Cm. La Tendida	260
+845	Bocono	260
+846	Hernandez	260
+847	Cm. Seboruco	261
+848	Cm. Las Mesas	262
+849	Cm. San Jose De Bolivar	263
+850	Cm. El Cobre	264
+851	Cm. Delicias	265
+852	Cm. San Simon	266
+853	Cm. San Josecito	267
+854	Cm. Umuquena	268
+855	Betijoque	269
+856	Jose G Hernandez	269
+857	La Pueblita	269
+858	El Cedro	269
+859	Bocono	270
+860	El Carmen	270
+861	Mosquey	270
+862	Ayacucho	270
+863	Burbusay	270
+864	General Rivas	270
+865	Monseñor Jauregui	270
+866	Rafael Rangel	270
+867	San Jose	270
+868	San Miguel	270
+869	Guaramacal	270
+870	La Vega De Guaramacal	270
+871	Carache	271
+872	La Concepcion	271
+873	Cuicas	271
+874	Panamericana	271
+875	Santa Cruz	271
+876	Escuque	272
+877	Sabana Libre	272
+878	La Union	272
+879	Santa Rita	272
+880	Cristobal Mendoza	273
+881	Chiquinquira	273
+882	Matriz	273
+883	Monseñor Carrillo	273
+884	Cruz Carrillo	273
+885	Andres Linares	273
+886	Tres Esquinas	273
+887	La Quebrada	274
+888	Jajo	274
+889	La Mesa	274
+890	Santiago	274
+891	Cabimbu	274
+892	Tuñame	274
+893	Mercedes Diaz	275
+894	Juan Ignacio Montilla	275
+895	La Beatriz	275
+896	Mendoza	275
+897	La Puerta	275
+898	San Luis	275
+899	Chejende	276
+900	Carrillo	276
+901	Cegarra	276
+902	Bolivia	276
+903	Manuel Salvador Ulloa	276
+904	San Jose	276
+905	Arnoldo Gabaldon	276
+906	El Dividive	277
+907	Agua Caliente	277
+908	El Cenizo	277
+909	Agua Santa	277
+910	Valerita	277
+911	Monte Carmelo	278
+912	Buena Vista	278
+913	Sta Maria Del Horcon	278
+914	Motatan	279
+915	El Baño	279
+916	Jalisco	279
+917	Pampan	280
+918	Santa Ana	280
+919	La Paz	280
+920	Flor De Patria	280
+921	Carvajal	281
+922	Antonio N Briceño	281
+923	Campo Alegre	281
+924	Jose Leonardo Suarez	281
+925	Sabana De Mendoza	282
+926	Junin	282
+927	Valmore Rodriguez	282
+928	El Paraiso	282
+929	Santa Isabel	283
+930	Araguaney	283
+931	El Jaguito	283
+932	La Esperanza	283
+933	Sabana Grande	284
+934	Cheregue	284
+935	Granados	284
+936	El Socorro	285
+937	Los Caprichos	285
+938	Antonio Jose De Sucre	285
+939	Campo Elias	286
+940	Arnoldo Gabaldon	286
+941	Santa Apolonia	287
+942	La Ceiba	287
+943	El Progreso	287
+944	Tres De Febrero	287
+945	Pampanito	288
+946	Pampanito Ii	288
+947	La Concepcion	288
+948	Cm. Aroa	289
+949	Cm. Chivacoa	290
+950	Campo Elias	290
+951	Cm. Nirgua	291
+952	Salom	291
+953	Temerla	291
+954	Cm. San Felipe	292
+955	Albarico	292
+956	San Javier	292
+957	Cm. Guama	293
+958	Cm. Urachiche	294
+959	Cm. Yaritagua	295
+960	San Andres	295
+961	Cm. Sabana De Parra	296
+962	Cm. Boraure	297
+963	Cm. Cocorote	298
+964	Cm. Independencia	299
+965	Cm. San Pablo	300
+966	Cm. Yumare	301
+967	Cm. Farriar	302
+968	El Guayabo	302
+969	General Urdaneta	303
+970	Libertador	303
+971	Manuel Guanipa Matos	303
+972	Marcelino Briceño	303
+973	San Timoteo	303
+974	Pueblo Nuevo	303
+975	Pedro Lucas Urribarri	304
+976	Santa Rita	304
+977	Jose Cenovio Urribarr	304
+978	El Mene	304
+979	Santa Cruz Del Zulia	305
+980	Urribarri	305
+981	Moralito	305
+982	San Carlos Del Zulia	305
+983	Santa Barbara	305
+984	Luis De Vicente	306
+985	Ricaurte	306
+986	Mons.Marcos Sergio G	306
+987	San Rafael	306
+988	Las Parcelas	306
+989	Tamare	306
+990	La Sierrita	306
+991	Bolivar	307
+992	Coquivacoa	307
+993	Cristo De Aranza	307
+994	Chiquinquira	307
+995	Santa Lucia	307
+996	Olegario Villalobos	307
+997	Juana De Avila	307
+998	Caracciolo Parra Perez	307
+999	Idelfonzo Vasquez	307
+1000	Cacique Mara	307
+1001	Cecilio Acosta	307
+1002	Raul Leoni	307
+1003	Francisco Eugenio B	307
+1004	Manuel Dagnino	307
+1005	Luis Hurtado Higuera	307
+1006	Venancio Pulgar	307
+1007	Antonio Borjas Romero	307
+1008	San Isidro	307
+1009	Faria	308
+1010	San Antonio	308
+1011	Ana Maria Campos	308
+1012	San Jose	308
+1013	Altagracia	308
+1014	Goajira	309
+1015	Elias Sanchez Rubio	309
+1016	Sinamaica	309
+1017	Alta Guajira	309
+1018	San Jose De Perija	310
+1019	Bartolome De Las Casas	310
+1020	Libertad	310
+1021	Rio Negro	310
+1022	Gibraltar	311
+1023	Heras	311
+1024	M.Arturo Celestino A	311
+1025	Romulo Gallegos	311
+1026	Bobures	311
+1027	El Batey	311
+1028	Andres Bello (KM 48)	312
+1029	Potreritos	312
+1030	El Carmelo	312
+1031	Chiquinquira	312
+1032	Concepcion	312
+1033	Eleazar Lopez C	313
+1034	Alonso De Ojeda	313
+1035	Venezuela	313
+1036	Campo Lara	313
+1037	Libertad	313
+1038	Udon Perez	314
+1039	Encontrados	314
+1040	Donaldo Garcia	315
+1041	Sixto Zambrano	315
+1042	El Rosario	315
+1043	Ambrosio	316
+1044	German Rios Linares	316
+1045	Jorge Hernandez	316
+1046	La Rosa	316
+1047	Punta Gorda	316
+1048	Carmen Herrera	316
+1049	San Benito	316
+1050	Romulo Betancourt	316
+1051	Aristides Calvani	316
+1052	Raul Cuenca	317
+1053	La Victoria	317
+1054	Rafael Urdaneta	317
+1055	Jose Ramon Yepez	318
+1056	La Concepcion	318
+1057	San Jose	318
+1058	Mariano Parra Leon	318
+1059	Monagas	319
+1060	Isla De Toas	319
+1061	Marcial Hernandez	320
+1062	Francisco Ochoa	320
+1063	San Francisco	320
+1064	El Bajo	320
+1065	Domitila Flores	320
+1066	Los Cortijos	320
+1067	Bari	321
+1068	Jesus M Semprun	321
+1069	Simon Rodriguez	322
+1070	Carlos Quevedo	322
+1071	Francisco J Pulgar	322
+1072	Rafael Maria Baralt	323
+1073	Manuel Manrique	323
+1074	Rafael Urdaneta	323
+1075	Fernando Giron Tovar	324
+1076	Luis Alberto Gomez	324
+1077	Parhueña	324
+1078	Platanillal	324
+1079	Cm. San Fernando De Ataba	325
+1080	Ucata	325
+1081	Yapacana	325
+1082	Caname	325
+1083	Cm. Maroa	326
+1084	Victorino	326
+1085	Comunidad	326
+1086	Cm. San Carlos De Rio Neg	327
+1087	Solano	327
+1088	Cocuy	327
+1089	Cm. Isla De Raton	328
+1090	Samariapo	328
+1091	Sipapo	328
+1092	Munduapo	328
+1093	Guayapo	328
+1094	Cm. San Juan De Manapiare	329
+1095	Alto Ventuari	329
+1096	Medio Ventuari	329
+1097	Bajo Ventuari	329
+1098	Cm. La Esmeralda	330
+1099	Huachamacare	330
+1100	Marawaka	330
+1101	Mavaca	330
+1102	Sierra Parima	330
+1103	San Jose	331
+1104	Virgen Del Valle	331
+1105	San Rafael	331
+1106	Jose Vidal Marcano	331
+1107	Leonardo Ruiz Pineda	331
+1108	Mons. Argimiro Garcia	331
+1109	Mcl.Antonio J De Sucre	331
+1110	Juan Millan	331
+1111	Pedernales	332
+1112	Luis B Prieto Figuero	332
+1113	Curiapo	333
+1114	Santos De Abelgas	333
+1115	Manuel Renaud	333
+1116	Padre Barral	333
+1117	Aniceto Lugo	333
+1118	Almirante Luis Brion	333
+1119	Imataca	334
+1120	Romulo Gallegos	334
+1121	Juan Bautista Arismen	334
+1122	Manuel Piar	334
+1123	5 De Julio	334
+1124	Caraballeda	335
+1125	Carayaca	335
+1126	Caruao	335
+1127	Catia La Mar	335
+1128	La Guaira	335
+1129	Macuto	335
+1130	Maiquetia	335
+1131	Naiguata	335
+1132	El Junko	335
+1133	Pq Raul Leoni	335
+1134	Pq Carlos Soublette	335
+4	La Pastora	1
+\.
+
+
+--
+-- TOC entry 2286 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: parroquia_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('parroquia_id_seq', 1, false);
+
+
+--
+-- TOC entry 2233 (class 0 OID 129194)
+-- Dependencies: 195 2246
+-- Data for Name: ponente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ponente (id, nombre, apellido, cedula, rif, sexo, nacionalidad, telefono_local, telefono_celular, email, observaciones) FROM stdin;
+1	Jonathan	Rodriguez Corte	V-18249804	V-18249804	Masculino	1			jrodriguezcorte@gmail.com	
+\.
+
+
+--
+-- TOC entry 2235 (class 0 OID 129229)
+-- Dependencies: 197 2246
+-- Data for Name: ponente_actividad; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY ponente_actividad (id, id_ponente, id_actividad, id_feria) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2287 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: ponente_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ponente_id_seq', 1, true);
+
+
+--
+-- TOC entry 2288 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: ponente_rel_actividad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ponente_rel_actividad_id_seq', 1, false);
+
+
+--
+-- TOC entry 2223 (class 0 OID 129076)
+-- Dependencies: 185 2246
+-- Data for Name: region; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY region (id, nombre) FROM stdin;
+1	Capital
+2	Central
+3	Centro Occidental
+4	Los Andes
+5	Zuliana
+6	Los Llanos
+7	Nororiental
+8	Guayana
+9	Insular
+\.
+
+
+--
+-- TOC entry 2225 (class 0 OID 129083)
+-- Dependencies: 187 2246
+-- Data for Name: sello_editorial; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sello_editorial (id, nombre, id_pais) FROM stdin;
+1	Monteavila	1
+\.
+
+
+--
+-- TOC entry 2289 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: sello_editorial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sello_editorial_id_seq', 1, true);
+
+
+--
+-- TOC entry 2200 (class 0 OID 128919)
+-- Dependencies: 162 2246
+-- Data for Name: sf_guard_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sf_guard_group (id, name, description) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2290 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: sf_guard_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sf_guard_group_id_seq', 1, false);
+
+
+--
+-- TOC entry 2203 (class 0 OID 128943)
+-- Dependencies: 165 2246
+-- Data for Name: sf_guard_group_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sf_guard_group_permission (group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2202 (class 0 OID 128932)
+-- Dependencies: 164 2246
+-- Data for Name: sf_guard_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sf_guard_permission (id, name, description) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2291 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: sf_guard_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sf_guard_permission_id_seq', 1, false);
+
+
+--
+-- TOC entry 2208 (class 0 OID 128974)
+-- Dependencies: 170 2246
+-- Data for Name: sf_guard_remember_key; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sf_guard_remember_key (user_id, remember_key, ip_address, created_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2205 (class 0 OID 128950)
+-- Dependencies: 167 2246
+-- Data for Name: sf_guard_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sf_guard_user (id, username, algorithm, salt, password, created_at, last_login, is_active, is_super_admin) FROM stdin;
+1	admin	sha1	a29bd72f3df978be78a58092812c5a64	17bd64b67dea621cbafcb4337e6d17b3b0274d88	2014-09-27 16:14:09	2014-10-12 15:44:41	t	f
+\.
+
+
+--
+-- TOC entry 2207 (class 0 OID 128969)
+-- Dependencies: 169 2246
+-- Data for Name: sf_guard_user_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sf_guard_user_group (user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2292 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: sf_guard_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sf_guard_user_id_seq', 1, true);
+
+
+--
+-- TOC entry 2206 (class 0 OID 128964)
+-- Dependencies: 168 2246
+-- Data for Name: sf_guard_user_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sf_guard_user_permission (user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2227 (class 0 OID 129091)
+-- Dependencies: 189 2246
+-- Data for Name: tipo_actividad; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tipo_actividad (id, nombre) FROM stdin;
+1	Presentación de libro
+2	Conferencia
+3	Mesa redonda
+4	Ronda de negocios
+5	Otro
+\.
+
+
+--
+-- TOC entry 2293 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: tipo_actividad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tipo_actividad_id_seq', 1, true);
+
+
+--
+-- TOC entry 2229 (class 0 OID 129099)
+-- Dependencies: 191 2246
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY usuario (id, nombre, apellido, cedula, isbn, login, contrasena, sf_guard_user, sexo, sf_guard_user_group, correo, telefono) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2294 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuario_id_seq', 1, false);
+
+
+--
+-- TOC entry 2231 (class 0 OID 129110)
+-- Dependencies: 193 2246
+-- Data for Name: visitante; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY visitante (id, fecha, numero, id_feria) FROM stdin;
+1	2014-10-29	57	\N
+\.
+
+
+--
+-- TOC entry 2295 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: visitante_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('visitante_id_seq', 1, true);
+
+
+--
+-- TOC entry 2119 (class 2606 OID 129024)
+-- Dependencies: 172 172 2247
+-- Name: actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2121 (class 2606 OID 129032)
+-- Dependencies: 174 174 2247
+-- Name: estado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY estado
+    ADD CONSTRAINT estado_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2160 (class 2606 OID 129329)
+-- Dependencies: 203 203 2247
+-- Name: expositor_feria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2151 (class 2606 OID 129299)
+-- Dependencies: 199 199 2247
+-- Name: expositor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY expositor
+    ADD CONSTRAINT expositor_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2155 (class 2606 OID 129287)
+-- Dependencies: 201 201 2247
+-- Name: expositor_sello_editorial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY expositor_selloeditorial
+    ADD CONSTRAINT expositor_sello_editorial_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2123 (class 2606 OID 129043)
+-- Dependencies: 176 176 2247
+-- Name: feria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2125 (class 2606 OID 129051)
+-- Dependencies: 178 178 2247
+-- Name: feria_selloeditorial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY feria_selloeditorial
+    ADD CONSTRAINT feria_selloeditorial_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2164 (class 2606 OID 129367)
+-- Dependencies: 207 207 2247
+-- Name: linea_editorial_exposior_feria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY linea_editorial_exposior_feria
+    ADD CONSTRAINT linea_editorial_exposior_feria_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2162 (class 2606 OID 129327)
+-- Dependencies: 205 205 2247
+-- Name: linea_editorial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY linea_editorial
+    ADD CONSTRAINT linea_editorial_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2127 (class 2606 OID 129059)
+-- Dependencies: 180 180 2247
+-- Name: municipio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY municipio
+    ADD CONSTRAINT municipio_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2129 (class 2606 OID 129067)
+-- Dependencies: 182 182 2247
+-- Name: pais_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pais
+    ADD CONSTRAINT pais_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2131 (class 2606 OID 129075)
+-- Dependencies: 184 184 2247
+-- Name: parroquia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY parroquia
+    ADD CONSTRAINT parroquia_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2145 (class 2606 OID 129202)
+-- Dependencies: 195 195 2247
+-- Name: ponente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ponente
+    ADD CONSTRAINT ponente_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2149 (class 2606 OID 129234)
+-- Dependencies: 197 197 2247
+-- Name: ponente_rel_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_rel_actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2133 (class 2606 OID 129080)
+-- Dependencies: 185 185 2247
+-- Name: region_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT region_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2135 (class 2606 OID 129088)
+-- Dependencies: 187 187 2247
+-- Name: sello_editorial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sello_editorial
+    ADD CONSTRAINT sello_editorial_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2099 (class 2606 OID 128929)
+-- Dependencies: 162 162 2247
+-- Name: sf_guard_group_U_1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_group
+    ADD CONSTRAINT "sf_guard_group_U_1" UNIQUE (name);
+
+
+--
+-- TOC entry 2107 (class 2606 OID 128947)
+-- Dependencies: 165 165 165 2247
+-- Name: sf_guard_group_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_group_permission
+    ADD CONSTRAINT sf_guard_group_permission_pkey PRIMARY KEY (group_id, permission_id);
+
+
+--
+-- TOC entry 2101 (class 2606 OID 128927)
+-- Dependencies: 162 162 2247
+-- Name: sf_guard_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_group
+    ADD CONSTRAINT sf_guard_group_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2103 (class 2606 OID 128942)
+-- Dependencies: 164 164 2247
+-- Name: sf_guard_permission_U_1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_permission
+    ADD CONSTRAINT "sf_guard_permission_U_1" UNIQUE (name);
+
+
+--
+-- TOC entry 2105 (class 2606 OID 128940)
+-- Dependencies: 164 164 2247
+-- Name: sf_guard_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_permission
+    ADD CONSTRAINT sf_guard_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2117 (class 2606 OID 128978)
+-- Dependencies: 170 170 170 2247
+-- Name: sf_guard_remember_key_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_remember_key
+    ADD CONSTRAINT sf_guard_remember_key_pkey PRIMARY KEY (user_id, ip_address);
+
+
+--
+-- TOC entry 2109 (class 2606 OID 128963)
+-- Dependencies: 167 167 2247
+-- Name: sf_guard_user_U_1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user
+    ADD CONSTRAINT "sf_guard_user_U_1" UNIQUE (username);
+
+
+--
+-- TOC entry 2115 (class 2606 OID 128973)
+-- Dependencies: 169 169 169 2247
+-- Name: sf_guard_user_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user_group
+    ADD CONSTRAINT sf_guard_user_group_pkey PRIMARY KEY (user_id, group_id);
+
+
+--
+-- TOC entry 2113 (class 2606 OID 128968)
+-- Dependencies: 168 168 168 2247
+-- Name: sf_guard_user_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user_permission
+    ADD CONSTRAINT sf_guard_user_permission_pkey PRIMARY KEY (user_id, permission_id);
+
+
+--
+-- TOC entry 2111 (class 2606 OID 128961)
+-- Dependencies: 167 167 2247
+-- Name: sf_guard_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user
+    ADD CONSTRAINT sf_guard_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2137 (class 2606 OID 129096)
+-- Dependencies: 189 189 2247
+-- Name: tipo_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tipo_actividad
+    ADD CONSTRAINT tipo_actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2139 (class 2606 OID 129107)
+-- Dependencies: 191 191 2247
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2141 (class 2606 OID 129115)
+-- Dependencies: 193 193 2247
+-- Name: visitante_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY visitante
+    ADD CONSTRAINT visitante_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2156 (class 1259 OID 129352)
+-- Dependencies: 203 2247
+-- Name: expositor_feria_email_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_feria_email_idx ON expositor_feria USING btree (email);
+
+
+--
+-- TOC entry 2157 (class 1259 OID 129351)
+-- Dependencies: 203 2247
+-- Name: expositor_feria_id_expositor_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_feria_id_expositor_idx ON expositor_feria USING btree (id_expositor);
+
+
+--
+-- TOC entry 2158 (class 1259 OID 129350)
+-- Dependencies: 203 2247
+-- Name: expositor_feria_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_feria_id_feria_idx ON expositor_feria USING btree (id_feria);
+
+
+--
+-- TOC entry 2152 (class 1259 OID 129307)
+-- Dependencies: 201 2247
+-- Name: expositor_sello_editorial_id_expositor_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_sello_editorial_id_expositor_idx ON expositor_selloeditorial USING btree (id_expositor);
+
+
+--
+-- TOC entry 2153 (class 1259 OID 129306)
+-- Dependencies: 201 2247
+-- Name: expositor_sello_editorial_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_sello_editorial_id_feria_idx ON expositor_selloeditorial USING btree (id_feria);
+
+
+--
+-- TOC entry 2142 (class 1259 OID 129214)
+-- Dependencies: 195 195 2247
+-- Name: ponente_cedula_rif_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_cedula_rif_idx ON ponente USING btree (cedula, rif);
+
+
+--
+-- TOC entry 2143 (class 1259 OID 129216)
+-- Dependencies: 195 2247
+-- Name: ponente_nacionalidad_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_nacionalidad_idx ON ponente USING btree (nacionalidad);
+
+
+--
+-- TOC entry 2146 (class 1259 OID 129246)
+-- Dependencies: 197 2247
+-- Name: ponente_rel_actividad_id_actividad_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_rel_actividad_id_actividad_idx ON ponente_actividad USING btree (id_actividad);
+
+
+--
+-- TOC entry 2147 (class 1259 OID 129245)
+-- Dependencies: 197 2247
+-- Name: ponente_rel_actividad_id_ponente_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_rel_actividad_id_ponente_idx ON ponente_actividad USING btree (id_ponente);
+
+
+--
+-- TOC entry 2172 (class 2606 OID 129121)
+-- Dependencies: 189 172 2136 2247
+-- Name: actividad_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT "actividad_FK_2" FOREIGN KEY (id_tipo_actividad) REFERENCES tipo_actividad(id);
+
+
+--
+-- TOC entry 2173 (class 2606 OID 129256)
+-- Dependencies: 2122 172 176 2247
+-- Name: actividad_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT actividad_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2174 (class 2606 OID 129131)
+-- Dependencies: 2128 174 182 2247
+-- Name: estado_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY estado
+    ADD CONSTRAINT "estado_FK_1" FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2195 (class 2606 OID 129335)
+-- Dependencies: 199 2150 203 2247
+-- Name: expositor_feria_id_expositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_expositor_fkey FOREIGN KEY (id_expositor) REFERENCES expositor(id);
+
+
+--
+-- TOC entry 2194 (class 2606 OID 129330)
+-- Dependencies: 2122 176 203 2247
+-- Name: expositor_feria_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2196 (class 2606 OID 129340)
+-- Dependencies: 182 2128 203 2247
+-- Name: expositor_feria_id_pais_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2190 (class 2606 OID 129378)
+-- Dependencies: 182 2128 199 2247
+-- Name: expositor_id_pais_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor
+    ADD CONSTRAINT expositor_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2193 (class 2606 OID 129301)
+-- Dependencies: 2150 201 199 2247
+-- Name: expositor_sello_editorial_id_expositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_selloeditorial
+    ADD CONSTRAINT expositor_sello_editorial_id_expositor_fkey FOREIGN KEY (id_expositor) REFERENCES expositor(id);
+
+
+--
+-- TOC entry 2191 (class 2606 OID 129288)
+-- Dependencies: 201 176 2122 2247
+-- Name: expositor_sello_editorial_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_selloeditorial
+    ADD CONSTRAINT expositor_sello_editorial_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2192 (class 2606 OID 129293)
+-- Dependencies: 187 2134 201 2247
+-- Name: expositor_sello_editorial_id_sello_editorial_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_selloeditorial
+    ADD CONSTRAINT expositor_sello_editorial_id_sello_editorial_fkey FOREIGN KEY (id_sello_editorial) REFERENCES sello_editorial(id);
+
+
+--
+-- TOC entry 2175 (class 2606 OID 129136)
+-- Dependencies: 182 2128 176 2247
+-- Name: feria_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT "feria_FK_1" FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2176 (class 2606 OID 129141)
+-- Dependencies: 2120 176 174 2247
+-- Name: feria_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT "feria_FK_2" FOREIGN KEY (id_estado) REFERENCES estado(id);
+
+
+--
+-- TOC entry 2177 (class 2606 OID 129146)
+-- Dependencies: 176 2126 180 2247
+-- Name: feria_FK_3; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT "feria_FK_3" FOREIGN KEY (id_municipio) REFERENCES municipio(id);
+
+
+--
+-- TOC entry 2178 (class 2606 OID 129151)
+-- Dependencies: 184 176 2130 2247
+-- Name: feria_FK_4; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT "feria_FK_4" FOREIGN KEY (id_parroquia) REFERENCES parroquia(id);
+
+
+--
+-- TOC entry 2179 (class 2606 OID 129156)
+-- Dependencies: 2132 185 176 2247
+-- Name: feria_FK_5; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT "feria_FK_5" FOREIGN KEY (id_region) REFERENCES region(id);
+
+
+--
+-- TOC entry 2180 (class 2606 OID 129161)
+-- Dependencies: 2122 176 178 2247
+-- Name: feria_selloeditorial_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria_selloeditorial
+    ADD CONSTRAINT "feria_selloeditorial_FK_1" FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2181 (class 2606 OID 129166)
+-- Dependencies: 187 178 2134 2247
+-- Name: feria_selloeditorial_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria_selloeditorial
+    ADD CONSTRAINT "feria_selloeditorial_FK_2" FOREIGN KEY (id_selloeditorial) REFERENCES sello_editorial(id);
+
+
+--
+-- TOC entry 2197 (class 2606 OID 129368)
+-- Dependencies: 2159 207 203 2247
+-- Name: linea_editorial_exposior_feria_id_expositor_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY linea_editorial_exposior_feria
+    ADD CONSTRAINT linea_editorial_exposior_feria_id_expositor_feria_fkey FOREIGN KEY (id_expositor_feria) REFERENCES expositor_feria(id);
+
+
+--
+-- TOC entry 2198 (class 2606 OID 129373)
+-- Dependencies: 2161 205 207 2247
+-- Name: linea_editorial_exposior_feria_id_linea_editorial_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY linea_editorial_exposior_feria
+    ADD CONSTRAINT linea_editorial_exposior_feria_id_linea_editorial_fkey FOREIGN KEY (id_linea_editorial) REFERENCES linea_editorial(id);
+
+
+--
+-- TOC entry 2182 (class 2606 OID 129171)
+-- Dependencies: 174 180 2120 2247
+-- Name: municipio_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY municipio
+    ADD CONSTRAINT "municipio_FK_1" FOREIGN KEY (id_estado) REFERENCES estado(id);
+
+
+--
+-- TOC entry 2183 (class 2606 OID 129176)
+-- Dependencies: 180 184 2126 2247
+-- Name: parroquia_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY parroquia
+    ADD CONSTRAINT "parroquia_FK_1" FOREIGN KEY (id_municipio) REFERENCES municipio(id);
+
+
+--
+-- TOC entry 2189 (class 2606 OID 129353)
+-- Dependencies: 197 176 2122 2247
+-- Name: ponente_actividad_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_actividad_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2186 (class 2606 OID 129208)
+-- Dependencies: 195 2128 182 2247
+-- Name: ponente_nacionalidad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente
+    ADD CONSTRAINT ponente_nacionalidad_fkey FOREIGN KEY (nacionalidad) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2188 (class 2606 OID 129240)
+-- Dependencies: 172 197 2118 2247
+-- Name: ponente_rel_actividad_id_actividad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_rel_actividad_id_actividad_fkey FOREIGN KEY (id_actividad) REFERENCES actividad(id);
+
+
+--
+-- TOC entry 2187 (class 2606 OID 129235)
+-- Dependencies: 197 2144 195 2247
+-- Name: ponente_rel_actividad_id_ponente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_rel_actividad_id_ponente_fkey FOREIGN KEY (id_ponente) REFERENCES ponente(id);
+
+
+--
+-- TOC entry 2184 (class 2606 OID 129181)
+-- Dependencies: 187 2128 182 2247
+-- Name: sello_editorial_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sello_editorial
+    ADD CONSTRAINT "sello_editorial_FK_1" FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2165 (class 2606 OID 128979)
+-- Dependencies: 2100 165 162 2247
+-- Name: sf_guard_group_permission_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_group_permission
+    ADD CONSTRAINT "sf_guard_group_permission_FK_1" FOREIGN KEY (group_id) REFERENCES sf_guard_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2166 (class 2606 OID 128984)
+-- Dependencies: 2104 165 164 2247
+-- Name: sf_guard_group_permission_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_group_permission
+    ADD CONSTRAINT "sf_guard_group_permission_FK_2" FOREIGN KEY (permission_id) REFERENCES sf_guard_permission(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2171 (class 2606 OID 129009)
+-- Dependencies: 2110 170 167 2247
+-- Name: sf_guard_remember_key_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_remember_key
+    ADD CONSTRAINT "sf_guard_remember_key_FK_1" FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2169 (class 2606 OID 128999)
+-- Dependencies: 169 167 2110 2247
+-- Name: sf_guard_user_group_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_group
+    ADD CONSTRAINT "sf_guard_user_group_FK_1" FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2170 (class 2606 OID 129004)
+-- Dependencies: 169 2100 162 2247
+-- Name: sf_guard_user_group_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_group
+    ADD CONSTRAINT "sf_guard_user_group_FK_2" FOREIGN KEY (group_id) REFERENCES sf_guard_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2167 (class 2606 OID 128989)
+-- Dependencies: 167 2110 168 2247
+-- Name: sf_guard_user_permission_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_permission
+    ADD CONSTRAINT "sf_guard_user_permission_FK_1" FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2168 (class 2606 OID 128994)
+-- Dependencies: 168 2104 164 2247
+-- Name: sf_guard_user_permission_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_permission
+    ADD CONSTRAINT "sf_guard_user_permission_FK_2" FOREIGN KEY (permission_id) REFERENCES sf_guard_permission(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2185 (class 2606 OID 129186)
+-- Dependencies: 2122 193 176 2247
+-- Name: visitante_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY visitante
+    ADD CONSTRAINT "visitante_FK_1" FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2252 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2014-10-12 15:47:16 VET
+
+--
+-- PostgreSQL database dump complete
+--
+
