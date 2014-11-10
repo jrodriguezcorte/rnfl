@@ -17,5 +17,7 @@
  * @package    lib.model
  */
 class Feria extends BaseFeria {
-
+    public function __toString() {
+        return $this->getId();
+    }
 } // Feria

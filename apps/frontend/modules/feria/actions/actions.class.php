@@ -31,7 +31,7 @@ class feriaActions extends sfActions {
                 'Region' => $Region->getNombre(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/feria/show/id/'.$list->getId().'"><img src="/images/search_mini.png"></a>'
-                . '      <a style="vertical-align:middle;" title="Ingresar" href="/feria/info/id/'.$list->getId().'"><img src="/images/go_mini.png"></a>'
+                . '      <a style="vertical-align:middle;" title="Ingresar" href="/feria/info/id_feria/'.$list->getId().'"><img src="/images/go_mini.png"></a>'
                 . '    ',
             );
         }        
@@ -41,7 +41,7 @@ class feriaActions extends sfActions {
     
     public function executeInfo(sfWebRequest $request) {
         
-        $this->Feria = FeriaPeer::retrieveByPk($request->getParameter('id'));
+        $this->Feria = FeriaPeer::retrieveByPk($request->getParameter('id_feria'));
 
     }    
 

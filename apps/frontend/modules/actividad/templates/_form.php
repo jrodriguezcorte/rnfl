@@ -27,7 +27,8 @@
   </table>
 </div>    
 </form>
-<?php echo link_to(image_tag('back.png'), 'actividad/index', array('title' => 'Volver al Listado')) ?>
+<?php $id_feria = $sf_params->get('id_feria'); ?>
+<?php echo link_to(image_tag('back.png'), "actividad/index?id_feria=$id_feria", array('title' => 'Volver al Listado')) ?>
 &nbsp;
 <?php if (!$form->getObject()->isNew()): ?>
 <?php echo link_to(image_tag('delete.png'), 'actividad/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>

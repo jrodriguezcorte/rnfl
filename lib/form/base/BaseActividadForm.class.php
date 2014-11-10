@@ -28,6 +28,7 @@ abstract class BaseActividadForm extends BaseFormPropel
       'hora'                       => new sfWidgetFormDateTime(),
       'facilitador'                => new sfWidgetFormInputText(),
       'id_feria'                   => new sfWidgetFormPropelChoice(array('model' => 'Feria', 'add_empty' => true)),
+      'id_usuario'                 => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -45,6 +46,7 @@ abstract class BaseActividadForm extends BaseFormPropel
       'hora'                       => new sfValidatorDateTime(array('required' => false)),
       'facilitador'                => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'id_feria'                   => new sfValidatorPropelChoice(array('model' => 'Feria', 'column' => 'id', 'required' => false)),
+      'id_usuario'                 => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('actividad[%s]');

@@ -1,7 +1,10 @@
+<?php include_partial('usuario/menuferia') ?>
+
+<div class="jumbotron">
 <h2>Detalle de la Actividad</h2>
 <br>
 <div class="table-responsive">
-  <table class="table">
+  <table class="table">      
   <tbody>
     <tr>
       <th>Nombre:</th>
@@ -64,8 +67,10 @@
 </table>
 </div>
 <hr />
-<?php echo link_to(image_tag('back.png'),'actividad/index',array('title' => 'Ver listado'))?>
+<?php $id_feria = $sf_params->get('id_feria'); ?>
+<?php echo link_to(image_tag('back.png'),"actividad/index?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
 &nbsp;
-<?php echo link_to(image_tag('edit.png'),'actividad/edit?id='.$Actividad->getId(),array('title' => 'Editar'))?>
-
+<?php echo link_to(image_tag('edit.png'),"actividad/edit?id_feria=".$id_feria."&id=".$Actividad->getId(),array('title' => 'Editar'))?>
+<br>
+<br>
 

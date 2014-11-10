@@ -1,0 +1,55 @@
+
+    jQuery(document).ready(function(e) {
+
+        $(".sent").click(function() {
+            if (!confirm('¿Está seguro de que quiere enviar este ítem a la siguiente etapa de la ruta?')) {
+                event.preventDefault();
+            } else {
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            }
+        });
+    });
+
+    jQuery(document).ready(function(e) {
+
+        $(".agree").click(function() {
+            if (!confirm('¿Está seguro de que el libro ha sido aprobado por el Consejo Editorial?')) {
+                event.preventDefault();
+            } else {
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            }
+        });
+    });
+
+    jQuery(document).ready(function(e) {
+
+        $(".discard").click(function() {
+            if (!confirm('¿Está seguro de que el libro ha sido rechazado por el Consejo Editorial?')) {
+                event.preventDefault();
+            } else {
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            }
+        });
+    });
+
+    jQuery(document).ready(function(e) {
+
+        $(".back").click(function() {
+            if (!confirm('¿Está seguro de que desea enviar este libro a Corrección?')) {
+                event.preventDefault();
+            } else {
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            }
+        });
+    });
+
+    jQuery(document).ready(function(e) {
+
+        $(".close").click(function() {
+            if (!confirm('¿Está seguro de que desea finalizar la ruta?')) {
+                event.preventDefault();
+            } else {
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            }
+        });
+    });

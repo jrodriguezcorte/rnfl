@@ -98,7 +98,9 @@
             });
         });
 </script>
-
+<?php use_javascript('humanmsg') ?>
+<?php use_stylesheet('humanmsg') ?>
+<?php use_javascript('modules/usuario') ?>
 </head>
 <?php include_partial('usuario/menuinicial') ?>
 

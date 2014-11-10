@@ -15,7 +15,7 @@
                 <td style="padding-left: 40px;"><?php echo image_tag('logo.png') ?></td>
                 <td style="vertical-align: middle;"><h3><b> Sistema de Registro Nacional de Ferias del Libro </b></h3></td>
                 <td style="text-align: right; vertical-align: middle; padding-right: 20px;">
-                    <?php echo link_to(image_tag('home.png'),'usuario/bienvenido',array('title' => 'Home'))?>
+                    <?php echo link_to(image_tag('home.png'),'usuario/bienvenido',array('title' => 'Inicio'))?>
                     &nbsp;&nbsp;&nbsp;&nbsp;<?php echo link_to(image_tag('logout.png'),'/logout',array('title' => 'Cerrar Sesión'))?>
                 </td>                
             </tr>

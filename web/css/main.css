@@ -306,3 +306,9 @@ input[type=submit]:active {
     .jumbotron2{padding-top:18px;padding-bottom:3px}
     .jumbotron2{padding-left:20px;padding-right:20px}
     .jumbotron2 .h1{font-size:67.5px}}
+
+.feria-registro {
+    background-color: rgb(87, 15, 145);
+    border-color: rgb(87, 15, 145);
+    color: #ffffff;    
+}

@@ -1,0 +1,20 @@
+    jQuery(document).ready(function() {
+
+        jQuery("#formulario").submit(function(e) {
+            if ($('#lista_autor_id_autor').val() != '') {
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            } else {
+                    humanMsg.displayMsg('Faltan algún dato por agregar, los siguientes campos son obligatorios: Título, Número de planilla y Materia');
+                    e.preventDefault();
+                    $(document).ready(function() {
+                        setTimeout(function() {
+                            $('.humanMsg').fadeOut("slow", function() {
+                                //$('.humanMsg').remove();
+                            });
+
+                        }, 3000);
+                    });
+            }
+        })
+
+    });

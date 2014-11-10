@@ -1,0 +1,23 @@
+    jQuery(document).ready(function() {
+
+        jQuery("#formulario").submit(function(e) {
+            if ($('#autor_nombre').val() != '' && $('#autor_apellido').val() != '' && $('#autor_cedula').val() != '' &&  $("select#autor_id_pais").val() > 0) {
+		$("select#autor_fecha_nacimiento_day").removeAttr('disabled');
+		$("select#autor_fecha_nacimiento_day option:selected").removeAttr('disabled');
+		//alert($("select#autor_fecha_nacimiento_day"));
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            } else {
+                    humanMsg.displayMsg('Faltan algún dato por agregar, los siguientes campos son obligatorios: Nombre, Apellido, Cédula y País');
+                    e.preventDefault();
+                    $(document).ready(function() {
+                        setTimeout(function() {
+                            $('.humanMsg').fadeOut("slow", function() {
+                                //$('.humanMsg').remove();
+                            });
+
+                        }, 3000);
+                    });
+            }
+        })
+
+    });

@@ -57,11 +57,15 @@ class ActividadForm extends BaseActividadForm {
         $this->widgetSchema->setLabel('hora', 'Hora <font color="red">*</font>');
 
         $this->widgetSchema['id_feria'] = new sfWidgetFormInputHidden();
+       
+        $this->widgetSchema['id_usuario'] = new sfWidgetFormInputHidden();
+       
                 
         $this->setValidators(array(
             'nombre' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
             'cantidad_participantes_m'  => new sfValidatorInteger(array('min' => 0, 'required' => false), array('invalid' => 'Debe ingresar un número entero')),
             'cantidad_participantes_f'  => new sfValidatorInteger(array('min' => 0, 'required' => false), array('invalid' => 'Debe ingresar un número entero')),
+            'alcanzo_tiempo' => new sfValidatorString(array('required' => false)),
             'causas_incumplimiento' => new sfValidatorString(array('required' => false)),
             'observaciones' => new sfValidatorString(array('required' => false)),
             'id_tipo_actividad' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
@@ -70,7 +74,8 @@ class ActividadForm extends BaseActividadForm {
             'hora' => new sfValidatorDate(array('required' => false)),
             'facilitador' => new sfValidatorString(array('required' => false)),
             'id'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
-            'id_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),   
+            'id_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'id_usuario'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
         ));        
         
     }

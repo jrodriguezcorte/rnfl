@@ -1,0 +1,125 @@
+<?php decorate_with(false) ?>
+<!DOCTYPE html>
+                                            <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+                                                <head>
+                                                    <?php include_http_metas() ?>
+                                                    <?php include_metas() ?>
+                                                    <?php include_title() ?>
+                                                    <link rel="shortcut icon" href="/favicon.ico" />
+                                                    <?php include_stylesheets() ?>
+                                                    <?php include_javascripts() ?>
+                                                </head>
+                                                <body>
+                                                    <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plantilla básica de Bootstrap</title>
+ 
+    <!-- CSS de Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+ 
+    <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<table>
+<tbody>
+
+              <div class="modal-header">
+		<center><?php echo image_tag('logo.jpg')?></center>
+                <center><h3><b>Sistema de Registro Nacional de Ferias del Libro</b></h3></center>
+              </div>
+<div style="background-color: #b0c4de;">
+<div class="container" style="max-width:300px; ">
+	<div class="row">
+        <div class="span12">
+    		<div class="" id="loginModal">
+
+              <div class="modal-body">
+                <div class="well">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                    <li><a href="#create" data-toggle="tab">Create Account</a></li>
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active in" id="login">
+                      <form class="form-horizontal" action='' method="POST">
+                        <fieldset>
+                          <div id="legend">
+			    <br>	
+                            <legend class="">Acceder</legend>
+                          </div>    
+                          <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  for="username">Usuario</label>
+                            <div class="controls">
+			      <?php echo $form['username']->render(array('placeholder' => 'Nombre de usuario', 'class' => 'input-xlarge')) ?> 	
+                            </div>
+                          </div>
+     
+                          <div class="control-group">
+                            <!-- Password-->
+                            <label class="control-label" for="password">Password</label>
+                            <div class="controls">
+                              <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                            </div>
+                          </div>
+     
+     
+                          <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                              <button class="btn btn-success">Login</button>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>                
+                    </div>
+                    <div class="tab-pane fade" id="create">
+                      <form id="tab">
+                        <label>Usuario</label>
+                        <?php echo $form['username']->render(array('placeholder' => 'Nombre de usuario')) ?>
+                        <label>First Name</label>
+                        <input type="text" value="" class="input-xlarge">
+                        <label>Last Name</label>
+                        <input type="text" value="" class="input-xlarge">
+                        <label>Email</label>
+                        <input type="text" value="" class="input-xlarge">
+                        <label>Address</label>
+                        <textarea value="Smith" rows="3" class="input-xlarge">
+                        </textarea>
+     
+                        <div>
+                          <button class="btn btn-primary">Create Account</button>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+
+ 
+    <!-- Librería jQuery requerida por los plugins de JavaScript -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+ 
+    <!-- Todos los plugins JavaScript de Bootstrap (también puedes
+         incluir archivos JavaScript individuales de los únicos
+         plugins que utilices) -->
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+
+
+                                                      

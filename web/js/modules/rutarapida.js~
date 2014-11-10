@@ -1,0 +1,32 @@
+    jQuery(document).ready(function() {
+
+        jQuery("#formulario").submit(function(e) {
+            if ($('#edicion_id_editor').val() != '' && $('#correccion_id_corrector').val() != '' && $('#diagramacion_id_diagramador').val() != '') {
+		$("select#edicion_fecha_inicio_day").removeAttr('disabled');
+		$("select#edicion_fecha_inicio_day option:selected").removeAttr('disabled');
+		$("select#edicion_fecha_fin_day").removeAttr('disabled');
+		$("select#edicion_fecha_fin_day option:selected").removeAttr('disabled');
+		$("select#correccion_fecha_inicio_day").removeAttr('disabled');
+		$("select#correccion_fecha_inicio_day option:selected").removeAttr('disabled');
+		$("select#correccion_fecha_cierre_day").removeAttr('disabled');
+		$("select#correccion_fecha_cierre_day option:selected").removeAttr('disabled');
+		$("select#diagramacion_fecha_inicio_day").removeAttr('disabled');
+		$("select#diagramacion_fecha_inicio_day option:selected").removeAttr('disabled');
+		$("select#diagramacion_fecha_cierre_day").removeAttr('disabled');
+		$("select#diagramacion_fecha_cierre_day option:selected").removeAttr('disabled');
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            } else {
+                    humanMsg.displayMsg('Faltan algún dato por agregar, los siguientes campos son obligatorios: Editor, Corrector, Diagramador y las Fecha de inicio y Fecha de cierre para cada caso');
+                    e.preventDefault();
+                    $(document).ready(function() {
+                        setTimeout(function() {
+                            $('.humanMsg').fadeOut("slow", function() {
+                                //$('.humanMsg').remove();
+                            });
+
+                        }, 3000);
+                    });
+            }
+        })
+
+    });

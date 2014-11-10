@@ -18,6 +18,7 @@ propel:
     hora: { phpName: Hora, type: TIMESTAMP, required: false }
     facilitador: { phpName: Facilitador, type: VARCHAR, required: false }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
   estado:
     _attributes: { phpName: Estado, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }

@@ -1,0 +1,24 @@
+    jQuery(document).ready(function() {
+
+        jQuery("#formulario").submit(function(e) {
+            if ($('#imprenta_id_diagramador').val() != '') {
+		$("select#imprenta_fecha_envio_day").removeAttr('disabled');
+		$("select#imprenta_fecha_envio_day option:selected").removeAttr('disabled');
+		$("select#imprenta_fecha_impresion_day").removeAttr('disabled');
+		$("select#imprenta_fecha_impresion_day option:selected").removeAttr('disabled');
+                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+            } else {
+                    humanMsg.displayMsg('Faltan algún dato por agregar, los siguientes campos son obligatorios: Fecha de envío');
+                    e.preventDefault();
+                    $(document).ready(function() {
+                        setTimeout(function() {
+                            $('.humanMsg').fadeOut("slow", function() {
+                                //$('.humanMsg').remove();
+                            });
+
+                        }, 3000);
+                    });
+            }
+        })
+
+    });
