@@ -1,0 +1,1134 @@
+1;Altagracia;1
+2;Candelaria;1
+3;Catedral;1
+4;LA Pastora;1
+5;San Agustin;1
+6;San Jose;1
+7;San Juan;1
+8;Santa Rosalia;1
+9;Santa Teresa;1
+10;Sucre;1
+11;23 De Enero;1
+12;Antimano;1
+13;El Recreo;1
+14;El Valle;1
+15;La Vega;1
+16;Macarao;1
+17;Caricuao;1
+18;El Junquito;1
+19;Coche;1
+20;San Pedro;1
+21;San Bernardino;1
+22;El Paraiso;1
+23;Anaco;2
+24;San Joaquin;2
+25;Cm. Aragua De Barcelona;3
+26;Cachipo;3
+27;El Carmen;4
+28;San Cristobal;4
+29;Bergantin;4
+30;Caigua;4
+31;El Pilar;4
+32;Naricual;4
+33;Cm. Clarines;5
+34;Guanape;5
+35;Sabana De Uchire;5
+36;Cm. Onoto;6
+37;San Pablo;6
+38;Cm. Cantaura;7
+39;Libertador;7
+40;Santa Rosa;7
+41;Urica;7
+42;Cm. Soledad;8
+43;Mamo;8
+44;Cm. San Mateo;9
+45;El Carito;9
+46;Santa Ines;9
+47;Cm. Pariaguan;10
+48;Atapirire;10
+49;Boca Del Pao;10
+50;El Pao;10
+51;Cm. Mapire;11
+52;Piar;11
+53;Sn Diego De Cabrutica;11
+54;Santa Clara;11
+55;Uverito;11
+56;Zuata;11
+57;Cm. Puerto Piritu;12
+58;San Miguel;12
+59;Sucre;12
+60;Cm. El Tigre;13
+61;Pozuelos;14
+62;Cm Pto. La Cruz;14
+63;Cm. San Jose De Guanipa;15
+64;Guanta;16
+65;Chorreron;16
+66;Piritu;17
+67;San Francisco;17
+68;Lecherias;18
+69;El Morro;18
+70;Valle Guanape;19
+71;Santa Barbara;19
+72;Santa Ana;20
+73;Pueblo Nuevo;20
+74;El Chaparro;21
+75;Tomas Alfaro Calatrava;21
+76;Boca Uchire;22
+77;Boca De Chavez;22
+78;Achaguas;23
+79;Apurito;23
+80;El Yagual;23
+81;Guachara;23
+82;Mucuritas;23
+83;Queseras Del Medio;23
+84;Bruzual;24
+85;Mantecal;24
+86;Quintero;24
+87;San Vicente;24
+88;Rincon Hondo;24
+89;Guasdualito;25
+90;Aramendi;25
+91;El Amparo;25
+92;San Camilo;25
+93;Urdaneta;25
+94;San Juan De Payara;26
+95;Codazzi;26
+96;Cunaviche;26
+97;Elorza;27
+98;La Trinidad;27
+99;San Fernando;28
+100;Peñalver;28
+101;El Recreo;28
+102;Sn Rafael De Atamaica;28
+103;Biruaca;29
+104;Cm. Las Delicias;30
+105;Choroni;30
+106;Madre Ma De San Jose;30
+107;Joaquin Crespo;30
+108;Pedro Jose Ovalles;30
+109;Jose Casanova Godoy;30
+110;Andres Eloy Blanco;30
+111;Los Tacariguas;30
+112;Cm. Turmero;31
+113;Saman De Guere;31
+114;Alfredo Pacheco M;31
+115;Chuao;31
+116;Arevalo Aponte;31
+117;Cm. La Victoria;32
+118;Zuata;32
+119;Pao De Zarate;32
+120;Castor Nieves Rios;32
+121;Las Guacamayas;32
+122;Cm. San Casimiro;33
+123;Valle Morin;33
+124;Guiripa;33
+125;Ollas De Caramacate;33
+126;Cm. San Sebastian;34
+127;Cm. Cagua;35
+128;Bella Vista;35
+129;Cm. Barbacoas;36
+130;San Francisco De Cara;36
+131;Taguay;36
+132;Las Peñitas;36
+133;Cm. Villa De Cura;37
+134;Magdaleno;37
+135;San Francisco De Asis;37
+136;Valles De Tucutunemo;37
+137;Pq Augusto Mijares;37
+138;Cm. Palo Negro;38
+139;San Martin De Porres;38
+140;Cm. Santa Cruz;39
+141;Cm. San Mateo;40
+142;Cm. Las Tejerias;41
+143;Tiara;41
+144;Cm. El Limon;42
+145;Ca A De Azucar;42
+146;Cm. Colonia Tovar;43
+147;Cm. Camatagua;44
+148;Carmen De Cura;44
+149;Cm. El Consejo;45
+150;Cm. Santa Rita;46
+151;Francisco De Miranda;46
+152;Mons Feliciano G;46
+153;Ocumare De La Costa;47
+154;Arismendi;48
+155;Guadarrama;48
+156;La Union;48
+157;San Antonio;48
+158;Alfredo A Larriva;49
+159;Barinas;49
+160;San Silvestre;49
+161;Santa Ines;49
+162;Santa Lucia;49
+163;Torunos;49
+164;El Carmen;49
+165;Romulo Betancourt;49
+166;Corazon De Jesus;49
+167;Ramon I Mendez;49
+168;Alto Barinas;49
+169;Manuel P Fajardo;49
+170;Juan A Rodriguez D;49
+171;Dominga Ortiz P;49
+172;Altamira;50
+173;Barinitas;50
+174;Calderas;50
+175;Santa Barbara;51
+176;Jose Ignacio Del Pumar;51
+177;Ramon Ignacio Mendez;51
+178;Pedro Briceño Mendez;51
+179;El Real;52
+180;La Luz;52
+181;Obispos;52
+182;Los Guasimitos;52
+183;Ciudad Bolivia;53
+184;Ignacio Briceño;53
+185;Paez;53
+186;Jose Felix Ribas;53
+187;Dolores;54
+188;Libertad;54
+189;Palacio Fajardo;54
+190;Santa Rosa;54
+191;Ciudad De Nutrias;55
+192;El Regalo;55
+193;Puerto De Nutrias;55
+194;Santa Catalina;55
+195;Rodriguez Dominguez;56
+196;Sabaneta;56
+197;Ticoporo;57
+198;Nicolas Pulido;57
+199;Andres Bello;57
+200;Barrancas;58
+201;El Socorro;58
+202;Masparrito;58
+203;El Canton;59
+204;Santa Cruz De Guacas;59
+205;Puerto Vivas;59
+206;Simon Bolivar;60
+207;Once De Abril;60
+208;Vista Al Sol;60
+209;Chirica;60
+210;Dalla Costa;60
+211;Cachamay;60
+212;Universidad;60
+213;Unare;60
+214;Yocoima;60
+215;Pozo Verde;60
+216;Cm. Caicara Del Orinoco;61
+217;Ascension Farreras;61
+218;Altagracia;61
+219;La Urbana;61
+220;Guaniamo;61
+221;Pijiguaos;61
+222;Catedral;62
+223;Agua Salada;62
+224;La Sabanita;62
+225;Vista Hermosa;62
+226;Marhuanta;62
+227;Jose Antonio Paez;62
+228;Orinoco;62
+229;Panapana;62
+230;Zea;62
+231;Cm. Upata;63
+232;Andres Eloy Blanco;63
+233;Pedro Cova;63
+234;Cm. Guasipati;64
+235;Salom;64
+236;Cm. Maripa;65
+237;Aripao;65
+238;Las Majadas;65
+239;Moitaco;65
+240;Guarataro;65
+241;Cm. Tumeremo;66
+242;Dalla Costa;66
+243;San Isidro;66
+244;Cm. Ciudad Piar;67
+245;San Francisco;67
+246;Barceloneta;67
+247;Santa Barbara;67
+248;Cm. Santa Elena De Uairen;68
+249;Ikabaru;68
+250;Cm. El Callao;69
+251;Cm. El Palmar;70
+252;Bejuma;71
+253;Canoabo;71
+254;Simon Bolivar;71
+255;Guigue;72
+256;Belen;72
+257;Tacarigua;72
+258;Mariara;73
+259;Aguas Calientes;73
+260;Guacara;74
+261;Ciudad Alianza;74
+262;Yagua;74
+263;Montalban;75
+264;Moron;76
+265;Urama;76
+266;Democracia;77
+267;Fraternidad;77
+268;Goaigoaza;77
+269;Juan Jose Flores;77
+270;Bartolome Salom;77
+271;Union;77
+272;Borburata;77
+273;Patanemo;77
+274;San Joaquin;78
+275;Candelaria;79
+276;Catedral;79
+277;El Socorro;79
+278;Miguel Peña;79
+279;San Blas;79
+280;San Jose;79
+281;Santa Rosa;79
+282;Rafael Urdaneta;79
+283;Negro Primero;79
+284;Miranda;80
+285;U Los Guayos;81
+286;Naguanagua;82
+287;Urb San Diego;83
+288;U Tocuyito;84
+289;U Independencia;84
+290;Cojedes;85
+291;Juan De Mata Suarez;85
+292;Tinaquillo;86
+293;El Baul;87
+294;Sucre;87
+295;El Pao;88
+296;Libertad De Cojedes;89
+297;El Amparo;89
+298;San Carlos De Austria;90
+299;Juan Angel Bravo;90
+300;Manuel Manrique;90
+301;Grl/Jefe Jose L Silva;91
+302;Macapo;92
+303;La Aguadita;92
+304;Romulo Gallegos;93
+305;San Juan De Los Cayos;94
+306;Capadare;94
+307;La Pastora;94
+308;Libertador;94
+309;San Luis;95
+310;Aracua;95
+311;La Peña;95
+312;Capatarida;96
+313;Borojo;96
+314;Seque;96
+315;Zazarida;96
+316;Bariro;96
+317;Guajiro;96
+318;Norte;97
+319;Carirubana;97
+320;Punta Cardon;97
+321;Santa Ana;97
+322;La Vela De Coro;98
+323;Acurigua;98
+324;Guaibacoa;98
+325;Macoruca;98
+326;Las Calderas;98
+327;Pedregal;99
+328;Agua Clara;99
+329;Avaria;99
+330;Piedra Grande;99
+331;Purureche;99
+332;Pueblo Nuevo;100
+333;Adicora;100
+334;Baraived;100
+335;Buena Vista;100
+336;Jadacaquiva;100
+337;Moruy;100
+338;El Vinculo;100
+339;El Hato;100
+340;Adaure;100
+341;Churuguara;101
+342;Agua Larga;101
+343;Independencia;101
+344;Maparari;101
+345;El Pauji;101
+346;Mene De Mauroa;102
+347;Casigua;102
+348;San Felix;102
+349;San Antonio;103
+350;San Gabriel;103
+351;Santa Ana;103
+352;Guzman Guillermo;103
+353;Mitare;103
+354;Sabaneta;103
+355;Rio Seco;103
+356;Cabure;104
+357;Curimagua;104
+358;Colina;104
+359;Tucacas;105
+360;Boca De Aroa;105
+361;Puerto Cumarebo;106
+362;La Cienaga;106
+363;La Soledad;106
+364;Pueblo Cumarebo;106
+365;Zazarida;106
+366;Cm. Dabajuro;107
+367;Chichiriviche;108
+368;Boca De Tocuyo;108
+369;Tocuyo De La Costa;108
+370;Los Taques;109
+371;Judibana;109
+372;Piritu;110
+373;San Jose De La Costa;110
+374;Sta.Cruz De Bucaral;111
+375;El Charal;111
+376;Las Vegas Del Tuy;111
+377;Cm. Mirimire;112
+378;Jacura;113
+379;Agua Linda;113
+380;Araurima;113
+381;Cm. Yaracal;114
+382;Cm. Palma Sola;115
+383;Sucre;116
+384;Pecaya;116
+385;Urumaco;117
+386;Bruzual;117
+387;Cm. Tocopero;118
+388;Valle De La Pascua;119
+389;Espino;119
+390;El Sombrero;120
+391;Sosa;120
+392;Calabozo;121
+393;El Calvario;121
+394;El Rastro;121
+395;Guardatinajas;121
+396;Altagracia De Orituco;122
+397;Lezama;122
+398;Libertad De Orituco;122
+399;San Fco De Macaira;122
+400;San Rafael De Orituco;122
+401;Soublette;122
+402;Paso Real De Macaira;122
+403;Tucupido;123
+404;San Rafael De Laya;123
+405;San Juan De Los Morros;124
+406;Parapara;124
+407;Cantagallo;124
+408;Zaraza;125
+409;San Jose De Unare;125
+410;Camaguan;126
+411;Puerto Miranda;126
+412;Uverito;126
+413;San Jose De Guaribe;127
+414;Las Mercedes;128
+415;Sta Rita De Manapire;128
+416;Cabruta;128
+417;El Socorro;129
+418;Ortiz;130
+419;San Fco. De Tiznados;130
+420;San Jose De Tiznados;130
+421;S Lorenzo De Tiznados;130
+422;Santa Maria De Ipire;131
+423;Altamira;131
+424;Chaguaramas;132
+425;Guayabal;133
+426;Cazorla;133
+427;Freitez;134
+428;Jose Maria Blanco;134
+429;Catedral;135
+430;La Concepcion;135
+431;Santa Rosa;135
+432;Union;135
+433;El Cuji;135
+434;Tamaca;135
+435;Juan De Villegas;135
+436;Aguedo F. Alvarado;135
+437;Buena Vista;135
+438;Juarez;135
+439;Juan B Rodriguez;136
+440;Diego De Lozada;136
+441;San Miguel;136
+442;Cuara;136
+443;Paraiso De San Jose;136
+444;Tintorero;136
+445;Jose Bernardo Dorante;136
+446;Crnel. Mariano Peraza;136
+447;Bolivar;137
+448;Anzoategui;137
+449;Guarico;137
+450;Humocaro Alto;137
+451;Humocaro Bajo;137
+452;Moran;137
+453;Hilario Luna Y Luna;137
+454;La Candelaria;137
+455;Cabudare;138
+456;Jose G. Bastidas;138
+457;Agua Viva;138
+458;Trinidad Samuel;139
+459;Antonio Diaz;139
+460;Camacaro;139
+461;Castañeda;139
+462;Chiquinquira;139
+463;Espinoza Los Monteros;139
+464;Lara;139
+465;Manuel Morillo;139
+466;Montes De Oca;139
+467;Torres;139
+468;El Blanco;139
+469;Monta A Verde;139
+470;Heriberto Arroyo;139
+471;Las Mercedes;139
+472;Cecilio Zubillaga;139
+473;Reyes Vargas;139
+474;Altagracia;139
+475;Siquisique;140
+476;San Miguel;140
+477;Xaguas;140
+478;Moroturo;140
+479;Pio Tamayo;141
+480;Yacambu;141
+481;Qbda. Honda De Guache;141
+482;Sarare;142
+483;Gustavo Vegas Leon;142
+484;Buria;142
+485;Gabriel Picon G.;143
+486;HECTOR Amable Mora;143
+487;Jose Nucete Sardi;143
+488;Pulido Mendez;143
+489;Pte. Romulo Gallegos;143
+490;Presidente Betancourt;143
+491;Presidente Paez;143
+492;Cm. La Azulita;144
+493;Cm. Canagua;145
+494;Capuri;145
+495;Chacanta;145
+496;El Molino;145
+497;Guaimaral;145
+498;Mucutuy;145
+499;Mucuchachi;145
+500;Acequias;146
+501;Jaji;146
+502;La Mesa;146
+503;San Jose;146
+504;Montalban;146
+505;Matriz;146
+506;Fernandez Peña;146
+507;Cm. Guaraque;147
+508;Mesa De Quintero;147
+509;Rio Negro;147
+510;Cm. Arapuey;148
+511;Palmira;148
+512;Cm. Torondoy;149
+513;San Cristobal De T;149
+514;Arias;150
+515;Sagrario;150
+516;Milla;150
+517;El Llano;150
+518;Juan Rodriguez Suarez;150
+519;Jacinto Plaza;150
+520;Domingo Peña;150
+521;Gonzalo Picon Febres;150
+522;Osuna Rodriguez;150
+523;Lasso De La Vega;150
+524;Caracciolo Parra P;150
+525;Mariano Picon Salas;150
+526;Antonio Spinetti Dini;150
+527;El Morro;150
+528;Los Nevados;150
+529;Cm. Tabay;151
+530;Cm. Timotes;152
+531;Andres Eloy Blanco;152
+532;Piñango;152
+533;La Venta;152
+534;Cm. Sta Cruz De Mora;153
+535;Mesa Bolivar;153
+536;Mesa De Las Palmas;153
+537;Cm. Sta Elena De Arenales;154
+538;Eloy Paredes;154
+539;Pq R De Alcazar;154
+540;Cm. Tucani;155
+541;Florencio Ramirez;155
+542;Cm. Santo Domingo;156
+543;Las Piedras;156
+544;Cm. Pueblo Llano;157
+545;Cm. Mucuchies;158
+546;Mucuruba;158
+547;San Rafael;158
+548;Cacute;158
+549;La Toma;158
+550;Cm. Bailadores;159
+551;Geronimo Maldonado;159
+552;Cm. Lagunillas;160
+553;Chiguara;160
+554;Estanques;160
+555;San Juan;160
+556;Pueblo Nuevo Del Sur;160
+557;La Trampa;160
+558;El Llano;161
+559;Tovar;161
+560;El Amparo;161
+561;San Francisco;161
+562;Cm. Nueva Bolivia;162
+563;Independencia;162
+564;Maria C Palacios;162
+565;Santa Apolonia;162
+566;Cm. Sta Maria De Caparo;163
+567;Cm. Aricagua;164
+568;San Antonio;164
+569;Cm. Zea;165
+570;Caño El Tigre;165
+571;Caucagua;166
+572;Araguita;166
+573;Arevalo Gonzalez;166
+574;Capaya;166
+575;Panaquire;166
+576;Ribas;166
+577;El Cafe;166
+578;Marizapa;166
+579;Higuerote;167
+580;Curiepe;167
+581;Tacarigua;167
+582;Los Teques;168
+583;Cecilio Acosta;168
+584;Paracotos;168
+585;San Pedro;168
+586;Tacata;168
+587;El Jarillo;168
+588;Altagracia De La M;168
+589;Sta Teresa Del Tuy;169
+590;El Cartanal;169
+591;Ocumare Del Tuy;170
+592;La Democracia;170
+593;Santa Barbara;170
+594;Rio Chico;171
+595;El Guapo;171
+596;Tacarigua De La Laguna;171
+597;Paparo;171
+598;Sn Fernando Del Guapo;171
+599;Santa Lucia;172
+600;Guarenas;173
+601;Petare;174
+602;Leoncio Martinez;174
+603;Caucaguita;174
+604;Filas De Mariches;174
+605;La Dolorita;174
+606;Cua;175
+607;Nueva Cua;175
+608;Guatire;176
+609;Bolivar;176
+610;Charallave;177
+611;Las Brisas;177
+612;San Antonio Los Altos;178
+613;San Jose De Barlovento;179
+614;Cumbo;179
+615;San Fco De Yare;180
+616;S Antonio De Yare;180
+617;Baruta;181
+618;El Cafetal;181
+619;Las Minas De Baruta;181
+620;Carrizal;182
+621;Chacao;183
+622;El Hatillo;184
+623;Mamporal;185
+624;Cupira;186
+625;Machurucuto;186
+626;Cm. San Antonio;187
+627;San Francisco;187
+628;Cm. Caripito;188
+629;Cm. Caripe;189
+630;Teresen;189
+631;El Guacharo;189
+632;San Agustin;189
+633;La Guanota;189
+634;Sabana De Piedra;189
+635;Cm. Caicara;190
+636;Areo;190
+637;San Felix;190
+638;Viento Fresco;190
+639;Cm. Punta De Mata;191
+640;El Tejero;191
+641;Cm. Temblador;192
+642;Tabasca;192
+643;Las Alhuacas;192
+644;Chaguaramas;192
+645;El Furrial;193
+646;Jusepin;193
+647;El Corozo;193
+648;San Vicente;193
+649;La Pica;193
+650;Alto De Los Godos;193
+651;Boqueron;193
+652;Las Cocuizas;193
+653;Santa Cruz;193
+654;San Simon;193
+655;Cm. Aragua;194
+656;Chaguaramal;194
+657;Guanaguana;194
+658;Aparicio;194
+659;Taguaya;194
+660;El Pinto;194
+661;La Toscana;194
+662;Cm. Quiriquire;195
+663;Cachipo;195
+664;Cm. Barrancas;196
+665;Los Barrancos De Fajardo;196
+666;Cm. Aguasay;197
+667;Cm. Santa Barbara;198
+668;Cm. Uracoa;199
+669;Cm. La Asuncion;200
+670;Cm. San Juan Bautista;201
+671;Zabala;201
+672;Cm. Santa Ana;202
+673;Guevara;202
+674;Matasiete;202
+675;Bolivar;202
+676;Sucre;202
+677;Cm. Pampatar;203
+678;Aguirre;203
+679;Cm. Juan Griego;204
+680;Adrian;204
+681;Cm. Porlamar;205
+682;Cm. Boca Del Rio;206
+683;San Francisco;206
+684;Cm. San Pedro De Coche;207
+685;Vicente Fuentes;207
+686;Cm. Punta De Piedras;208
+687;Los Barales;208
+688;Cm.La Plaza De Paraguachi;209
+689;Cm. Valle Esp Santo;210
+690;Francisco Fajardo;210
+691;Cm. Araure;211
+692;Rio Acarigua;211
+693;Cm. Piritu;212
+694;Uveral;212
+695;Cm. Guanare;213
+696;Cordoba;213
+697;San Juan Guanaguanare;213
+698;Virgen De La Coromoto;213
+699;San Jose De La Montaña;213
+700;Cm. Guanarito;214
+701;Trinidad De La Capilla;214
+702;Divina Pastora;214
+703;Cm. Ospino;215
+704;Aparicion;215
+705;La Estacion;215
+706;Cm. Acarigua;216
+707;Payara;216
+708;Pimpinela;216
+709;Ramon Peraza;216
+710;Cm. Biscucuy;217
+711;Concepcion;217
+712;San Rafael Palo Alzado;217
+713;Uvencio A Velasquez;217
+714;San Jose De Saguaz;217
+715;Villa Rosa;217
+716;Cm. Villa Bruzual;218
+717;Canelones;218
+718;Santa Cruz;218
+719;San Isidro Labrador;218
+720;Cm. Chabasquen;219
+721;Peña Blanca;219
+722;Cm. Agua Blanca;220
+723;Cm. Papelon;221
+724;Caño Delgadito;221
+725;Cm. Boconoito;222
+726;Antolin Tovar Aquino;222
+727;Cm. San Rafael De Onoto;223
+728;Santa Fe;223
+729;Thermo Morles;223
+730;Cm. El Playon;224
+731;Florida;224
+732;Rio Caribe;225
+733;San Juan Galdonas;225
+734;Puerto Santo;225
+735;El Morro De Pto Santo;225
+736;Antonio Jose De Sucre;225
+737;El Pilar;226
+738;El Rincon;226
+739;Guaraunos;226
+740;Tunapuicito;226
+741;Union;226
+742;Gral Fco. A Vasquez;226
+743;Santa Catalina;227
+744;Santa Rosa;227
+745;Santa Teresa;227
+746;Bolivar;227
+747;Macarapana;227
+748;Yaguaraparo;228
+749;Libertad;228
+750;Paujil;228
+751;Irapa;229
+752;Campo Claro;229
+753;Soro;229
+754;San Antonio De Irapa;229
+755;Marabal;229
+756;Cm. San Ant Del Golfo;230
+757;Cumanacoa;231
+758;Arenas;231
+759;Aricagua;231
+760;Cocollar;231
+761;San Fernando;231
+762;San Lorenzo;231
+763;Cariaco;232
+764;Catuaro;232
+765;Rendon;232
+766;Santa Cruz;232
+767;Santa Maria;232
+768;Altagracia;233
+769;Ayacucho;233
+770;Santa Ines;233
+771;Valentin Valiente;233
+772;San Juan;233
+773;Gran Mariscal;233
+774;Raul Leoni;233
+775;Guiria;234
+776;Cristobal Colon;234
+777;Punta De Piedra;234
+778;Bideau;234
+779;Mariño;235
+780;Romulo Gallegos;235
+781;Tunapuy;236
+782;Campo Elias;236
+783;San Jose De Areocuar;237
+784;Tavera Acosta;237
+785;Cm. Mariguitar;238
+786;Araya;239
+787;Manicuare;239
+788;Chacopata;239
+789;Cm. Colon;240
+790;Rivas Berti;240
+791;San Pedro Del Rio;240
+792;Cm. San Ant Del Tachira;241
+793;Palotal;241
+794;Juan Vicente Gomez;241
+795;Isaias Medina Angarit;241
+796;Cm. Capacho Nuevo;242
+797;Juan German Roscio;242
+798;Roman Cardenas;242
+799;Cm. Tariba;243
+800;La Florida;243
+801;Amenodoro Rangel Lamu;243
+802;Cm. La Grita;244
+803;Emilio C. Guerrero;244
+804;Mons. Miguel A Salas;244
+805;Cm. Rubio;245
+806;Bramon;245
+807;La Petrolea;245
+808;Quinimari;245
+809;Cm. Lobatera;246
+810;Constitucion;246
+811;La Concordia;247
+812;Pedro Maria Morantes;247
+813;Sn Juan Bautista;247
+814;San Sebastian;247
+815;Dr. Fco. Romero Lobo;247
+816;Cm. Pregonero;248
+817;Cardenas;248
+818;Potosi;248
+819;Juan Pablo Peñaloza;248
+820;Cm. Sta. Ana  Del Tachira;249
+821;Cm. La Fria;250
+822;Boca De Grita;250
+823;Jose Antonio Paez;250
+824;Cm. Palmira;251
+825;Cm. Michelena;252
+826;Cm. Abejales;253
+827;San Joaquin De Navay;253
+828;Doradas;253
+829;Emeterio Ochoa;253
+830;Cm. Coloncito;254
+831;La Palmita;254
+832;Cm. Ureña;255
+833;Nueva Arcadia;255
+834;Cm. Queniquea;256
+835;San Pablo;256
+836;Eleazar Lopez Contrera;256
+837;Cm. Cordero;257
+838;Cm.San Rafael Del Pinal;258
+839;Santo Domingo;258
+840;Alberto Adriani;258
+841;Cm. Capacho Viejo;259
+842;Cipriano Castro;259
+843;Manuel Felipe Rugeles;259
+844;Cm. La Tendida;260
+845;Bocono;260
+846;Hernandez;260
+847;Cm. Seboruco;261
+848;Cm. Las Mesas;262
+849;Cm. San Jose De Bolivar;263
+850;Cm. El Cobre;264
+851;Cm. Delicias;265
+852;Cm. San Simon;266
+853;Cm. San Josecito;267
+854;Cm. Umuquena;268
+855;Betijoque;269
+856;Jose G Hernandez;269
+857;La Pueblita;269
+858;El Cedro;269
+859;Bocono;270
+860;El Carmen;270
+861;Mosquey;270
+862;Ayacucho;270
+863;Burbusay;270
+864;General Rivas;270
+865;Monseñor Jauregui;270
+866;Rafael Rangel;270
+867;San Jose;270
+868;San Miguel;270
+869;Guaramacal;270
+870;La Vega De Guaramacal;270
+871;Carache;271
+872;La Concepcion;271
+873;Cuicas;271
+874;Panamericana;271
+875;Santa Cruz;271
+876;Escuque;272
+877;Sabana Libre;272
+878;La Union;272
+879;Santa Rita;272
+880;Cristobal Mendoza;273
+881;Chiquinquira;273
+882;Matriz;273
+883;Monseñor Carrillo;273
+884;Cruz Carrillo;273
+885;Andres Linares;273
+886;Tres Esquinas;273
+887;La Quebrada;274
+888;Jajo;274
+889;La Mesa;274
+890;Santiago;274
+891;Cabimbu;274
+892;Tuñame;274
+893;Mercedes Diaz;275
+894;Juan Ignacio Montilla;275
+895;La Beatriz;275
+896;Mendoza;275
+897;La Puerta;275
+898;San Luis;275
+899;Chejende;276
+900;Carrillo;276
+901;Cegarra;276
+902;Bolivia;276
+903;Manuel Salvador Ulloa;276
+904;San Jose;276
+905;Arnoldo Gabaldon;276
+906;El Dividive;277
+907;Agua Caliente;277
+908;El Cenizo;277
+909;Agua Santa;277
+910;Valerita;277
+911;Monte Carmelo;278
+912;Buena Vista;278
+913;Sta Maria Del Horcon;278
+914;Motatan;279
+915;El Baño;279
+916;Jalisco;279
+917;Pampan;280
+918;Santa Ana;280
+919;La Paz;280
+920;Flor De Patria;280
+921;Carvajal;281
+922;Antonio N Briceño;281
+923;Campo Alegre;281
+924;Jose Leonardo Suarez;281
+925;Sabana De Mendoza;282
+926;Junin;282
+927;Valmore Rodriguez;282
+928;El Paraiso;282
+929;Santa Isabel;283
+930;Araguaney;283
+931;El Jaguito;283
+932;La Esperanza;283
+933;Sabana Grande;284
+934;Cheregue;284
+935;Granados;284
+936;El Socorro;285
+937;Los Caprichos;285
+938;Antonio Jose De Sucre;285
+939;Campo Elias;286
+940;Arnoldo Gabaldon;286
+941;Santa Apolonia;287
+942;La Ceiba;287
+943;El Progreso;287
+944;Tres De Febrero;287
+945;Pampanito;288
+946;Pampanito Ii;288
+947;La Concepcion;288
+948;Cm. Aroa;289
+949;Cm. Chivacoa;290
+950;Campo Elias;290
+951;Cm. Nirgua;291
+952;Salom;291
+953;Temerla;291
+954;Cm. San Felipe;292
+955;Albarico;292
+956;San Javier;292
+957;Cm. Guama;293
+958;Cm. Urachiche;294
+959;Cm. Yaritagua;295
+960;San Andres;295
+961;Cm. Sabana De Parra;296
+962;Cm. Boraure;297
+963;Cm. Cocorote;298
+964;Cm. Independencia;299
+965;Cm. San Pablo;300
+966;Cm. Yumare;301
+967;Cm. Farriar;302
+968;El Guayabo;302
+969;General Urdaneta;303
+970;Libertador;303
+971;Manuel Guanipa Matos;303
+972;Marcelino Briceño;303
+973;San Timoteo;303
+974;Pueblo Nuevo;303
+975;Pedro Lucas Urribarri;304
+976;Santa Rita;304
+977;Jose Cenovio Urribarr;304
+978;El Mene;304
+979;Santa Cruz Del Zulia;305
+980;Urribarri;305
+981;Moralito;305
+982;San Carlos Del Zulia;305
+983;Santa Barbara;305
+984;Luis De Vicente;306
+985;Ricaurte;306
+986;Mons.Marcos Sergio G;306
+987;San Rafael;306
+988;Las Parcelas;306
+989;Tamare;306
+990;La Sierrita;306
+991;Bolivar;307
+992;Coquivacoa;307
+993;Cristo De Aranza;307
+994;Chiquinquira;307
+995;Santa Lucia;307
+996;Olegario Villalobos;307
+997;Juana De Avila;307
+998;Caracciolo Parra Perez;307
+999;Idelfonzo Vasquez;307
+1000;Cacique Mara;307
+1001;Cecilio Acosta;307
+1002;Raul Leoni;307
+1003;Francisco Eugenio B;307
+1004;Manuel Dagnino;307
+1005;Luis Hurtado Higuera;307
+1006;Venancio Pulgar;307
+1007;Antonio Borjas Romero;307
+1008;San Isidro;307
+1009;Faria;308
+1010;San Antonio;308
+1011;Ana Maria Campos;308
+1012;San Jose;308
+1013;Altagracia;308
+1014;Goajira;309
+1015;Elias Sanchez Rubio;309
+1016;Sinamaica;309
+1017;Alta Guajira;309
+1018;San Jose De Perija;310
+1019;Bartolome De Las Casas;310
+1020;Libertad;310
+1021;Rio Negro;310
+1022;Gibraltar;311
+1023;Heras;311
+1024;M.Arturo Celestino A;311
+1025;Romulo Gallegos;311
+1026;Bobures;311
+1027;El Batey;311
+1028;Andres Bello (KM 48);312
+1029;Potreritos;312
+1030;El Carmelo;312
+1031;Chiquinquira;312
+1032;Concepcion;312
+1033;Eleazar Lopez C;313
+1034;Alonso De Ojeda;313
+1035;Venezuela;313
+1036;Campo Lara;313
+1037;Libertad;313
+1038;Udon Perez;314
+1039;Encontrados;314
+1040;Donaldo Garcia;315
+1041;Sixto Zambrano;315
+1042;El Rosario;315
+1043;Ambrosio;316
+1044;German Rios Linares;316
+1045;Jorge Hernandez;316
+1046;La Rosa;316
+1047;Punta Gorda;316
+1048;Carmen Herrera;316
+1049;San Benito;316
+1050;Romulo Betancourt;316
+1051;Aristides Calvani;316
+1052;Raul Cuenca;317
+1053;La Victoria;317
+1054;Rafael Urdaneta;317
+1055;Jose Ramon Yepez;318
+1056;La Concepcion;318
+1057;San Jose;318
+1058;Mariano Parra Leon;318
+1059;Monagas;319
+1060;Isla De Toas;319
+1061;Marcial Hernandez;320
+1062;Francisco Ochoa;320
+1063;San Francisco;320
+1064;El Bajo;320
+1065;Domitila Flores;320
+1066;Los Cortijos;320
+1067;Bari;321
+1068;Jesus M Semprun;321
+1069;Simon Rodriguez;322
+1070;Carlos Quevedo;322
+1071;Francisco J Pulgar;322
+1072;Rafael Maria Baralt;323
+1073;Manuel Manrique;323
+1074;Rafael Urdaneta;323
+1075;Fernando Giron Tovar;324
+1076;Luis Alberto Gomez;324
+1077;Parhueña;324
+1078;Platanillal;324
+1079;Cm. San Fernando De Ataba;325
+1080;Ucata;325
+1081;Yapacana;325
+1082;Caname;325
+1083;Cm. Maroa;326
+1084;Victorino;326
+1085;Comunidad;326
+1086;Cm. San Carlos De Rio Neg;327
+1087;Solano;327
+1088;Cocuy;327
+1089;Cm. Isla De Raton;328
+1090;Samariapo;328
+1091;Sipapo;328
+1092;Munduapo;328
+1093;Guayapo;328
+1094;Cm. San Juan De Manapiare;329
+1095;Alto Ventuari;329
+1096;Medio Ventuari;329
+1097;Bajo Ventuari;329
+1098;Cm. La Esmeralda;330
+1099;Huachamacare;330
+1100;Marawaka;330
+1101;Mavaca;330
+1102;Sierra Parima;330
+1103;San Jose;331
+1104;Virgen Del Valle;331
+1105;San Rafael;331
+1106;Jose Vidal Marcano;331
+1107;Leonardo Ruiz Pineda;331
+1108;Mons. Argimiro Garcia;331
+1109;Mcl.Antonio J De Sucre;331
+1110;Juan Millan;331
+1111;Pedernales;332
+1112;Luis B Prieto Figuero;332
+1113;Curiapo;333
+1114;Santos De Abelgas;333
+1115;Manuel Renaud;333
+1116;Padre Barral;333
+1117;Aniceto Lugo;333
+1118;Almirante Luis Brion;333
+1119;Imataca;334
+1120;Romulo Gallegos;334
+1121;Juan Bautista Arismen;334
+1122;Manuel Piar;334
+1123;5 De Julio;334
+1124;Caraballeda;335
+1125;Carayaca;335
+1126;Caruao;335
+1127;Catia La Mar;335
+1128;La Guaira;335
+1129;Macuto;335
+1130;Maiquetia;335
+1131;Naiguata;335
+1132;El Junko;335
+1133;Pq Raul Leoni;335
+1134;Pq Carlos Soublette;335

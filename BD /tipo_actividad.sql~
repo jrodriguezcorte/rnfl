@@ -1,0 +1,6 @@
+INSERT INTO estado VALUES(1,'Presentación de libro');
+INSERT INTO estado VALUES(2,'Conferencia');
+INSERT INTO estado VALUES(3,'Mesa redonda');
+INSERT INTO estado VALUES(4,'Ronda de negocios');
+INSERT INTO estado VALUES(5,'Otro');
+
