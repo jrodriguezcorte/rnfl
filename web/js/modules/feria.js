@@ -7,6 +7,16 @@
                 humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
         })
 
+	$("#feria_nombre_escritor_homenajeado").parents("tr").hide();
+
+	$('#feria_escritor_homenajeado').on('click', '', function (e) {
+		if ($('#feria_escritor_homenajeado').is(':checked')) {
+		    $("#feria_nombre_escritor_homenajeado").parents("tr").show();
+		} else {
+		    $("#feria_nombre_escritor_homenajeado").parents("tr").hide();	
+		}
+	});
+
 	$('#feria_id_pais').on('change', function (e) {
 	    var optionSelected = $("option:selected", this);
 	    var id_pais = this.value;

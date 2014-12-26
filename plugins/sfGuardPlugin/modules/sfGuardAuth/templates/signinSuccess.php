@@ -70,19 +70,38 @@
                                                                             <br>
                                                                                 <button class="btn btn-success">Login</button>
                                                                         </div>
+                                                                        <center><br>Para realizar el cambio de contraseña. Comuníquese a través de <br><b>CORREO</b></center>
                                                                     </div>
                                                                 </fieldset>
                                                             </form>                
                                                         </div>
-                                                        <div class="tab-pane fade" id="create">
+                                                        <div class="tab-pane fade" id="create" style="height:500px; overflow: scroll;">
                                                             
-                                                                <br><label>RIF</label>
+                                                                <br><label>RIF <font color="red">*</font></label>
                                                                     <br><input type="text" value="" id="rif" name="rif" class="ancho_input">
-                                                                            <br><center>* Ingrese el RIF bajo el siguiente formato: <b>V-000000000</b></center>  
-                                                                                <br><label>Institución</label>
+                                                                            <br><center>* Ingrese el RIF bajo el siguiente formato: <b>V000000000</b></center>  
+                                                                                <br><label>Institución <font color="red">*</font></label>
                                                                                     <br><input type="text" value="" id="usuario" name="usuario" class="ancho_input">                                                                                
-                                                                                            <br><label>Correo Electrónico</label>
+                                                                                            <br>
+                                                                                                <label>Tipo de Organizador <font color="red">*</font></label><br>
+                                                                                                <select name="organizador" id="organizador">
+                                                                                                    <option value="1">Interno</option>
+                                                                                                    <option value="0">Externo</option>
+                                                                                                </select><br><br>
+                                                                                                    <label>Ente Organizador <font color="red">*</font></label><br>
+                                                                                                <input type="text" value="" name="ente" id="ente" class="ancho_input"><br>
+                                                                                                        <label>Sector <font color="red">*</font></label><br>
+                                                                                                 <select name="sector" id="sector">
+                                                                                                    <option value="1">Publico</option>
+                                                                                                    <option value="0">Privado</option>
+                                                                                                 </select><br><br>
+                                                                                                 <label>Unidad Responsable <font color="red">*</font></label>
+                                                                                                <input type="text" value="" name="unidad_responsable" id="unidad_responsable" class="ancho_input">
+                                                                                                <label>Correo Electrónico <font color="red">*</font></label>
                                                                                                 <input type="text" value="" name="email" id="email" class="ancho_input">
+                                                                                                <label>Teléfono <font color="red">*</font></label>
+                                                                                                <input type="text" value="" name="telefono" id="telefono" class="ancho_input">    
+                                                                                                <br><center>* Ingrese el Teléfono bajo el siguiente formato: <b>0000-0000000</b></center> 
                                                                                                     <div>
                                                                                                         <br>
                                                                                                             <button id="registrar" class="btn btn-primary">Enviar</button>
@@ -105,57 +124,98 @@
                                                                                                                 </html>
 
 
-                                                                                                                <script>
-                                                                                                                    jQuery(document).ready(function() {
-                                                                                                                    jQuery("#rif").blur(function(e) {
-                                                                                                                    var rif = $('#rif').val();
-                                                                                                                    /*
-                                                                                                                            $.ajax({
-                                                                                                                            type: "POST",
-                                                                                                                                    url: "<?php echo url_for('usuario/ajaxverificarrif') ?>",
-                                                                                                                                    data:   "rif=" + rif,
-                                                                                                                                    success: function(html){
-                                                                                                                                    var JSONobject = JSON.parse(html);
-                                                                                                                                            $("#feria_id_municipio").parent("td").attr('id', 'municipio');
-                                                                                                                                            $("#feria_id_municipio").parent("td").empty();
-                                                                                                                                            $("#municipio").html(JSONobject.municipio);
-                                                                                                                                            $("#feria_id_parroquia").parent("td").attr('id', 'parroquia');
-                                                                                                                                            $("#feria_id_parroquia").parent("td").empty();
-                                                                                                                                            $("#parroquia").html(JSONobject.parroquia);
-                                                                                                                                    }
-                                                                                                                      
-                                                                                                                            }); //fin de ajax   
-                                                                                                                    */        
-                                                                                                                    });        
-                                                                                                                            
-                                                                                                                    $('#email').blur(function(){
-                                                                                                                        $('#email:last').filter(function(){
-                                                                                                                            var emil = $('#email').val();
-                                                                                                                            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                                                                                                                            if (!emailReg.test(emil)) {
-                                                                                                                                alert('El formato de correo introducido es inválido. Inténtelo nuevamente');
-                                                                                                                                $('#email:last').val('');
-                                                                                                                            }
-                                                                                                                        });
-                                                                                                                    });
-                                                                                                                    
-                                                                                                                    $('#registrar').click(function(){
-                                                                                                                        var institucion = $('#usuario').val();
-                                                                                                                        var rif = $('#rif').val();
-                                                                                                                        var email = $('#email').val();
-                                                                                                                        var dataString = 'institucion=' + institucion + '&rif=' + rif  + '&email=' + email;
-                                                                                                                        $.ajax({
-                                                                                                                            type: "POST",
-                                                                                                                                    url: "<?php echo url_for('registro/ajaxregistrar') ?>",
-                                                                                                                                    data:   dataString,
-                                                                                                                                    success: function(html){
-                                                                                                                                    
-                                                                                                                                           
-                                                                                                                                    }
-                                                                                                                      
-                                                                                                                        }); //fin de ajax
-                                                                                                                    });    
+<script>
+    var rif_valido = {};
+    jQuery(document).ready(function() {
+     
+    $("#rif").focusout(function(){
+          var rif=$(this).val();
+          var dataString = 'rif=' + rif; 
+            $.ajax({
+                type: "POST",
+                        url: "<?php echo url_for('registro/ajaxvalidarrif') ?>",
+                        data:   dataString,
+                        success: function(html){
+                            switch (html) {
+                                case '0':
+                                    alert('Formato de Rif inválido, inserte nuevamente');
+                                    rif_valido.valor = 0;
+                                    break;
+                                case '1':
+                                    alert('No hay conexión a Internet');
+                                    rif_valido.valor = 1;
+                                    break;
+                                case '2':
+                                    alert('Falló la conexión para verificar el Rif, inténtelo nuevamente');
+                                    rif_valido.valor = 2;
+                                    break;
+                                case '3':
+                                    alert('Rif válido');
+                                    rif_valido.valor = 3;
+                                    break;
+                            }   
+                            
+                        }
 
-                                                                                                                });                            
-                                                                                                                </script>    
+            }); //fin de ajax
+
+      })    
+                                                                                                                            
+    $('#email').blur(function(){
+        $('#email:last').filter(function(){
+            var emil = $('#email').val();
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (!emailReg.test(emil)) {
+                alert('El formato de correo introducido es inválido. Inténtelo nuevamente');
+                $('#email:last').val('');
+            }
+        });
+    });
+    
+     $('#telefono').blur(function(){
+        $('#telefono:last').filter(function(){
+            var telef = $('#telefono').val();
+            var telefonoReg = /([0-9]{4})([-])([0-9]{7})$/;
+            if (!telefonoReg.test(telef)) {
+                alert('El formato de teléfono introducido es inválido. Inténtelo nuevamente');
+                $('#telefono:last').val('');
+            }
+        });
+    });   
+                                                                                                                    
+    $('#registrar').click(function(event){
+        var institucion = $('#usuario').val();
+        var organizador = $('#organizador option:selected').val();
+        var rif = $('#rif').val();
+        var ente = $('#ente').val();
+        var sector = $('#sector option:selected').val();
+        var unidad_responsable = $('#unidad_responsable').val();
+        var email = $('#email').val();
+        var telefono = $('#telefono').val();
+        if (/*rif_valido.valor == 3 &&  */ institucion != '' && organizador != '' && rif != '' && ente != '' && sector != '' && unidad_responsable != '' && email != '' && telefono != '') {
+            var dataString = 'institucion=' + institucion + 
+                             '&organizador=' + organizador + 
+                             '&rif=' + rif  + 
+                             '&ente=' + ente + 
+                             '&sector=' + sector +
+                             '&unidad_responsable=' + unidad_responsable +
+                             '&telefono=' + telefono +
+                             '&email=' + email;
+            $.ajax({
+                type: "POST",
+                        url: "<?php echo url_for('registro/ajaxregistrar') ?>",
+                        data:   dataString,
+                        success: function(html){
+                               alert(html);
+                                
+                        }
+
+            }); //fin de ajax
+        } else {
+            alert('Recuerde que todos los campos del formulario son obligatorios');
+        }    
+    });    
+
+});                            
+</script>    
 

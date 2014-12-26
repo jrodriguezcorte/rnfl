@@ -11,8 +11,17 @@
       <td><?php echo $Feria->getNombre() ?></td>
     </tr>
     <tr>
-      <th>Descripcion:</th>
-      <td><?php echo $Feria->getDescripcion() ?></td>
+      <th>Lema:</th>
+      <td><?php echo $Feria->getLema() ?></td>
+    </tr>
+    <tr>
+      <th>Tema:</th>
+      <td><?php echo $Feria->getTema() ?></td>
+    </tr>    
+    <tr>
+      <th>Tipo de Feria:</th>
+      <td><?php $TipoFeria = TipoFeriaQuery::create()->filterById($Feria->getIdTipoFeria())->findOne();
+                echo $TipoFeria->getTipoFeria() ?></td>
     </tr>
     <tr>
       <th>Fecha de Inicio:</th>
@@ -22,6 +31,16 @@
       <th>Fecha de Cierre:</th>
       <td><?php echo implode("-", array_reverse(explode("-", $Feria->getFechaFin()))); ?></td>
     </tr>
+    <tr>
+      <th>Hora de Inicio:</th>
+      <td><?php list($fecha,$hora) = explode(" ", $Feria->getHoraInicio()); 
+                 echo $hora ?></td>
+    </tr>
+    <tr>
+      <th>Hora de Cierre:</th>
+      <td><?php list($fecha,$hora) = explode(" ", $Feria->getHoraFin()); 
+                 echo $hora ?></td>
+    </tr>    
     <tr>
       <th>País:</th>
       <td><?php $Pais = PaisQuery::create()->filterById($Feria->getIdPais())->findOne();
@@ -48,20 +67,24 @@
                 echo $Region->getNombre() ?></td>
     </tr>
     <tr>
-      <th>Costo:</th>
-      <td><?php echo $Feria->getCosto() ?></td>
-    </tr>
-    <tr>
-      <th>Libro más vendido:</th>
-      <td><?php echo $Feria->getLibroMasVendido() ?></td>
-    </tr>
-    <tr>
-      <th>Autor del libro más vendido:</th>
-      <td><?php echo $Feria->getAutorLibroMasVendido() ?></td>
+      <th>Dirección:</th>
+      <td><?php echo $Feria->getDireccion() ?></td>
     </tr>
     <tr>
       <th>Extensión del recinto en m<sup>2</sup>:</th>
       <td><?php echo $Feria->getExtensionSuperficie() ?></td>
+    </tr> 
+    <tr>
+      <th>Libro más vendido:</th>
+      <td><?php echo $Feria->getLibroMasVendido() ?></td>
+    </tr> 
+    <tr>
+      <th>Autor del libro más vendido:</th>
+      <td><?php echo $Feria->getAutorLibroMasVendido() ?></td>
+    </tr>    
+    <tr>
+      <th>Costo:</th>
+      <td><?php echo $Feria->getCosto() ?></td>
     </tr>
   </tbody>
 </table>

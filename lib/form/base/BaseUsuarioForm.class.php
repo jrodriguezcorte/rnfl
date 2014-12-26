@@ -24,6 +24,10 @@ abstract class BaseUsuarioForm extends BaseFormPropel
       'sf_guard_user'       => new sfWidgetFormInputText(),
       'sexo'                => new sfWidgetFormInputCheckbox(),
       'sf_guard_user_group' => new sfWidgetFormInputText(),
+      'tipo_organizador'    => new sfWidgetFormInputCheckbox(),
+      'ente_organizador'    => new sfWidgetFormInputText(),
+      'sector'              => new sfWidgetFormInputCheckbox(),
+      'unidad_responsable'  => new sfWidgetFormInputText(),
       'correo'              => new sfWidgetFormInputText(),
       'telefono'            => new sfWidgetFormInputText(),
     ));
@@ -39,6 +43,10 @@ abstract class BaseUsuarioForm extends BaseFormPropel
       'sf_guard_user'       => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
       'sexo'                => new sfValidatorBoolean(array('required' => false)),
       'sf_guard_user_group' => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'tipo_organizador'    => new sfValidatorBoolean(array('required' => false)),
+      'ente_organizador'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'sector'              => new sfValidatorBoolean(array('required' => false)),
+      'unidad_responsable'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'correo'              => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'telefono'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));

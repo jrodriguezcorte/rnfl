@@ -52,6 +52,10 @@ class feriaActions extends sfActions {
 
     public function executeNew(sfWebRequest $request) {
         $this->form = new FeriaForm();
+        
+        $this->form->setDefault('id_pais_homenajeado', 1);
+        
+        $this->form->setDefault('id_tipo_feria', 1);
 
         $this->form->setDefault('id_pais', 1);
 
@@ -66,6 +70,10 @@ class feriaActions extends sfActions {
         $this->form->setDefault('fecha_inicio', date("Y-m-d"));
 
         $this->form->setDefault('fecha_fin', date("Y-m-d"));
+        
+        $this->form->setDefault('hora_inicio', date("Y-m-d h:m"));
+         
+        $this->form->setDefault('hora_fin', date("Y-m-d h:m"));
     }
 
     public function executeCreate(sfWebRequest $request) {
@@ -106,10 +114,22 @@ class feriaActions extends sfActions {
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
+    //    die(var_dump($request->getParameter($form->getName())));
+        $formulario = $request->getParameter($form->getName());
+        
+        $params['hora_inicio']= $formulario['hora_inicio']['hour'].':'. $formulario['hora_inicio']['minute'];
+        $params['hora_i']= (string) date("Y-m-d").' '.$params['hora_inicio'];
+        $valor_inicio = date('Y-m-d H:i', strtotime($params['hora_i']));
+        
+        $params['hora_fin']= $formulario['hora_fin']['hour'].':'. $formulario['hora_fin']['minute'];
+        $params['hora_f']= (string) date("Y-m-d").' '.$params['hora_fin'];
+        $valor_fin = date('Y-m-d H:i', strtotime($params['hora_f']));        
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid()) {
             $Feria = $form->save();
-
+            $Feria->setHoraInicio($valor_inicio);
+            $Feria->setHoraFin($valor_fin);
+            $Feria->save();
             $this->redirect('feria/edit?id=' . $Feria->getId());
         }
     }

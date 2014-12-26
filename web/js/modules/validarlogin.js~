@@ -1,0 +1,54 @@
+ jQuery(document).ready(function() {
+                                                                                                                    jQuery("#rif").blur(function(e) {
+                                                                                                                    var rif = $('#rif').val();
+                                                                                                                    /*
+                                                                                                                            $.ajax({
+                                                                                                                            type: "POST",
+                                                                                                                                    url: "<?php echo url_for('usuario/ajaxverificarrif') ?>",
+                                                                                                                                    data:   "rif=" + rif,
+                                                                                                                                    success: function(html){
+                                                                                                                                    var JSONobject = JSON.parse(html);
+                                                                                                                                            $("#feria_id_municipio").parent("td").attr('id', 'municipio');
+                                                                                                                                            $("#feria_id_municipio").parent("td").empty();
+                                                                                                                                            $("#municipio").html(JSONobject.municipio);
+                                                                                                                                            $("#feria_id_parroquia").parent("td").attr('id', 'parroquia');
+                                                                                                                                            $("#feria_id_parroquia").parent("td").empty();
+                                                                                                                                            $("#parroquia").html(JSONobject.parroquia);
+                                                                                                                                    }
+                                                                                                                      
+                                                                                                                            }); //fin de ajax   
+                                                                                                                    */        
+                                                                                                                    });        
+                                                                                                                            
+                                                                                                                    $('#email').blur(function(){
+                                                                                                                        $('#email:last').filter(function(){
+                                                                                                                            var emil = $('#email').val();
+                                                                                                                            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                                                                                                                            if (!emailReg.test(emil)) {
+                                                                                                                                alert('El formato de correo introducido es inválido. Inténtelo nuevamente');
+                                                                                                                                $('#email:last').val('');
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                    });
+                                                                                                                    
+                                                                                                                    $('#registrar').click(function(){
+                                                                                                                        var institucion = $('#usuario').val();
+                                                                                                                        var rif = $('#rif').val();
+                                                                                                                        var email = $('#email').val();
+                                                                                                                        var dataString = 'institucion=' + institucion + '&rif=' + rif  + '&email=' + email;
+                                                                                                                        $.ajax({
+                                                                                                                            type: "POST",
+                                                                                                                                    url: "<?php echo url_for('registro/ajaxregistrar') ?>",
+                                                                                                                                    data:   dataString,
+                                                                                                                                    success: function(html){
+                                                                                                                                    
+                                                                                                                                           
+                                                                                                                                    }
+                                                                                                                      
+                                                                                                                        }); //fin de ajax
+                                                                                                                    });    
+
+                                                                                                                });                            
+
+
+

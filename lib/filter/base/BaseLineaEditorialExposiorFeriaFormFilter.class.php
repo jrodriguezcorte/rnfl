@@ -12,12 +12,12 @@ abstract class BaseLineaEditorialExposiorFeriaFormFilter extends BaseFormFilterP
   public function setup()
   {
     $this->setWidgets(array(
-      'id_expositor_feria' => new sfWidgetFormPropelChoice(array('model' => 'ExpositorFeria', 'add_empty' => true)),
+      'id_expositor_feria' => new sfWidgetFormFilterInput(),
       'id_linea_editorial' => new sfWidgetFormPropelChoice(array('model' => 'LineaEditorial', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'id_expositor_feria' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'ExpositorFeria', 'column' => 'id')),
+      'id_expositor_feria' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'id_linea_editorial' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'LineaEditorial', 'column' => 'id')),
     ));
 
@@ -37,7 +37,7 @@ abstract class BaseLineaEditorialExposiorFeriaFormFilter extends BaseFormFilterP
   {
     return array(
       'id'                 => 'Number',
-      'id_expositor_feria' => 'ForeignKey',
+      'id_expositor_feria' => 'Number',
       'id_linea_editorial' => 'ForeignKey',
     );
   }

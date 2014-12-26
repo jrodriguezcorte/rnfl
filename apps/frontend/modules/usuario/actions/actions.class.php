@@ -28,7 +28,8 @@ class usuarioActions extends sfActions
       $id_grupo = $Usuario->getSfGuardUserGroup();
       
       if ($id_grupo == 1) {
-         $Usuarios = UsuarioQuery::create()->orderByLogin('asc')->find();
+       $Usuarios = UsuarioQuery::create()->orderByLogin('asc')->find();
+       
          foreach ($Usuarios as $list) {
             if ($list->getSfGuardUserGroup() == 1) {
                 $admin = '   <a id="admin" style="vertical-align:middle;" title="Eliminar Privilegio de Administrador" href="/usuario/noadmin/id/'.$list->getId().'"><img src="/images/noadmin.png"></a>';

@@ -21,8 +21,8 @@ class ExpositorForm extends BaseExpositorForm
      ));
     
     
-    $this->widgetSchema['cedula'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: V-12345678'));
-    $this->widgetSchema['rif'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: J-12345678'));
+    $this->widgetSchema['cedula'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: V12345678'));
+    $this->widgetSchema['rif'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: J12345678'));
 
     $this->widgetSchema->setLabel('nombre', 'Nombre <font color="red">*</font>');
     $this->widgetSchema->setLabel('apellido', 'Apellido <font color="red">*</font>');

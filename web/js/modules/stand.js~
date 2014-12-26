@@ -1,0 +1,14 @@
+    jQuery(document).ready(function() {
+        jQuery("#formulario").submit(function(e) {
+		e.preventDefault();
+		metros = $("#stand_metros").val();
+		tarifa = $("#stand_tarifa").val();
+		if !($.isNumeric(metros) || $.isNumeric(tarifa)) {
+			e.preventDefault();
+                	humanMsg.displayMsg('Los valores deben ser números');
+		} else {
+			humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+		}
+        })
+
+    });

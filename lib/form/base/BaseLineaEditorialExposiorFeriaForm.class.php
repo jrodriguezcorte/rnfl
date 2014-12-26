@@ -15,13 +15,13 @@ abstract class BaseLineaEditorialExposiorFeriaForm extends BaseFormPropel
   {
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
-      'id_expositor_feria' => new sfWidgetFormPropelChoice(array('model' => 'ExpositorFeria', 'add_empty' => true)),
+      'id_expositor_feria' => new sfWidgetFormInputText(),
       'id_linea_editorial' => new sfWidgetFormPropelChoice(array('model' => 'LineaEditorial', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
       'id'                 => new sfValidatorPropelChoice(array('model' => 'LineaEditorialExposiorFeria', 'column' => 'id', 'required' => false)),
-      'id_expositor_feria' => new sfValidatorPropelChoice(array('model' => 'ExpositorFeria', 'column' => 'id', 'required' => false)),
+      'id_expositor_feria' => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
       'id_linea_editorial' => new sfValidatorPropelChoice(array('model' => 'LineaEditorial', 'column' => 'id', 'required' => false)),
     ));
 

@@ -54,7 +54,7 @@
                             {text: 'Nombre', datafield: 'Nombre', width: 200  },
                             {text: 'Apellido', datafield: 'Apellido', width: 200  },
                             {text: 'Cédula', datafield: 'Cedula', width: 200  },
-                            {text: 'RIF', datafield: 'Rif', width: 200  },
+                            {text: 'Rif', datafield: 'Rif', width: 200  },
                             {text: 'País', datafield: 'Pais', width: 100 ,cellsalign: 'center'},
                             {text: '', datafield: '', width: 100 ,cellsalign: 'center'},                            
                         ]

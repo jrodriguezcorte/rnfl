@@ -16,10 +16,10 @@ class actividadActions extends sfActions {
     public function executeIndexajax(sfWebRequest $request) {
        $id_feria = $request->getParameter('id_feria');
        $Actividades = ActividadQuery::create()->filterByIdFeria($id_feria)->orderByFecha('desc')->find();
-       
+        $i = 0;
         foreach ($Actividades as $list) {
             list($fecha,$hora) = explode(" ", $list->getHora());
-            $arreglo[] = array(
+            $arreglo[$i] = array(
                 'Nombre' => $list->getNombre(),
                 'Fecha' => implode("-", array_reverse(explode("-", $list->getFecha()))),
                 'Hora' => $hora,
@@ -28,6 +28,7 @@ class actividadActions extends sfActions {
                 . '      <a style="vertical-align:middle;" title="Información de Ponentes" href="/actividad/ponente/id_feria/'.$id_feria.'/id/' . $list->getId() .'"><img src="/images/ponente_mini.png"></a>'
                . '    ',
             );
+            $i++;
         }
         
         return $this->renderText(json_encode($arreglo));
@@ -135,7 +136,7 @@ class actividadActions extends sfActions {
                ->filterByIdFeria($id_feria)
                ->filterByIdActividad($id_actividad)
                ->find();
-              
+        $i = 0;      
         foreach ($PonenteActividads as $list) {
             $id_ponente = $list->getIdPonente();
             if ($id_usuario == $Actividad->getIdUsuario() || $id_grupo == 1) {
@@ -143,9 +144,10 @@ class actividadActions extends sfActions {
                 //$eliminar = '<a style="vertical-align:middle;" id="'.$id_ponente.'" title="Eliminar" href="#"  ><img  class="eliminar" src="/images/delete_mini.png"></a>';    
             }  else {
                  $eliminar = '';
-            }            
+            }       
+            
             $Ponente = PonenteQuery::create()->filterById($id_ponente)->findOne();
-            $arreglo[] = array(
+            $arreglo[$i] = array(
                 'Nombre' => $Ponente->getNombre(),
                 'Apellido' => $Ponente->getApellido(),
                 'Cedula' => $Ponente->getCedula(),
@@ -154,6 +156,7 @@ class actividadActions extends sfActions {
                 . '      <a style="vertical-align:middle;" title="Ver" href="/ponente/show/id/'.$Ponente->getId().'"><img src="/images/search_mini.png"></a>'
                 . $eliminar
             );
+            $i++;
         }
         
         return $this->renderText(json_encode($arreglo));        

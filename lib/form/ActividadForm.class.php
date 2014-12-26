@@ -45,13 +45,22 @@ class ActividadForm extends BaseActividadForm {
                     ))
         ));
 
+        $this->widgetSchema['fecha_sugerida'] = new sfWidgetFormJQueryDate(array(
+            'image' => '/images/calendar.png', 'culture' => 'es',
+            'date_widget' => new sfWidgetFormi18nDate(array('culture' => 'es')),
+            'config' => '{ changeMonth: true, changeYear: true, firstDay: 1 }',
+            'date_widget' => new sfWidgetFormi18nDate(array(
+                'years' => array_combine($years, $years),
+                'culture' => 'es'
+                    ))
+        ));        
+        
         $this->widgetSchema->setLabel('nombre', 'Nombre <font color="red">*</font>');
         $this->widgetSchema->setLabel('ejecutada', '¿La actividad fue realizada?');
         $this->widgetSchema->setLabel('cantidad_participantes_m', 'N° de participantes masculinos');
         $this->widgetSchema->setLabel('cantidad_participantes_f', 'N° de participantes femeninos');
         $this->widgetSchema->setLabel('alcanzo_tiempo', '¿Alcanzó el tiempo?');
         $this->widgetSchema->setLabel('causas_incumplimiento', 'Causas de incumplimiento');
-        $this->widgetSchema->setLabel('id_tipo_actividad', 'Tipo de actividad <font color="red">*</font>');
         $this->widgetSchema->setLabel('observacion_tipo_actividad', 'Otro');
         $this->widgetSchema->setLabel('fecha', 'Fecha <font color="red">*</font>');
         $this->widgetSchema->setLabel('hora', 'Hora <font color="red">*</font>');
@@ -60,6 +69,11 @@ class ActividadForm extends BaseActividadForm {
        
         $this->widgetSchema['id_usuario'] = new sfWidgetFormInputHidden();
        
+        $this->widgetSchema['hora'] = new sfWidgetFormTime(array
+            ('label' => 'Hora', 'with_seconds' => false));   
+        
+        $this->widgetSchema['hora_sugerida'] = new sfWidgetFormTime(array
+            ('label' => 'Hora', 'with_seconds' => false));           
                 
         $this->setValidators(array(
             'nombre' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
@@ -68,7 +82,6 @@ class ActividadForm extends BaseActividadForm {
             'alcanzo_tiempo' => new sfValidatorString(array('required' => false)),
             'causas_incumplimiento' => new sfValidatorString(array('required' => false)),
             'observaciones' => new sfValidatorString(array('required' => false)),
-            'id_tipo_actividad' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
             'observacion_tipo_actividad' => new sfValidatorString(array('required' => false)),
             'fecha' => new sfValidatorDate(array('required' => false)),
             'hora' => new sfValidatorDate(array('required' => false)),
@@ -76,7 +89,8 @@ class ActividadForm extends BaseActividadForm {
             'id'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
             'id_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
             'id_usuario'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
-        ));        
+        ));  
+        
         
     }
 

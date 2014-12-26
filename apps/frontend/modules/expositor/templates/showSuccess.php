@@ -1,32 +1,38 @@
 <?php include_partial('usuario/menuinicial') ?>
 
 <div class="jumbotron">
-<h2>Detalle del Expositor</h2>
+<h2>Información básica del expositor</h2>
 <br>
 <div class="table-responsive">
-  <table class="table">
+  <table class="table">      
   <tbody>
     <tr>
-      <th>Nombre:</th>
-      <td><?php echo $Expositor->getNombre() ?></td>
-    </tr>
-    <tr>
-      <th>Apellido:</th>
-      <td><?php echo $Expositor->getApellido() ?></td>
+      <th>Nombre y Apellido:</th>
+      <td><?php echo $Expositor->getNombre().'  '.$Expositor->getApellido() ?></td>
     </tr>
     <tr>
       <th>Cédula:</th>
-      <td><?php echo $Expositor->getCedula() ?></td>
+      <td><?php $Expositor->getCedula() ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Rif:</th>
+      <td><?php $Expositor->getRif() ?>
+      </td>
     </tr>
     <tr>
       <th>País:</th>
-      <td><?php echo $Expositor->getPais() ?></td>
+      <td><?php  $Pais = PaisQuery::create()->filterById($Expositor->getIdPais())->findOne();
+                  echo $Pais->getNombre();
+           ?>
+      </td>
     </tr>
   </tbody>
 </table>
 </div>
 <hr />
-<?php echo link_to(image_tag('back.png'),'expositor/index',array('title' => 'Ver listado'))?>
+<?php echo link_to(image_tag('back.png'),"expositor/index",array('title' => 'Ver listado'))?>
 &nbsp;
-<?php echo link_to(image_tag('edit.png'),'expositor/edit?id='.$Expositor->getId(),array('title' => 'Editar'))?>
-</div>
+<?php echo link_to(image_tag('edit.png'),"expositor/edit?id=".$Expositor->getId(),array('title' => 'Editar'))?>
+<br>
+<br>

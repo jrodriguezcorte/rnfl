@@ -18,5 +18,7 @@
  * @package    propel.generator.lib.model
  */
 class Expositor extends BaseExpositor {
-
+    public function __toString() {
+        return $this->getRif();
+    }
 } // Expositor
