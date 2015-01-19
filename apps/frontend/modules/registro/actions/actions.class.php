@@ -38,6 +38,7 @@ class registroActions extends sfActions {
                 $sfusuario->save($conuser);
             }
             
+            
             $sfusuario = SfGuardUserQuery::create()->findOneByUsername($rif);
 
             $id_usuario_creado = $sfusuario->getId();
@@ -59,15 +60,20 @@ class registroActions extends sfActions {
             $nuevousuario->setCorreo($email);
             $nuevousuario->save($conuser);
             
+            
             //GUARDO LA RELACION GRUPO-USUARIO
-            $sfusuariogrupo = new SfGuardUserGroup();
-            $sfusuariogrupo->setUserId($sfusuario->getId());
-            $sfusuariogrupo->setGroupId(2);
-            $sfusuariogrupo->save($conuser);
-            $conuser->commit();
+            $sfguardgrupo = SfGuardUserGroupQuery::create()->findOneByUserId($sfusuario->getId());
+                    
+            if (count($sfguardgrupo) == 0) { 
+                $sfusuariogrupo = new SfGuardUserGroup();
+                $sfusuariogrupo->setUserId($sfusuario->getId());
+                $sfusuariogrupo->setGroupId(2);
+                $sfusuariogrupo->save($conuser);
+                $conuser->commit();
+            }
             /* Envio de Correo */
                
-            /*
+                        
             $subject = "Bienvenido al Registro Nacional de Ferias del Libro";
             $body = "Su registro fue realizado el : ". date('d-m-y') . ' y su clave de acceso es ....';
                 
@@ -75,7 +81,7 @@ class registroActions extends sfActions {
                ->compose('no-responder@cenal.gob.ve', $email, $subject, $body);
 
              $this->getMailer()->send($message);             
-             */
+             
             
                $arreglo = 'Se ha enviado a su correo su clave de acceso '.$clave_acceso; 
             

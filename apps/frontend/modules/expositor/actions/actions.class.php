@@ -27,14 +27,17 @@ class expositorActions extends sfActions
         foreach ($Expositores as $list) {
             $Pais = PaisQuery::create()->filterById($list->getIdPais())->findOne();
             $arreglo[$i] = array(
-                'Nombre' => $list->getNombre(),
-                'Apellido' => $list->getApellido(),
-                'Cedula' => $list->getCedula(),
-                'Rif' => $list->getRif(),
-                'Pais' => $Pais->getNombre(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor/show/id/'.$list->getId().'"><img src="/images/search_mini.png"></a>'
-                . '    ',
+                . '    ',                
+                'Nombre' => $list->getNombre(),
+                'Apellido' => $list->getApellido(),
+                'Pais' => $Pais->getNombre(),
+                'Rif' => $list->getRif(),
+                'Email' => $list->getEmail(),
+                'Local' => $list->getTelefonoLocal(),
+                'Celular' => $list->getTelefonoCelular(),
+                
             );
             $i++;
         }        
@@ -51,15 +54,18 @@ class expositorActions extends sfActions
         foreach ($Expositores as $list) {
             $Pais = PaisQuery::create()->filterById($list->getIdPais())->findOne();
             $arreglo[$i] = array(
+                                '' => ''
+                . '      <a style="vertical-align:middle;" title="Ver" href="/expositor/mostrar/id_feria/'.$id_feria.'/id_expositor/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'                
+                . '      <a style="vertical-align:middle;" title="Asociar a la feria" href="/expositor_feria/new/id_feria/'.$id_feria.'/id_expositor/' . $list->getId() . '"><img src="/images/go_mini.png"></a>', 
                 'Nombre' => $list->getNombre(),
                 'Apellido' => $list->getApellido(),
-                'Cedula' => $list->getCedula(),
-                'Rif' => $list->getRif(),
                 'Pais' => $Pais->getNombre(),
-                '' => ''
-                . '      <a style="vertical-align:middle;" title="Ver" href="/expositor/mostrar/id_feria/'.$id_feria.'/id_expositor/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'                
-                . '      <a style="vertical-align:middle;" title="Asociar a la feria" href="/expositor_feria/new/id_feria/'.$id_feria.'/id_expositor/' . $list->getId() . '"><img src="/images/go_mini.png"></a>' 
-            );
+                'Rif' => $list->getRif(),
+                'Email' => $list->getEmail(),
+                'Local' => $list->getTelefonoLocal(),
+                'Celular' => $list->getTelefonoCelular(),
+                
+            );        
             $i++;
         }        
 
@@ -83,6 +89,8 @@ class expositorActions extends sfActions
     $this->form = new ExpositorForm();
     
     $this->form->setDefault('id_pais', 1);
+    
+    $this->form->setDefault('es_venezolano', 1);
   }
   
   public function executeNuevo(sfWebRequest $request)
@@ -90,6 +98,8 @@ class expositorActions extends sfActions
     $this->form = new ExpositorForm();
     
     $this->form->setDefault('id_pais', 1);
+    
+    $this->form->setDefault('es_venezolano', 1);
             
   }  
   
@@ -165,6 +175,7 @@ class expositorActions extends sfActions
   protected function procesarForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+
     if ($form->isValid())
     {
       $Expositor = $form->save();

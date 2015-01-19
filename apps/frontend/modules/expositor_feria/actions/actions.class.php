@@ -76,9 +76,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Aprobar" href="/expositor_feria/aprobarsolicitud/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/check_mini.png"></a>'
                 . '      <a style="vertical-align:middle;" title="Rechazar" href="/expositor_feria/rechazarsolicitud/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/delete_mini.png"></a>'
@@ -109,9 +109,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor_feria/mostrar/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>',
             );
@@ -207,9 +207,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Revertir" href="/expositor_feria/revertirsolicitud/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/back_mini.png"></a>'
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor_feria/mostrar/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>',
@@ -239,9 +239,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor_feria/mostrar/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>',
             );
@@ -361,9 +361,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 'Observaciones' => $Status->getObservaciones(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Revertir" href="/expositor_feria/revertirsolicitud/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/back_mini.png"></a>'
@@ -400,9 +400,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 'Observaciones' => $Status->getObservaciones(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor_feria/mostrar/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>',
@@ -442,7 +442,8 @@ class expositor_feriaActions extends sfActions
                       ->where(array('cond2', 'cond34'), 'and')
                       ->where('Status.StatusActual = true')      
                       ->find();
-               
+                    
+                   
          $i = 0;           
          foreach ($ExpositorFeria as $list) {
 
@@ -452,9 +453,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor_feria/mostrar/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>'
                 . '      <a style="vertical-align:middle;" title="Registrar" href="/pago_expositor/new/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/go_mini.png"></a>',
@@ -484,9 +485,9 @@ class expositor_feriaActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Telefono Local' => $list->getTelefonoLocal(),
-                'Telefono Celular' => $list->getTelefonoCelular(),
-                'Email' => $list->getEmail(),
+                'Telefono Local' => $Expositor->getTelefonoLocal(),
+                'Telefono Celular' => $Expositor->getTelefonoCelular(),
+                'Email' => $Expositor->getEmail(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor_feria/mostrar/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>'
                 . '      <a style="vertical-align:middle;" title="Registrar" href="/pago_expositor/new/id/'.$list->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/go_mini.png"></a>',
@@ -535,9 +536,14 @@ class expositor_feriaActions extends sfActions
                     $Expositor = ExpositorQuery::create()->
                             filterById($id_expositor)->
                             findOne();
-             if ($PagoExpositor->getFormaPago()) {
+             if ($PagoExpositor->getEsPagoBancoNacional()) {
                  $forma_pago = "Internacional";
-                 $monto = $PagoExpositor->getMonto().' $';
+                 $Banco = BancoQuery::create()
+                      ->orderById('desc')                     
+                      ->where('Banco.Id = ?', $PagoExpositor->getIdBanco())    
+                      ->findOne(); 
+                 $Moneda = MonedaQuery::create()->filterById($Banco->getIdMoneda())->findOne();
+                 $monto = $PagoExpositor->getMonto().' '.$Moneda->getSimbolo();
              } else {
                  $forma_pago = "Nacional";
                  $monto = $PagoExpositor->getMonto().' Bs';
@@ -612,6 +618,18 @@ class expositor_feriaActions extends sfActions
     $this->form->setDefault('id_pais', 1);
     
     $this->form->setDefault('id_tipo_distribuidor', 1);
+    
+    $Stands = StandQuery::create()->filterByIdFeria($request->getParameter('id_feria'))->find();
+    
+    $arreglo = array();
+    foreach ($Stands as $Stand) {
+        $arreglo[$Stand->getId()] = $Stand->getMetros();
+    }       
+    
+    $this->form->setWidget('id_stand', new sfWidgetFormChoice(array(
+        'choices' => $arreglo,
+        'label' => 'Stand (m<sup>2</sup>)'
+    )));
     
     $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
       
@@ -723,7 +741,7 @@ class expositor_feriaActions extends sfActions
       }
                 
       $id_feria = $this->prueba;
-      
+            
       $this->redirect('expositor_feria/edit?id_feria='.$id_feria.'&id='.$ExpositorFeria->getId());
     }
   }

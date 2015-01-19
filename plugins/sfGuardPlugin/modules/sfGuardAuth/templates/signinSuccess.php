@@ -192,7 +192,7 @@
         var unidad_responsable = $('#unidad_responsable').val();
         var email = $('#email').val();
         var telefono = $('#telefono').val();
-        if (/*rif_valido.valor == 3 &&  */ institucion != '' && organizador != '' && rif != '' && ente != '' && sector != '' && unidad_responsable != '' && email != '' && telefono != '') {
+        if (/*rif_valido.valor == 3 &&*/  institucion != '' && organizador != '' && rif != '' && ente != '' && sector != '' && unidad_responsable != '' && email != '' && telefono != '') {
             var dataString = 'institucion=' + institucion + 
                              '&organizador=' + organizador + 
                              '&rif=' + rif  + 

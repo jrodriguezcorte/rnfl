@@ -35,7 +35,28 @@ class pago_expositorActions extends sfActions
       
     $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();    
     
-    $this->form->setDefault('id_usuario', $Usuario->getId());    
+    $this->form->setDefault('id_usuario', $Usuario->getId());
+    
+    $this->form->setDefault('fecha_pago', date("Y-m-d"));
+    
+    // Caso Nacional  
+    $Bancos = BancoQuery::create()
+     ->leftJoin('Cuenta')
+     ->orderByNombre('asc')
+     ->where('Banco.IdPais = 1')                     
+     ->where('Cuenta.IdFeria = ?', $request->getParameter('id_feria'))
+     ->find();  
+                  
+    $arreglo = array();
+    foreach ($Bancos as $Banco) {
+        $arreglo[$Banco->getId()] = $Banco->getNombre();
+    }
+    
+    
+    $this->form->setWidget('id_banco', new sfWidgetFormChoice(array(
+        'choices' => $arreglo,
+        'label' => 'Depósito realizado en el Banco',
+    )));       
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -44,7 +65,7 @@ class pago_expositorActions extends sfActions
 
     $this->form = new PagoExpositorForm();
 
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form); 
 
     $this->setTemplate('new');
   }
@@ -200,22 +221,28 @@ class pago_expositorActions extends sfActions
                       ->find();   
                     
         $i = 0;        
-        foreach ($PagoExpositors as $PagoExpositor) {
+        foreach ($PagoExpositors as $PagoExpositor) {            
             $id_expositor = $PagoExpositor->getIdExpositor();
-                            
+            $id_expositor_feria = $PagoExpositor->getIdExpositorFeria();
                     $Expositor = ExpositorQuery::create()->
                             filterById($id_expositor)->
                             findOne();
-             if ($PagoExpositor->getFormaPago()) {
+             if ($PagoExpositor->getEsPagoBancoNacional()) {
                  $forma_pago = "Internacional";
-                 $monto = $PagoExpositor->getMonto().' $';
+                 $Banco = BancoQuery::create()
+                      ->orderById('desc')                     
+                      ->where('Banco.Id = ?', $PagoExpositor->getIdBanco())    
+                      ->findOne(); 
+                 $Moneda = MonedaQuery::create()->filterById($Banco->getIdMoneda())->findOne();
+                 $monto = $PagoExpositor->getMonto().' '.$Moneda->getSimbolo();
              } else {
                  $forma_pago = "Nacional";
                  $monto = $PagoExpositor->getMonto().' Bs';
              }      
                     
              $arreglo[$i] = array(
-                '' =>  '      <a style="vertical-align:middle;" title="Ver" href="/pago_expositor/mostrar/id/'.$PagoExpositor->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>',
+                '' =>  '      <a style="vertical-align:middle;" title="Ver" href="/pago_expositor/mostrar/id/'.$PagoExpositor->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>'
+                     . '      <a style="vertical-align:middle;" title="Revertir" href="/pago_expositor/revertirpagoaprobado/id/'.$PagoExpositor->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'/id_expositor_feria/'.$id_expositor_feria.'"><img src="/images/back_mini.png"></a>', 
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
@@ -348,8 +375,9 @@ public function executeEsrechazada(sfWebRequest $request)
             
             
              $arreglo[$i] = array(
-                '' => '      <a style="vertical-align:middle;" title="Ver" href="/pago_expositor/mostrar/id/'.$PagoExpositor->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>',
-                'Observaciones' => $Status->getObservaciones(),
+                '' => '      <a style="vertical-align:middle;" title="Ver" href="/pago_expositor/mostrar/id/'.$PagoExpositor->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>'
+                    . '      <a style="vertical-align:middle;" title="Revertir" href="/pago_expositor/revertirpagorechazado/id/'.$PagoExpositor->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'/id_expositor_feria/'.$id_expositor_feria.'"><img src="/images/back_mini.png"></a>',  
+                 'Observaciones' => $Status->getObservaciones(),
                  'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),               
@@ -400,5 +428,138 @@ public function executeEsrechazada(sfWebRequest $request)
       }
       
         return $this->renderText(json_encode($arreglo));
-  }    
+  }  
+  
+     public function executeRevertirpagorechazado(sfWebRequest $request)
+  {
+    $id_feria = $request->getParameter('id_feria');
+    $id_expositor = $request->getParameter('id_expositor');
+    $id_expositor_feria = $request->getParameter('id_expositor_feria');
+    $id = $request->getParameter('id');
+    
+    $PagoExpositor = PagoExpositorQuery::create()->filterById($id)->findOne();
+    $PagoExpositor->setStatusActual(false);
+    $PagoExpositor->save();
+    
+    $Status = StatusQuery::create()->
+        filterByIdFeria($id_feria)->
+        filterByIdExpositor($id_expositor)->
+        filterByIdExpositorFeria($id_expositor_feria)->     
+        filterByStatusActual(true)-> 
+        filterByIdStatus(6)->     
+        findOne(); 
+    
+    if (count($Status) > 0) {
+        $Status->setStatusActual(false);
+        $Status->save();
+        
+        $StatusNuevo = new Status();
+        $StatusNuevo->setIdExpositor($id_expositor);
+        $StatusNuevo->setIdFeria($id_feria);
+        $StatusNuevo->setIdStatus(2);
+        $StatusNuevo->setIdExpositorFeria($id_expositor_feria);
+        $StatusNuevo->setStatusActual(true);
+        $StatusNuevo->save(); 
+        
+        
+    }
+    
+    $this->redirect('expositor_feria/pago?id_feria='.$id_feria);
+    
+  } 
+  
+     public function executeRevertirpagoaprobado(sfWebRequest $request)
+  {
+    $id_feria = $request->getParameter('id_feria');
+    $id_expositor = $request->getParameter('id_expositor');
+    $id_expositor_feria = $request->getParameter('id_expositor_feria');
+    $id = $request->getParameter('id');
+    
+    $PagoExpositor = PagoExpositorQuery::create()->filterById($id)->findOne();
+    $PagoExpositor->setStatusActual(false);
+    $PagoExpositor->save();
+    
+    $Status = StatusQuery::create()->
+        filterByIdFeria($id_feria)->
+        filterByIdExpositor($id_expositor)->
+        filterByIdExpositorFeria($id_expositor_feria)->     
+        filterByStatusActual(true)-> 
+        filterByIdStatus(5)->     
+        findOne(); 
+    
+    if (count($Status) > 0) {
+        $Status->setStatusActual(false);
+        $Status->save();
+        
+        $StatusNuevo = new Status();
+        $StatusNuevo->setIdExpositor($id_expositor);
+        $StatusNuevo->setIdFeria($id_feria);
+        $StatusNuevo->setIdStatus(2);
+        $StatusNuevo->setIdExpositorFeria($id_expositor_feria);
+        $StatusNuevo->setStatusActual(true);
+        $StatusNuevo->save(); 
+        
+        
+    }
+    
+    $this->redirect('expositor_feria/pago?id_feria='.$id_feria);
+    
+  }   
+  
+  public function executeListadobanco(sfWebRequest $request)
+  {
+      $valor = $request->getParameter('valor');
+      
+      $id_feria = $request->getParameter('id_feria');
+      
+      if (!$valor) {
+          
+        // Caso Nacional  
+        $Bancos = BancoQuery::create()
+         ->leftJoin('Cuenta')
+         ->orderByNombre('asc')
+         ->where('Banco.IdPais = 1')                     
+         ->where('Cuenta.IdFeria = ?', $id_feria)
+         ->find();  
+        
+      } else {
+          
+         $Bancos = BancoQuery::create()
+         ->leftJoin('Cuenta')
+         ->orderByNombre('asc')
+         ->where('Banco.IdPais > 1')                     
+         ->where('Cuenta.IdFeria = ?', $id_feria)
+         ->find();  
+                 
+      }
+      
+
+                
+    $arreglo = array();
+    foreach ($Bancos as $Banco) {
+            $arreglo[$Banco->getId()] = $Banco->getNombre();
+    }     
+
+ 
+      return $this->renderText(json_encode($arreglo));
+  }  
+  
+  public function executeListadocuenta(sfWebRequest $request)
+  {
+      $valor = $request->getParameter('valor');
+      
+      $id_feria = $request->getParameter('id_feria');
+      
+      $Cuenta = CuentaQuery::create()->filterByIdBanco($valor)->filterByIdFeria($id_feria)->findOne();
+      
+      $arreglo = array();
+      if (count($Cuenta) > 0) {
+            $arreglo['cuenta'] = $Cuenta->getNumero();
+            $arreglo['beneficiario'] = $Cuenta->getBeneficiario();
+            $arreglo['swift'] = $Cuenta->getSwift();
+            $arreglo['aba'] = $Cuenta->getAba();        
+      }
+      
+      return $this->renderText(json_encode($arreglo));
+  }   
 }

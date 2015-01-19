@@ -11,15 +11,9 @@ class PagoExpositorForm extends BasePagoExpositorForm
 {
   public function configure()
   {
-        $this->widgetSchema['forma_pago'] = new sfWidgetFormChoice(array(
+        $this->widgetSchema['es_pago_banco_nacional'] = new sfWidgetFormChoice(array(
             'choices' => array('Nacional', 'Internacional'),
         ));
-        
-        $this->widgetSchema['deposito_nacional'] = new sfWidgetFormChoice(array(
-            'choices' => array('Efectivo', 'Cheque de Gerencia'),
-        ));        
-        
-        $pago = 'Deposito en Efectivo y/o Cheque de Gerencia en cuenta Corriente N°, en el Banco De Venezuela a Nombre de: ';
         
         $this->widgetSchema['id_feria'] = new sfWidgetFormInputHidden();
 
@@ -35,12 +29,42 @@ class PagoExpositorForm extends BasePagoExpositorForm
         
         $this->widgetSchema['fecha'] = new sfWidgetFormInputHidden();
         
-        $this->widgetSchema->setLabel('forma_pago', 'Forma de pago <font color="red">*</font>');
-        $this->widgetSchema->setLabel('deposito_nacional', 'Depósito Nacional <font color="red">*</font>');
-        $this->widgetSchema->setLabel('planilla_deposito_nacional', 'Planilla de depósito N° <font color="red">*</font>'); 
-        $this->widgetSchema->setLabel('transferencia_cuenta', 'Transferencia desde la Cuenta <font color="red">*</font>'); 
-        $this->widgetSchema->setLabel('banco_emisor', 'Banco Emisor <font color="red">*</font>'); 
-        $this->widgetSchema->setLabel('numero_transaccion', 'N° de transacción <font color="red">*</font>'); 
-        $this->widgetSchema->setLabel('monto', 'Monto depositado <font color="red">*</font>'); 
+         $years = range(1900, date('Y') + 100);
+        
+        $this->widgetSchema['fecha_pago'] = new sfWidgetFormJQueryDate(array(
+            'image' => '/images/calendar.png', 'culture' => 'es',
+            'date_widget' => new sfWidgetFormi18nDate(array('culture' => 'es')),
+            'config' => '{ changeMonth: true, changeYear: true, firstDay: 1 }',
+            'date_widget' => new sfWidgetFormi18nDate(array(
+                'years' => array_combine($years, $years),
+                'culture' => 'es'
+                    ))
+        ));    
+        
+        $this->getWidgetSchema()->moveField('es_pago_banco_nacional', sfWidgetFormSchema::BEFORE, 'id_banco');
+        $this->getWidgetSchema()->moveField('monto', sfWidgetFormSchema::AFTER, 'numero_deposito');
+        
+        $this->widgetSchema->setLabel('monto', 'Monto depositado <font color="red">*</font>&nbsp;<b class="monto"></b>'); 
+        $this->widgetSchema->setLabel('fecha_pago', 'Fecha de depósito<font color="red">*</font>'); 
+        $this->widgetSchema->setLabel('id_banco', 'Banco <font color="red">*</font>'); 
+        $this->widgetSchema->setLabel('numero_deposito', 'N° de depósito <font color="red">*</font>'); 
+        $this->widgetSchema->setLabel('es_pago_banco_nacional', 'Depósito en banco <font color="red">*</font>'); 
+       
+        
+        $this->setValidators(array(
+            'id' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'monto' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
+            'id_feria' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'id_expositor' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'id_usuario' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
+            'id_expositor_feria' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
+            'status_actual' => new sfValidatorString(array('required' => false)),
+            'pago_aprobado' => new sfValidatorString(array('required' => false)),
+            'fecha' => new sfValidatorDate(array('required' => false)),
+            'id_banco' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'numero_deposito' => new sfValidatorString(array('required' => false)),
+            'fecha_pago' => new sfValidatorDate(array('required' => false)),            
+            'es_pago_banco_nacional' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
+        ));       
   }
 }

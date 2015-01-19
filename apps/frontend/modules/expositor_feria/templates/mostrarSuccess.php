@@ -14,8 +14,10 @@
       <td><?php echo $Expositor->getNombre().'  '.$Expositor->getApellido() ?></td>
     </tr>
     <tr>
-      <th>Cédula:</th>
-      <td><?php $Expositor->getCedula() ?>
+      <th>País:</th>
+      <td><?php  $Pais = PaisQuery::create()->filterById($Expositor->getIdPais())->findOne();
+                  echo $Pais->getNombre();
+           ?>
       </td>
     </tr>
     <tr>
@@ -24,11 +26,44 @@
       </td>
     </tr>
     <tr>
-      <th>País:</th>
-      <td><?php  $Pais = PaisQuery::create()->filterById($Expositor->getIdPais())->findOne();
-                  echo $Pais->getNombre();
-           ?>
-      </td>
+      <th>Nombre de la Empresa:</th>
+      <td><?php echo $Expositor->getNombreEmpresa() ?></td>
+    </tr>
+    <tr>
+      <th>Nombre del Director:</th>
+      <td><?php echo $Expositor->getNombreDirector() ?></td>
+    </tr>
+    <tr>
+      <th>Nombre del Ejecutivo de Feria:</th>
+      <td><?php echo $Expositor->getNombreEjecutivoFeria() ?></td>
+    </tr>
+    <tr>
+      <th>Dirección:</th>
+      <td><?php echo $Expositor->getDireccion() ?></td>
+    </tr>
+    <tr>
+      <th>Ciudad:</th>
+      <td><?php echo $Expositor->getCiudad() ?></td>
+    </tr>
+    <tr>
+      <th>Teléfono Local:</th>
+      <td><?php echo $Expositor->getTelefonoLocal() ?></td>
+    </tr>
+    <tr>
+      <th>Teléfono Celular:</th>
+      <td><?php echo $Expositor->getTelefonoCelular() ?></td>
+    </tr>
+    <tr>
+      <th>Fax:</th>
+      <td><?php echo $Expositor->getFax() ?></td>
+    </tr>
+    <tr>
+      <th>Email:</th>
+      <td><?php echo $Expositor->getEmail() ?></td>
+    </tr>
+    <tr>
+      <th>Portal Web:</th>
+      <td><?php echo $Expositor->getSitioWeb() ?></td>
     </tr>
   </tbody>
 </table>
@@ -38,17 +73,8 @@
 <div class="table-responsive">
   <table class="table">      
   <tbody>
-    <tr>  
-      <th>Nombre de la empresa:</th>
-      <td><?php echo $ExpositorFeria->getNombeEmpresa() ?></td>
-    </tr>
     <tr>
-      <th>Procendencia:</th>
-      <td><?php $ExpositorFeria->getProcedencia() == true ? $procendencia = "Internacional" : $procendencia = "Nacional"; 
-                 echo $procendencia; ?></td>
-    </tr>  
-    <tr>
-      <th>Tipo de Distribuidor:</th>
+      <th>Característica del Expositor:</th>
       <td><?php $Distribuidor = TipoDistribuidorQuery::create()->filterById($ExpositorFeria->getIdTipoDistribuidor())->findOne();
                 echo $Distribuidor->getNombre();
       ?></td>
@@ -58,61 +84,20 @@
       <td><?php echo $ExpositorFeria->getSelloEditorial() ?></td>
     </tr>    
     <tr>
-      <th>Dirección:</th>
-      <td><?php echo $ExpositorFeria->getDireccion() ?></td>
-    </tr>
-    <tr>
       <th>Domicilio fiscal:</th>
       <td><?php echo $ExpositorFeria->getDomicilioFiscal() ?></td>
     </tr>    
-    <tr>
-      <th>Telefono local:</th>
-      <td><?php echo $ExpositorFeria->getTelefonoLocal() ?></td>
-    </tr>
-    <tr>
-      <th>Telefono celular:</th>
-      <td><?php echo $ExpositorFeria->getTelefonoCelular() ?></td>
-    </tr>
-    <tr>
-      <th>Fax:</th>
-      <td><?php echo $ExpositorFeria->getFax() ?></td>
-    </tr>
-    <tr>
-      <th>Email:</th>
-      <td><?php echo $ExpositorFeria->getEmail() ?></td>
-    </tr>
-    <tr>
-      <th>Portal web:</th>
-      <td><?php echo $ExpositorFeria->getSitioWeb() ?></td>
-    </tr>
-    <tr>
-      <th>Nombre del director:</th>
-      <td><?php echo $ExpositorFeria->getNombreDirector() ?></td>
-    </tr>
-    <tr>
-      <th>Nombre del representante legal:</th>
-      <td><?php echo $ExpositorFeria->getRepresentanteLegal() ?></td>
-    </tr>
-    <tr>
-      <th>Nombre ejecutivo de feria:</th>
-      <td><?php echo $ExpositorFeria->getNombreEjecutivoFeria() ?></td>
-    </tr>
-    <tr>
-      <th>Contacto:</th>
-      <td><?php echo $ExpositorFeria->getContacto() ?></td>
-    </tr>
     <tr>
       <th>Responsable del Stand:</th>
       <td><?php echo $ExpositorFeria->getResponsableStand() ?></td>
     </tr>    
     <tr>
-      <th>Atención del Stand:</th>
-      <td><?php echo $ExpositorFeria->getAtencionStand() ?></td>
-    </tr>
-    <tr>
       <th>Tipo de Stand:</th>
       <td><?php $Stand = StandQuery::create()->filterById($ExpositorFeria->getIdStand())->findOne();
-            echo $Stand->getMetros().' m<sup>2</sup>' ?></td>
+            if (count($Stand) > 0) {
+                echo $Stand->getMetros().' m<sup>2</sup>'; 
+            }        
+          ?></td>
     </tr>    
     <tr>
       <th>N° de títulos:</th>
@@ -134,7 +119,7 @@
        $id_expositor = $sf_params->get('id_expositor');
        $id = $sf_params->get('id');
 ?>
-<?php echo link_to(image_tag('back.png'),"expositor_feria/index?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
+<?php echo link_to(image_tag('back.png'),"expositor_feria/espera?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
 &nbsp;
 <?php echo link_to(image_tag('edit.png'),"expositor_feria/edit?id_feria=".$id_feria."&id=".$id."&id_expositor=".$id_expositor,array('title' => 'Editar'))?>
 <br>

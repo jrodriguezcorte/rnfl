@@ -21,7 +21,8 @@ class standActions extends sfActions
         foreach ($Stands as $list) {
             $arreglo[] = array(
                 'Metros' => $list->getMetros(),
-                'Tarifa' => $list->getTarifa(),
+                'Costo en Bs' => $list->getCostoBs(),
+                'Costo en USD' => $list->getCostoDs(),
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/stand/show/id_feria/'.$list->getIdFeria().'/id/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'
                . '    ',
@@ -97,4 +98,30 @@ class standActions extends sfActions
       $this->redirect('stand/edit?id=' . $Stand->getId().'&id_feria='.$params['id_feria']);
     }
   }
+  
+  public function executeListado(sfWebRequest $request)
+  {
+      $valor = $request->getParameter('valor');
+      
+      $id_feria = $request->getParameter('id_feria');
+      
+      $Stand = StandQuery::create()->filterById($valor)->filterByIdFeria($id_feria)->findOne();
+      
+      $costo = '';
+      if (count($Stand) > 0) {
+            if ($Stand->getCostoBs() == '') {
+                $costo = '';
+            } else {
+                $costo = $Stand->getCostoBs().' Bs';
+            }
+
+            if ($Stand->getCostoDs() == '') {
+                $costo .= '   ';
+            } else {
+                $costo .= '   '.$Stand->getCostoDs().' USD';
+            }
+      }
+      
+      return $this->renderText(json_encode($costo));
+  }  
 }

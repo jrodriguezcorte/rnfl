@@ -23,12 +23,14 @@
                     {
                         datatype: "json",
                         datafields: [
+                            {name: ''},                                
                             {name: 'Nombre'},
                             {name: 'Apellido'},
-                            {name: 'Cedula'},
-                            {name: 'Rif'},
                             {name: 'Pais'},
-                            {name: ''},
+                            {name: 'Rif'},
+                            {name: 'Email'},
+                            {name: 'Local'},
+                            {name: 'Celular'},                           
                         ],
                         url: "<?php echo url_for('expositor/indexajaxexp?id_feria='.$sf_params->get('id_feria')) ?>",
                         pager: function(pagenum, pagesize, oldpagenum) {
@@ -51,12 +53,14 @@
                         autoshowfiltericon: true,
                         theme: 'ui-redmond',
                         columns: [
+                            {text: '', datafield: '', width: 100 ,cellsalign: 'center'},
                             {text: 'Nombre', datafield: 'Nombre', width: 200  },
                             {text: 'Apellido', datafield: 'Apellido', width: 200  },
-                            {text: 'Cédula', datafield: 'Cedula', width: 200  },
-                            {text: 'Rif', datafield: 'Rif', width: 200  },
                             {text: 'País', datafield: 'Pais', width: 100 ,cellsalign: 'center'},
-                            {text: '', datafield: '', width: 100 ,cellsalign: 'center'},                            
+                            {text: 'Rif', datafield: 'Rif', width: 200  },
+                            {text: 'Correo', datafield: 'Email', width: 200  },
+                            {text: 'Teléfono Local', datafield: 'Local', width: 200  },
+                            {text: 'Teléfono Celular', datafield: 'Celular', width: 200  },                            
                         ]
                     });
             $('#events').jqxPanel({width: 500, height: 300});
@@ -106,7 +110,7 @@
 </script>
 
 </head>
-<?php include_partial('usuario/menuferia') ?>
+<?php include_partial('usuario/menuinicial') ?>
 
 <div class="jumbotron">
 <h2>Listado de Expositores</h2>
@@ -125,7 +129,7 @@
         <td>&nbsp;</td>
     </tr>    
     <tr>
-        <td>&nbsp;</td>
+        <td><?php echo link_to(image_tag('add.png'),'expositor/new',array('title' => 'Agregar'))?></td>
     </tr>
 </table>
 </div>

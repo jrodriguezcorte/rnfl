@@ -23,12 +23,14 @@
                     {
                         datatype: "json",
                         datafields: [
+                            {name: ''},                                
                             {name: 'Nombre'},
                             {name: 'Apellido'},
-                            {name: 'Cedula'},
-                            {name: 'Rif'},
                             {name: 'Pais'},
-                            {name: ''},
+                            {name: 'Rif'},
+                            {name: 'Email'},
+                            {name: 'Local'},
+                            {name: 'Celular'},                           
                         ],
                         url: "<?php echo url_for('expositor/indexajax') ?>",
                         pager: function(pagenum, pagesize, oldpagenum) {
@@ -51,12 +53,14 @@
                         autoshowfiltericon: true,
                         theme: 'ui-redmond',
                         columns: [
+                            {text: '', datafield: '', width: 100 ,cellsalign: 'center'},
                             {text: 'Nombre', datafield: 'Nombre', width: 200  },
                             {text: 'Apellido', datafield: 'Apellido', width: 200  },
-                            {text: 'Cédula', datafield: 'Cedula', width: 200  },
-                            {text: 'Rif', datafield: 'Rif', width: 200  },
                             {text: 'País', datafield: 'Pais', width: 100 ,cellsalign: 'center'},
-                            {text: '', datafield: '', width: 100 ,cellsalign: 'center'},                            
+                            {text: 'Rif', datafield: 'Rif', width: 200  },
+                            {text: 'Correo', datafield: 'Email', width: 200  },
+                            {text: 'Teléfono Local', datafield: 'Local', width: 200  },
+                            {text: 'Teléfono Celular', datafield: 'Celular', width: 200  },                            
                         ]
                     });
             $('#events').jqxPanel({width: 500, height: 300});

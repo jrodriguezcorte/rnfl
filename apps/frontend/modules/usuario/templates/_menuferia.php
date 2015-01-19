@@ -25,6 +25,15 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Banco <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+                  <li><?php echo link_to("Agregar", "banco/new?id_feria=$id_feria")  ?></li>
+                  <li><?php echo link_to("Listado", "banco/index?id_feria=$id_feria")  ?></li>
+                  <li><?php echo link_to("Agregar Cuenta", "cuenta/new?id_feria=$id_feria")  ?></li>
+                  <li><?php echo link_to("Listado de Cuenta", "cuenta/index?id_feria=$id_feria")  ?></li>
+          </ul>
+        </li>
+          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stand <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
                   <li><?php echo link_to("Agregar", "stand/new?id_feria=$id_feria")  ?></li>

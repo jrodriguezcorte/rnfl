@@ -20,7 +20,40 @@
                 }
         ?>
     });    
-</script>    
+</script>
+<script>
+    jQuery(document).ready(function() {
+
+		valor = $("select#expositor_feria_id_stand option:selected").val();
+                id_feria = <?php echo $sf_params->get('id_feria') ?>;
+		var dataString = 'valor=' + valor + '&id_feria=' + id_feria;;
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo url_for('stand/listado') ?>",
+                        data: dataString,
+                        success: function(data) {
+                            $("#expositor_feria_id_stand").parent('td').append('<span id="costo"><b>   Costo del Stand: '+data+'</b></span>');
+                        }
+                    });
+ 
+	$('select#expositor_feria_id_stand').on('change', '', function (e) {
+		valor = $("select#expositor_feria_id_stand option:selected").val();
+                id_feria = <?php echo $sf_params->get('id_feria') ?>;
+		var dataString = 'valor=' + valor + '&id_feria=' + id_feria;;
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo url_for('stand/listado') ?>",
+                        data: dataString,
+                        success: function(data) {
+                            $("#costo").empty();
+                            $("#costo").append('   <b>Costo del Stand: '+data+'</b>');
+                        }
+                    });
+	});
+               
+    });  
+
+</script> 
 <form id="formulario" action="<?php echo url_for('expositor_feria/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />

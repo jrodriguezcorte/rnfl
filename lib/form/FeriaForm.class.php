@@ -43,8 +43,8 @@ class FeriaForm extends BaseFeriaForm
               
 
         $this->widgetSchema->setLabel('nombre', 'Nombre <font color="red">*</font>');
-        $this->widgetSchema->setLabel('lema', 'Lema <font color="red">*</font>');
-        $this->widgetSchema->setLabel('tema', 'Tema <font color="red">*</font>');
+        $this->widgetSchema->setLabel('lema', 'Lema');
+        $this->widgetSchema->setLabel('tema', 'Tema');
         $this->widgetSchema->setLabel('id_tipo_feria', 'Tipo de feria <font color="red">*</font>');
         $this->widgetSchema->setLabel('id_pais_homenajeado', 'Pais invitado'); 
         $this->widgetSchema->setLabel('escritor_homenajeado', '¿Un escritor será homenajeado?');
@@ -64,10 +64,10 @@ class FeriaForm extends BaseFeriaForm
         
         $this->setValidators(array(
             'nombre' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
-            'lema' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
-            'tema' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
+            'lema' => new sfValidatorString(array('required' => false)),
+            'tema' => new sfValidatorString(array('required' => false)),
             'id_tipo_feria' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Este campo es requerido')),
-            'escritor_homenajeado'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'escritor_homenajeado'  => new sfValidatorString(array('required' => false)),
             'nombre_escritor_homenajeado' => new sfValidatorString(array('required' => false)),
             'fecha_inicio' => new sfValidatorDate(array('required' => false),array('invalid' => 'Debe ingresar un valor')),
             'fecha_fin' => new sfValidatorDate(array('required' => false),array('invalid' => 'Debe ingresar un valor')),

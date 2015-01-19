@@ -1,0 +1,33 @@
+    jQuery(document).ready(function() {
+        jQuery("#formulario").submit(function(e) {
+		valor = $("#expositor_es_venezolano").is(':checked');
+		if (valor && $("#expositor_rif").val() != '') {
+		  humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+		} else {
+		   if (!valor) {
+			humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+		   } else {
+				e.preventDefault();
+		        	humanMsg.displayMsg('Verifique que haya insertado el número de Rif');
+		                $(document).ready(function() {
+		                setTimeout(function() {
+		                    $('.humanMsg').fadeOut("slow", function() {
+		                        //$('.humanMsg').remove();
+		                    });
+
+		                }, 3000);
+                                });
+		   }		
+		}
+        })
+
+
+	$("#expositor_es_venezolano").on('click', '', function (e) {
+		valor = $(this).is(':checked');
+		if (valor) {
+		    $("#expositor_rif").parents("tr").show();
+		} else {
+		    $("#expositor_rif").parents("tr").hide();	
+		}
+	});
+    });

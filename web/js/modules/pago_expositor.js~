@@ -1,23 +1,6 @@
     jQuery(document).ready(function() {
         jQuery("#formulario").submit(function(e) {
-           	valor = $("select#pago_expositor_forma_pago option:selected").val();
-		if (valor == 0) {
-			deposito_nacional = $("#pago_expositor_deposito_nacional").val();
-			planilla_deposito_nacional = $("#pago_expositor_planilla_deposito_nacional").val();
-			transferencia_cuenta = $("#pago_expositor_transferencia_cuenta").val();
-			$("#pago_expositor_banco_emisor").val('');
-			$("#pago_expositor_numero_transaccion").val('');
-			if (deposito_nacional >= 0 && planilla_deposito_nacional != '' && transferencia_cuenta != '') {
-				humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
-			} else {
-				e.preventDefault();
-		        	humanMsg.displayMsg('Verifique que haya insertado todos los datos solicitados');
-
-			}
-		} else {
-			humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
-		}
-                
+           	humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');  
         });
 
 
@@ -31,21 +14,9 @@
 	}
 	
 
-	$('select#pago_expositor_forma_pago').on('change', '', function (e) {
-		valor = $("select#pago_expositor_forma_pago option:selected").val();
-		if (valor == 0) {
-			$("#pago_expositor_deposito_nacional").parents("tr").show();	
-			$("#pago_expositor_planilla_deposito_nacional").parents("tr").show();
-			$("#pago_expositor_transferencia_cuenta").parents("tr").show();	
-			$("#pago_expositor_banco_emisor").parents("tr").hide();
-			$("#pago_expositor_numero_transaccion").parents("tr").hide();
-		} else {
-			$("#pago_expositor_deposito_nacional").parents("tr").hide();	
-			$("#pago_expositor_planilla_deposito_nacional").parents("tr").hide();
-			$("#pago_expositor_transferencia_cuenta").parents("tr").hide();	
-			$("#pago_expositor_banco_emisor").parents("tr").show();
-			$("#pago_expositor_numero_transaccion").parents("tr").show();
-		}
+	$('select#pago_expositor_es_pago_banco_nacional').on('change', '', function (e) {
+		valor = $("select#pago_expositor_es_pago_banco_nacional").val();
+		alert(valor);
 	});
 
     });

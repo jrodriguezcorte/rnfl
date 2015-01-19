@@ -5,28 +5,50 @@ propel:
   actividad:
     _attributes: { phpName: Actividad, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    nombre: { phpName: Nombre, type: VARCHAR, size: '255', required: false }
-    datos_institucion: { phpName: DatosInstitucion, type: VARCHAR, size: '255', required: false }
-    ejecutada: { phpName: Ejecutada, type: BOOLEAN, required: false }
-    cantidad_participantes_m: { phpName: CantidadParticipantesM, type: INTEGER, required: false }
-    cantidad_participantes_f: { phpName: CantidadParticipantesF, type: INTEGER, required: false }
-    alcanzo_tiempo: { phpName: AlcanzoTiempo, type: BOOLEAN, required: false }
-    causas_incumplimiento: { phpName: CausasIncumplimiento, type: LONGVARCHAR, required: false }
-    observaciones: { phpName: Observaciones, type: LONGVARCHAR, required: false }
-    observacion_tipo_actividad: { phpName: ObservacionTipoActividad, type: VARCHAR, required: false }
     fecha_sugerida: { phpName: FechaSugerida, type: DATE, required: false }
-    hora_sugerida: { phpName: HoraSugerida, type: TIMESTAMP, required: false }
-    sala: { phpName: Sala, type: VARCHAR, required: false }
-    fecha: { phpName: Fecha, type: DATE, required: false }
     hora: { phpName: Hora, type: TIMESTAMP, required: false }
-    facilitador: { phpName: Facilitador, type: VARCHAR, required: false }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
     id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
+    stand_numero: { phpName: StandNumero, type: INTEGER, required: false }
+    nombre_empresa: { phpName: NombreEmpresa, type: VARCHAR, required: false }
+    direccion: { phpName: Direccion, type: VARCHAR, required: false }
+    nombre_solicitante: { phpName: NombreSolicitante, type: VARCHAR, required: false }
+    nombre_representante: { phpName: NombreRepresentante, type: VARCHAR, required: false }
+    telefono_local: { phpName: TelefonoLocal, type: VARCHAR, required: false }
+    telefono_celular: { phpName: TelefonoCelular, type: VARCHAR, required: false }
+    fax: { phpName: Fax, type: VARCHAR, required: false }
+    email: { phpName: Email, type: VARCHAR, required: false }
+    id_tipo_actividad: { phpName: IdTipoActividad, type: INTEGER, required: false, foreignTable: tipo_actividad, foreignReference: id }
+    titulo: { phpName: Titulo, type: VARCHAR, required: false }
+    autor: { phpName: Autor, type: VARCHAR, required: false }
+    editorial: { phpName: Editorial, type: VARCHAR, required: false }
+    descripcion_actividad: { phpName: DescripcionActividad, type: LONGVARCHAR, required: false }
+    presente_autor: { phpName: PresenteAutor, type: BOOLEAN, required: false }
+    publico_dirigido: { phpName: PublicoDirigido, type: VARCHAR, required: false }
+    numero_ponentes: { phpName: NumeroPonentes, type: VARCHAR, required: false }
+    actividad_cerrada: { phpName: ActividadCerrada, type: BOOLEAN, required: false }
   actividad_tipo_actividad:
     _attributes: { phpName: ActividadTipoActividad, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
     id_tipo_actividad: { phpName: IdTipoActividad, type: INTEGER, required: false, foreignTable: tipo_actividad, foreignReference: id }
+  banco:
+    _attributes: { phpName: Banco, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, required: false }
+    es_nacional: { phpName: EsNacional, type: BOOLEAN, required: false, defaultValue: true }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
+    id_moneda: { phpName: IdMoneda, type: INTEGER, required: false, foreignTable: moneda, foreignReference: id }
+  cuenta:
+    _attributes: { phpName: Cuenta, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    id_banco: { phpName: IdBanco, type: INTEGER, required: false, foreignTable: banco, foreignReference: id }
+    swift: { phpName: Swift, type: VARCHAR, required: false }
+    aba: { phpName: Aba, type: VARCHAR, required: false }
+    beneficiario: { phpName: Beneficiario, type: VARCHAR, required: false }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    numero: { phpName: Numero, type: VARCHAR, required: false }
   estado:
     _attributes: { phpName: Estado, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -37,39 +59,35 @@ propel:
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, required: false }
     apellido: { phpName: Apellido, type: VARCHAR, required: false }
-    cedula: { phpName: Cedula, type: VARCHAR, required: false }
     rif: { phpName: Rif, type: VARCHAR, required: false }
     id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
-  expositor_feria:
-    _attributes: { phpName: ExpositorFeria, idMethod: native }
-    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id }
-    nombe_empresa: { phpName: NombeEmpresa, type: VARCHAR, required: false }
-    procedencia: { phpName: Procedencia, type: BOOLEAN, required: false }
-    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
-    ciudad: { phpName: Ciudad, type: VARCHAR, required: false }
-    id_tipo_distribuidor: { phpName: IdTipoDistribuidor, type: INTEGER, required: false, foreignTable: tipo_distribuidor, foreignReference: id }
-    sello_editorial: { phpName: SelloEditorial, type: VARCHAR, required: false }
+    nombre_empresa: { phpName: NombreEmpresa, type: VARCHAR, required: false }
+    nombre_director: { phpName: NombreDirector, type: VARCHAR, required: false }
+    nombre_ejecutivo_feria: { phpName: NombreEjecutivoFeria, type: VARCHAR, required: false }
     direccion: { phpName: Direccion, type: VARCHAR, required: false }
-    domicilio_fiscal: { phpName: DomicilioFiscal, type: VARCHAR, required: false }
+    ciudad: { phpName: Ciudad, type: VARCHAR, required: false }
     telefono_local: { phpName: TelefonoLocal, type: VARCHAR, required: false }
     telefono_celular: { phpName: TelefonoCelular, type: VARCHAR, required: false }
     fax: { phpName: Fax, type: VARCHAR, required: false }
     email: { phpName: Email, type: VARCHAR, required: false }
     sitio_web: { phpName: SitioWeb, type: VARCHAR, required: false }
-    nombre_director: { phpName: NombreDirector, type: VARCHAR, required: false }
-    representante_legal: { phpName: RepresentanteLegal, type: VARCHAR, required: false }
-    nombre_ejecutivo_feria: { phpName: NombreEjecutivoFeria, type: VARCHAR, required: false }
-    contacto: { phpName: Contacto, type: VARCHAR, required: false }
+    es_venezolano: { phpName: EsVenezolano, type: BOOLEAN, required: false }
+  expositor_feria:
+    _attributes: { phpName: ExpositorFeria, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id }
+    id_tipo_distribuidor: { phpName: IdTipoDistribuidor, type: INTEGER, required: false, foreignTable: tipo_distribuidor, foreignReference: id }
+    sello_editorial: { phpName: SelloEditorial, type: VARCHAR, required: false }
+    domicilio_fiscal: { phpName: DomicilioFiscal, type: VARCHAR, required: false }
     responsable_stand: { phpName: ResponsableStand, type: VARCHAR, required: false }
-    atencion_stand: { phpName: AtencionStand, type: VARCHAR, required: false }
     id_stand: { phpName: IdStand, type: INTEGER, required: false, foreignTable: stand, foreignReference: id }
     numero_titulos: { phpName: NumeroTitulos, type: INTEGER, required: false }
     numero_novedades: { phpName: NumeroNovedades, type: INTEGER, required: false }
     observaciones: { phpName: Observaciones, type: LONGVARCHAR, required: false }
     id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
-    _indexes: { expositor_feria_email_idx: [email], expositor_feria_id_expositor_idx: [id_expositor], expositor_feria_id_feria_idx: [id_feria] }
+    nombre_cenefa: { phpName: NombreCenefa, type: VARCHAR, required: false }
+    _indexes: { expositor_feria_id_expositor_idx: [id_expositor], expositor_feria_id_feria_idx: [id_feria] }
   expositor_lineaeditorial:
     _attributes: { phpName: ExpositorLineaeditorial, idMethod: native }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
@@ -116,6 +134,11 @@ propel:
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     id_expositor_feria: { phpName: IdExpositorFeria, type: INTEGER, required: false }
     id_linea_editorial: { phpName: IdLineaEditorial, type: INTEGER, required: false, foreignTable: linea_editorial, foreignReference: id }
+  moneda:
+    _attributes: { phpName: Moneda, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, required: false }
+    simbolo: { phpName: Simbolo, type: VARCHAR, required: false }
   municipio:
     _attributes: { phpName: Municipio, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -124,12 +147,6 @@ propel:
   pago_expositor:
     _attributes: { phpName: PagoExpositor, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    forma_pago: { phpName: FormaPago, type: BOOLEAN, required: false }
-    deposito_nacional: { phpName: DepositoNacional, type: VARCHAR, required: false }
-    planilla_deposito_nacional: { phpName: PlanillaDepositoNacional, type: VARCHAR, required: false }
-    transferencia_cuenta: { phpName: TransferenciaCuenta, type: VARCHAR, required: false }
-    banco_emisor: { phpName: BancoEmisor, type: VARCHAR, required: false }
-    numero_transaccion: { phpName: NumeroTransaccion, type: VARCHAR, required: false }
     monto: { phpName: Monto, type: DECIMAL, required: false }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
     id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id }
@@ -138,6 +155,10 @@ propel:
     status_actual: { phpName: StatusActual, type: BOOLEAN, required: false }
     pago_aprobado: { phpName: PagoAprobado, type: BOOLEAN, required: false }
     fecha: { phpName: Fecha, type: DATE, required: false, defaultExpr: now() }
+    id_banco: { phpName: IdBanco, type: INTEGER, required: false, foreignTable: banco, foreignReference: id }
+    numero_deposito: { phpName: NumeroDeposito, type: INTEGER, required: false }
+    fecha_pago: { phpName: FechaPago, type: DATE, required: false }
+    es_pago_banco_nacional: { phpName: EsPagoBancoNacional, type: BOOLEAN, required: false }
   pais:
     _attributes: { phpName: Pais, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -163,10 +184,10 @@ propel:
     _indexes: { ponente_cedula_rif_idx: [cedula, rif], ponente_nacionalidad_idx: [nacionalidad] }
   ponente_actividad:
     _attributes: { phpName: PonenteActividad, idMethod: native }
-    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     id_ponente: { phpName: IdPonente, type: INTEGER, required: false, foreignTable: ponente, foreignReference: id }
     id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     _indexes: { ponente_rel_actividad_id_activid: [id_actividad], ponente_rel_actividad_id_ponente: [id_ponente] }
   region:
     _attributes: { phpName: Region, idMethod: native }
@@ -182,7 +203,8 @@ propel:
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
     metros: { phpName: Metros, type: VARCHAR, required: false }
-    tarifa: { phpName: Tarifa, type: VARCHAR, required: false }
+    costo_bs: { phpName: CostoBs, type: VARCHAR, required: false }
+    costo_ds: { phpName: CostoDs, type: VARCHAR, required: false }
   status:
     _attributes: { phpName: Status, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }

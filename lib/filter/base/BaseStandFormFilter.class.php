@@ -14,13 +14,15 @@ abstract class BaseStandFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'id_feria' => new sfWidgetFormPropelChoice(array('model' => 'Feria', 'add_empty' => true)),
       'metros'   => new sfWidgetFormFilterInput(),
-      'tarifa'   => new sfWidgetFormFilterInput(),
+      'costo_bs' => new sfWidgetFormFilterInput(),
+      'costo_ds' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'id_feria' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Feria', 'column' => 'id')),
       'metros'   => new sfValidatorPass(array('required' => false)),
-      'tarifa'   => new sfValidatorPass(array('required' => false)),
+      'costo_bs' => new sfValidatorPass(array('required' => false)),
+      'costo_ds' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('stand_filters[%s]');
@@ -41,7 +43,8 @@ abstract class BaseStandFormFilter extends BaseFormFilterPropel
       'id'       => 'Number',
       'id_feria' => 'ForeignKey',
       'metros'   => 'Text',
-      'tarifa'   => 'Text',
+      'costo_bs' => 'Text',
+      'costo_ds' => 'Text',
     );
   }
 }

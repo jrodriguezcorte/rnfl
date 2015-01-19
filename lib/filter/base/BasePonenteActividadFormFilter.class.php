@@ -38,10 +38,10 @@ abstract class BasePonenteActividadFormFilter extends BaseFormFilterPropel
   public function getFields()
   {
     return array(
-      'id'           => 'Number',
       'id_ponente'   => 'ForeignKey',
       'id_actividad' => 'ForeignKey',
       'id_feria'     => 'ForeignKey',
+      'id'           => 'Number',
     );
   }
 }

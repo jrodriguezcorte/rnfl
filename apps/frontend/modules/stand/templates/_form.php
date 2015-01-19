@@ -28,3 +28,4 @@
 <?php if (!$form->getObject()->isNew()): ?>
 <?php echo link_to(image_tag('delete.png'), 'stand/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
 <?php endif; ?>
+  

@@ -35,10 +35,10 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sello Editorial <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Banco <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-                  <li><?php echo link_to("Agregar", "sello_editorial/new")  ?></li>
-                  <li><?php echo link_to("Listado", "sello_editorial/index")  ?></li>
+                  <li><?php echo link_to("Agregar", "banco/new?id_feria=$id_feria")  ?></li>
+                  <li><?php echo link_to("Listado", "banco/index?id_feria=$id_feria")  ?></li>
           </ul>
         </li>
         <li class="dropdown">
