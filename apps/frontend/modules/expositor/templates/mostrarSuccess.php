@@ -68,5 +68,6 @@
 <hr />
 <?php $id_feria = $sf_params->get('id_feria'); ?>
 <?php echo link_to(image_tag('back.png'),"expositor/indexexp?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
+<?php echo link_to(image_tag('edit.png'),"expositor/edit?id=".$Expositor->getId(),array('title' => 'Editar'))?>
 &nbsp;
 

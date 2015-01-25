@@ -110,7 +110,7 @@
 <?php include_partial('usuario/menuferia') ?>
 
 <div class="jumbotron">
-<h2>Pagos Registrados</h2>
+<h2>Pagos Registrados y por Verificar</h2>
 <br>
 <div class="table-responsive">
 <body class='default'>

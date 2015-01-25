@@ -53,7 +53,7 @@ class PagoExpositorForm extends BasePagoExpositorForm
         
         $this->setValidators(array(
             'id' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
-            'monto' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
+            'monto' => new sfValidatorNumber(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
             'id_feria' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
             'id_expositor' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
             'id_usuario' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
