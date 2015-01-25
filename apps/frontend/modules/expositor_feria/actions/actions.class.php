@@ -642,11 +642,11 @@ class expositor_feriaActions extends sfActions
   {      
     $this->forward404Unless($request->isMethod(sfRequest::POST));
     
-    list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
+ //   list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
 
-    list($id_feria,$resto) = explode("/id_expositor/", $id_feria);
+ //   list($id_feria,$resto) = explode("/id_expositor/", $id_feria);
     
-    list($id_feria) = explode("/id", $id_feria);
+ //   list($id_feria) = explode("/id", $id_feria);
     
     $this->prueba = $id_feria;  
 
@@ -666,15 +666,7 @@ class expositor_feriaActions extends sfActions
 
   public function executeUpdate(sfWebRequest $request)
   {
-      
-    list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
-
-    list($id_feria,$resto) = explode("/id_expositor/", $id_feria);
-    
-    list($id_feria) = explode("/id", $id_feria);
-    
-    $this->prueba = $id_feria;
-    
+          
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
     $ExpositorFeria = ExpositorFeriaQuery::create()->findPk($request->getParameter('id'));
     $this->forward404Unless($ExpositorFeria, sprintf('Object ExpositorFeria does not exist (%s).', $request->getParameter('id')));
@@ -700,7 +692,7 @@ class expositor_feriaActions extends sfActions
   {
     $linea_editorial = $request["expositor_feria"]["opciones"]; 
     $id_expositor = $request["expositor_feria"]["id_expositor"]; 
-    $id_feria = $request["expositor_feria"]["id_feria"]; 
+    $id_feria = $request["expositor_feria"]["id_feria"];
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
@@ -739,9 +731,7 @@ class expositor_feriaActions extends sfActions
            $Status->setStatusActual(true);
            $Status->save();
       }
-                
-      $id_feria = $this->prueba;
-            
+                            
       $this->redirect('expositor_feria/edit?id_feria='.$id_feria.'&id='.$ExpositorFeria->getId());
     }
   }

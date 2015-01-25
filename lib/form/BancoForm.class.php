@@ -15,6 +15,7 @@ class BancoForm extends BaseBancoForm
         $this->widgetSchema['id_feria'] = new sfWidgetFormInputHidden();
         $this->widgetSchema['es_nacional'] = new sfWidgetFormInputHidden();
       
+        $this->widgetSchema->setLabel('nombre', 'Nombre <font color="red">*</font>');
         $this->widgetSchema->setLabel('id_moneda', 'Moneda <font color="red">*</font>'); 
         $this->widgetSchema->setLabel('id_pais', 'País <font color="red">*</font>'); 
       

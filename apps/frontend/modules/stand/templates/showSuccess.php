@@ -11,9 +11,13 @@
       <td><?php echo $Stand->getMetros() ?></td>
     </tr>
     <tr>
-      <th>Tarifa:</th>
-      <td><?php echo $Stand->getTarifa() ?></td>
+      <th>Costo en Bs:</th>
+      <td><?php echo $Stand->getCostoBs() ?></td>
     </tr>
+    <tr>
+      <th>Costo en USD:</th>
+      <td><?php echo $Stand->getCostoDs() ?></td>
+    </tr>    
   </tbody>
 </table>
 </div>

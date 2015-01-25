@@ -306,4 +306,7 @@
 </body>
 </div>
 </html>
+<br>
+<?php echo link_to(image_tag('back.png'),"actividad/index?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
+&nbsp;
 </div>

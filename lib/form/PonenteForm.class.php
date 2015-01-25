@@ -40,8 +40,8 @@ class PonenteForm extends BasePonenteForm
      ));
     
     
-    $this->widgetSchema['cedula'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el siguiente formato Ej: V-12345678'));
-    $this->widgetSchema['rif'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el siguiente formato Ej: J-12345678'));
+    $this->widgetSchema['cedula'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el siguiente formato Ej: V12345678'));
+    $this->widgetSchema['rif'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el siguiente formato Ej: J12345678'));
     $this->widgetSchema['telefono_local'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el siguiente formato Ej: 0212-5555555'));
     $this->widgetSchema['telefono_celular'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el siguiente formato Ej: 0414-5555555'));
     $this->widgetSchema['sexo'] = new sfWidgetFormSelect(array('choices' => self::$sexo));

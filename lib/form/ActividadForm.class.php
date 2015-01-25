@@ -84,7 +84,7 @@ class ActividadForm extends BaseActividadForm {
             'fax' => new sfValidatorString(array('required' => false)),
             'email' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
             'id_tipo_actividad' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
-            'titulo' => new sfValidatorString(array('required' => false)),
+            'titulo' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
             'autor' => new sfValidatorString(array('required' => false)),
             'editorial' => new sfValidatorString(array('required' => false)),
             'descripcion_actividad' => new sfValidatorString(array('required' => false)),
