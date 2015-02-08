@@ -15,8 +15,10 @@ class cuentaActions extends sfActions
   {
   }
 
-    public function executeIndexajax() {
-        $Cuentas = CuentaQuery::create()->orderByIdBanco('asc')->find();
+    public function executeIndexajax(sfWebRequest $request) {
+        
+        $id_feria = $request->getParameter('id_feria');
+        $Cuentas = CuentaQuery::create()->filterByIdFeria($id_feria)->orderByIdBanco('asc')->find();
         
         foreach ($Cuentas as $list) {
             $Banco = BancoQuery::create()->filterById($list->getIdBanco())->findOne();

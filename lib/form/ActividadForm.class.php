@@ -47,6 +47,9 @@ class ActividadForm extends BaseActividadForm {
         $this->getWidgetSchema()->moveField('fecha_sugerida', sfWidgetFormSchema::AFTER, 'email');
         $this->getWidgetSchema()->moveField('hora', sfWidgetFormSchema::AFTER, 'fecha_sugerida');
         
+        $this->widgetSchema['telefono_local'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: 0000-0000000'));
+        $this->widgetSchema['telefono_celular'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: 0000-0000000'));        
+
         $this->widgetSchema->setLabel('fecha_sugerida', 'Fecha Sugerida <font color="red">*</font>');
         $this->widgetSchema->setLabel('hora', 'Hora Sugerida <font color="red">*</font>');
         $this->widgetSchema->setLabel('stand_numero', 'Stand N° ');

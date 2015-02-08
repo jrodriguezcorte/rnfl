@@ -54,6 +54,10 @@ class ponenteActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new PonenteForm();
+    
+    list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
+
+    $this->prueba = $id_feria;     
 
     $this->processForm($request, $this->form);
 
@@ -97,7 +101,11 @@ class ponenteActions extends sfActions
     {
       $Ponente = $form->save();
 
-      $this->redirect('ponente/edit?id='.$Ponente->getId());
+      if ($this->prueba != '') {
+        $this->redirect('feria/info?id_feria='.$this->prueba);
+      } else {
+        $this->redirect('ponente/index?id='.$Ponente->getId());  
+      }
     }
   }
 }

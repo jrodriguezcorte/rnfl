@@ -180,7 +180,12 @@ class expositorActions extends sfActions
     {
       $Expositor = $form->save();
       
-      $this->redirect('expositor/indexexp?id_feria=' . $this->prueba);
+      if ($this->prueba != '') {
+        $this->redirect('feria/info?id_feria='.$this->prueba);;
+      } else {
+        $this->redirect('expositor/index?id='.$Expositor->getId());  
+      }      
+      
     }
   }  
 }

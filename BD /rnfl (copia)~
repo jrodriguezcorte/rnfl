@@ -1,0 +1,3094 @@
+﻿--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.11
+-- Dumped by pg_dump version 9.1.9
+-- Started on 2015-02-08 12:49:09 VET
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 219 (class 3079 OID 11716)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2386 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 161 (class 1259 OID 130512)
+-- Dependencies: 6
+-- Name: actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE actividad (
+    id bigint NOT NULL,
+    fecha_sugerida date,
+    hora timestamp without time zone,
+    id_feria integer,
+    id_usuario integer,
+    stand_numero integer,
+    nombre_empresa character varying,
+    direccion character varying,
+    nombre_solicitante character varying,
+    nombre_representante character varying,
+    telefono_local character varying,
+    telefono_celular character varying,
+    fax character varying,
+    email character varying,
+    id_tipo_actividad integer,
+    titulo character varying,
+    autor character varying,
+    editorial character varying,
+    descripcion_actividad text,
+    presente_autor boolean,
+    publico_dirigido character varying,
+    numero_ponentes character varying,
+    actividad_cerrada boolean
+);
+
+
+ALTER TABLE public.actividad OWNER TO postgres;
+
+--
+-- TOC entry 162 (class 1259 OID 130518)
+-- Dependencies: 161 6
+-- Name: actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE actividad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.actividad_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2387 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE actividad_id_seq OWNED BY actividad.id;
+
+
+--
+-- TOC entry 163 (class 1259 OID 130520)
+-- Dependencies: 2117 6
+-- Name: banco; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE banco (
+    id bigint NOT NULL,
+    nombre character varying,
+    es_nacional boolean DEFAULT true,
+    id_feria integer,
+    id_pais integer,
+    id_moneda integer
+);
+
+
+ALTER TABLE public.banco OWNER TO postgres;
+
+--
+-- TOC entry 164 (class 1259 OID 130527)
+-- Dependencies: 6 163
+-- Name: banco_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE banco_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.banco_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2388 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: banco_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE banco_id_seq OWNED BY banco.id;
+
+
+--
+-- TOC entry 165 (class 1259 OID 130529)
+-- Dependencies: 6
+-- Name: cuenta; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cuenta (
+    id bigint NOT NULL,
+    id_banco integer,
+    swift character varying,
+    aba character varying,
+    beneficiario character varying,
+    id_feria integer,
+    numero character varying
+);
+
+
+ALTER TABLE public.cuenta OWNER TO postgres;
+
+--
+-- TOC entry 166 (class 1259 OID 130535)
+-- Dependencies: 165 6
+-- Name: cuenta_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE cuenta_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cuenta_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2389 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: cuenta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE cuenta_id_seq OWNED BY cuenta.id;
+
+
+--
+-- TOC entry 167 (class 1259 OID 130537)
+-- Dependencies: 6
+-- Name: estado; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE estado (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    id_pais integer
+);
+
+
+ALTER TABLE public.estado OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 130540)
+-- Dependencies: 6 167
+-- Name: estado_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE estado_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.estado_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2390 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: estado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE estado_id_seq OWNED BY estado.id;
+
+
+--
+-- TOC entry 169 (class 1259 OID 130542)
+-- Dependencies: 6
+-- Name: expositor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE expositor (
+    id bigint NOT NULL,
+    nombre character varying,
+    apellido character varying,
+    rif character varying,
+    id_pais integer,
+    nombre_empresa character varying,
+    nombre_director character varying,
+    nombre_ejecutivo_feria character varying,
+    direccion character varying,
+    ciudad character varying,
+    telefono_local character varying,
+    telefono_celular character varying,
+    fax character varying,
+    email character varying,
+    sitio_web character varying,
+    es_venezolano boolean
+);
+
+
+ALTER TABLE public.expositor OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 130548)
+-- Dependencies: 6
+-- Name: expositor_feria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE expositor_feria (
+    id bigint NOT NULL,
+    id_feria integer,
+    id_expositor integer,
+    id_tipo_distribuidor integer,
+    sello_editorial character varying,
+    domicilio_fiscal character varying,
+    responsable_stand character varying,
+    id_stand integer,
+    numero_titulos integer,
+    numero_novedades integer,
+    observaciones text,
+    id_usuario integer,
+    nombre_cenefa character varying
+);
+
+
+ALTER TABLE public.expositor_feria OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 130554)
+-- Dependencies: 170 6
+-- Name: expositor_feria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE expositor_feria_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.expositor_feria_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2391 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: expositor_feria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE expositor_feria_id_seq OWNED BY expositor_feria.id;
+
+
+--
+-- TOC entry 172 (class 1259 OID 130556)
+-- Dependencies: 169 6
+-- Name: expositor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE expositor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.expositor_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2392 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: expositor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE expositor_id_seq OWNED BY expositor.id;
+
+
+--
+-- TOC entry 173 (class 1259 OID 130558)
+-- Dependencies: 6
+-- Name: expositor_lineaeditorial; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE expositor_lineaeditorial (
+    id_feria integer,
+    id_expositor integer,
+    linea_editorial integer,
+    id bigint NOT NULL
+);
+
+
+ALTER TABLE public.expositor_lineaeditorial OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 130561)
+-- Dependencies: 6 173
+-- Name: expositor_lineaeditorial_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE expositor_lineaeditorial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.expositor_lineaeditorial_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2393 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: expositor_lineaeditorial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE expositor_lineaeditorial_id_seq OWNED BY expositor_lineaeditorial.id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 130563)
+-- Dependencies: 6
+-- Name: feria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE feria (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    lema character varying(255),
+    tema character varying(255),
+    id_tipo_feria integer,
+    id_pais_homenajeado integer,
+    escritor_homenajeado boolean,
+    nombre_escritor_homenajeado character varying(255),
+    fecha_inicio date,
+    fecha_fin date,
+    hora_inicio timestamp without time zone,
+    hora_fin timestamp without time zone,
+    id_pais integer,
+    id_estado integer,
+    id_municipio integer,
+    id_parroquia integer,
+    id_region integer,
+    direccion character varying(255),
+    extension_superficie numeric,
+    libro_mas_vendido character varying(255),
+    autor_libro_mas_vendido character varying(255),
+    costo numeric
+);
+
+
+ALTER TABLE public.feria OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 130569)
+-- Dependencies: 175 6
+-- Name: feria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE feria_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.feria_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2394 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: feria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE feria_id_seq OWNED BY feria.id;
+
+
+--
+-- TOC entry 177 (class 1259 OID 130571)
+-- Dependencies: 6
+-- Name: linea_editorial; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE linea_editorial (
+    id bigint NOT NULL,
+    nombre character varying,
+    observaciones text
+);
+
+
+ALTER TABLE public.linea_editorial OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 130577)
+-- Dependencies: 6 177
+-- Name: linea_editorial_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE linea_editorial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.linea_editorial_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2395 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: linea_editorial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE linea_editorial_id_seq OWNED BY linea_editorial.id;
+
+
+--
+-- TOC entry 179 (class 1259 OID 130579)
+-- Dependencies: 6
+-- Name: moneda; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE moneda (
+    id bigint NOT NULL,
+    nombre character varying,
+    simbolo character varying
+);
+
+
+ALTER TABLE public.moneda OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 130585)
+-- Dependencies: 179 6
+-- Name: moneda_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE moneda_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.moneda_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2396 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: moneda_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE moneda_id_seq OWNED BY moneda.id;
+
+
+--
+-- TOC entry 181 (class 1259 OID 130587)
+-- Dependencies: 6
+-- Name: municipio; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE municipio (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    id_estado integer
+);
+
+
+ALTER TABLE public.municipio OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 130590)
+-- Dependencies: 6 181
+-- Name: municipio_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE municipio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.municipio_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2397 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: municipio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE municipio_id_seq OWNED BY municipio.id;
+
+
+--
+-- TOC entry 183 (class 1259 OID 130592)
+-- Dependencies: 2128 6
+-- Name: pago_expositor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pago_expositor (
+    id bigint NOT NULL,
+    monto numeric,
+    id_feria integer,
+    id_expositor integer,
+    id_usuario integer,
+    id_expositor_feria integer,
+    status_actual boolean,
+    pago_aprobado boolean,
+    fecha date DEFAULT now(),
+    id_banco integer,
+    numero_deposito integer,
+    fecha_pago date,
+    es_pago_banco_nacional boolean
+);
+
+
+ALTER TABLE public.pago_expositor OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 130599)
+-- Dependencies: 6 183
+-- Name: pago_expositor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pago_expositor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pago_expositor_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2398 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: pago_expositor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pago_expositor_id_seq OWNED BY pago_expositor.id;
+
+
+--
+-- TOC entry 185 (class 1259 OID 130601)
+-- Dependencies: 6
+-- Name: pais; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pais (
+    id bigint NOT NULL,
+    nombre character varying(255)
+);
+
+
+ALTER TABLE public.pais OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 130604)
+-- Dependencies: 185 6
+-- Name: pais_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pais_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pais_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2399 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: pais_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pais_id_seq OWNED BY pais.id;
+
+
+--
+-- TOC entry 187 (class 1259 OID 130606)
+-- Dependencies: 6
+-- Name: parroquia; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE parroquia (
+    id bigint NOT NULL,
+    nombre character varying(255) NOT NULL,
+    id_municipio integer
+);
+
+
+ALTER TABLE public.parroquia OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 130609)
+-- Dependencies: 187 6
+-- Name: parroquia_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE parroquia_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.parroquia_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2400 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: parroquia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE parroquia_id_seq OWNED BY parroquia.id;
+
+
+--
+-- TOC entry 189 (class 1259 OID 130611)
+-- Dependencies: 6
+-- Name: ponente; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ponente (
+    id bigint NOT NULL,
+    nombre character varying,
+    apellido character varying,
+    cedula character varying,
+    rif character varying,
+    sexo character varying,
+    nacionalidad integer,
+    telefono_local character varying,
+    telefono_celular character varying,
+    email character varying,
+    observaciones text
+);
+
+
+ALTER TABLE public.ponente OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 130617)
+-- Dependencies: 6
+-- Name: ponente_actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ponente_actividad (
+    id_ponente integer,
+    id_actividad integer,
+    id_feria integer,
+    id bigint NOT NULL
+);
+
+
+ALTER TABLE public.ponente_actividad OWNER TO postgres;
+
+--
+-- TOC entry 191 (class 1259 OID 130620)
+-- Dependencies: 190 6
+-- Name: ponente_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ponente_actividad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ponente_actividad_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2401 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: ponente_actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ponente_actividad_id_seq OWNED BY ponente_actividad.id;
+
+
+--
+-- TOC entry 192 (class 1259 OID 130622)
+-- Dependencies: 6 189
+-- Name: ponente_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE ponente_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ponente_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2402 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: ponente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE ponente_id_seq OWNED BY ponente.id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 130624)
+-- Dependencies: 6
+-- Name: region; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE region (
+    id integer NOT NULL,
+    nombre character varying(255)
+);
+
+
+ALTER TABLE public.region OWNER TO postgres;
+
+--
+-- TOC entry 194 (class 1259 OID 130627)
+-- Dependencies: 6
+-- Name: sf_guard_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_group (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.sf_guard_group OWNER TO postgres;
+
+--
+-- TOC entry 195 (class 1259 OID 130633)
+-- Dependencies: 6 194
+-- Name: sf_guard_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sf_guard_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sf_guard_group_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2403 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: sf_guard_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sf_guard_group_id_seq OWNED BY sf_guard_group.id;
+
+
+--
+-- TOC entry 196 (class 1259 OID 130635)
+-- Dependencies: 6
+-- Name: sf_guard_group_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_group_permission (
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_group_permission OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 130638)
+-- Dependencies: 6
+-- Name: sf_guard_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description text
+);
+
+
+ALTER TABLE public.sf_guard_permission OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 130644)
+-- Dependencies: 6 197
+-- Name: sf_guard_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sf_guard_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sf_guard_permission_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2404 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: sf_guard_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sf_guard_permission_id_seq OWNED BY sf_guard_permission.id;
+
+
+--
+-- TOC entry 199 (class 1259 OID 130646)
+-- Dependencies: 6
+-- Name: sf_guard_remember_key; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_remember_key (
+    user_id integer NOT NULL,
+    remember_key character varying(32),
+    ip_address character varying(50) NOT NULL,
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.sf_guard_remember_key OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 130649)
+-- Dependencies: 2136 2137 2138 6
+-- Name: sf_guard_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_user (
+    id integer NOT NULL,
+    username character varying(128) NOT NULL,
+    algorithm character varying(128) DEFAULT 'sha1'::character varying NOT NULL,
+    salt character varying(128) NOT NULL,
+    password character varying(128) NOT NULL,
+    created_at timestamp without time zone,
+    last_login timestamp without time zone,
+    is_active boolean DEFAULT true NOT NULL,
+    is_super_admin boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_user OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 130658)
+-- Dependencies: 6
+-- Name: sf_guard_user_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_user_group (
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_user_group OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 130661)
+-- Dependencies: 6 200
+-- Name: sf_guard_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sf_guard_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sf_guard_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2405 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: sf_guard_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sf_guard_user_id_seq OWNED BY sf_guard_user.id;
+
+
+--
+-- TOC entry 203 (class 1259 OID 130663)
+-- Dependencies: 6
+-- Name: sf_guard_user_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sf_guard_user_permission (
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sf_guard_user_permission OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 130666)
+-- Dependencies: 6
+-- Name: stand; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE stand (
+    id bigint NOT NULL,
+    id_feria integer,
+    metros character varying,
+    costo_bs character varying,
+    costo_ds character varying
+);
+
+
+ALTER TABLE public.stand OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 130672)
+-- Dependencies: 6 204
+-- Name: stand_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE stand_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.stand_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2406 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: stand_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE stand_id_seq OWNED BY stand.id;
+
+
+--
+-- TOC entry 206 (class 1259 OID 130674)
+-- Dependencies: 2141 6
+-- Name: status; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE status (
+    id bigint NOT NULL,
+    id_feria integer,
+    id_expositor integer,
+    id_status integer,
+    observaciones character varying,
+    fecha date DEFAULT now(),
+    id_expositor_feria integer,
+    status_actual boolean,
+    id_pago_expositor integer
+);
+
+
+ALTER TABLE public.status OWNER TO postgres;
+
+--
+-- TOC entry 207 (class 1259 OID 130681)
+-- Dependencies: 6
+-- Name: tipo_status; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tipo_status (
+    id bigint NOT NULL,
+    nombre character varying
+);
+
+
+ALTER TABLE public.tipo_status OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1259 OID 130687)
+-- Dependencies: 207 6
+-- Name: status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE status_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.status_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2407 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: status_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE status_id_seq OWNED BY tipo_status.id;
+
+
+--
+-- TOC entry 209 (class 1259 OID 130689)
+-- Dependencies: 206 6
+-- Name: status_id_seq1; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE status_id_seq1
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.status_id_seq1 OWNER TO postgres;
+
+--
+-- TOC entry 2408 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: status_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE status_id_seq1 OWNED BY status.id;
+
+
+--
+-- TOC entry 210 (class 1259 OID 130691)
+-- Dependencies: 6
+-- Name: tipo_actividad; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tipo_actividad (
+    id bigint NOT NULL,
+    nombre character varying(255)
+);
+
+
+ALTER TABLE public.tipo_actividad OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 130694)
+-- Dependencies: 6 210
+-- Name: tipo_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tipo_actividad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipo_actividad_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2409 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: tipo_actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tipo_actividad_id_seq OWNED BY tipo_actividad.id;
+
+
+--
+-- TOC entry 212 (class 1259 OID 130696)
+-- Dependencies: 6
+-- Name: tipo_distribuidor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tipo_distribuidor (
+    id bigint NOT NULL,
+    nombre character varying
+);
+
+
+ALTER TABLE public.tipo_distribuidor OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 130702)
+-- Dependencies: 212 6
+-- Name: tipo_distribuidor_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tipo_distribuidor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipo_distribuidor_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2410 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: tipo_distribuidor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tipo_distribuidor_id_seq OWNED BY tipo_distribuidor.id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 130704)
+-- Dependencies: 6
+-- Name: tipo_feria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tipo_feria (
+    id bigint NOT NULL,
+    tipo_feria character varying(255)
+);
+
+
+ALTER TABLE public.tipo_feria OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 130707)
+-- Dependencies: 2146 2147 6
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    id bigint NOT NULL,
+    nombre character varying(255),
+    apellido character varying(255),
+    cedula character varying(255),
+    isbn character varying(255),
+    login character varying(255),
+    contrasena character varying(255),
+    sf_guard_user integer,
+    sexo boolean,
+    sf_guard_user_group integer,
+    tipo_organizador boolean DEFAULT true,
+    ente_organizador character varying,
+    sector boolean DEFAULT true,
+    unidad_responsable character varying,
+    correo character varying,
+    telefono character varying
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 130715)
+-- Dependencies: 215 6
+-- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE usuario_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.usuario_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2411 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: usuario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE usuario_id_seq OWNED BY usuario.id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 130717)
+-- Dependencies: 6
+-- Name: visitante; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE visitante (
+    id bigint NOT NULL,
+    fecha date,
+    numero integer,
+    id_feria integer
+);
+
+
+ALTER TABLE public.visitante OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 130720)
+-- Dependencies: 217 6
+-- Name: visitante_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE visitante_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.visitante_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2412 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: visitante_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE visitante_id_seq OWNED BY visitante.id;
+
+
+--
+-- TOC entry 2116 (class 2604 OID 130722)
+-- Dependencies: 162 161
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actividad ALTER COLUMN id SET DEFAULT nextval('actividad_id_seq'::regclass);
+
+
+--
+-- TOC entry 2118 (class 2604 OID 130723)
+-- Dependencies: 164 163
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY banco ALTER COLUMN id SET DEFAULT nextval('banco_id_seq'::regclass);
+
+
+--
+-- TOC entry 2119 (class 2604 OID 130724)
+-- Dependencies: 166 165
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cuenta ALTER COLUMN id SET DEFAULT nextval('cuenta_id_seq'::regclass);
+
+
+--
+-- TOC entry 2120 (class 2604 OID 130725)
+-- Dependencies: 168 167
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY estado ALTER COLUMN id SET DEFAULT nextval('estado_id_seq'::regclass);
+
+
+--
+-- TOC entry 2121 (class 2604 OID 130726)
+-- Dependencies: 172 169
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor ALTER COLUMN id SET DEFAULT nextval('expositor_id_seq'::regclass);
+
+
+--
+-- TOC entry 2122 (class 2604 OID 130727)
+-- Dependencies: 171 170
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria ALTER COLUMN id SET DEFAULT nextval('expositor_feria_id_seq'::regclass);
+
+
+--
+-- TOC entry 2123 (class 2604 OID 130728)
+-- Dependencies: 174 173
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_lineaeditorial ALTER COLUMN id SET DEFAULT nextval('expositor_lineaeditorial_id_seq'::regclass);
+
+
+--
+-- TOC entry 2124 (class 2604 OID 130729)
+-- Dependencies: 176 175
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria ALTER COLUMN id SET DEFAULT nextval('feria_id_seq'::regclass);
+
+
+--
+-- TOC entry 2125 (class 2604 OID 130730)
+-- Dependencies: 178 177
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY linea_editorial ALTER COLUMN id SET DEFAULT nextval('linea_editorial_id_seq'::regclass);
+
+
+--
+-- TOC entry 2126 (class 2604 OID 130731)
+-- Dependencies: 180 179
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY moneda ALTER COLUMN id SET DEFAULT nextval('moneda_id_seq'::regclass);
+
+
+--
+-- TOC entry 2127 (class 2604 OID 130732)
+-- Dependencies: 182 181
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY municipio ALTER COLUMN id SET DEFAULT nextval('municipio_id_seq'::regclass);
+
+
+--
+-- TOC entry 2129 (class 2604 OID 130733)
+-- Dependencies: 184 183
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pago_expositor ALTER COLUMN id SET DEFAULT nextval('pago_expositor_id_seq'::regclass);
+
+
+--
+-- TOC entry 2130 (class 2604 OID 130734)
+-- Dependencies: 186 185
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pais ALTER COLUMN id SET DEFAULT nextval('pais_id_seq'::regclass);
+
+
+--
+-- TOC entry 2131 (class 2604 OID 130735)
+-- Dependencies: 188 187
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY parroquia ALTER COLUMN id SET DEFAULT nextval('parroquia_id_seq'::regclass);
+
+
+--
+-- TOC entry 2132 (class 2604 OID 130736)
+-- Dependencies: 192 189
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente ALTER COLUMN id SET DEFAULT nextval('ponente_id_seq'::regclass);
+
+
+--
+-- TOC entry 2133 (class 2604 OID 130737)
+-- Dependencies: 191 190
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad ALTER COLUMN id SET DEFAULT nextval('ponente_actividad_id_seq'::regclass);
+
+
+--
+-- TOC entry 2134 (class 2604 OID 130738)
+-- Dependencies: 195 194
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_group ALTER COLUMN id SET DEFAULT nextval('sf_guard_group_id_seq'::regclass);
+
+
+--
+-- TOC entry 2135 (class 2604 OID 130739)
+-- Dependencies: 198 197
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_permission ALTER COLUMN id SET DEFAULT nextval('sf_guard_permission_id_seq'::regclass);
+
+
+--
+-- TOC entry 2139 (class 2604 OID 130740)
+-- Dependencies: 202 200
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user ALTER COLUMN id SET DEFAULT nextval('sf_guard_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 2140 (class 2604 OID 130741)
+-- Dependencies: 205 204
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY stand ALTER COLUMN id SET DEFAULT nextval('stand_id_seq'::regclass);
+
+
+--
+-- TOC entry 2142 (class 2604 OID 130742)
+-- Dependencies: 209 206
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY status ALTER COLUMN id SET DEFAULT nextval('status_id_seq1'::regclass);
+
+
+--
+-- TOC entry 2144 (class 2604 OID 130743)
+-- Dependencies: 211 210
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tipo_actividad ALTER COLUMN id SET DEFAULT nextval('tipo_actividad_id_seq'::regclass);
+
+
+--
+-- TOC entry 2145 (class 2604 OID 130744)
+-- Dependencies: 213 212
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tipo_distribuidor ALTER COLUMN id SET DEFAULT nextval('tipo_distribuidor_id_seq'::regclass);
+
+
+--
+-- TOC entry 2143 (class 2604 OID 130745)
+-- Dependencies: 208 207
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tipo_status ALTER COLUMN id SET DEFAULT nextval('status_id_seq'::regclass);
+
+
+--
+-- TOC entry 2148 (class 2604 OID 130746)
+-- Dependencies: 216 215
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usuario ALTER COLUMN id SET DEFAULT nextval('usuario_id_seq'::regclass);
+
+
+--
+-- TOC entry 2149 (class 2604 OID 130747)
+-- Dependencies: 218 217
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY visitante ALTER COLUMN id SET DEFAULT nextval('visitante_id_seq'::regclass);
+
+
+
+--
+-- TOC entry 2413 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: actividad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('actividad_id_seq', 1, false);
+
+
+--
+-- TOC entry 2414 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: banco_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('banco_id_seq', 1, false);
+
+
+
+--
+-- TOC entry 2415 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: cuenta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cuenta_id_seq', 1, false);
+
+
+
+--
+-- TOC entry 2416 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: estado_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('estado_id_seq', 1, false);
+
+
+--
+-- TOC entry 2330 (class 0 OID 130548)
+-- Dependencies: 170 2379
+-- Data for Name: expositor_feria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+SELECT pg_catalog.setval('expositor_feria_id_seq', 1, false);
+
+
+--
+-- TOC entry 2418 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: expositor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('expositor_id_seq', 1, false);
+
+
+--
+-- TOC entry 2333 (class 0 OID 130558)
+-- Dependencies: 173 2379
+-- Data for Name: expositor_lineaeditorial; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+SELECT pg_catalog.setval('expositor_lineaeditorial_id_seq', 1, false);
+
+
+--
+-- TOC entry 2335 (class 0 OID 130563)
+-- Dependencies: 175 2379
+-- Data for Name: feria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+SELECT pg_catalog.setval('feria_id_seq', 1, false);
+
+
+--
+-- TOC entry 2421 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: linea_editorial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('linea_editorial_id_seq', 1, false);
+
+
+--
+-- TOC entry 2422 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: moneda_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('moneda_id_seq', 1, false);
+
+
+--
+-- TOC entry 2423 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: municipio_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('municipio_id_seq', 1, false);
+
+
+--
+-- TOC entry 2424 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: pago_expositor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pago_expositor_id_seq', 1, false);
+
+
+
+--
+-- TOC entry 2425 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: pais_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('pais_id_seq', 1, false);
+
+
+--
+-- TOC entry 2426 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: parroquia_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('parroquia_id_seq', 1, false);
+
+
+--
+-- TOC entry 2427 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: ponente_actividad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ponente_actividad_id_seq', 1, false);
+
+
+--
+-- TOC entry 2428 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: ponente_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('ponente_id_seq', 1, false);
+
+--
+-- TOC entry 2429 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: sf_guard_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sf_guard_group_id_seq', 1, false);
+
+--
+-- TOC entry 2430 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: sf_guard_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sf_guard_permission_id_seq', 1, false);
+
+
+--
+-- TOC entry 2431 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: sf_guard_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sf_guard_user_id_seq', 1, false);
+
+--
+-- TOC entry 2432 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: stand_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('stand_id_seq', 1, false);
+
+
+--
+-- TOC entry 2433 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: status_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('status_id_seq', 1, false);
+
+
+--
+-- TOC entry 2434 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: status_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('status_id_seq1', 1, false);
+
+
+--
+-- TOC entry 2435 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: tipo_actividad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tipo_actividad_id_seq', 1, false);
+
+
+--
+-- TOC entry 2436 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: tipo_distribuidor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tipo_distribuidor_id_seq', 1, false);
+
+
+--
+-- TOC entry 2437 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('usuario_id_seq', 1, false);
+
+--
+-- TOC entry 2438 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: visitante_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('visitante_id_seq', 11, true);
+
+
+--
+-- TOC entry 2155 (class 2606 OID 130749)
+-- Dependencies: 161 161 2380
+-- Name: actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2158 (class 2606 OID 130751)
+-- Dependencies: 163 163 2380
+-- Name: banco_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY banco
+    ADD CONSTRAINT banco_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2164 (class 2606 OID 130753)
+-- Dependencies: 165 165 2380
+-- Name: cuenta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cuenta
+    ADD CONSTRAINT cuenta_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2167 (class 2606 OID 130755)
+-- Dependencies: 167 167 2380
+-- Name: estado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY estado
+    ADD CONSTRAINT estado_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2177 (class 2606 OID 130757)
+-- Dependencies: 170 170 2380
+-- Name: expositor_feria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2179 (class 2606 OID 130759)
+-- Dependencies: 173 173 2380
+-- Name: expositor_lineaeditorial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY expositor_lineaeditorial
+    ADD CONSTRAINT expositor_lineaeditorial_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2172 (class 2606 OID 130761)
+-- Dependencies: 169 169 2380
+-- Name: expositor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY expositor
+    ADD CONSTRAINT expositor_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2188 (class 2606 OID 130763)
+-- Dependencies: 175 175 2380
+-- Name: feria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2191 (class 2606 OID 130765)
+-- Dependencies: 177 177 2380
+-- Name: linea_editorial_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY linea_editorial
+    ADD CONSTRAINT linea_editorial_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2194 (class 2606 OID 130767)
+-- Dependencies: 179 179 2380
+-- Name: moneda_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY moneda
+    ADD CONSTRAINT moneda_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2197 (class 2606 OID 130769)
+-- Dependencies: 181 181 2380
+-- Name: municipio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY municipio
+    ADD CONSTRAINT municipio_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2204 (class 2606 OID 130771)
+-- Dependencies: 183 183 2380
+-- Name: pago_expositor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pago_expositor
+    ADD CONSTRAINT pago_expositor_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2207 (class 2606 OID 130773)
+-- Dependencies: 185 185 2380
+-- Name: pais_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pais
+    ADD CONSTRAINT pais_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2210 (class 2606 OID 130775)
+-- Dependencies: 187 187 2380
+-- Name: parroquia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY parroquia
+    ADD CONSTRAINT parroquia_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2216 (class 2606 OID 130777)
+-- Dependencies: 190 190 2380
+-- Name: ponente_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2214 (class 2606 OID 130779)
+-- Dependencies: 189 189 2380
+-- Name: ponente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ponente
+    ADD CONSTRAINT ponente_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2221 (class 2606 OID 130781)
+-- Dependencies: 193 193 2380
+-- Name: region_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT region_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2223 (class 2606 OID 130783)
+-- Dependencies: 194 194 2380
+-- Name: sf_guard_group_U_1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_group
+    ADD CONSTRAINT "sf_guard_group_U_1" UNIQUE (name);
+
+
+--
+-- TOC entry 2227 (class 2606 OID 130785)
+-- Dependencies: 196 196 196 2380
+-- Name: sf_guard_group_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_group_permission
+    ADD CONSTRAINT sf_guard_group_permission_pkey PRIMARY KEY (group_id, permission_id);
+
+
+--
+-- TOC entry 2225 (class 2606 OID 130787)
+-- Dependencies: 194 194 2380
+-- Name: sf_guard_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_group
+    ADD CONSTRAINT sf_guard_group_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2229 (class 2606 OID 130789)
+-- Dependencies: 197 197 2380
+-- Name: sf_guard_permission_U_1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_permission
+    ADD CONSTRAINT "sf_guard_permission_U_1" UNIQUE (name);
+
+
+--
+-- TOC entry 2231 (class 2606 OID 130791)
+-- Dependencies: 197 197 2380
+-- Name: sf_guard_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_permission
+    ADD CONSTRAINT sf_guard_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2233 (class 2606 OID 130793)
+-- Dependencies: 199 199 199 2380
+-- Name: sf_guard_remember_key_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_remember_key
+    ADD CONSTRAINT sf_guard_remember_key_pkey PRIMARY KEY (user_id, ip_address);
+
+
+--
+-- TOC entry 2235 (class 2606 OID 130795)
+-- Dependencies: 200 200 2380
+-- Name: sf_guard_user_U_1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user
+    ADD CONSTRAINT "sf_guard_user_U_1" UNIQUE (username);
+
+
+--
+-- TOC entry 2239 (class 2606 OID 130797)
+-- Dependencies: 201 201 201 2380
+-- Name: sf_guard_user_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user_group
+    ADD CONSTRAINT sf_guard_user_group_pkey PRIMARY KEY (user_id, group_id);
+
+
+--
+-- TOC entry 2241 (class 2606 OID 130799)
+-- Dependencies: 203 203 203 2380
+-- Name: sf_guard_user_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user_permission
+    ADD CONSTRAINT sf_guard_user_permission_pkey PRIMARY KEY (user_id, permission_id);
+
+
+--
+-- TOC entry 2237 (class 2606 OID 130801)
+-- Dependencies: 200 200 2380
+-- Name: sf_guard_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sf_guard_user
+    ADD CONSTRAINT sf_guard_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2244 (class 2606 OID 130803)
+-- Dependencies: 204 204 2380
+-- Name: stand_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY stand
+    ADD CONSTRAINT stand_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2253 (class 2606 OID 130805)
+-- Dependencies: 207 207 2380
+-- Name: status_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tipo_status
+    ADD CONSTRAINT status_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2251 (class 2606 OID 130807)
+-- Dependencies: 206 206 2380
+-- Name: status_pkey1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY status
+    ADD CONSTRAINT status_pkey1 PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2257 (class 2606 OID 130809)
+-- Dependencies: 210 210 2380
+-- Name: tipo_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tipo_actividad
+    ADD CONSTRAINT tipo_actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2260 (class 2606 OID 130811)
+-- Dependencies: 212 212 2380
+-- Name: tipo_distribuidor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tipo_distribuidor
+    ADD CONSTRAINT tipo_distribuidor_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2262 (class 2606 OID 130813)
+-- Dependencies: 214 214 2380
+-- Name: tipo_feria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tipo_feria
+    ADD CONSTRAINT tipo_feria_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2266 (class 2606 OID 130815)
+-- Dependencies: 215 215 2380
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2271 (class 2606 OID 130817)
+-- Dependencies: 217 217 2380
+-- Name: visitante_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY visitante
+    ADD CONSTRAINT visitante_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2150 (class 1259 OID 131072)
+-- Dependencies: 161 161 161 2380
+-- Name: actividad_fecha_sugerida_id_feria_id_usuario_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX actividad_fecha_sugerida_id_feria_id_usuario_idx ON actividad USING btree (fecha_sugerida, id_feria, id_usuario);
+
+
+--
+-- TOC entry 2151 (class 1259 OID 131073)
+-- Dependencies: 161 2380
+-- Name: actividad_fecha_sugerida_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX actividad_fecha_sugerida_idx ON actividad USING btree (fecha_sugerida);
+
+
+--
+-- TOC entry 2152 (class 1259 OID 131074)
+-- Dependencies: 161 2380
+-- Name: actividad_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX actividad_id_feria_idx ON actividad USING btree (id_feria);
+
+
+--
+-- TOC entry 2153 (class 1259 OID 131075)
+-- Dependencies: 161 2380
+-- Name: actividad_id_usuario_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX actividad_id_usuario_idx ON actividad USING btree (id_usuario);
+
+
+--
+-- TOC entry 2156 (class 1259 OID 131076)
+-- Dependencies: 163 2380
+-- Name: banco_es_nacional_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX banco_es_nacional_idx ON banco USING btree (es_nacional);
+
+
+--
+-- TOC entry 2159 (class 1259 OID 131077)
+-- Dependencies: 165 165 2380
+-- Name: cuenta_id_banco_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX cuenta_id_banco_id_feria_idx ON cuenta USING btree (id_banco, id_feria);
+
+
+--
+-- TOC entry 2160 (class 1259 OID 131078)
+-- Dependencies: 165 2380
+-- Name: cuenta_id_banco_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX cuenta_id_banco_idx ON cuenta USING btree (id_banco);
+
+
+--
+-- TOC entry 2161 (class 1259 OID 131079)
+-- Dependencies: 165 2380
+-- Name: cuenta_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX cuenta_id_feria_idx ON cuenta USING btree (id_feria);
+
+
+--
+-- TOC entry 2162 (class 1259 OID 131080)
+-- Dependencies: 165 2380
+-- Name: cuenta_numero_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX cuenta_numero_idx ON cuenta USING btree (numero);
+
+
+--
+-- TOC entry 2165 (class 1259 OID 131092)
+-- Dependencies: 167 167 2380
+-- Name: estado_nombre_id_pais_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX estado_nombre_id_pais_idx ON estado USING btree (nombre, id_pais);
+
+
+--
+-- TOC entry 2168 (class 1259 OID 131083)
+-- Dependencies: 169 2380
+-- Name: expositor_email_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_email_idx ON expositor USING btree (email);
+
+
+--
+-- TOC entry 2174 (class 1259 OID 130818)
+-- Dependencies: 170 2380
+-- Name: expositor_feria_id_expositor_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_feria_id_expositor_idx ON expositor_feria USING btree (id_expositor);
+
+
+--
+-- TOC entry 2175 (class 1259 OID 130819)
+-- Dependencies: 170 2380
+-- Name: expositor_feria_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_feria_id_feria_idx ON expositor_feria USING btree (id_feria);
+
+
+--
+-- TOC entry 2169 (class 1259 OID 131082)
+-- Dependencies: 169 2380
+-- Name: expositor_id_pais_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_id_pais_idx ON expositor USING btree (id_pais);
+
+
+--
+-- TOC entry 2170 (class 1259 OID 131084)
+-- Dependencies: 169 169 2380
+-- Name: expositor_id_pais_rif_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_id_pais_rif_idx ON expositor USING btree (id_pais, rif);
+
+
+--
+-- TOC entry 2173 (class 1259 OID 131081)
+-- Dependencies: 169 2380
+-- Name: expositor_rif_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_rif_idx ON expositor USING btree (rif);
+
+
+--
+-- TOC entry 2180 (class 1259 OID 130820)
+-- Dependencies: 173 2380
+-- Name: expositor_sello_editorial_id_expositor_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_sello_editorial_id_expositor_idx ON expositor_lineaeditorial USING btree (id_expositor);
+
+
+--
+-- TOC entry 2181 (class 1259 OID 130821)
+-- Dependencies: 173 2380
+-- Name: expositor_sello_editorial_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX expositor_sello_editorial_id_feria_idx ON expositor_lineaeditorial USING btree (id_feria);
+
+
+--
+-- TOC entry 2182 (class 1259 OID 131086)
+-- Dependencies: 175 2380
+-- Name: feria_fecha_inicio_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX feria_fecha_inicio_idx ON feria USING btree (fecha_inicio);
+
+
+--
+-- TOC entry 2183 (class 1259 OID 131088)
+-- Dependencies: 175 2380
+-- Name: feria_id_municipio_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX feria_id_municipio_idx ON feria USING btree (id_municipio);
+
+
+--
+-- TOC entry 2184 (class 1259 OID 131087)
+-- Dependencies: 175 2380
+-- Name: feria_id_pais_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX feria_id_pais_idx ON feria USING btree (id_pais);
+
+
+--
+-- TOC entry 2185 (class 1259 OID 131089)
+-- Dependencies: 175 2380
+-- Name: feria_id_region_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX feria_id_region_idx ON feria USING btree (id_region);
+
+
+--
+-- TOC entry 2186 (class 1259 OID 131085)
+-- Dependencies: 175 2380
+-- Name: feria_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX feria_nombre_idx ON feria USING btree (nombre);
+
+
+--
+-- TOC entry 2189 (class 1259 OID 131090)
+-- Dependencies: 177 2380
+-- Name: linea_editorial_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX linea_editorial_nombre_idx ON linea_editorial USING btree (nombre);
+
+
+--
+-- TOC entry 2192 (class 1259 OID 131091)
+-- Dependencies: 179 2380
+-- Name: moneda_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX moneda_nombre_idx ON moneda USING btree (nombre);
+
+
+--
+-- TOC entry 2195 (class 1259 OID 131093)
+-- Dependencies: 181 181 2380
+-- Name: municipio_nombre_id_estado_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX municipio_nombre_id_estado_idx ON municipio USING btree (nombre, id_estado);
+
+
+--
+-- TOC entry 2198 (class 1259 OID 131096)
+-- Dependencies: 183 2380
+-- Name: pago_expositor_id_expositor_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pago_expositor_id_expositor_feria_idx ON pago_expositor USING btree (id_expositor_feria);
+
+
+--
+-- TOC entry 2199 (class 1259 OID 131098)
+-- Dependencies: 183 2380
+-- Name: pago_expositor_id_expositor_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pago_expositor_id_expositor_idx ON pago_expositor USING btree (id_expositor);
+
+
+--
+-- TOC entry 2200 (class 1259 OID 131097)
+-- Dependencies: 183 183 183 183 2380
+-- Name: pago_expositor_id_feria_id_expositor_id_expositor_feria_id_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pago_expositor_id_feria_id_expositor_id_expositor_feria_id_idx ON pago_expositor USING btree (id_feria, id_expositor, id_expositor_feria, id);
+
+
+--
+-- TOC entry 2201 (class 1259 OID 131094)
+-- Dependencies: 183 2380
+-- Name: pago_expositor_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pago_expositor_id_feria_idx ON pago_expositor USING btree (id_feria);
+
+
+--
+-- TOC entry 2202 (class 1259 OID 131095)
+-- Dependencies: 183 2380
+-- Name: pago_expositor_id_usuario_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pago_expositor_id_usuario_idx ON pago_expositor USING btree (id_usuario);
+
+
+--
+-- TOC entry 2205 (class 1259 OID 131099)
+-- Dependencies: 185 2380
+-- Name: pais_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pais_nombre_idx ON pais USING btree (nombre);
+
+
+--
+-- TOC entry 2208 (class 1259 OID 131100)
+-- Dependencies: 187 187 2380
+-- Name: parroquia_nombre_id_municipio_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX parroquia_nombre_id_municipio_idx ON parroquia USING btree (nombre, id_municipio);
+
+
+--
+-- TOC entry 2211 (class 1259 OID 130822)
+-- Dependencies: 189 189 2380
+-- Name: ponente_cedula_rif_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_cedula_rif_idx ON ponente USING btree (cedula, rif);
+
+
+--
+-- TOC entry 2212 (class 1259 OID 130823)
+-- Dependencies: 189 2380
+-- Name: ponente_nacionalidad_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_nacionalidad_idx ON ponente USING btree (nacionalidad);
+
+
+--
+-- TOC entry 2217 (class 1259 OID 130824)
+-- Dependencies: 190 2380
+-- Name: ponente_rel_actividad_id_actividad_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_rel_actividad_id_actividad_idx ON ponente_actividad USING btree (id_actividad);
+
+
+--
+-- TOC entry 2218 (class 1259 OID 130825)
+-- Dependencies: 190 2380
+-- Name: ponente_rel_actividad_id_ponente_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX ponente_rel_actividad_id_ponente_idx ON ponente_actividad USING btree (id_ponente);
+
+
+--
+-- TOC entry 2219 (class 1259 OID 131101)
+-- Dependencies: 193 2380
+-- Name: region_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX region_nombre_idx ON region USING btree (nombre);
+
+
+--
+-- TOC entry 2242 (class 1259 OID 131102)
+-- Dependencies: 204 2380
+-- Name: stand_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX stand_id_feria_idx ON stand USING btree (id_feria);
+
+
+--
+-- TOC entry 2245 (class 1259 OID 131107)
+-- Dependencies: 206 2380
+-- Name: status_id_expositor_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX status_id_expositor_feria_idx ON status USING btree (id_expositor_feria);
+
+
+--
+-- TOC entry 2246 (class 1259 OID 131105)
+-- Dependencies: 206 2380
+-- Name: status_id_expositor_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX status_id_expositor_idx ON status USING btree (id_expositor);
+
+
+--
+-- TOC entry 2247 (class 1259 OID 131103)
+-- Dependencies: 206 206 206 206 2380
+-- Name: status_id_feria_id_expositor_id_status_id_expositor_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX status_id_feria_id_expositor_id_status_id_expositor_feria_idx ON status USING btree (id_feria, id_expositor, id_status, id_expositor_feria);
+
+
+--
+-- TOC entry 2248 (class 1259 OID 131104)
+-- Dependencies: 206 2380
+-- Name: status_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX status_id_feria_idx ON status USING btree (id_feria);
+
+
+--
+-- TOC entry 2249 (class 1259 OID 131106)
+-- Dependencies: 206 2380
+-- Name: status_id_status_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX status_id_status_idx ON status USING btree (id_status);
+
+
+--
+-- TOC entry 2255 (class 1259 OID 131108)
+-- Dependencies: 210 2380
+-- Name: tipo_actividad_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX tipo_actividad_nombre_idx ON tipo_actividad USING btree (nombre);
+
+
+--
+-- TOC entry 2258 (class 1259 OID 131109)
+-- Dependencies: 212 2380
+-- Name: tipo_distribuidor_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX tipo_distribuidor_nombre_idx ON tipo_distribuidor USING btree (nombre);
+
+
+--
+-- TOC entry 2263 (class 1259 OID 131110)
+-- Dependencies: 214 2380
+-- Name: tipo_feria_tipo_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX tipo_feria_tipo_feria_idx ON tipo_feria USING btree (tipo_feria);
+
+
+--
+-- TOC entry 2254 (class 1259 OID 131111)
+-- Dependencies: 207 2380
+-- Name: tipo_status_nombre_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX tipo_status_nombre_idx ON tipo_status USING btree (nombre);
+
+
+--
+-- TOC entry 2264 (class 1259 OID 131112)
+-- Dependencies: 215 215 215 2380
+-- Name: usuario_cedula_correo_login_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX usuario_cedula_correo_login_idx ON usuario USING btree (cedula, correo, login);
+
+
+--
+-- TOC entry 2267 (class 1259 OID 131113)
+-- Dependencies: 217 217 2380
+-- Name: visitante_fecha_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX visitante_fecha_id_feria_idx ON visitante USING btree (fecha, id_feria);
+
+
+--
+-- TOC entry 2268 (class 1259 OID 131114)
+-- Dependencies: 217 2380
+-- Name: visitante_fecha_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX visitante_fecha_idx ON visitante USING btree (fecha);
+
+
+--
+-- TOC entry 2269 (class 1259 OID 131115)
+-- Dependencies: 217 2380
+-- Name: visitante_id_feria_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX visitante_id_feria_idx ON visitante USING btree (id_feria);
+
+
+--
+-- TOC entry 2272 (class 2606 OID 130826)
+-- Dependencies: 2187 161 175 2380
+-- Name: actividad_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT actividad_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2273 (class 2606 OID 130831)
+-- Dependencies: 161 210 2256 2380
+-- Name: actividad_id_tipo_actividad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT actividad_id_tipo_actividad_fkey FOREIGN KEY (id_tipo_actividad) REFERENCES tipo_actividad(id);
+
+
+--
+-- TOC entry 2274 (class 2606 OID 130836)
+-- Dependencies: 2265 215 161 2380
+-- Name: actividad_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT actividad_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuario(id);
+
+
+--
+-- TOC entry 2275 (class 2606 OID 130841)
+-- Dependencies: 175 2187 163 2380
+-- Name: banco_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY banco
+    ADD CONSTRAINT banco_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2276 (class 2606 OID 130846)
+-- Dependencies: 179 163 2193 2380
+-- Name: banco_id_moneda_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY banco
+    ADD CONSTRAINT banco_id_moneda_fkey FOREIGN KEY (id_moneda) REFERENCES moneda(id);
+
+
+--
+-- TOC entry 2277 (class 2606 OID 130851)
+-- Dependencies: 163 185 2206 2380
+-- Name: banco_id_pais_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY banco
+    ADD CONSTRAINT banco_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2278 (class 2606 OID 130856)
+-- Dependencies: 2157 165 163 2380
+-- Name: cuenta_id_banco_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cuenta
+    ADD CONSTRAINT cuenta_id_banco_fkey FOREIGN KEY (id_banco) REFERENCES banco(id);
+
+
+--
+-- TOC entry 2279 (class 2606 OID 130861)
+-- Dependencies: 175 165 2187 2380
+-- Name: cuenta_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cuenta
+    ADD CONSTRAINT cuenta_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2280 (class 2606 OID 130866)
+-- Dependencies: 185 167 2206 2380
+-- Name: estado_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY estado
+    ADD CONSTRAINT "estado_FK_1" FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2282 (class 2606 OID 130871)
+-- Dependencies: 169 170 2171 2380
+-- Name: expositor_feria_id_expositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_expositor_fkey FOREIGN KEY (id_expositor) REFERENCES expositor(id);
+
+
+--
+-- TOC entry 2283 (class 2606 OID 130876)
+-- Dependencies: 175 170 2187 2380
+-- Name: expositor_feria_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2284 (class 2606 OID 130881)
+-- Dependencies: 204 170 2243 2380
+-- Name: expositor_feria_id_stand_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_stand_fkey FOREIGN KEY (id_stand) REFERENCES stand(id);
+
+
+--
+-- TOC entry 2285 (class 2606 OID 130886)
+-- Dependencies: 212 170 2259 2380
+-- Name: expositor_feria_id_tipo_distribuidor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_tipo_distribuidor_fkey FOREIGN KEY (id_tipo_distribuidor) REFERENCES tipo_distribuidor(id);
+
+
+--
+-- TOC entry 2286 (class 2606 OID 130891)
+-- Dependencies: 215 170 2265 2380
+-- Name: expositor_feria_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_feria
+    ADD CONSTRAINT expositor_feria_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuario(id);
+
+
+--
+-- TOC entry 2281 (class 2606 OID 130896)
+-- Dependencies: 169 185 2206 2380
+-- Name: expositor_id_pais_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor
+    ADD CONSTRAINT expositor_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2287 (class 2606 OID 130901)
+-- Dependencies: 173 169 2171 2380
+-- Name: expositor_sello_editorial_id_expositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_lineaeditorial
+    ADD CONSTRAINT expositor_sello_editorial_id_expositor_fkey FOREIGN KEY (id_expositor) REFERENCES expositor(id);
+
+
+--
+-- TOC entry 2288 (class 2606 OID 130906)
+-- Dependencies: 2187 173 175 2380
+-- Name: expositor_sello_editorial_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY expositor_lineaeditorial
+    ADD CONSTRAINT expositor_sello_editorial_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2289 (class 2606 OID 130911)
+-- Dependencies: 167 175 2166 2380
+-- Name: feria_id_estado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_id_estado_fkey FOREIGN KEY (id_estado) REFERENCES estado(id);
+
+
+--
+-- TOC entry 2290 (class 2606 OID 130916)
+-- Dependencies: 181 175 2196 2380
+-- Name: feria_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_id_municipio_fkey FOREIGN KEY (id_municipio) REFERENCES municipio(id);
+
+
+--
+-- TOC entry 2291 (class 2606 OID 130921)
+-- Dependencies: 185 175 2206 2380
+-- Name: feria_id_pais_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2292 (class 2606 OID 130926)
+-- Dependencies: 185 175 2206 2380
+-- Name: feria_id_pais_homenajeado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_id_pais_homenajeado_fkey FOREIGN KEY (id_pais_homenajeado) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2293 (class 2606 OID 130931)
+-- Dependencies: 187 175 2209 2380
+-- Name: feria_id_parroquia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_id_parroquia_fkey FOREIGN KEY (id_parroquia) REFERENCES parroquia(id);
+
+
+--
+-- TOC entry 2294 (class 2606 OID 130936)
+-- Dependencies: 193 175 2220 2380
+-- Name: feria_id_region_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_id_region_fkey FOREIGN KEY (id_region) REFERENCES region(id);
+
+
+--
+-- TOC entry 2295 (class 2606 OID 130941)
+-- Dependencies: 175 2261 214 2380
+-- Name: feria_id_tipo_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY feria
+    ADD CONSTRAINT feria_id_tipo_feria_fkey FOREIGN KEY (id_tipo_feria) REFERENCES tipo_feria(id);
+
+
+--
+-- TOC entry 2296 (class 2606 OID 130946)
+-- Dependencies: 181 2166 167 2380
+-- Name: municipio_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY municipio
+    ADD CONSTRAINT "municipio_FK_1" FOREIGN KEY (id_estado) REFERENCES estado(id);
+
+
+--
+-- TOC entry 2297 (class 2606 OID 130951)
+-- Dependencies: 2157 163 183 2380
+-- Name: pago_expositor_id_banco_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pago_expositor
+    ADD CONSTRAINT pago_expositor_id_banco_fkey FOREIGN KEY (id_banco) REFERENCES banco(id);
+
+
+--
+-- TOC entry 2298 (class 2606 OID 130956)
+-- Dependencies: 183 2176 170 2380
+-- Name: pago_expositor_id_expositor_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pago_expositor
+    ADD CONSTRAINT pago_expositor_id_expositor_feria_fkey FOREIGN KEY (id_expositor_feria) REFERENCES expositor_feria(id);
+
+
+--
+-- TOC entry 2299 (class 2606 OID 130961)
+-- Dependencies: 2171 169 183 2380
+-- Name: pago_expositor_id_expositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pago_expositor
+    ADD CONSTRAINT pago_expositor_id_expositor_fkey FOREIGN KEY (id_expositor) REFERENCES expositor(id);
+
+
+--
+-- TOC entry 2300 (class 2606 OID 130966)
+-- Dependencies: 2187 175 183 2380
+-- Name: pago_expositor_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pago_expositor
+    ADD CONSTRAINT pago_expositor_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2301 (class 2606 OID 130971)
+-- Dependencies: 183 215 2265 2380
+-- Name: pago_expositor_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pago_expositor
+    ADD CONSTRAINT pago_expositor_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuario(id);
+
+
+--
+-- TOC entry 2302 (class 2606 OID 130976)
+-- Dependencies: 181 187 2196 2380
+-- Name: parroquia_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY parroquia
+    ADD CONSTRAINT "parroquia_FK_1" FOREIGN KEY (id_municipio) REFERENCES municipio(id);
+
+
+--
+-- TOC entry 2304 (class 2606 OID 130981)
+-- Dependencies: 175 190 2187 2380
+-- Name: ponente_actividad_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_actividad_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2303 (class 2606 OID 130986)
+-- Dependencies: 2206 189 185 2380
+-- Name: ponente_nacionalidad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente
+    ADD CONSTRAINT ponente_nacionalidad_fkey FOREIGN KEY (nacionalidad) REFERENCES pais(id);
+
+
+--
+-- TOC entry 2305 (class 2606 OID 130991)
+-- Dependencies: 2154 161 190 2380
+-- Name: ponente_rel_actividad_id_actividad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_rel_actividad_id_actividad_fkey FOREIGN KEY (id_actividad) REFERENCES actividad(id);
+
+
+--
+-- TOC entry 2306 (class 2606 OID 130996)
+-- Dependencies: 2213 190 189 2380
+-- Name: ponente_rel_actividad_id_ponente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ponente_actividad
+    ADD CONSTRAINT ponente_rel_actividad_id_ponente_fkey FOREIGN KEY (id_ponente) REFERENCES ponente(id);
+
+
+--
+-- TOC entry 2307 (class 2606 OID 131001)
+-- Dependencies: 194 2224 196 2380
+-- Name: sf_guard_group_permission_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_group_permission
+    ADD CONSTRAINT "sf_guard_group_permission_FK_1" FOREIGN KEY (group_id) REFERENCES sf_guard_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2308 (class 2606 OID 131006)
+-- Dependencies: 197 2230 196 2380
+-- Name: sf_guard_group_permission_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_group_permission
+    ADD CONSTRAINT "sf_guard_group_permission_FK_2" FOREIGN KEY (permission_id) REFERENCES sf_guard_permission(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2309 (class 2606 OID 131011)
+-- Dependencies: 199 2236 200 2380
+-- Name: sf_guard_remember_key_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_remember_key
+    ADD CONSTRAINT "sf_guard_remember_key_FK_1" FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2310 (class 2606 OID 131016)
+-- Dependencies: 201 2236 200 2380
+-- Name: sf_guard_user_group_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_group
+    ADD CONSTRAINT "sf_guard_user_group_FK_1" FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2311 (class 2606 OID 131021)
+-- Dependencies: 201 194 2224 2380
+-- Name: sf_guard_user_group_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_group
+    ADD CONSTRAINT "sf_guard_user_group_FK_2" FOREIGN KEY (group_id) REFERENCES sf_guard_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2312 (class 2606 OID 131026)
+-- Dependencies: 2236 203 200 2380
+-- Name: sf_guard_user_permission_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_permission
+    ADD CONSTRAINT "sf_guard_user_permission_FK_1" FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2313 (class 2606 OID 131031)
+-- Dependencies: 2230 197 203 2380
+-- Name: sf_guard_user_permission_FK_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sf_guard_user_permission
+    ADD CONSTRAINT "sf_guard_user_permission_FK_2" FOREIGN KEY (permission_id) REFERENCES sf_guard_permission(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2314 (class 2606 OID 131036)
+-- Dependencies: 204 2187 175 2380
+-- Name: stand_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY stand
+    ADD CONSTRAINT stand_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2315 (class 2606 OID 131041)
+-- Dependencies: 170 2176 206 2380
+-- Name: status_id_expositor_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY status
+    ADD CONSTRAINT status_id_expositor_feria_fkey FOREIGN KEY (id_expositor_feria) REFERENCES expositor_feria(id);
+
+
+--
+-- TOC entry 2316 (class 2606 OID 131046)
+-- Dependencies: 169 206 2171 2380
+-- Name: status_id_expositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY status
+    ADD CONSTRAINT status_id_expositor_fkey FOREIGN KEY (id_expositor) REFERENCES expositor(id);
+
+
+--
+-- TOC entry 2317 (class 2606 OID 131051)
+-- Dependencies: 2187 206 175 2380
+-- Name: status_id_feria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY status
+    ADD CONSTRAINT status_id_feria_fkey FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+--
+-- TOC entry 2318 (class 2606 OID 131056)
+-- Dependencies: 2203 206 183 2380
+-- Name: status_id_pago_expositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY status
+    ADD CONSTRAINT status_id_pago_expositor_fkey FOREIGN KEY (id_pago_expositor) REFERENCES pago_expositor(id);
+
+
+--
+-- TOC entry 2319 (class 2606 OID 131061)
+-- Dependencies: 206 207 2252 2380
+-- Name: status_id_status_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY status
+    ADD CONSTRAINT status_id_status_fkey FOREIGN KEY (id_status) REFERENCES tipo_status(id);
+
+
+--
+-- TOC entry 2320 (class 2606 OID 131066)
+-- Dependencies: 217 175 2187 2380
+-- Name: visitante_FK_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY visitante
+    ADD CONSTRAINT "visitante_FK_1" FOREIGN KEY (id_feria) REFERENCES feria(id);
+
+
+CREATE TABLE incumplimiento_actividad
+(
+  id bigserial NOT NULL,
+  nombre character varying,
+  CONSTRAINT incumplimiento_actividad_pkey PRIMARY KEY (id )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE incumplimiento_actividad
+  OWNER TO postgres;
+
+-- Index: incumplimiento_actividad_nombre_idx
+
+-- DROP INDEX incumplimiento_actividad_nombre_idx;
+
+CREATE INDEX incumplimiento_actividad_nombre_idx
+  ON incumplimiento_actividad
+  USING btree
+  (nombre COLLATE pg_catalog."default" );
+
+--
+-- TOC entry 2385 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-02-08 12:49:10 VET
+
+--
+-- PostgreSQL database dump complete
+--
+
