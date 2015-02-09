@@ -78,7 +78,7 @@ class registroActions extends sfActions {
             $body = "Su registro fue realizado el : ". date('d-m-y') . ' y su clave de acceso es '.$clave_acceso;
                 
              $message = $this->getMailer()
-               ->compose('jrodriguezcorte@gmail.com', $email, $subject, $body);
+               ->compose('no-responder@cenal.com', $email, $subject, $body);
 
              $this->getMailer()->send($message);             
              
