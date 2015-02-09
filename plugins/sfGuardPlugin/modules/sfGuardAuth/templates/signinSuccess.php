@@ -146,7 +146,7 @@
                                     rif_valido.valor = 1;
                                     break;
                                 case '2':
-                                    alert('Falló la conexión para verificar el Rif, inténtelo nuevamente');
+                                    alert('Rif inválido,c inténtelo nuevamente');
                                     rif_valido.valor = 2;
                                     break;
                                 case '3':

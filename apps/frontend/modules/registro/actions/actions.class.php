@@ -75,16 +75,16 @@ class registroActions extends sfActions {
                
                         
             $subject = "Bienvenido al Registro Nacional de Ferias del Libro";
-            $body = "Su registro fue realizado el : ". date('d-m-y') . ' y su clave de acceso es ....';
+            $body = "Su registro fue realizado el : ". date('d-m-y') . ' y su clave de acceso es '.$clave_acceso;
                 
              $message = $this->getMailer()
-               ->compose('no-responder@cenal.gob.ve', $email, $subject, $body);
+               ->compose('jrodriguezcorte@gmail.com', $email, $subject, $body);
 
              $this->getMailer()->send($message);             
              
             
-               $arreglo = 'Se ha enviado a su correo su clave de acceso '.$clave_acceso; 
-            
+        //       $arreglo = 'Se ha enviado a su correo su clave de acceso '.$clave_acceso; 
+            $arreglo = 'Se ha enviado a su correo su clave de acceso '; 
             
         } catch (Exception $e) {
             $conuser->rollback();
@@ -102,7 +102,6 @@ class registroActions extends sfActions {
         
         if ($retorno) {
             $digitos = str_split($rif);
-
             $digitos[8] *= 2;
             $digitos[7] *= 3;
             $digitos[6] *= 4;
@@ -137,13 +136,12 @@ class registroActions extends sfActions {
             $resta = 11 - $residuo;
 
             $digitoVerificador = ($resta >= 10) ? 0 : $resta;
-
             if ($digitoVerificador != $digitos[9]) {
                 $retorno = false;
+                $respuesta = 2;
             }
 
             if ($retorno) {
-
                 $url = 'http://contribuyente.seniat.gob.ve/getContribuyente/getrif?rif=';
                 $url .= $rif;
                 $ch = curl_init();
@@ -168,28 +166,31 @@ class registroActions extends sfActions {
                                 $seniat[$index] = (string) $node;
                             }
                             $this->_responseJson['seniat'] = $seniat;
+                            $respuesta = 3;
                         }
                     } catch (Exception $e) {
                         $exception = explode(' ', $result, 2);
                         $this->_responseJson['code_result'] = (int) $exception[0];
-
                         $retorno =  2;
+                        $respuesta = 2;
                     }
                 } else {
                     // No hay conexión a internet
                     $this->_responseJson['code_result'] = 0;
                     
                     $retorno =  1;
+                    $respuesta = 1;
                 }
                 
 
             }
            
-        } else {           
+        } else {      
             $retorno = 0;           
+            $respuesta = 0;
         }
         
-        return $this->renderText(json_encode($retorno));
+        return $this->renderText(json_encode($respuesta));
     }
 
 }
