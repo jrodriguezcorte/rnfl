@@ -95,7 +95,7 @@ class standActions extends sfActions
     {
       $Stand = $form->save();
 
-      $this->redirect('stand/edit?id=' . $Stand->getId().'&id_feria='.$params['id_feria']);
+      $this->redirect('stand/index?id_feria='.$params['id_feria']);
     }
   }
   

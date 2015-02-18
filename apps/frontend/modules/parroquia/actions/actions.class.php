@@ -95,7 +95,7 @@ class parroquiaActions extends sfActions
     {
       $Parroquia = $form->save();
 
-      $this->redirect('parroquia/edit?id='.$Parroquia->getId());
+      $this->redirect('parroquia/index');
     }
   }
 }

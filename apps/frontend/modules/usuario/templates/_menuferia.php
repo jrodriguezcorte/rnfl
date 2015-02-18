@@ -45,6 +45,7 @@
           <ul class="dropdown-menu" role="menu">
                   <li><?php echo link_to("Agregar", "actividad/new?id_feria=$id_feria")  ?></li>
                   <li><?php echo link_to("Listado", "actividad/index?id_feria=$id_feria")  ?></li>
+                  <li><?php echo link_to("Actividades Finalizadas", "actividad_finalizada/index?id_feria=$id_feria")  ?></li>
           </ul>
         </li>
         <li class="dropdown">

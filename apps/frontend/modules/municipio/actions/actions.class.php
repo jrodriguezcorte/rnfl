@@ -93,7 +93,7 @@ class municipioActions extends sfActions
     {
       $Municipio = $form->save();
 
-      $this->redirect('municipio/edit?id='.$Municipio->getId());
+      $this->redirect('municipio/index');
     }
   }
 }

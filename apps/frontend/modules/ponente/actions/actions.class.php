@@ -14,9 +14,14 @@ class ponenteActions extends sfActions
 
   }
   
-    public function executeIndexajax() {
+    public function executeIndexajax(sfWebRequest $request) {
         $Ponentes = PonenteQuery::create()->orderByNombre('asc')->find();
-        
+        $id_feria = $request->getParameter('id_feria');
+        if ($id_feria != '') {
+            $feria = '/id_feria/'.$id_feria;
+        } else {
+            $feria = '';
+        }        
         foreach ($Ponentes as $list) {
             $Pais = PaisQuery::create()->filterById($list->getNacionalidad())->findOne();
             $arreglo[] = array(
@@ -28,7 +33,7 @@ class ponenteActions extends sfActions
                 'Pais' => $Pais->getNombre(),
                 'Correo' => $list->getEmail(),
                 '' => ''
-                . '      <a style="vertical-align:middle;" title="Ver" href="/ponente/show/id/'.$list->getId().'"><img src="/images/search_mini.png"></a>'
+                . '      <a style="vertical-align:middle;" title="Ver" href="/ponente/show/id/'.$list->getId().$feria.'"><img src="/images/search_mini.png"></a>'
                 . '    ',
             );
         }        
@@ -77,7 +82,9 @@ class ponenteActions extends sfActions
     $Ponente = PonenteQuery::create()->findPk($request->getParameter('id'));
     $this->forward404Unless($Ponente, sprintf('Object Ponente does not exist (%s).', $request->getParameter('id')));
     $this->form = new PonenteForm($Ponente);
+    list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
 
+    $this->prueba = $id_feria;
     $this->processForm($request, $this->form);
 
     $this->setTemplate('edit');
@@ -90,9 +97,16 @@ class ponenteActions extends sfActions
     $Ponente = PonenteQuery::create()->findPk($request->getParameter('id'));
     $this->forward404Unless($Ponente, sprintf('Object Ponente does not exist (%s).', $request->getParameter('id')));
     $Ponente->delete();
+    
+     list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
 
-    $this->redirect('ponente/index');
-  }
+      $this->prueba = $id_feria;
+    
+      if ($this->prueba != '') {
+        $this->redirect('feria/info?id_feria='.$this->prueba);
+      } else {
+        $this->redirect('ponente/index');  
+      }  }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
@@ -104,7 +118,7 @@ class ponenteActions extends sfActions
       if ($this->prueba != '') {
         $this->redirect('feria/info?id_feria='.$this->prueba);
       } else {
-        $this->redirect('ponente/index?id='.$Ponente->getId());  
+        $this->redirect('ponente/index');  
       }
     }
   }

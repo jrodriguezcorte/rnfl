@@ -1,4 +1,12 @@
-<?php include_partial('usuario/menuinicial') ?>
+<?php 
+    if ($sf_params->get('id_feria') == '') { 
+     include_partial('usuario/menuinicial'); 
+     $feria = '';
+    } else {
+     include_partial('usuario/menuferia');
+     $feria = '?id_feria='.$sf_params->get('id_feria');
+    }
+?>
 
 <div class="jumbotron">
 <h2>Agregar Banco</h2>

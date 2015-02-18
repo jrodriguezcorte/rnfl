@@ -87,7 +87,7 @@ class regionActions extends sfActions
     {
       $Region = $form->save();
 
-      $this->redirect('region/edit?id='.$Region->getId());
+      $this->redirect('region/index');
     }
   }
 }

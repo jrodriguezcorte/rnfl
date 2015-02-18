@@ -91,7 +91,7 @@ class estadoActions extends sfActions
     {
       $Estado = $form->save();
 
-      $this->redirect('estado/edit?id='.$Estado->getId());
+      $this->redirect('estado/index');
     }
   }
 }

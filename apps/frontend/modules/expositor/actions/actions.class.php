@@ -144,10 +144,11 @@ class expositorActions extends sfActions
     $Expositor = ExpositorQuery::create()->findPk($request->getParameter('id'));
     $this->forward404Unless($Expositor, sprintf('Object Expositor does not exist (%s).', $request->getParameter('id')));
     $this->form = new ExpositorForm($Expositor);
+    list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
 
+    $this->prueba = $id_feria;
     $this->processForm($request, $this->form);
 
-    $this->setTemplate('edit');
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -158,7 +159,15 @@ class expositorActions extends sfActions
     $this->forward404Unless($Expositor, sprintf('Object Expositor does not exist (%s).', $request->getParameter('id')));
     $Expositor->delete();
 
-    $this->redirect('expositor/index');
+     list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
+
+      $this->prueba = $id_feria;
+    
+      if ($this->prueba != '') {
+        $this->redirect('feria/info?id_feria='.$this->prueba);
+      } else {
+        $this->redirect('ponente/index');  
+      }  
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -168,8 +177,11 @@ class expositorActions extends sfActions
     {
       $Expositor = $form->save();
 
-      $this->redirect('expositor/edit?id='.$Expositor->getId());
-    }
+      if ($this->prueba != '') {
+        $this->redirect('feria/info?id_feria='.$this->prueba);;
+      } else {
+        $this->redirect('expositor/index');  
+      }      }
   }
   
   protected function procesarForm(sfWebRequest $request, sfForm $form)
@@ -183,7 +195,7 @@ class expositorActions extends sfActions
       if ($this->prueba != '') {
         $this->redirect('feria/info?id_feria='.$this->prueba);;
       } else {
-        $this->redirect('expositor/index?id='.$Expositor->getId());  
+        $this->redirect('expositor/index');  
       }      
       
     }

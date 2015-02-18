@@ -27,7 +27,7 @@
                             {name: 'Pais'},
                             {name: ''},
                         ],
-                        url: "<?php echo url_for('banco/indexajax') ?>",
+                        url: "<?php echo url_for('banco/indexajax?id_feria='.$sf_params->get('id_feria')) ?>",
                         pager: function(pagenum, pagesize, oldpagenum) {
                             // callback called when a page or page size is changed.
                         }
@@ -102,8 +102,15 @@
 <?php use_stylesheet('humanmsg') ?>
 <?php use_javascript('modules/usuario') ?>
 </head>
-<?php include_partial('usuario/menuinicial') ?>
-
+<?php 
+    if ($sf_params->get('id_feria') == '') { 
+     include_partial('usuario/menuinicial'); 
+     $feria = '';
+    } else {
+     include_partial('usuario/menuferia');
+     $feria = '?id_feria='.$sf_params->get('id_feria');
+    }
+?>
 <div class="jumbotron">
 <h2>Listado de Bancos</h2>
 <br>
@@ -121,7 +128,7 @@
         <td>&nbsp;</td>
     </tr>    
     <tr>
-        <td><?php echo link_to(image_tag('add.png'),'banco/new',array('title' => 'Agregar'))?></td>
+        <td><?php echo link_to(image_tag('add.png'),'banco/new'.$feria,array('title' => 'Agregar'))?></td>
     </tr>
 </table>
 </div>

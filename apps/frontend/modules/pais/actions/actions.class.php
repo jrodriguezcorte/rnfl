@@ -89,7 +89,7 @@ class paisActions extends sfActions
     {
       $Pais = $form->save();
 
-      $this->redirect('pais/edit?id='.$Pais->getId());
+      $this->redirect('pais/index');
     }
   }
 }

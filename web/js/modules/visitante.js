@@ -2,7 +2,21 @@
         jQuery("#formulario").submit(function(e) {
            	$("select#visitante_fecha_day").removeAttr('disabled');
 		$("select#visitante_fecha_day option:selected").removeAttr('disabled');
-                humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+		visitante_numero = $("#visitante_numero").val();
+		if ($.isNumeric(visitante_numero)) {
+                        humanMsg.displayMsg('La operación realizada ha finalizado exitosamente');
+		} else {
+			e.preventDefault();
+                	humanMsg.displayMsg('Los valores deben ser números');
+                        $(document).ready(function() {
+                        setTimeout(function() {
+                            $('.humanMsg').fadeOut("slow", function() {
+                                //$('.humanMsg').remove();
+                            });
+
+                        }, 3000);
+                    });
+		}
         })
 
     });

@@ -179,7 +179,7 @@ class actividadActions extends sfActions {
             $Actividad->setHora($params['hora']);
             $Actividad->save();
 
-            $this->redirect('actividad/edit?id=' . $Actividad->getId().'&id_feria='.$params['id_feria']);
+            $this->redirect('actividad/index?id_feria='.$params['id_feria']);
         } 
     }
 

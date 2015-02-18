@@ -22,8 +22,17 @@
   </table>
 </div>    
 </form>
-<?php echo link_to(image_tag('back.png'), 'ponente/index', array('title' => 'Volver al Listado')) ?>
+<?php 
+    if ($sf_params->get('id_feria') == '') { 
+     $feria = '';
+     $feria_edit = '';
+    } else {
+     $feria = '?id_feria='.$sf_params->get('id_feria');
+     $feria_edit = '&id_feria='.$sf_params->get('id_feria');
+    }
+?>
+<?php echo link_to(image_tag('back.png'), 'ponente/index'.$feria, array('title' => 'Volver al Listado')) ?>
 &nbsp;
 <?php if (!$form->getObject()->isNew()): ?>
-<?php echo link_to(image_tag('delete.png'), 'ponente/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
+<?php echo link_to(image_tag('delete.png'), 'ponente/delete?id='.$form->getObject()->getId().$feria_edit, array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
 <?php endif; ?>

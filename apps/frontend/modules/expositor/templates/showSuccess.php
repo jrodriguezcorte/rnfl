@@ -1,4 +1,14 @@
-<?php include_partial('usuario/menuinicial') ?>
+<?php 
+    if ($sf_params->get('id_feria') == '') { 
+     include_partial('usuario/menuinicial'); 
+     $feria = '';
+     $feria_edit = '';
+    } else {
+     include_partial('usuario/menuferia');
+     $feria = '?id_feria='.$sf_params->get('id_feria');
+     $feria_edit = '&id_feria='.$sf_params->get('id_feria');
+    }
+?>
 
 <div class="jumbotron">
 <h2>Información básica del expositor</h2>
@@ -66,8 +76,8 @@
 </table>
 </div>
 <hr />
-<?php echo link_to(image_tag('back.png'),"expositor/index",array('title' => 'Ver listado'))?>
+<?php echo link_to(image_tag('back.png'),"expositor/index".$feria,array('title' => 'Ver listado'))?>
 &nbsp;
-<?php echo link_to(image_tag('edit.png'),"expositor/edit?id=".$Expositor->getId(),array('title' => 'Editar'))?>
+<?php echo link_to(image_tag('edit.png'),"expositor/edit?id=".$Expositor->getId().$feria_edit,array('title' => 'Editar'))?>
 <br>
 <br>

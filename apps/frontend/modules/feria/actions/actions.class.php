@@ -130,7 +130,7 @@ class feriaActions extends sfActions {
             $Feria->setHoraInicio($valor_inicio);
             $Feria->setHoraFin($valor_fin);
             $Feria->save();
-            $this->redirect('feria/edit?id=' . $Feria->getId());
+            $this->redirect('feria/index');
         }
     }
 

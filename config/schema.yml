@@ -27,6 +27,29 @@ propel:
     publico_dirigido: { phpName: PublicoDirigido, type: VARCHAR, required: false }
     numero_ponentes: { phpName: NumeroPonentes, type: VARCHAR, required: false }
     actividad_cerrada: { phpName: ActividadCerrada, type: BOOLEAN, required: false }
+  actividad_finalizada:
+    _attributes: { phpName: ActividadFinalizada, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    nombre_responsable: { phpName: NombreResponsable, type: VARCHAR, required: false }
+    fecha_ejecucion: { phpName: FechaEjecucion, type: DATE, required: false }
+    hora_ejecucion: { phpName: HoraEjecucion, type: TIME, required: false }
+    hora_fin_ejecucion: { phpName: HoraFinEjecucion, type: TIME, required: false }
+    participantes_m: { phpName: ParticipantesM, type: INTEGER, required: false }
+    participantes_f: { phpName: ParticipantesF, type: INTEGER, required: false }
+    total: { phpName: Total, type: INTEGER, required: false }
+    evento_publico: { phpName: EventoPublico, type: BOOLEAN, required: false }
+    otro_incumplimiento: { phpName: OtroIncumplimiento, type: VARCHAR, required: false }
+    nombre_institucion: { phpName: NombreInstitucion, type: VARCHAR, required: false }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, defaultValue: '1', foreignTable: pais, foreignReference: id }
+    id_estado: { phpName: IdEstado, type: INTEGER, required: false, defaultValue: '1', foreignTable: estado, foreignReference: id }
+    id_municipio: { phpName: IdMunicipio, type: INTEGER, required: false, defaultValue: '1', foreignTable: municipio, foreignReference: id }
+    id_parroquia: { phpName: IdParroquia, type: INTEGER, required: false, defaultValue: '1', foreignTable: parroquia, foreignReference: id }
+    id_region: { phpName: IdRegion, type: INTEGER, required: false, defaultValue: '1', foreignTable: region, foreignReference: id }
+    incluir_info_geografica: { phpName: IncluirInfoGeografica, type: BOOLEAN, required: false }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
+    _indexes: { actividad_finalizada_id_activida: [id_actividad], actividad_finalizada_id_feria_id: [id_feria] }
   actividad_tipo_actividad:
     _attributes: { phpName: ActividadTipoActividad, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -124,6 +147,19 @@ propel:
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
     id_selloeditorial: { phpName: IdSelloeditorial, type: INTEGER, required: false, foreignTable: sello_editorial, foreignReference: id }
+  incumplimiento_actividad:
+    _attributes: { phpName: IncumplimientoActividad, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, required: false }
+    _indexes: { incumplimiento_actividad_nombre_: [nombre] }
+  incumplmiento_actividad_finalizada:
+    _attributes: { phpName: IncumplmientoActividadFinalizada, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_actividad_finalizada: { phpName: IdActividadFinalizada, type: INTEGER, required: false, foreignTable: actividad_finalizada, foreignReference: id }
+    id_incumplimiento_actividad: { phpName: IdIncumplimientoActividad, type: INTEGER, required: false, foreignTable: incumplimiento_actividad, foreignReference: id }
+    _indexes: { incumplmiento_actividad_final_id: [id_actividad_finalizada, id_incumplimiento_actividad], incumplmiento_actividad_finaliz_: [id_incumplimiento_actividad], incumplmiento_actividad_finaliza: [id_feria] }
   linea_editorial:
     _attributes: { phpName: LineaEditorial, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }

@@ -17,5 +17,7 @@
  * @package    lib.model
  */
 class Actividad extends BaseActividad {
-
+    public function __toString() {
+        return $this->getTitulo();
+    }
 } // Actividad

@@ -732,7 +732,7 @@ class expositor_feriaActions extends sfActions
            $Status->save();
       }
                             
-      $this->redirect('expositor_feria/edit?id_feria='.$id_feria.'&id='.$ExpositorFeria->getId());
+      $this->redirect('expositor_feria/espera?id_feria='.$id_feria);
     }
   }
 }

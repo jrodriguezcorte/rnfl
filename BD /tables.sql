@@ -725,4 +725,5 @@ INSERT INTO incumplimiento_actividad VALUES (1,'Ausencia de Moderador');
 INSERT INTO incumplimiento_actividad VALUES (2,'Ausencia de Ponente');
 INSERT INTO incumplimiento_actividad VALUES (3,'Ausencia de Público');
 INSERT INTO incumplimiento_actividad VALUES (4,'Problemas Técnicos');
+INSERT INTO incumplimiento_actividad VALUES (5,'Otros');
 

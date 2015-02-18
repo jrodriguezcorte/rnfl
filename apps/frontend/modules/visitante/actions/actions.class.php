@@ -95,7 +95,7 @@ class visitanteActions extends sfActions
     {
       $Visitante = $form->save();
 
-      $this->redirect("visitante/edit?id_feria=".$Visitante->getIdFeria()."&id=".$Visitante->getId());
+      $this->redirect("visitante/index?id_feria=".$Visitante->getIdFeria());
     }
   }
 }
