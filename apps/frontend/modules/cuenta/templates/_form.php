@@ -26,5 +26,5 @@
 <?php echo link_to(image_tag('back.png'), "cuenta/index?id_feria=$id_feria", array('title' => 'Volver al Listado')) ?>
 &nbsp;
 <?php if (!$form->getObject()->isNew()): ?>
-<?php echo link_to(image_tag('delete.png'), 'cuenta/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
+<?php echo link_to(image_tag('delete.png'), 'cuenta/delete?id='.$form->getObject()->getId().'&id_feria='.$id_feria, array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
 <?php endif; ?>

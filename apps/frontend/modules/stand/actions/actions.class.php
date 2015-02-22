@@ -79,6 +79,8 @@ class standActions extends sfActions
   {
     $request->checkCSRFProtection();
 
+    $id_feria = $request->getParameter('id_feria');
+    
     $Stand = StandQuery::create()->findPk($request->getParameter('id'));
     $this->forward404Unless($Stand, sprintf('Object Stand does not exist (%s).', $request->getParameter('id')));
     $Stand->delete();

@@ -6,7 +6,7 @@
 <script>
     jQuery(document).ready(function() {
         <?php $IncumplmientoActividadFinalizadas = IncumplmientoActividadFinalizadaQuery::create()->
-                filterByIdFeria($sf_params->get('id_feria'))->
+                filterByIdFeria($sf_params->get('id_actividad_finalizada'))->
                 filterByIdActividadFinalizada($sf_params->get('id'))->
                 find();
                 if (count($IncumplmientoActividadFinalizadas) > 0) {    
@@ -40,11 +40,11 @@
   </table>
 </div>    
 </form>
-<?php $id_feria = $sf_params->get('id_feria'); ?>
-<?php echo link_to(image_tag('back.png'), "actividad_finalizada/index?id_feria=$id_feria", array('title' => 'Volver al Listado')) ?>
+<?php $id_actividad_finalizada = $sf_params->get('id_actividad_finalizada'); ?>
+<?php echo link_to(image_tag('back.png'), "actividad_finalizada/index?id_actividad_finalizada=$id_actividad_finalizada", array('title' => 'Volver al Listado')) ?>
 &nbsp;
 <?php if (!$form->getObject()->isNew()): ?>
-<?php echo link_to(image_tag('delete.png'), 'actividad_finalizada/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
+<?php echo link_to(image_tag('delete.png'), 'actividad_finalizada/delete?id='.$form->getObject()->getId().'&id_actividad_finalizada='.$id_actividad_finalizada, array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
 <?php endif; ?>
 <script>
     jQuery(document).ready(function() {    
@@ -56,13 +56,13 @@
             data:   "id_estado=" + id,
             success: function(html){
                 var JSONobject = JSON.parse(html);
-                $( "#actividad_finalizada_id_municipio" ).parent("td").attr('id', 'municipio');
-                $( "#actividad_finalizada_id_municipio" ).parent("td").empty();
+                $( "#actividad_finalizada_id_municipio" ).empty();
+                $( "#actividad_finalizada_id_municipio" ).html(JSONobject.municipio);
                 $( "#municipio" ).html(JSONobject.municipio);  
-                
+        
                 $( "#actividad_finalizada_id_parroquia" ).parent("td").attr('id', 'parroquia');
                 $( "#actividad_finalizada_id_parroquia" ).parent("td").empty();
-                $( "#parroquia" ).html(JSONobject.parroquia);                
+                $( "#parroquia" ).html(JSONobject.parroquia);                 
             }
             });//fin de ajax    
     
@@ -74,13 +74,12 @@
             data:   "id_estado=" + id,
             success: function(html){
                 var JSONobject = JSON.parse(html);
-                $( "#actividad_finalizada_id_municipio" ).parent("td").attr('id', 'municipio');
-                $( "#actividad_finalizada_id_municipio" ).parent("td").empty();
-                $( "#municipio" ).html(JSONobject.municipio);  
-                
+                $( "#actividad_finalizada_id_municipio" ).empty();
+                $( "#actividad_finalizada_id_municipio" ).html(JSONobject.municipio);
+                             
                 $( "#actividad_finalizada_id_parroquia" ).parent("td").attr('id', 'parroquia');
                 $( "#actividad_finalizada_id_parroquia" ).parent("td").empty();
-                $( "#parroquia" ).html(JSONobject.parroquia);                
+                $( "#parroquia" ).html(JSONobject.parroquia);               
             }
             });//fin de ajax
             }); //fin de estado change  
@@ -97,7 +96,7 @@
                 $( "#parroquia" ).html(html);
             }
             });//fin de ajax
-        }); //fin de estado change              
+        }); //fin de estado change             
             
 });       
 </script>    

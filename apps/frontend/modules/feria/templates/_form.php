@@ -37,13 +37,13 @@
             data:   "id_estado=" + id,
             success: function(html){
                 var JSONobject = JSON.parse(html);
-                $( "#feria_id_municipio" ).parent("td").attr('id', 'municipio');
-                $( "#feria_id_municipio" ).parent("td").empty();
+                $( "#feria_id_municipio" ).empty();
+                $( "#feria_id_municipio" ).html(JSONobject.municipio);
                 $( "#municipio" ).html(JSONobject.municipio);  
-                
+        
                 $( "#feria_id_parroquia" ).parent("td").attr('id', 'parroquia');
                 $( "#feria_id_parroquia" ).parent("td").empty();
-                $( "#parroquia" ).html(JSONobject.parroquia);                
+                $( "#parroquia" ).html(JSONobject.parroquia);                 
             }
             });//fin de ajax    
     
@@ -55,13 +55,12 @@
             data:   "id_estado=" + id,
             success: function(html){
                 var JSONobject = JSON.parse(html);
-                $( "#feria_id_municipio" ).parent("td").attr('id', 'municipio');
-                $( "#feria_id_municipio" ).parent("td").empty();
-                $( "#municipio" ).html(JSONobject.municipio);  
-                
+                $( "#feria_id_municipio" ).empty();
+                $( "#feria_id_municipio" ).html(JSONobject.municipio);
+                             
                 $( "#feria_id_parroquia" ).parent("td").attr('id', 'parroquia');
                 $( "#feria_id_parroquia" ).parent("td").empty();
-                $( "#parroquia" ).html(JSONobject.parroquia);                
+                $( "#parroquia" ).html(JSONobject.parroquia);               
             }
             });//fin de ajax
             }); //fin de estado change  

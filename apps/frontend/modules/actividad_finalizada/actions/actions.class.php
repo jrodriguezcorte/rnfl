@@ -43,7 +43,7 @@ class actividad_finalizadaActions extends sfActions
                 'Fecha' => implode("-", array_reverse(explode("-", $list->getFechaSugerida()))),
                 'Hora' => $hora,
                 '' => ''
-                . '      <a style="vertical-align:middle;" title="Ver" href="/actividad_finalizada/show/id_feria/'.$list->getIdFeria().'/id/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'
+                . '      <a style="vertical-align:middle;" title="Ver" href="/actividad_finalizada/show/id_actividad_finalizada/'.$list->getIdFeria().'/id/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'
                 . $agregar
                . $cerrar,
             );
@@ -115,13 +115,15 @@ class actividad_finalizadaActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
+    $id_feria = $request->getParameter('id_feria');
+      
     $request->checkCSRFProtection();
 
     $ActividadFinalizada = ActividadFinalizadaQuery::create()->findPk($request->getParameter('id'));
     $this->forward404Unless($ActividadFinalizada, sprintf('Object ActividadFinalizada does not exist (%s).', $request->getParameter('id')));
     $ActividadFinalizada->delete();
 
-    $this->redirect('actividad_finalizada/index');
+    $this->redirect('actividad_finalizada/index?id_feria=' . $id_feria);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -156,7 +158,7 @@ class actividad_finalizadaActions extends sfActions
       for($i = 0; $i < count($incumplimiento); $i++ ) {
           $incumplimiento_current = new IncumplmientoActividadFinalizada();
           $incumplimiento_current->setIdActividad($id_actividad);
-          $incumplimiento_current->setIdFeria($id_feria);
+          $incumplimiento_current->setIdFeria($id_actividad_finalizada);
           $incumplimiento_current->setIdActividadFinalizada($ActividadFinalizada->getId());
           $incumplimiento_current->setIdIncumplimientoActividad($incumplimiento[$i]);
           $incumplimiento_current->save();
@@ -172,7 +174,7 @@ class actividad_finalizadaActions extends sfActions
 
         $arreglo = array();
 
-        $arreglo['municipio'] = '<select name="actividad_finalizada[id_municipio]" id="actividad_finalizada_id_municipio">';
+        $arreglo['municipio'] = '<select  id="actividad_finalizada_id_municipio" name="actividad_finalizada[id_municipio]" >';
         foreach ($Municipios as $Municipio) {
             $arreglo['municipio'].='<option value="' . $Municipio->getId() . '">' . $Municipio->getNombre() . '</option>';
         }
@@ -182,7 +184,7 @@ class actividad_finalizadaActions extends sfActions
         $id_municipio = $Municipio->getId();
 
         $Parroquias = ParroquiaQuery::create()->filterByIdMunicipio($id_municipio)->orderByNombre('asc')->find();
-        $arreglo['parroquia'] = '<select name="actividad_finalizada[id_parroquia]" id="actividad_finalizada_id_parroquia">';
+        $arreglo['parroquia'] = '<select id="actividad_finalizada_id_parroquia" name="actividad_finalizada[id_parroquia]" >';
         foreach ($Parroquias as $Parroquia) {
             $arreglo['parroquia'].='<option value="' . $Parroquia->getId() . '">' . $Parroquia->getNombre() . '</option>';
         }
@@ -201,5 +203,5 @@ class actividad_finalizadaActions extends sfActions
         }
         $html.= '</select>';
         return $this->renderText($html);
-    }  
+    } 
 }

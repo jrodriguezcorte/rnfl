@@ -140,7 +140,7 @@ class feriaActions extends sfActions {
 
         $arreglo = array();
 
-        $arreglo['municipio'] = '<select name="feria[id_municipio]" id="feria_id_municipio">';
+        $arreglo['municipio'] = '<select  id="feria_id_municipio" name="feria[id_municipio]" >';
         foreach ($Municipios as $Municipio) {
             $arreglo['municipio'].='<option value="' . $Municipio->getId() . '">' . $Municipio->getNombre() . '</option>';
         }
@@ -150,7 +150,7 @@ class feriaActions extends sfActions {
         $id_municipio = $Municipio->getId();
 
         $Parroquias = ParroquiaQuery::create()->filterByIdMunicipio($id_municipio)->orderByNombre('asc')->find();
-        $arreglo['parroquia'] = '<select name="feria[id_parroquia]" id="feria_id_parroquia">';
+        $arreglo['parroquia'] = '<select id="feria_id_parroquia" name="feria[id_parroquia]" >';
         foreach ($Parroquias as $Parroquia) {
             $arreglo['parroquia'].='<option value="' . $Parroquia->getId() . '">' . $Parroquia->getNombre() . '</option>';
         }
@@ -171,29 +171,4 @@ class feriaActions extends sfActions {
         return $this->renderText($html);
     }
 
-    public function executePruebaajax() {
-      //  $Ferias = FeriaQuery::create()->orderByFechaInicio('desc')->find();
-
-        $Ferias = MunicipioQuery::create()->orderByNombre('asc')->find();
-/*        foreach ($Ferias as $list) {
-            $arreglo[] = array(
-                'Nombre' => $list->getNombre(),
-                'Descripcion' => $list->getIdEstado(),
-            );
-        }
-*/
-        
-        foreach ($Ferias as $list) {
-            $arreglo[] = array(
-                'Nombre' => $list->getNombre(),
-                'Descripcion' => '<a title="Ver" href="/municipio/show/id/'.$list->getId().'"><img src="/images/search_mini.png"></a>',
-            );
-        }        
-
-        return $this->renderText(json_encode($arreglo));
-    }
-
-    public function executePrueba() {
-        
-    }
 }

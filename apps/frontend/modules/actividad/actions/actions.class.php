@@ -156,13 +156,13 @@ class actividadActions extends sfActions {
     }
 
     public function executeDelete(sfWebRequest $request) {
-        $request->checkCSRFProtection();
-
+        $id_feria = $request->getParameter('id_feria');
+        $request->checkCSRFProtection();       
         $Actividad = ActividadQuery::create()->findPk($request->getParameter('id'));
         $this->forward404Unless($Actividad, sprintf('Object Actividad does not exist (%s).', $request->getParameter('id')));
         $Actividad->delete();
 
-        $this->redirect('actividad/index');
+        $this->redirect('actividad/index?id_feria=' . $id_feria);
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {

@@ -93,6 +93,7 @@ class bancoActions extends sfActions
   {
     $request->checkCSRFProtection();
 
+    $id_feria = $request->getParameter('id_feria');
     $Banco = BancoQuery::create()->findPk($request->getParameter('id'));
     $this->forward404Unless($Banco, sprintf('Object Banco does not exist (%s).', $request->getParameter('id')));
     $Banco->delete();

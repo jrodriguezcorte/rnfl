@@ -88,6 +88,7 @@ class cuentaActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
+    $id_feria = $request->getParameter('id_feria');  
     $request->checkCSRFProtection();
 
     $Cuenta = CuentaQuery::create()->findPk($request->getParameter('id'));
