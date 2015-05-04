@@ -36,6 +36,8 @@ abstract class BaseFeriaForm extends BaseFormPropel
       'libro_mas_vendido'           => new sfWidgetFormInputText(),
       'autor_libro_mas_vendido'     => new sfWidgetFormInputText(),
       'costo'                       => new sfWidgetFormInputText(),
+      'id_usuario'                  => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
+      'id_status_feria'             => new sfWidgetFormPropelChoice(array('model' => 'StatusFeria', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -61,6 +63,8 @@ abstract class BaseFeriaForm extends BaseFormPropel
       'libro_mas_vendido'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'autor_libro_mas_vendido'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'costo'                       => new sfValidatorNumber(array('required' => false)),
+      'id_usuario'                  => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id', 'required' => false)),
+      'id_status_feria'             => new sfValidatorPropelChoice(array('model' => 'StatusFeria', 'column' => 'id', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('feria[%s]');

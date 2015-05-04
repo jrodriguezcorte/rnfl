@@ -111,10 +111,36 @@
 
 </head>
 <?php include_partial('usuario/menuinicial') ?>
-
+<?php
+$miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+$Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+$sf_guard_user = $Usuario->getSfGuardUserGroup();
+?>
 <div class="jumbotron">
 <h2>Listado de Ferias</h2>
 <br>
+<?php 
+if ($sf_guard_user != 3) {
+?>
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td><?php echo link_to(image_tag('add.png'),'feria/new',array('title' => 'Agregar'))?></td>
+    </tr>
+</table>
+<br>
+<?php } else { ?>
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<?php } ?>
 <div class="table-responsive">
 <body class='default'>
     <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
@@ -124,6 +150,9 @@
 </body>
 </div>
 </html>
+<?php 
+if ($sf_guard_user != 3) {
+?>
 <table width="100%">
     <tr>
         <td>&nbsp;</td>
@@ -132,4 +161,14 @@
         <td><?php echo link_to(image_tag('add.png'),'feria/new',array('title' => 'Agregar'))?></td>
     </tr>
 </table>
+<?php } else { ?>
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<?php } ?>
 </div>

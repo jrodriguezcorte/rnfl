@@ -33,6 +33,8 @@ abstract class BaseFeriaFormFilter extends BaseFormFilterPropel
       'libro_mas_vendido'           => new sfWidgetFormFilterInput(),
       'autor_libro_mas_vendido'     => new sfWidgetFormFilterInput(),
       'costo'                       => new sfWidgetFormFilterInput(),
+      'id_usuario'                  => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
+      'id_status_feria'             => new sfWidgetFormPropelChoice(array('model' => 'StatusFeria', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -57,6 +59,8 @@ abstract class BaseFeriaFormFilter extends BaseFormFilterPropel
       'libro_mas_vendido'           => new sfValidatorPass(array('required' => false)),
       'autor_libro_mas_vendido'     => new sfValidatorPass(array('required' => false)),
       'costo'                       => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'id_usuario'                  => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Usuario', 'column' => 'id')),
+      'id_status_feria'             => new sfValidatorPropelChoice(array('required' => false, 'model' => 'StatusFeria', 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('feria_filters[%s]');
@@ -96,6 +100,8 @@ abstract class BaseFeriaFormFilter extends BaseFormFilterPropel
       'libro_mas_vendido'           => 'Text',
       'autor_libro_mas_vendido'     => 'Text',
       'costo'                       => 'Number',
+      'id_usuario'                  => 'ForeignKey',
+      'id_status_feria'             => 'ForeignKey',
     );
   }
 }

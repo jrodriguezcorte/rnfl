@@ -1,9 +1,18 @@
 <?php include_partial('usuario/menuferia') ?>
-
+    <?php $id_feria = $sf_params->get('id_feria'); ?>
+    <?php $id_actividad = $sf_params->get('id'); ?>
 <div class="jumbotron">
+<p align="right">
+<?php echo link_to(image_tag('back.png'),"actividad_finalizada/index?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
+&nbsp;
+<?php if (count($ActividadFinalizada) > 0)  { ?>
+<?php echo link_to(image_tag('edit.png'),"actividad_finalizada/edit?id_feria=".$id_feria."&id=".$ActividadFinalizada->getId(),array('title' => 'Editar'))?>
+<?php } ?>        
+</p>    
 <h2>Detalle de la Actividad</h2>
 <br>
 <div class="table-responsive">
+    <br>  
   <table class="table">      
   <tbody>
     <tr>
@@ -89,8 +98,6 @@
 </div>
 <hr />
 <br>
-    <?php $id_feria = $sf_params->get('id_feria'); ?>
-    <?php $id_actividad = $sf_params->get('id'); ?>
 <?php
        $PonenteActividads = PonenteActividadQuery::create()
                ->filterByIdFeria($id_feria)

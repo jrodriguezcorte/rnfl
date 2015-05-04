@@ -27,7 +27,7 @@
                             {name: 'Nombre'},
                             {name: 'Apellido'},
                             {name: 'Rif'},
-                            {name: 'Tipo de Pago'},
+                            {name: 'TipodePago'},
                             {name: 'Monto'},
                             
                         ],
@@ -56,7 +56,7 @@
                             {text: 'Nombre', datafield: 'Nombre', width: 200  },
                             {text: 'Apellido', datafield: 'Apellido', width: 200  },
                             {text: 'Rif', datafield: 'Rif', width: 200  },
-                            {text: 'Tipo de Pago', datafield: 'Tipo de Pago', width: 200  },
+                            {text: 'Tipo de Pago', datafield: 'TipodePago', width: 200  },
                             {text: 'Monto', datafield: 'Monto', width: 200  },
                         ]
                     });
@@ -110,7 +110,7 @@
 <?php include_partial('usuario/menuferia') ?>
 
 <div class="jumbotron">
-<h2>Pagos Verificados</h2>
+<h2>Pagos Verificados que han sido Aprobados</h2>
 <br>
 <div class="table-responsive">
 <body class='default'>

@@ -1,4 +1,7 @@
 <?php 
+$miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+$Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+$sf_guard_user = $Usuario->getSfGuardUserGroup();
     if ($sf_params->get('id_feria') == '') { 
      include_partial('usuario/menuinicial'); 
      $feria = '';
@@ -7,10 +10,22 @@
      include_partial('usuario/menuferia');
      $feria = '?id_feria='.$sf_params->get('id_feria');
      $feria_edit = '&id_feria='.$sf_params->get('id_feria');
+     $Feria = FeriaQuery::create()->filterById($sf_params->get('id_feria'))->findOne();
+     $condicion = ($Usuario->getId() == $Feria->getIdUsuario());     
     }
 ?>
 
 <div class="jumbotron">
+<p align="right">
+&nbsp;
+            <?php echo link_to(image_tag('back.png'),"expositor/indexexp?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
+
+<?php if ($sf_guard_user == 1 || $condicion) { ?> 
+
+            <?php echo link_to(image_tag('edit.png'),"expositor/edit?id=".$Expositor->getId().$feria_edit,array('title' => 'Editar'))?>
+
+<?php } ?>
+</p>    
 <h2>Información básica del expositor</h2>
 <br>
 <div class="table-responsive">
@@ -77,7 +92,15 @@
 </div>
 <hr />
 <?php $id_feria = $sf_params->get('id_feria'); ?>
-<?php echo link_to(image_tag('back.png'),"expositor/indexexp?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
-<?php echo link_to(image_tag('edit.png'),"expositor/edit?id=".$Expositor->getId().$feria_edit,array('title' => 'Editar'))?>
+<p>
 &nbsp;
+            <?php echo link_to(image_tag('back.png'),"expositor/indexexp?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
+
+<?php if ($sf_guard_user == 1 || $condicion) { ?> 
+
+            <?php echo link_to(image_tag('edit.png'),"expositor/edit?id=".$Expositor->getId().$feria_edit,array('title' => 'Editar'))?>
+
+<?php } ?>
+</p>
+
 

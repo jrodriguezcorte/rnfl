@@ -200,14 +200,14 @@ class usuarioActions extends sfActions
         
         $Usuario = UsuarioQuery::create()->filterById($id)->findOne();
         $sf_guard_user = $Usuario->getSfGuardUser();
-        $Usuario->setSfGuardUserGroup(2);
+        $Usuario->setSfGuardUserGroup(3);
         $Usuario->save();
         
         $Grupo = sfGuardUserGroupQuery::create()->filterByUserId($sf_guard_user)->findOne();
         $Grupo->delete();
         $sfusuariogrupo = new SfGuardUserGroup();
         $sfusuariogrupo->setUserId($sf_guard_user);
-        $sfusuariogrupo->setGroupId(2);
+        $sfusuariogrupo->setGroupId(3);
         $sfusuariogrupo->save();
         
         $this->redirect('/usuario/index');

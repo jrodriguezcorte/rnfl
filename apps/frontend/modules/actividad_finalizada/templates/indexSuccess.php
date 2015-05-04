@@ -108,7 +108,7 @@
 <?php $id_feria = $sf_params->get('id_feria'); 
        $Feria = FeriaQuery::create()->filterById($id_feria)->findOne();
 ?>
-<h2>Listado de Actividades asociadas a la feria <?php echo $Feria->getNombre() ?></h2>
+<h2>Listado de Actividades Finalizadas y asociadas a la feria <?php echo $Feria->getNombre() ?></h2>
 <br>
 <div class="table-responsive">
 <body class='default'>

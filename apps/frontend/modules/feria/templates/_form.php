@@ -3,6 +3,11 @@
 <?php use_javascript('humanmsg') ?>
 <?php use_stylesheet('humanmsg') ?>
 <?php use_javascript('modules/feria') ?>
+<?php
+$miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+$Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+$sf_guard_user = $Usuario->getSfGuardUserGroup();
+?>
 <form id="formulario" action="<?php echo url_for('feria/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
@@ -24,9 +29,13 @@
 </form>
 <?php echo link_to(image_tag('back.png'), 'feria/index', array('title' => 'Volver al Listado')) ?>
 &nbsp;
+<?php 
+if ($sf_guard_user == 1) {
+?>
 <?php if (!$form->getObject()->isNew()): ?>
 <?php echo link_to(image_tag('delete.png'), 'feria/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
 <?php endif; ?>
+<?php } ?> 
 <script>
     jQuery(document).ready(function() {    
     

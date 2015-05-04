@@ -3,10 +3,33 @@
         $id_expositor = $ExpositorFeria->getIdExpositor();
         $Expositor = ExpositorQuery::create()->filterById($id_expositor)->findOne();
 ?>
+<?php 
+$miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+$Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+$sf_guard_user = $Usuario->getSfGuardUserGroup();
+     $Feria = FeriaQuery::create()->filterById($sf_params->get('id_feria'))->findOne();
+     $condicion = ($Usuario->getId() == $Feria->getIdUsuario()); 
+?>
+<?php $id_feria = $sf_params->get('id_feria'); 
+       $id_expositor = $sf_params->get('id_expositor');
+       $id = $sf_params->get('id');
+?>
+
 <div class="jumbotron">
+<p align="right">
+<?php echo link_to(image_tag('back.png'),"expositor_feria/espera?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
+&nbsp;
+
+<?php if ($sf_guard_user == 1 || $condicion) { ?> 
+
+        <?php echo link_to(image_tag('edit.png'),"expositor_feria/edit?id_feria=".$id_feria."&id=".$id."&id_expositor=".$id_expositor,array('title' => 'Editar'))?>
+
+<?php } ?>    
+</p>    
 <h2>Información básica del expositor</h2>
 <br>
 <div class="table-responsive">
+    <br>
   <table class="table">      
   <tbody>
     <tr>
@@ -115,13 +138,14 @@
 </table>
 </div>
 <br>
-<?php $id_feria = $sf_params->get('id_feria'); 
-       $id_expositor = $sf_params->get('id_expositor');
-       $id = $sf_params->get('id');
-?>
 <?php echo link_to(image_tag('back.png'),"expositor_feria/espera?id_feria=".$id_feria,array('title' => 'Ver listado'))?>
 &nbsp;
-<?php echo link_to(image_tag('edit.png'),"expositor_feria/edit?id_feria=".$id_feria."&id=".$id."&id_expositor=".$id_expositor,array('title' => 'Editar'))?>
+
+<?php if ($sf_guard_user == 1 || $condicion) { ?> 
+
+        <?php echo link_to(image_tag('edit.png'),"expositor_feria/edit?id_feria=".$id_feria."&id=".$id."&id_expositor=".$id_expositor,array('title' => 'Editar'))?>
+
+<?php } ?>
 <br>
 <br>
 

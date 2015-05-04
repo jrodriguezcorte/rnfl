@@ -111,18 +111,44 @@
 
 </head>
 <?php 
+$miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+$Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+$sf_guard_user = $Usuario->getSfGuardUserGroup();
     if ($sf_params->get('id_feria') == '') { 
-     include_partial('usuario/menuinicial'); 
+     include_partial('usuario/menuinicial');
+     $condicion = false;
      $feria = '';
     } else {
      include_partial('usuario/menuferia');
      $feria = '?id_feria='.$sf_params->get('id_feria');
+     $Feria = FeriaQuery::create()->filterById($sf_params->get('id_feria'))->findOne();
+     $condicion = ($Usuario->getId() == $Feria->getIdUsuario());             
     }
-?>  
+?> 
 <div class="jumbotron">
 <h2>Listado de Ponentes</h2>
 <br>
+<?php if ($sf_guard_user == 1 || $condicion) { ?> 
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td><?php echo link_to(image_tag('add.png'),"ponente/new".$feria,array('title' => 'Agregar'))?></td>
+    </tr>
+</table>
+<?php } else { ?>
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<?php } ?>
 <div class="table-responsive">
+    <br>
 <body class='default'>
     <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
         <div id="jqxgrid">
@@ -131,12 +157,23 @@
 </body>
 </div>
 </html>
+<?php if ($sf_guard_user == 1 || $condicion) { ?> 
 <table width="100%">
     <tr>
         <td>&nbsp;</td>
     </tr>    
     <tr>
-        <td><?php echo link_to(image_tag('add.png'),'ponente/new'.$feria,array('title' => 'Agregar'))?></td>
+        <td><?php echo link_to(image_tag('add.png'),"ponente/new".$feria,array('title' => 'Agregar'))?></td>
     </tr>
 </table>
+<?php } else { ?>
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<?php } ?>
 </div>

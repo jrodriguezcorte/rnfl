@@ -54,8 +54,23 @@ class expositor_feriaActions extends sfActions
       
  
       $id_grupo = $Usuario->getSfGuardUserGroup();
- 
+
+      $bandera = false;
+      
       if ($id_grupo == 1) {
+        $bandera = true;   
+      }    
+      
+      if ($id_grupo == 2) {
+          $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                  ->filterByIdUsuario($id_usuario)
+                  ->find();
+          if (count($FeriaOrg) > 0) {
+              $bandera = true;
+          }
+      }
+      
+      if ($bandera) {
                     $ExpositorFeria = ExpositorFeriaQuery::create()
                       ->Join('Status')
                       ->orderById('desc')                     
@@ -186,7 +201,22 @@ class expositor_feriaActions extends sfActions
  
       $id_grupo = $Usuario->getSfGuardUserGroup();
  
+      $bandera = false;
+      
       if ($id_grupo == 1) {
+        $bandera = true;   
+      }    
+      
+      if ($id_grupo == 2) {
+          $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                  ->filterByIdUsuario($id_usuario)
+                  ->find();
+          if (count($FeriaOrg) > 0) {
+              $bandera = true;
+          }
+      }
+      
+      if ($bandera) {
                     $ExpositorFeria = ExpositorFeriaQuery::create()
                       ->Join('Status')
                       ->orderById('desc')                     
@@ -334,7 +364,22 @@ class expositor_feriaActions extends sfActions
  
       $id_grupo = $Usuario->getSfGuardUserGroup();
  
+      $bandera = false;
+      
       if ($id_grupo == 1) {
+        $bandera = true;   
+      }    
+      
+      if ($id_grupo == 2) {
+          $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                  ->filterByIdUsuario($id_usuario)
+                  ->find();
+          if (count($FeriaOrg) > 0) {
+              $bandera = true;
+          }
+      }
+      
+      if ($bandera) {
                     $ExpositorFeria = ExpositorFeriaQuery::create()
                       ->Join('Status')
                       ->orderById('desc')                     
@@ -517,6 +562,19 @@ class expositor_feriaActions extends sfActions
       $id_grupo = $Usuario->getSfGuardUserGroup();
  
       if ($id_grupo == 1) {
+        $bandera = true;   
+      }    
+      
+      if ($id_grupo == 2) {
+          $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                  ->filterByIdUsuario($id_usuario)
+                  ->find();
+          if (count($FeriaOrg) > 0) {
+              $bandera = true;
+          }
+      }
+      
+      if ($bandera) {
                  
                 $PagoExpositors = PagoExpositorQuery::create()
                       ->Join('Status')

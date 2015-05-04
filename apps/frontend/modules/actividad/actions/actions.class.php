@@ -25,7 +25,21 @@ class actividadActions extends sfActions {
        
        foreach ($Actividades as $list) {
             $cerrar = ''; 
+            $bandera = false;
             if ($id_grupo == 1) {
+              $bandera = true;   
+            }    
+
+            if ($id_grupo == 2) {
+                $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                        ->filterByIdUsuario($id_usuario)
+                        ->find();
+                if (count($FeriaOrg) > 0) {
+                    $bandera = true;
+                }
+            }
+
+            if ($bandera) {
                  if ( !$list->getActividadCerrada()) {
                      $cerrar = '<a style="vertical-align:middle;" title="Cerrar Actividad" href="/actividad/cerrar/id_feria/'.$id_feria.'/id/' . $list->getId() .'"><img src="/images/check_mini.png"></a>';
                  }   

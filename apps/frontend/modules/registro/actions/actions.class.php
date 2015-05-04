@@ -20,6 +20,11 @@ class registroActions extends sfActions {
         $telefono = $request->getParameter('telefono');
         $email = $request->getParameter('email');
         $conuser = Propel::getConnection('propel');
+        if ($organizador == 1) {
+            $grupo = 2;
+        } else {
+            $grupo = 3;
+        }
         $arreglo = array();
         try {
             $conuser->beginTransaction();
@@ -51,7 +56,7 @@ class registroActions extends sfActions {
             $nuevousuario->setLogin($rif);
             $nuevousuario->setContrasena(md5($clave_acceso));
             $nuevousuario->setSfGuardUser($id_usuario_creado);
-            $nuevousuario->setSfGuardUserGroup(2);
+            $nuevousuario->setSfGuardUserGroup($grupo);
             $nuevousuario->setTipoOrganizador($organizador);
             $nuevousuario->setEnteOrganizador($ente);
             $nuevousuario->setSector($sector);
@@ -67,7 +72,7 @@ class registroActions extends sfActions {
             if (count($sfguardgrupo) == 0) { 
                 $sfusuariogrupo = new SfGuardUserGroup();
                 $sfusuariogrupo->setUserId($sfusuario->getId());
-                $sfusuariogrupo->setGroupId(2);
+                $sfusuariogrupo->setGroupId($grupo);
                 $sfusuariogrupo->save($conuser);
                 $conuser->commit();
             }

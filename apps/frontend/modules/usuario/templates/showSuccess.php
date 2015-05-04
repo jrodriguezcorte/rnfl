@@ -1,6 +1,11 @@
 <?php include_partial('usuario/menuinicial') ?>
 
 <div class="jumbotron">
+<p align='right'>
+<?php echo link_to(image_tag('back.png'),'usuario/index',array('title' => 'Ver listado'))?>
+&nbsp;
+<?php echo link_to(image_tag('edit.png'),'usuario/edit?id='.$Usuario->getId(),array('title' => 'Editar'))?>
+</p>    
 <h2>Detalle del Usuario</h2>
 <br>
 <div class="table-responsive">

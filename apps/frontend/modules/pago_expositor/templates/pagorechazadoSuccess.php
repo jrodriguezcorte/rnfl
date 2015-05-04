@@ -108,7 +108,7 @@
 <?php include_partial('usuario/menuferia') ?>
 
 <div class="jumbotron">
-<h2>Solicitudes Rechazadas</h2>
+<h2>Pagos Verificados que han sido Rechazados</h2>
 <br>
 <div class="table-responsive">
 <body class='default'>

@@ -27,6 +27,7 @@ abstract class BaseExpositorFormFilter extends BaseFormFilterPropel
       'email'                  => new sfWidgetFormFilterInput(),
       'sitio_web'              => new sfWidgetFormFilterInput(),
       'es_venezolano'          => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'id_usuario'             => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -45,6 +46,7 @@ abstract class BaseExpositorFormFilter extends BaseFormFilterPropel
       'email'                  => new sfValidatorPass(array('required' => false)),
       'sitio_web'              => new sfValidatorPass(array('required' => false)),
       'es_venezolano'          => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'id_usuario'             => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Usuario', 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('expositor_filters[%s]');
@@ -78,6 +80,7 @@ abstract class BaseExpositorFormFilter extends BaseFormFilterPropel
       'email'                  => 'Text',
       'sitio_web'              => 'Text',
       'es_venezolano'          => 'Boolean',
+      'id_usuario'             => 'ForeignKey',
     );
   }
 }

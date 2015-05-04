@@ -28,9 +28,10 @@ class ExpositorForm extends BaseExpositorForm
             'sitio_web' => new sfValidatorString(array('required' => false)),
             'es_venezolano'  => new sfValidatorString(array('required' => false)),    
             'id'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'id_usuario'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
      ));
     
-    
+    $this->widgetSchema['id_usuario'] = new sfWidgetFormInputHidden();
     $this->widgetSchema['rif'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: J12345678'));
     $this->widgetSchema['telefono_local'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: 0000-0000000'));
     $this->widgetSchema['telefono_celular'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: 0000-0000000'));

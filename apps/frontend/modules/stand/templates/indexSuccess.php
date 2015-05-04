@@ -107,18 +107,13 @@
 <div class="jumbotron">
 <?php $id_feria = $sf_params->get('id_feria'); 
        $Feria = FeriaQuery::create()->filterById($id_feria)->findOne();
+        $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+        $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+        $sf_guard_user = $Usuario->getSfGuardUserGroup();               
 ?>
 <h2>Listado de Stands asociados a la feria <?php echo $Feria->getNombre() ?></h2>
 <br>
-<div class="table-responsive">
-<body class='default'>
-    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
-        <div id="jqxgrid">
-        </div>
-    </div>
-</body>
-</div>
-</html>
+<?php if ($sf_guard_user == 1 || $Usuario->getId() == $Feria->getIdUsuario()) { ?> 
 <table width="100%">
     <tr>
         <td>&nbsp;</td>
@@ -127,4 +122,43 @@
         <td><?php echo link_to(image_tag('add.png'),"stand/new?id_feria=$id_feria",array('title' => 'Agregar'))?></td>
     </tr>
 </table>
+<?php } else { ?>
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<?php } ?>
+<div class="table-responsive">
+    <br>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div id="jqxgrid">
+        </div>
+    </div>
+</body>
+</div>
+</html>
+<?php if ($sf_guard_user == 1 || $Usuario->getId() == $Feria->getIdUsuario()) { ?> 
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td><?php echo link_to(image_tag('add.png'),"stand/new?id_feria=$id_feria",array('title' => 'Agregar'))?></td>
+    </tr>
+</table>
+<?php } else { ?>
+<table width="100%">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>    
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<?php } ?>
 </div>

@@ -25,8 +25,22 @@ class actividad_finalizadaActions extends sfActions
        $id_grupo = $Usuario->getSfGuardUserGroup();
        
        foreach ($Actividades as $list) {
-            $cerrar = ''; 
+            $cerrar = '';
+            $bandera = false;
             if ($id_grupo == 1) {
+              $bandera = true;   
+            }    
+
+            if ($id_grupo == 2) {
+                $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                        ->filterByIdUsuario($id_usuario)
+                        ->find();
+                if (count($FeriaOrg) > 0) {
+                    $bandera = true;
+                }
+            }
+
+            if ($bandera) {
                  if ( !$list->getActividadCerrada()) {
                      $cerrar = '<a style="vertical-align:middle;" title="Cerrar Actividad" href="/actividad/cerrar/id_feria/'.$id_feria.'/id/' . $list->getId() .'"><img src="/images/check_mini.png"></a>';
                  }   
@@ -34,7 +48,11 @@ class actividad_finalizadaActions extends sfActions
             $agregar = '';
             $ActividadFinalizada = ActividadFinalizadaQuery::create()->filterByIdActividad($list->getId())->findOne();
             if (count($ActividadFinalizada) == 0) {
-              $agregar = '<a style="vertical-align:middle;" title="Agregar Informacion" href="/actividad_finalizada/new/id_feria/'.$id_feria.'/id_actividad/' . $list->getId() .'"><img src="/images/add_mini.png"></a>';  
+              $agregar = '<a style="vertical-align:middle;" title="Agregar Informacion" href="/actividad_finalizada/new/id_feria/'.$id_feria.'/id_actividad/' . $list->getId() .'/id_feria/' . $list->getIdFeria() .'"><img src="/images/add_mini.png"></a>';  
+              $actividad_finalizada = "";              
+            } else {
+                $actividad_finalizada = '<a style="vertical-align:middle;" title="Ver" href="/actividad_finalizada/show/id_actividad_finalizada/'.$ActividadFinalizada->getId().'/id/' . $list->getId() .'/id_feria/' . $list->getIdFeria() . '"><img src="/images/search_mini.png"></a>';
+
             }
             
             list($fecha,$hora) = explode(" ", $list->getHora());
@@ -43,7 +61,7 @@ class actividad_finalizadaActions extends sfActions
                 'Fecha' => implode("-", array_reverse(explode("-", $list->getFechaSugerida()))),
                 'Hora' => $hora,
                 '' => ''
-                . '      <a style="vertical-align:middle;" title="Ver" href="/actividad_finalizada/show/id_actividad_finalizada/'.$list->getIdFeria().'/id/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'
+                . $actividad_finalizada
                 . $agregar
                . $cerrar,
             );
@@ -56,7 +74,7 @@ class actividad_finalizadaActions extends sfActions
   public function executeShow(sfWebRequest $request)
   {
     $this->Actividad = ActividadPeer::retrieveByPk($request->getParameter('id'));
-    $this->ActividadFinalizada = ActividadFinalizadaQuery::create()->filterByIdActividad($request->getParameter('id'))->findOne();
+    $this->ActividadFinalizada = ActividadFinalizadaQuery::create()->filterById($request->getParameter('id_actividad_finalizada'))->findOne();
     $this->forward404Unless($this->Actividad);
   }
 

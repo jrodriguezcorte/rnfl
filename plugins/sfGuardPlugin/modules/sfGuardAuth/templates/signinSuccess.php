@@ -83,10 +83,10 @@
                                                                                 <br><label>Institución <font color="red">*</font></label>
                                                                                     <br><input type="text" value="" id="usuario" name="usuario" class="ancho_input">                                                                                
                                                                                             <br>
-                                                                                                <label>Tipo de Organizador <font color="red">*</font></label><br>
+                                                                                                <label>Tipo de Usuario <font color="red">*</font></label><br>
                                                                                                 <select name="organizador" id="organizador">
-                                                                                                    <option value="1">Interno</option>
-                                                                                                    <option value="0">Externo</option>
+                                                                                                    <option value="1">Organizador</option>
+                                                                                                    <option value="0">Expositor</option>
                                                                                                 </select><br><br>
                                                                                                     <label>Ente Organizador <font color="red">*</font></label><br>
                                                                                                 <input type="text" value="" name="ente" id="ente" class="ancho_input"><br>

@@ -9,6 +9,7 @@
 ?>
 
 <div class="jumbotron">
+<p align="right"><?php echo link_to(image_tag('back.png'), 'ponente/index', array('title' => 'Volver al Listado')) ?></p>        
 <h2>Editar Ponente</h2>
 <br>
 <?php include_partial('form', array('form' => $form)) ?>

@@ -41,6 +41,7 @@ class FeriaForm extends BaseFeriaForm
         $this->widgetSchema['hora_fin'] = new sfWidgetFormTime(array
             ('label' => 'Hora de Cierre', 'with_seconds' => false));        
               
+        $this->widgetSchema['id_usuario'] = new sfWidgetFormInputHidden();
 
         $this->widgetSchema->setLabel('nombre', 'Nombre <font color="red">*</font>');
         $this->widgetSchema->setLabel('lema', 'Lema');
@@ -60,6 +61,7 @@ class FeriaForm extends BaseFeriaForm
         $this->widgetSchema->setLabel('libro_mas_vendido', 'Libro más vendido');
         $this->widgetSchema->setLabel('autor_libro_mas_vendido', 'Autor del libro más vendido');
         $this->widgetSchema->setLabel('extension_superficie', 'Extensión del recinto en m<sup>2</sup> ');
+        $this->widgetSchema->setLabel('id_status_feria', 'Estado de la Feria');
         
         
         $this->setValidators(array(
@@ -84,6 +86,8 @@ class FeriaForm extends BaseFeriaForm
             'libro_mas_vendido' => new sfValidatorString(array('required' => false)),            
             'autor_libro_mas_vendido' => new sfValidatorString(array('required' => false)),
             'extension_superficie'  => new sfValidatorInteger(array('min' => 0, 'required' => false), array('invalid' => 'Debe ingresar un número entero')),   
+            'id_usuario'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'id_status_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
             'id'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
         )); 
         

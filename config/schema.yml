@@ -95,6 +95,7 @@ propel:
     email: { phpName: Email, type: VARCHAR, required: false }
     sitio_web: { phpName: SitioWeb, type: VARCHAR, required: false }
     es_venezolano: { phpName: EsVenezolano, type: BOOLEAN, required: false }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
   expositor_feria:
     _attributes: { phpName: ExpositorFeria, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -142,6 +143,8 @@ propel:
     libro_mas_vendido: { phpName: LibroMasVendido, type: VARCHAR, size: '255', required: false }
     autor_libro_mas_vendido: { phpName: AutorLibroMasVendido, type: VARCHAR, size: '255', required: false }
     costo: { phpName: Costo, type: DECIMAL, required: false }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
+    id_status_feria: { phpName: IdStatusFeria, type: INTEGER, required: false, foreignTable: status_feria, foreignReference: id }
   feria_selloeditorial:
     _attributes: { phpName: FeriaSelloeditorial, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -252,6 +255,10 @@ propel:
     id_expositor_feria: { phpName: IdExpositorFeria, type: INTEGER, required: false, foreignTable: expositor_feria, foreignReference: id, onDelete: CASCADE }
     status_actual: { phpName: StatusActual, type: BOOLEAN, required: false }
     id_pago_expositor: { phpName: IdPagoExpositor, type: INTEGER, required: false, foreignTable: pago_expositor, foreignReference: id, onDelete: CASCADE }
+  status_feria:
+    _attributes: { phpName: StatusFeria, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, required: false }
   tipo_actividad:
     _attributes: { phpName: TipoActividad, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }

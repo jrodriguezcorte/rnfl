@@ -1,6 +1,19 @@
-<?php include_partial('usuario/menuinicial') ?>
-
+<?php include_partial('usuario/menuferia') ?>
+<?php
+$miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+$Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+$sf_guard_user = $Usuario->getSfGuardUserGroup();
+?>
 <div class="jumbotron">
+<p align="right">
+<?php echo link_to(image_tag('back.png'),'feria/index',array('title' => 'Ver listado'))?>
+&nbsp;
+<?php 
+if ($sf_guard_user == 1 || ($sf_guard_user == 2 && ($Feria->getIdUsuario() == $Usuario->getId()))) {
+?>
+<?php echo link_to(image_tag('edit.png'),'feria/edit?id='.$Feria->getId(),array('title' => 'Editar'))?>
+<?php } ?>
+</p>
 <h2>Detalle de la Feria</h2>
 <br>
 <div class="table-responsive">
@@ -92,7 +105,11 @@
 <hr />
 <?php echo link_to(image_tag('back.png'),'feria/index',array('title' => 'Ver listado'))?>
 &nbsp;
+<?php 
+if ($sf_guard_user == 1 || ($sf_guard_user == 2 && ($Feria->getIdUsuario() == $Usuario->getId()))) {
+?>
 <?php echo link_to(image_tag('edit.png'),'feria/edit?id='.$Feria->getId(),array('title' => 'Editar'))?>
+<?php } ?>
 </div>
 
 

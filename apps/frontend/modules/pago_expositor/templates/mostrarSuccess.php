@@ -6,6 +6,9 @@
        $ExpositorFeria = ExpositorFeriaQuery::create()->filterById($PagoExpositor->getIdExpositorFeria())->findOne();
 ?>
 <div class="jumbotron">
+    <p align="right">
+        <?php echo link_to(image_tag('back.png'),"expositor_feria/pagoregistrado?id_feria=".$id_feria,array('title' => 'Ver listado'))?>        
+    </p>    
 <h2>Información básica del expositor</h2>
 <br>
 <div class="table-responsive">

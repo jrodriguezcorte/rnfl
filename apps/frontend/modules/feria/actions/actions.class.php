@@ -14,7 +14,24 @@ class feriaActions extends sfActions {
     }
     
     public function executeIndexajax() {
-        $Ferias = FeriaQuery::create()->orderByFechaInicio('desc')->find();
+        $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+        $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+        $sf_guard_user = $Usuario->getSfGuardUserGroup();
+        
+        if ($sf_guard_user == 1) {
+            $Ferias = FeriaQuery::create()->orderByFechaInicio('desc')->find();
+        }
+        if ($sf_guard_user != 1) {
+
+            $Ferias = FeriaQuery::create()
+                    ->orderByFechaInicio('desc')
+                    ->condition('cond1', 'Feria.IdStatusFeria >= ? ', 1)
+                    ->condition('cond2', 'Feria.IdUsuario = ? ', $Usuario->getId())
+                    ->combine(array('cond1', 'cond2'), 'and', 'cond12')
+                    ->condition('cond3', 'Feria.IdStatusFeria = ? ', 2)
+                    ->where(array('cond12', 'cond3'), 'or', 'cond123')
+                    ->find();            
+        }        
         
         foreach ($Ferias as $list) {
             $Pais = PaisQuery::create()->filterById($list->getIdPais())->findOne();
@@ -39,6 +56,35 @@ class feriaActions extends sfActions {
         return $this->renderText(json_encode($arreglo));
     }  
     
+    public function executeInfoajax(sfWebRequest $request) {
+        $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+        $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+        $sf_guard_user = $Usuario->getSfGuardUserGroup();
+        $id_feria = $request->getParameter('id_feria');
+        
+            $Feria = FeriaQuery::create()->orderByFechaInicio('desc')->filterById($id_feria)->findOne();
+                   
+            $Pais = PaisQuery::create()->filterById($Feria->getIdPais())->findOne();
+            $Estado = EstadoQuery::create()->filterById($Feria->getIdEstado())->findOne();
+            $Municipio = MunicipioQuery::create()->filterById($Feria->getIdMunicipio())->findOne();
+            $Region = RegionQuery::create()->filterById($Feria->getIdRegion())->findOne();
+            $arreglo[] = array(
+                'Nombre' => $Feria->getNombre(),
+                'Fecha de Inicio' => implode("-", array_reverse(explode("-", $Feria->getFechaInicio()))),
+                'Fecha de Cierre' => implode("-", array_reverse(explode("-", $Feria->getFechaFin()))),
+                'Pais' => $Pais->getNombre(),
+                'Estado' => $Estado->getNombre(),
+                'Municipio' => $Municipio->getNombre(),
+                'Region' => $Region->getNombre(),
+                '' => ''
+                . '      <a style="vertical-align:middle;" title="Ver" href="/feria/mostrar/id_feria/'.$Feria->getId().'"><img src="/images/search_mini.png"></a>'
+                . '    ',
+            );
+                
+
+        return $this->renderText(json_encode($arreglo));
+    }     
+    
     public function executeInfo(sfWebRequest $request) {
         
         $this->Feria = FeriaPeer::retrieveByPk($request->getParameter('id_feria'));
@@ -49,6 +95,11 @@ class feriaActions extends sfActions {
         $this->Feria = FeriaPeer::retrieveByPk($request->getParameter('id'));
         $this->forward404Unless($this->Feria);
     }
+    
+    public function executeMostrar(sfWebRequest $request) {
+        $this->Feria = FeriaPeer::retrieveByPk($request->getParameter('id_feria'));
+        $this->forward404Unless($this->Feria);
+    }    
 
     public function executeNew(sfWebRequest $request) {
         $this->form = new FeriaForm();
@@ -74,6 +125,13 @@ class feriaActions extends sfActions {
         $this->form->setDefault('hora_inicio', date("Y-m-d h:m"));
          
         $this->form->setDefault('hora_fin', date("Y-m-d h:m"));
+        
+        $this->form->setDefault('id_status_feria', 1);
+        
+        $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+        $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+        
+        $this->form->setDefault('id_usuario', $Usuario->getId());
     }
 
     public function executeCreate(sfWebRequest $request) {

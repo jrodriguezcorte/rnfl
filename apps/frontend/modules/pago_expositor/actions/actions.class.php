@@ -149,7 +149,7 @@ class pago_expositorActions extends sfActions
 
         }
         
-      $this->redirect('pago_expositor/edit?id=' . $PagoExpositor->getId().'&id_feria='.$params['id_feria']);
+      $this->redirect('expositor_feria/pago?id_feria='.$params['id_feria']);
     }
   }
   
@@ -209,6 +209,19 @@ class pago_expositorActions extends sfActions
       $id_grupo = $Usuario->getSfGuardUserGroup();
  
       if ($id_grupo == 1) {
+        $bandera = true;   
+      }    
+      
+      if ($id_grupo == 2) {
+          $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                  ->filterByIdUsuario($id_usuario)
+                  ->find();
+          if (count($FeriaOrg) > 0) {
+              $bandera = true;
+          }
+      }
+      
+      if ($bandera) {
                     $PagoExpositors = PagoExpositorQuery::create()
                       ->Join('Status')
                       ->orderById('desc')
@@ -227,6 +240,8 @@ class pago_expositorActions extends sfActions
                     $Expositor = ExpositorQuery::create()->
                             filterById($id_expositor)->
                             findOne();
+                    
+                    
              if ($PagoExpositor->getEsPagoBancoNacional()) {
                  $forma_pago = "Internacional";
                  $Banco = BancoQuery::create()
@@ -246,7 +261,7 @@ class pago_expositorActions extends sfActions
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
                 'Rif' => $Expositor->getRif(),
-                'Tipo de Pago' => $forma_pago,
+                'TipodePago' => $forma_pago,
                 'Monto' => $monto, 
             ); 
             $i++; 
@@ -274,11 +289,27 @@ class pago_expositorActions extends sfActions
                     $Expositor = ExpositorQuery::create()->
                             filterById($id_expositor)->
                             findOne();
+             if ($PagoExpositor->getEsPagoBancoNacional()) {
+                 $forma_pago = "Internacional";
+                 $Banco = BancoQuery::create()
+                      ->orderById('desc')                     
+                      ->where('Banco.Id = ?', $PagoExpositor->getIdBanco())    
+                      ->findOne(); 
+                 $Moneda = MonedaQuery::create()->filterById($Banco->getIdMoneda())->findOne();
+                 $monto = $PagoExpositor->getMonto().' '.$Moneda->getSimbolo();
+             } else {
+                 $forma_pago = "Nacional";
+                 $monto = $PagoExpositor->getMonto().' Bs';
+             }      
+               
+             
              $arreglo[$i] = array(
                 '' => '      <a style="vertical-align:middle;" title="Ver" href="/pago_expositor/mostrar/id/'.$PagoExpositor->getId().'/id_feria/'.$id_feria.'/id_expositor/'.$id_expositor.'"><img src="/images/search_mini.png"></a>',
                 'Nombre' => $Expositor->getNombre(),
                 'Apellido' => $Expositor->getApellido(),
-                'Rif' => $Expositor->getRif(),               
+                'Rif' => $Expositor->getRif(),  
+                'TipodePago' => $forma_pago,
+                'Monto' => $monto,                  
             ); 
             $i++; 
                             
@@ -345,6 +376,19 @@ public function executeEsrechazada(sfWebRequest $request)
       $id_grupo = $Usuario->getSfGuardUserGroup();
  
       if ($id_grupo == 1) {
+        $bandera = true;   
+      }    
+      
+      if ($id_grupo == 2) {
+          $FeriaOrg = FeriaQuery::create()->filterById($id_feria)
+                  ->filterByIdUsuario($id_usuario)
+                  ->find();
+          if (count($FeriaOrg) > 0) {
+              $bandera = true;
+          }
+      }
+      
+      if ($bandera) {
                     $PagoExpositors = PagoExpositorQuery::create()
                       ->Join('Status')
                       ->orderById('desc')

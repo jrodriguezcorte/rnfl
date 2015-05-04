@@ -22,7 +22,22 @@ class expositorActions extends sfActions
   }  
 
     public function executeIndexajax() {
-        $Expositores = ExpositorQuery::create()->orderByNombre('desc')->find();
+        
+        $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+        $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+        $sf_guard_user = $Usuario->getSfGuardUserGroup();
+        if ($sf_guard_user != 1) {
+            
+                $Expositores = ExpositorQuery::create()
+                                    ->orderByNombre('asc')
+                                        ->filterByIdUsuario($Usuario->getId())
+                                    ->find();
+        } else {       
+        
+            $Expositores = ExpositorQuery::create()
+                                        ->orderByNombre('asc')
+                                        ->find();
+        }
         $i = 0;
         foreach ($Expositores as $list) {
             $Pais = PaisQuery::create()->filterById($list->getIdPais())->findOne();
@@ -48,15 +63,43 @@ class expositorActions extends sfActions
     public function executeIndexajaxexp(sfWebRequest $request) {
         $id_feria = $request->getParameter('id_feria');
         
-        $Expositores = ExpositorQuery::create()->orderByNombre('desc')->find();
+        $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+        $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+        $sf_guard_user = $Usuario->getSfGuardUserGroup();
+        if ($sf_guard_user == 3) {
+            
+                $Expositores = ExpositorQuery::create()
+                                    ->orderByNombre('asc')
+                                        ->filterByIdUSuario($Usuario->getId())
+                                    ->find();
+        } else {
+                 $Expositores = ExpositorQuery::create()
+                                    ->orderByNombre('asc')
+                                    ->useExpositorFeriaQuery()
+                                        ->filterByIdFeria($id_feria)
+                                    ->endUse()    
+                                    ->find();           
+        }
         
         $i = 0;
         foreach ($Expositores as $list) {
             $Pais = PaisQuery::create()->filterById($list->getIdPais())->findOne();
+            
+            $ExpositorFeria = ExpositorFeriaQuery::create()->
+                                filterByIdUsuario($Usuario->getId())->
+                                filterByIdFeria($id_feria)->
+                                findOne();
+            
+            if ($sf_guard_user == 3 && count($ExpositorFeria) > 0) {
+                $asociar_feria = '';
+            } else {
+                $asociar_feria = '<a style="vertical-align:middle;" title="Asociar a la feria" href="/expositor_feria/new/id_feria/'.$id_feria.'/id_expositor/' . $list->getId() . '"><img src="/images/go_mini.png"></a>';
+            }
+            
             $arreglo[$i] = array(
-                                '' => ''
+                                '' => $asociar_feria
                 . '      <a style="vertical-align:middle;" title="Ver" href="/expositor/mostrar/id_feria/'.$id_feria.'/id_expositor/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'                
-                . '      <a style="vertical-align:middle;" title="Asociar a la feria" href="/expositor_feria/new/id_feria/'.$id_feria.'/id_expositor/' . $list->getId() . '"><img src="/images/go_mini.png"></a>', 
+                . '      ', 
                 'Nombre' => $list->getNombre(),
                 'Apellido' => $list->getApellido(),
                 'Pais' => $Pais->getNombre(),
@@ -86,20 +129,31 @@ class expositorActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
+    $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+    $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
+        
     $this->form = new ExpositorForm();
     
     $this->form->setDefault('id_pais', 1);
     
     $this->form->setDefault('es_venezolano', 1);
+    
+    $this->form->setDefault('id_usuario', $Usuario->getId());
   }
   
   public function executeNuevo(sfWebRequest $request)
   {
+      
+    $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
+    $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();  
+    
     $this->form = new ExpositorForm();
     
     $this->form->setDefault('id_pais', 1);
     
     $this->form->setDefault('es_venezolano', 1);
+    
+    $this->form->setDefault('id_usuario', $Usuario->getId());
             
   }  
   
