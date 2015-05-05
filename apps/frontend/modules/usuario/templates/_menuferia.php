@@ -31,6 +31,67 @@ $Expositor = ExpositorQuery::create()->
             </button>
             <a class="navbar-brand" href="#">Menu</a>
         </div>
+        <?php if ($sf_guard_user != 3) { ?>
+        <table width="100%">
+        <?php } else { ?>
+            <br><br><br>    
+        <table width="30%">    
+        <?php } ?>    
+            <tr>              
+                    <?php if ($sf_guard_user != 3) { ?>
+                <td>
+                    <?php echo link_to(image_tag('menu/cuenta.png','size=100x100'),"cuenta/index?id_feria=$id_feria",array('title' => 'Cuenta'))?>
+                </td> 
+                   <?php } ?>
+                <td>
+                    <?php echo link_to(image_tag('menu/stand.png','size=100x100'),"stand/index?id_feria=$id_feria",array('title' => 'Stand'))?>
+                </td> 
+                    <?php if ($sf_guard_user != 3) { ?>
+                <td>
+                    <?php echo link_to(image_tag('menu/actividad.png','size=100x100'),"actividad/index?id_feria=$id_feria",array('title' => 'Actividad'))?>
+                </td>
+                <td>
+                    <?php echo link_to(image_tag('menu/actividad_finalizada.png','size=100x100'),"actividad_finalizada/index?id_feria=$id_feria",array('title' => 'Actividad Finalizada'))?>
+                </td>
+                <td>
+                    <?php echo link_to(image_tag('menu/ponente.png','size=100x100'),"ponente/index?id_feria=$id_feria",array('title' => 'Ponente'))?>
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php echo link_to(image_tag('menu/expositor.png','size=100x100'),"expositor/indexexp?id_feria=$id_feria",array('title' => 'Expositor'))?>
+                </td>
+            </tr>
+        </table>
+        <table align="center" width="90%">
+            <tr>              
+                <td>
+                    <?php echo link_to(image_tag('menu/solicitud_espera.png','size=50X50'),"expositor_feria/espera?id_feria=$id_feria",array('title' => 'Solicitud en Espera'))?>
+                </td> 
+                <td>
+                    <?php echo link_to(image_tag('menu/solicitud_aprobada.png','size=50X50'),"expositor_feria/aprobada?id_feria=$id_feria",array('title' => 'Solicitud Aprobada'))?>
+                </td> 
+                <td>
+                    <?php echo link_to(image_tag('menu/solicitud_rechazada.png','size=50X50'),"expositor_feria/rechazada?id_feria=$id_feria",array('title' => 'Solicitud Rechazada'))?>
+                </td>
+                <td>
+                    <?php echo link_to(image_tag('menu/registrar_pago.png','size=50X50'),"expositor_feria/pago?id_feria=$id_feria",array('title' => 'Registrar Información de Pago'))?>
+                </td>
+                <?php if ($sf_guard_user != 3) { ?>
+                <td>
+                    <?php echo link_to(image_tag('menu/solicitud_por_verificar.png','size=50X50'),"expositor_feria/pagoregistrado?id_feria=$id_feria",array('title' => 'Pago por Verificar'))?>
+                </td>
+                <?php } ?>
+                <td>
+                    <?php echo link_to(image_tag('menu/pago_aprobado.png','size=50X50'),"pago_expositor/pagoaprobado?id_feria=$id_feria",array('title' => 'Pago Aprobado'))?>
+                </td>
+                <td>
+                    <?php echo link_to(image_tag('menu/pago_rechazado.png','size=50X50'),"pago_expositor/pagorechazado?id_feria=$id_feria",array('title' => 'Pago Rechazado'))?>
+                </td>                
+            </tr>
+        </table>       
+        
+        
+        
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">

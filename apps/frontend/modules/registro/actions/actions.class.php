@@ -78,14 +78,43 @@ class registroActions extends sfActions {
             }
             /* Envio de Correo */
                
-                        
+ 
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            $headers .= 'From: <no-responder@cenal.gob.ve>' . "\r\n";
             $subject = "Bienvenido al Registro Nacional de Ferias del Libro";
-            $body = "Su registro fue realizado el : ". date('d-m-y') . ' y su clave de acceso es '.$clave_acceso;
-                
-             $message = $this->getMailer()
-               ->compose('no-responder@cenal.com', $email, $subject, $body);
+            $body = "<HTML>
+                     <HEAD>
+                     <BODY>
+                     Bienvenido,<br>
+                     Estimado usuario, este correo se le ha enviado porque se ha creado una nueva cuenta para usted en el Registro Nacional de Ferias del Libro, por favor tome nota:
+                     <br><br>
+                     
+                     <b>Usuario y Clave</b><br>
+                     Usuario: ".$rif."<br>
+                     Correo Electrónico: ".$email."<br><br>
 
-             $this->getMailer()->send($message);             
+                     Su contraseña es: ".$clave_acceso."<br><br> 
+
+                     Para ingresar a su cuenta:<br>
+                     Por favor siga este enlace :<br>
+
+                     <h2>http://rnfl.cenal.gob.ve</h2><br><br>
+    
+                     O dirijase a nuestra pagina web www.cenal.gob.ve  y seleccione la opcion <b>Registro Nacional de Ferias del Libro</b>, ubicada en el panel de <b>Servicios en Línea</b>.<br>
+                     <br>
+                     Por favor tome las precauciones necesarias para guardar esta información.
+                    </BODY> 
+                    </HEAD>
+                     </HTML>
+                    ";
+            /*    
+             $message = $this->getMailer()
+               ->compose('no-responder@cenal.gob.ve', $email, $subject, $body, $headers);
+
+             $this->getMailer()->send($message); 
+             */
+             mail($email, $subject, $body, $headers);
              
             
         //       $arreglo = 'Se ha enviado a su correo su clave de acceso '.$clave_acceso; 
