@@ -1,11 +1,3 @@
-﻿--
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.1.11
--- Dumped by pg_dump version 9.1.9
--- Started on 2015-02-22 12:08:13 VET
-
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
@@ -3146,6 +3138,34 @@ ALTER TABLE ONLY status
 ALTER TABLE ONLY visitante
     ADD CONSTRAINT "visitante_FK_1" FOREIGN KEY (id_feria) REFERENCES feria(id) ON DELETE CASCADE;
 
+CREATE TABLE status_feria
+(
+  id bigserial NOT NULL,
+  nombre character varying,
+  CONSTRAINT status_feria_pkey PRIMARY KEY (id )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE status_feria
+  OWNER TO postgres;
+
+
+
+ALTER TABLE expositor ADD COLUMN id_usuario integer;
+ALTER TABLE expositor ADD  CONSTRAINT expositor_id_usuario_fkey FOREIGN KEY (id_usuario)
+      REFERENCES usuario (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+ALTER TABLE feria ADD COLUMN id_usuario integer;
+ALTER TABLE feria ADD COLUMN id_status_feria integer;
+ALTER TABLE feria ADD  CONSTRAINT feria_id_usuario_fkey FOREIGN KEY (id_usuario)
+      REFERENCES usuario (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE feria ADD  CONSTRAINT feria_id_status_feria_fkey FOREIGN KEY (id_status_feria)
+      REFERENCES status_feria (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE;
 
 --
 -- TOC entry 2453 (class 0 OID 0)

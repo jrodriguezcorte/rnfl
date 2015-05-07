@@ -1,11 +1,15 @@
-﻿INSERT INTO SF_GUARD_GROUP VALUES (1,'Administrador','Administrador');
+INSERT INTO SF_GUARD_GROUP VALUES (1,'Administrador','Administrador');
 INSERT INTO SF_GUARD_GROUP VALUES (2,'Organizador','Organizador');
 INSERT INTO SF_GUARD_GROUP VALUES (3,'Expositor','Expositor');
 INSERT INTO SF_GUARD_USER VALUES (1,'admin','sha1','a29bd72f3df978be78a58092812c5a64','17bd64b67dea621cbafcb4337e6d17b3b0274d88','2015-02-02 10:59:29','2015-02-02 10:59:29',true,false);
 INSERT INTO USUARIO VALUES(1,'Admin','Admin','V-000000000','','admin','5ebe2294ecd0e0f08eab7690d2a6ee69',1,false,1,true,'Cenal',true,'','admin@cenal.gob.ve',1234567);
 INSERT INTO SF_GUARD_USER VALUES (2,'usuario','sha1','a29bd72f3df978be78a58092812c5a64','17bd64b67dea621cbafcb4337e6d17b3b0274d88','2015-02-02 10:59:29','2015-02-02 10:59:29',true,false);
 INSERT INTO USUARIO VALUES(2,'usuario','usuario','V-000000001','','usuario','5ebe2294ecd0e0f08eab7690d2a6ee69',2,false,2,true,'Cenal',true,'','admin@cenal.gob.ve',1234567);
-
+INSERT INTO SF_GUARD_USER VALUES (3,'expositor','sha1','a29bd72f3df978be78a58092812c5a64','17bd64b67dea621cbafcb4337e6d17b3b0274d88','2015-02-02 10:59:29','2015-02-02 10:59:29',true,false);
+INSERT INTO USUARIO VALUES(3,'expositor','expositor','V-000000001','','expositor','5ebe2294ecd0e0f08eab7690d2a6ee69',3,false,3,true,'Cenal',true,'','admin@cenal.gob.ve',1234567);
+INSERT INTO SF_GUARD_USER_GROUP VALUES(1,1);
+INSERT INTO SF_GUARD_USER_GROUP VALUES(2,2);
+INSERT INTO SF_GUARD_USER_GROUP VALUES(3,3);
 
 INSERT INTO pais VALUES(1, 'Venezuela');
 INSERT INTO pais VALUES(2, 'Afganistán');
