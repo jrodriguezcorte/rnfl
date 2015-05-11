@@ -21,6 +21,7 @@ abstract class BaseCuentaForm extends BaseFormPropel
       'beneficiario' => new sfWidgetFormInputText(),
       'id_feria'     => new sfWidgetFormPropelChoice(array('model' => 'Feria', 'add_empty' => true)),
       'numero'       => new sfWidgetFormInputText(),
+      'activo'       => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -31,6 +32,7 @@ abstract class BaseCuentaForm extends BaseFormPropel
       'beneficiario' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'id_feria'     => new sfValidatorPropelChoice(array('model' => 'Feria', 'column' => 'id', 'required' => false)),
       'numero'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'activo'       => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('cuenta[%s]');

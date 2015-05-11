@@ -34,6 +34,7 @@ abstract class BaseActividadFinalizadaForm extends BaseFormPropel
       'id_region'               => new sfWidgetFormPropelChoice(array('model' => 'Region', 'add_empty' => true)),
       'incluir_info_geografica' => new sfWidgetFormInputCheckbox(),
       'id_usuario'              => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
+      'activo'                  => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -57,6 +58,7 @@ abstract class BaseActividadFinalizadaForm extends BaseFormPropel
       'id_region'               => new sfValidatorPropelChoice(array('model' => 'Region', 'column' => 'id', 'required' => false)),
       'incluir_info_geografica' => new sfValidatorBoolean(array('required' => false)),
       'id_usuario'              => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id', 'required' => false)),
+      'activo'                  => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('actividad_finalizada[%s]');

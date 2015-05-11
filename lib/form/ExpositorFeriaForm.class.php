@@ -31,7 +31,7 @@ class ExpositorFeriaForm extends BaseExpositorFeriaForm {
     theme_advanced_buttons4: "",theme_advanced_path : false,',
         ));
         ;
-        
+
         $this->widgetSchema['id_feria'] = new sfWidgetFormInputHidden();
 
         $this->widgetSchema['id_expositor'] = new sfWidgetFormInputHidden();
@@ -76,6 +76,8 @@ class ExpositorFeriaForm extends BaseExpositorFeriaForm {
 
         $this->widgetSchema['opciones'] = new sfWidgetFormChoice(array("choices" => $choices, "multiple" => true, "expanded" => true, "label" => "Línea Editorial"));
 
+        $this->widgetSchema['activo'] = new sfWidgetFormInputHidden();
+
         $this->getWidgetSchema()->moveField('opciones', sfWidgetFormSchema::AFTER, 'sello_editorial');
         $this->getWidgetSchema()->moveField('nombre_cenefa', sfWidgetFormSchema::AFTER, 'id_stand');
 
@@ -88,7 +90,7 @@ class ExpositorFeriaForm extends BaseExpositorFeriaForm {
         $this->widgetSchema->setLabel('numero_novedades', 'N° de novedades <font color="red">*</font>');
         $this->widgetSchema->setLabel('observaciones', 'Observaciones');
         $this->widgetSchema->setLabel('nombre_cenefa', 'Nombre de la Cenefa <font color="red">*</font>');
- 
+
 
         $this->setValidators(array(
             'id' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
@@ -105,6 +107,7 @@ class ExpositorFeriaForm extends BaseExpositorFeriaForm {
             'id_usuario' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
             'nombre_cenefa' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
             'opciones' => new sfValidatorString(array('required' => false)),
+            'activo' => new sfValidatorString(array('required' => false)),
         ));
     }
 

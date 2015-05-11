@@ -126,7 +126,7 @@
     }
 ?>
 <div class="jumbotron">
-<h2>Listado de Expositores</h2>
+<h2>Listado de Expositores que han Solicitado participar</h2>
 <br>
 <?php if ($sf_guard_user == 1 || $condicion) { ?> 
 <table width="100%">

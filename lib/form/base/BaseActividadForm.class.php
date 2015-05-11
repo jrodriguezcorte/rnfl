@@ -37,6 +37,7 @@ abstract class BaseActividadForm extends BaseFormPropel
       'publico_dirigido'      => new sfWidgetFormInputText(),
       'numero_ponentes'       => new sfWidgetFormInputText(),
       'actividad_cerrada'     => new sfWidgetFormInputCheckbox(),
+      'activo'                => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -63,6 +64,7 @@ abstract class BaseActividadForm extends BaseFormPropel
       'publico_dirigido'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'numero_ponentes'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'actividad_cerrada'     => new sfValidatorBoolean(array('required' => false)),
+      'activo'                => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('actividad[%s]');

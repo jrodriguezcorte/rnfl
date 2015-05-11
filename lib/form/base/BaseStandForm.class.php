@@ -19,6 +19,7 @@ abstract class BaseStandForm extends BaseFormPropel
       'metros'   => new sfWidgetFormInputText(),
       'costo_bs' => new sfWidgetFormInputText(),
       'costo_ds' => new sfWidgetFormInputText(),
+      'activo'   => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -27,6 +28,7 @@ abstract class BaseStandForm extends BaseFormPropel
       'metros'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'costo_bs' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'costo_ds' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'activo'   => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('stand[%s]');

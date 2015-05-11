@@ -26,6 +26,7 @@
                             {name: 'Banco'},
                             {name: 'Numero'},                            
                             {name: 'Beneficiario'},
+                            {name: 'Estado'},
                             {name: ''},
                         ],
                         url: "<?php echo url_for('cuenta/indexajax?id_feria='.$sf_params->get('id_feria')) ?>",
@@ -52,6 +53,7 @@
                             {text: 'Banco', datafield: 'Banco', width: 200  },
                             {text: 'Número', datafield: 'Numero',cellsalign: 'center' },
                             {text: 'Beneficiario', datafield: 'Beneficiario', cellsalign: 'center' },
+                            {text: 'Estado', datafield: 'Estado', width: 200 },
                             {text: '', datafield: '', width: 100 ,cellsalign: 'center'},                            
                         ]
                     });

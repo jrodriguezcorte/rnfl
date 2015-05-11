@@ -27,6 +27,7 @@ propel:
     publico_dirigido: { phpName: PublicoDirigido, type: VARCHAR, required: false }
     numero_ponentes: { phpName: NumeroPonentes, type: VARCHAR, required: false }
     actividad_cerrada: { phpName: ActividadCerrada, type: BOOLEAN, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   actividad_finalizada:
     _attributes: { phpName: ActividadFinalizada, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -49,6 +50,7 @@ propel:
     id_region: { phpName: IdRegion, type: INTEGER, required: false, defaultValue: '1', foreignTable: region, foreignReference: id, onDelete: CASCADE }
     incluir_info_geografica: { phpName: IncluirInfoGeografica, type: BOOLEAN, required: false }
     id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
     _indexes: { actividad_finalizada_id_activida: [id_actividad], actividad_finalizada_id_feria_id: [id_feria] }
   actividad_tipo_actividad:
     _attributes: { phpName: ActividadTipoActividad, idMethod: native }
@@ -72,6 +74,7 @@ propel:
     beneficiario: { phpName: Beneficiario, type: VARCHAR, required: false }
     id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
     numero: { phpName: Numero, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   estado:
     _attributes: { phpName: Estado, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -96,6 +99,7 @@ propel:
     sitio_web: { phpName: SitioWeb, type: VARCHAR, required: false }
     es_venezolano: { phpName: EsVenezolano, type: BOOLEAN, required: false }
     id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   expositor_feria:
     _attributes: { phpName: ExpositorFeria, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -111,6 +115,7 @@ propel:
     observaciones: { phpName: Observaciones, type: LONGVARCHAR, required: false }
     id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE }
     nombre_cenefa: { phpName: NombreCenefa, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
     _indexes: { expositor_feria_id_expositor_idx: [id_expositor], expositor_feria_id_feria_idx: [id_feria] }
   expositor_lineaeditorial:
     _attributes: { phpName: ExpositorLineaeditorial, idMethod: native }
@@ -145,6 +150,7 @@ propel:
     costo: { phpName: Costo, type: DECIMAL, required: false }
     id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
     id_status_feria: { phpName: IdStatusFeria, type: INTEGER, required: false, foreignTable: status_feria, foreignReference: id }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   feria_selloeditorial:
     _attributes: { phpName: FeriaSelloeditorial, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -220,6 +226,7 @@ propel:
     telefono_celular: { phpName: TelefonoCelular, type: VARCHAR, required: false }
     email: { phpName: Email, type: VARCHAR, required: false }
     observaciones: { phpName: Observaciones, type: LONGVARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
     _indexes: { ponente_cedula_rif_idx: [cedula, rif], ponente_nacionalidad_idx: [nacionalidad] }
   ponente_actividad:
     _attributes: { phpName: PonenteActividad, idMethod: native }
@@ -244,6 +251,7 @@ propel:
     metros: { phpName: Metros, type: VARCHAR, required: false }
     costo_bs: { phpName: CostoBs, type: VARCHAR, required: false }
     costo_ds: { phpName: CostoDs, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   status:
     _attributes: { phpName: Status, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -293,6 +301,7 @@ propel:
     unidad_responsable: { phpName: UnidadResponsable, type: VARCHAR, required: false }
     correo: { phpName: Correo, type: VARCHAR, required: false }
     telefono: { phpName: Telefono, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   visitante:
     _attributes: { phpName: Visitante, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }

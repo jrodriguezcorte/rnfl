@@ -7,6 +7,7 @@
 $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
 $Usuario = UsuarioQuery::create()->filterBySfGuardUser($miid)->findOne();
 $sf_guard_user = $Usuario->getSfGuardUserGroup();
+$Feria = FeriaQuery::create()->filterById($sf_params->get('id'))->findOne();
 ?>
 <form id="formulario" action="<?php echo url_for('feria/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
@@ -30,12 +31,10 @@ $sf_guard_user = $Usuario->getSfGuardUserGroup();
 <?php echo link_to(image_tag('back.png'), 'feria/index', array('title' => 'Volver al Listado')) ?>
 &nbsp;
 <?php 
-if ($sf_guard_user == 1) {
+if ($sf_guard_user == 1 || ($sf_guard_user == 2 && ($Feria->getIdUsuario() == $Usuario->getId()))) {
 ?>
-<?php if (!$form->getObject()->isNew()): ?>
-<?php echo link_to(image_tag('delete.png'), 'feria/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
-<?php endif; ?>
-<?php } ?> 
+<?php echo link_to(image_tag('delete.png'), 'feria/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar esta Feria y todos los elementos asociados a la misma?'))?>
+<?php } ?>
 <script>
     jQuery(document).ready(function() {    
     

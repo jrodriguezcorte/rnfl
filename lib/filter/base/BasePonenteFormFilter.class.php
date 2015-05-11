@@ -22,6 +22,7 @@ abstract class BasePonenteFormFilter extends BaseFormFilterPropel
       'telefono_celular' => new sfWidgetFormFilterInput(),
       'email'            => new sfWidgetFormFilterInput(),
       'observaciones'    => new sfWidgetFormFilterInput(),
+      'activo'           => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -35,6 +36,7 @@ abstract class BasePonenteFormFilter extends BaseFormFilterPropel
       'telefono_celular' => new sfValidatorPass(array('required' => false)),
       'email'            => new sfValidatorPass(array('required' => false)),
       'observaciones'    => new sfValidatorPass(array('required' => false)),
+      'activo'           => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('ponente_filters[%s]');
@@ -63,6 +65,7 @@ abstract class BasePonenteFormFilter extends BaseFormFilterPropel
       'telefono_celular' => 'Text',
       'email'            => 'Text',
       'observaciones'    => 'Text',
+      'activo'           => 'Boolean',
     );
   }
 }

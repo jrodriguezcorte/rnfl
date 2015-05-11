@@ -27,6 +27,7 @@ abstract class BaseExpositorFeriaForm extends BaseFormPropel
       'observaciones'        => new sfWidgetFormTextarea(),
       'id_usuario'           => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
       'nombre_cenefa'        => new sfWidgetFormInputText(),
+      'activo'               => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -43,6 +44,7 @@ abstract class BaseExpositorFeriaForm extends BaseFormPropel
       'observaciones'        => new sfValidatorString(array('required' => false)),
       'id_usuario'           => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id', 'required' => false)),
       'nombre_cenefa'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'activo'               => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('expositor_feria[%s]');

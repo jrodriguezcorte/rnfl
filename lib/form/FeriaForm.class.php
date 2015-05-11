@@ -42,6 +42,8 @@ class FeriaForm extends BaseFeriaForm
             ('label' => 'Hora de Cierre', 'with_seconds' => false));        
               
         $this->widgetSchema['id_usuario'] = new sfWidgetFormInputHidden();
+        
+        $this->widgetSchema['activo'] = new sfWidgetFormInputHidden();
 
         $this->widgetSchema->setLabel('nombre', 'Nombre <font color="red">*</font>');
         $this->widgetSchema->setLabel('lema', 'Lema');
@@ -89,6 +91,7 @@ class FeriaForm extends BaseFeriaForm
             'id_usuario'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
             'id_status_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
             'id'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'activo'  => new sfValidatorString(array('required' => false)),
         )); 
         
                

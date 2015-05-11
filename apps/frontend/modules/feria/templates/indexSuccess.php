@@ -30,6 +30,7 @@
                             {name: 'Estado'},
                             {name: 'Municipio'},
                             {name: 'Region'},
+                            {name: 'StatusFeria'},
                             {name: ''},
                         ],
                         url: "<?php echo url_for('feria/indexajax') ?>",
@@ -60,6 +61,7 @@
                             {text: 'Estado', datafield: 'Estado', width: 100 ,cellsalign: 'center'},
                             {text: 'Municipio', datafield: 'Municipio', width: 100 ,cellsalign: 'center'},
                             {text: 'Región', datafield: 'Region', width: 100 ,cellsalign: 'center'},
+                            {text: 'Estado', datafield: 'StatusFeria', width: 100 ,cellsalign: 'center'},
                             {text: '', datafield: '', width: 100 ,cellsalign: 'center'},                            
                         ]
                     });

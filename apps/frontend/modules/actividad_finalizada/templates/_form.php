@@ -45,7 +45,7 @@
 <?php echo link_to(image_tag('back.png'), 'actividad_finalizada/index?id_actividad_finalizada='.$id_actividad_finalizada.'&id_feria='.$id_feria, array('title' => 'Volver al Listado')) ?>
 &nbsp;
 <?php if (!$form->getObject()->isNew()): ?>
-<?php echo link_to(image_tag('delete.png'), 'actividad_finalizada/delete?id='.$form->getObject()->getId().'&id_actividad_finalizada='.$id_actividad_finalizada, array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
+<?php echo link_to(image_tag('delete.png'), 'actividad_finalizada/delete?id_actividad_finalizada='.$form->getObject()->getId().'&id_feria='.$id_feria, array('method' => 'delete', 'confirm' => '¿Desea eliminar este elemento?'))?>
 <?php endif; ?>
 <script>
     jQuery(document).ready(function() {    

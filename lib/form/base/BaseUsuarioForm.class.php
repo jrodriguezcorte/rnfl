@@ -30,6 +30,7 @@ abstract class BaseUsuarioForm extends BaseFormPropel
       'unidad_responsable'  => new sfWidgetFormInputText(),
       'correo'              => new sfWidgetFormInputText(),
       'telefono'            => new sfWidgetFormInputText(),
+      'activo'              => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -49,6 +50,7 @@ abstract class BaseUsuarioForm extends BaseFormPropel
       'unidad_responsable'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'correo'              => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'telefono'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'activo'              => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('usuario[%s]');

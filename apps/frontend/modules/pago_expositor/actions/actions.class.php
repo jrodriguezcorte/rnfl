@@ -45,6 +45,7 @@ class pago_expositorActions extends sfActions
      ->orderByNombre('asc')
      ->where('Banco.IdPais = 1')                     
      ->where('Cuenta.IdFeria = ?', $request->getParameter('id_feria'))
+     ->where('Cuenta.Activo = ?', true)       
      ->find();  
                   
     $arreglo = array();

@@ -7,8 +7,8 @@ propel:
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     fecha_sugerida: { phpName: FechaSugerida, type: DATE, required: false }
     hora: { phpName: Hora, type: TIMESTAMP, required: false }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE }
     stand_numero: { phpName: StandNumero, type: INTEGER, required: false }
     nombre_empresa: { phpName: NombreEmpresa, type: VARCHAR, required: false }
     direccion: { phpName: Direccion, type: VARCHAR, required: false }
@@ -18,7 +18,7 @@ propel:
     telefono_celular: { phpName: TelefonoCelular, type: VARCHAR, required: false }
     fax: { phpName: Fax, type: VARCHAR, required: false }
     email: { phpName: Email, type: VARCHAR, required: false }
-    id_tipo_actividad: { phpName: IdTipoActividad, type: INTEGER, required: false, foreignTable: tipo_actividad, foreignReference: id }
+    id_tipo_actividad: { phpName: IdTipoActividad, type: INTEGER, required: false, foreignTable: tipo_actividad, foreignReference: id, onDelete: CASCADE }
     titulo: { phpName: Titulo, type: VARCHAR, required: false }
     autor: { phpName: Autor, type: VARCHAR, required: false }
     editorial: { phpName: Editorial, type: VARCHAR, required: false }
@@ -27,11 +27,12 @@ propel:
     publico_dirigido: { phpName: PublicoDirigido, type: VARCHAR, required: false }
     numero_ponentes: { phpName: NumeroPonentes, type: VARCHAR, required: false }
     actividad_cerrada: { phpName: ActividadCerrada, type: BOOLEAN, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   actividad_finalizada:
     _attributes: { phpName: ActividadFinalizada, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id, onDelete: CASCADE }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
     nombre_responsable: { phpName: NombreResponsable, type: VARCHAR, required: false }
     fecha_ejecucion: { phpName: FechaEjecucion, type: DATE, required: false }
     hora_ejecucion: { phpName: HoraEjecucion, type: TIME, required: false }
@@ -42,47 +43,50 @@ propel:
     evento_publico: { phpName: EventoPublico, type: BOOLEAN, required: false }
     otro_incumplimiento: { phpName: OtroIncumplimiento, type: VARCHAR, required: false }
     nombre_institucion: { phpName: NombreInstitucion, type: VARCHAR, required: false }
-    id_pais: { phpName: IdPais, type: INTEGER, required: false, defaultValue: '1', foreignTable: pais, foreignReference: id }
-    id_estado: { phpName: IdEstado, type: INTEGER, required: false, defaultValue: '1', foreignTable: estado, foreignReference: id }
-    id_municipio: { phpName: IdMunicipio, type: INTEGER, required: false, defaultValue: '1', foreignTable: municipio, foreignReference: id }
-    id_parroquia: { phpName: IdParroquia, type: INTEGER, required: false, defaultValue: '1', foreignTable: parroquia, foreignReference: id }
-    id_region: { phpName: IdRegion, type: INTEGER, required: false, defaultValue: '1', foreignTable: region, foreignReference: id }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, defaultValue: '1', foreignTable: pais, foreignReference: id, onDelete: CASCADE }
+    id_estado: { phpName: IdEstado, type: INTEGER, required: false, defaultValue: '1', foreignTable: estado, foreignReference: id, onDelete: CASCADE }
+    id_municipio: { phpName: IdMunicipio, type: INTEGER, required: false, defaultValue: '1', foreignTable: municipio, foreignReference: id, onDelete: CASCADE }
+    id_parroquia: { phpName: IdParroquia, type: INTEGER, required: false, defaultValue: '1', foreignTable: parroquia, foreignReference: id, onDelete: CASCADE }
+    id_region: { phpName: IdRegion, type: INTEGER, required: false, defaultValue: '1', foreignTable: region, foreignReference: id, onDelete: CASCADE }
     incluir_info_geografica: { phpName: IncluirInfoGeografica, type: BOOLEAN, required: false }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
     _indexes: { actividad_finalizada_id_activida: [id_actividad], actividad_finalizada_id_feria_id: [id_feria] }
   actividad_tipo_actividad:
     _attributes: { phpName: ActividadTipoActividad, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
-    id_tipo_actividad: { phpName: IdTipoActividad, type: INTEGER, required: false, foreignTable: tipo_actividad, foreignReference: id }
+    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id, onDelete: CASCADE }
+    id_tipo_actividad: { phpName: IdTipoActividad, type: INTEGER, required: false, foreignTable: tipo_actividad, foreignReference: id, onDelete: CASCADE }
   banco:
     _attributes: { phpName: Banco, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, required: false }
     es_nacional: { phpName: EsNacional, type: BOOLEAN, required: false, defaultValue: true }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
-    id_moneda: { phpName: IdMoneda, type: INTEGER, required: false, foreignTable: moneda, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id, onDelete: CASCADE }
+    id_moneda: { phpName: IdMoneda, type: INTEGER, required: false, foreignTable: moneda, foreignReference: id, onDelete: CASCADE }
   cuenta:
     _attributes: { phpName: Cuenta, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_banco: { phpName: IdBanco, type: INTEGER, required: false, foreignTable: banco, foreignReference: id }
+    id_banco: { phpName: IdBanco, type: INTEGER, required: false, foreignTable: banco, foreignReference: id, onDelete: CASCADE }
     swift: { phpName: Swift, type: VARCHAR, required: false }
     aba: { phpName: Aba, type: VARCHAR, required: false }
     beneficiario: { phpName: Beneficiario, type: VARCHAR, required: false }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
     numero: { phpName: Numero, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   estado:
     _attributes: { phpName: Estado, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '255', required: false }
-    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id, onDelete: CASCADE }
   expositor:
     _attributes: { phpName: Expositor, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, required: false }
     apellido: { phpName: Apellido, type: VARCHAR, required: false }
     rif: { phpName: Rif, type: VARCHAR, required: false }
-    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id, onDelete: CASCADE }
     nombre_empresa: { phpName: NombreEmpresa, type: VARCHAR, required: false }
     nombre_director: { phpName: NombreDirector, type: VARCHAR, required: false }
     nombre_ejecutivo_feria: { phpName: NombreEjecutivoFeria, type: VARCHAR, required: false }
@@ -94,26 +98,28 @@ propel:
     email: { phpName: Email, type: VARCHAR, required: false }
     sitio_web: { phpName: SitioWeb, type: VARCHAR, required: false }
     es_venezolano: { phpName: EsVenezolano, type: BOOLEAN, required: false }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
   expositor_feria:
     _attributes: { phpName: ExpositorFeria, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id }
-    id_tipo_distribuidor: { phpName: IdTipoDistribuidor, type: INTEGER, required: false, foreignTable: tipo_distribuidor, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id, onDelete: CASCADE }
+    id_tipo_distribuidor: { phpName: IdTipoDistribuidor, type: INTEGER, required: false, foreignTable: tipo_distribuidor, foreignReference: id, onDelete: CASCADE }
     sello_editorial: { phpName: SelloEditorial, type: VARCHAR, required: false }
     domicilio_fiscal: { phpName: DomicilioFiscal, type: VARCHAR, required: false }
     responsable_stand: { phpName: ResponsableStand, type: VARCHAR, required: false }
-    id_stand: { phpName: IdStand, type: INTEGER, required: false, foreignTable: stand, foreignReference: id }
+    id_stand: { phpName: IdStand, type: INTEGER, required: false, foreignTable: stand, foreignReference: id, onDelete: CASCADE }
     numero_titulos: { phpName: NumeroTitulos, type: INTEGER, required: false }
     numero_novedades: { phpName: NumeroNovedades, type: INTEGER, required: false }
     observaciones: { phpName: Observaciones, type: LONGVARCHAR, required: false }
-    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE }
     nombre_cenefa: { phpName: NombreCenefa, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
     _indexes: { expositor_feria_id_expositor_idx: [id_expositor], expositor_feria_id_feria_idx: [id_feria] }
   expositor_lineaeditorial:
     _attributes: { phpName: ExpositorLineaeditorial, idMethod: native }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id, onDelete: CASCADE }
     linea_editorial: { phpName: LineaEditorial, type: INTEGER, required: false }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     _indexes: { expositor_sello_editorial_id_exp: [id_expositor], expositor_sello_editorial_id_fer: [id_feria] }
@@ -123,29 +129,32 @@ propel:
     nombre: { phpName: Nombre, type: VARCHAR, size: '255', required: false }
     lema: { phpName: Lema, type: VARCHAR, size: '255', required: false }
     tema: { phpName: Tema, type: VARCHAR, size: '255', required: false }
-    id_tipo_feria: { phpName: IdTipoFeria, type: INTEGER, required: false, foreignTable: tipo_feria, foreignReference: id }
-    id_pais_homenajeado: { phpName: IdPaisHomenajeado, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
+    id_tipo_feria: { phpName: IdTipoFeria, type: INTEGER, required: false, foreignTable: tipo_feria, foreignReference: id, onDelete: CASCADE }
+    id_pais_homenajeado: { phpName: IdPaisHomenajeado, type: INTEGER, required: false, foreignTable: pais, foreignReference: id, onDelete: CASCADE }
     escritor_homenajeado: { phpName: EscritorHomenajeado, type: BOOLEAN, required: false }
     nombre_escritor_homenajeado: { phpName: NombreEscritorHomenajeado, type: VARCHAR, size: '255', required: false }
     fecha_inicio: { phpName: FechaInicio, type: DATE, required: false }
     fecha_fin: { phpName: FechaFin, type: DATE, required: false }
     hora_inicio: { phpName: HoraInicio, type: TIMESTAMP, required: false }
     hora_fin: { phpName: HoraFin, type: TIMESTAMP, required: false }
-    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
-    id_estado: { phpName: IdEstado, type: INTEGER, required: false, foreignTable: estado, foreignReference: id }
-    id_municipio: { phpName: IdMunicipio, type: INTEGER, required: false, foreignTable: municipio, foreignReference: id }
-    id_parroquia: { phpName: IdParroquia, type: INTEGER, required: false, foreignTable: parroquia, foreignReference: id }
-    id_region: { phpName: IdRegion, type: INTEGER, required: false, foreignTable: region, foreignReference: id }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id, onDelete: CASCADE }
+    id_estado: { phpName: IdEstado, type: INTEGER, required: false, foreignTable: estado, foreignReference: id, onDelete: CASCADE }
+    id_municipio: { phpName: IdMunicipio, type: INTEGER, required: false, foreignTable: municipio, foreignReference: id, onDelete: CASCADE }
+    id_parroquia: { phpName: IdParroquia, type: INTEGER, required: false, foreignTable: parroquia, foreignReference: id, onDelete: CASCADE }
+    id_region: { phpName: IdRegion, type: INTEGER, required: false, foreignTable: region, foreignReference: id, onDelete: CASCADE }
     direccion: { phpName: Direccion, type: VARCHAR, size: '255', required: false }
     extension_superficie: { phpName: ExtensionSuperficie, type: DECIMAL, required: false }
     libro_mas_vendido: { phpName: LibroMasVendido, type: VARCHAR, size: '255', required: false }
     autor_libro_mas_vendido: { phpName: AutorLibroMasVendido, type: VARCHAR, size: '255', required: false }
     costo: { phpName: Costo, type: DECIMAL, required: false }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
+    id_status_feria: { phpName: IdStatusFeria, type: INTEGER, required: false, foreignTable: status_feria, foreignReference: id }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   feria_selloeditorial:
     _attributes: { phpName: FeriaSelloeditorial, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_selloeditorial: { phpName: IdSelloeditorial, type: INTEGER, required: false, foreignTable: sello_editorial, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_selloeditorial: { phpName: IdSelloeditorial, type: INTEGER, required: false, foreignTable: sello_editorial, foreignReference: id, onDelete: CASCADE }
   incumplimiento_actividad:
     _attributes: { phpName: IncumplimientoActividad, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -154,10 +163,10 @@ propel:
   incumplmiento_actividad_finalizada:
     _attributes: { phpName: IncumplmientoActividadFinalizada, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_actividad_finalizada: { phpName: IdActividadFinalizada, type: INTEGER, required: false, foreignTable: actividad_finalizada, foreignReference: id }
-    id_incumplimiento_actividad: { phpName: IdIncumplimientoActividad, type: INTEGER, required: false, foreignTable: incumplimiento_actividad, foreignReference: id }
+    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id, onDelete: CASCADE }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_actividad_finalizada: { phpName: IdActividadFinalizada, type: INTEGER, required: false, foreignTable: actividad_finalizada, foreignReference: id, onDelete: CASCADE }
+    id_incumplimiento_actividad: { phpName: IdIncumplimientoActividad, type: INTEGER, required: false, foreignTable: incumplimiento_actividad, foreignReference: id, onDelete: CASCADE }
     _indexes: { incumplmiento_actividad_final_id: [id_actividad_finalizada, id_incumplimiento_actividad], incumplmiento_actividad_finaliz_: [id_incumplimiento_actividad], incumplmiento_actividad_finaliza: [id_feria] }
   linea_editorial:
     _attributes: { phpName: LineaEditorial, idMethod: native }
@@ -168,7 +177,7 @@ propel:
     _attributes: { phpName: LineaEditorialExposiorFeria, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     id_expositor_feria: { phpName: IdExpositorFeria, type: INTEGER, required: false }
-    id_linea_editorial: { phpName: IdLineaEditorial, type: INTEGER, required: false, foreignTable: linea_editorial, foreignReference: id }
+    id_linea_editorial: { phpName: IdLineaEditorial, type: INTEGER, required: false, foreignTable: linea_editorial, foreignReference: id, onDelete: CASCADE }
   moneda:
     _attributes: { phpName: Moneda, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -178,19 +187,19 @@ propel:
     _attributes: { phpName: Municipio, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '255', required: false }
-    id_estado: { phpName: IdEstado, type: INTEGER, required: false, foreignTable: estado, foreignReference: id }
+    id_estado: { phpName: IdEstado, type: INTEGER, required: false, foreignTable: estado, foreignReference: id, onDelete: CASCADE }
   pago_expositor:
     _attributes: { phpName: PagoExpositor, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     monto: { phpName: Monto, type: DECIMAL, required: false }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id }
-    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id }
-    id_expositor_feria: { phpName: IdExpositorFeria, type: INTEGER, required: false, foreignTable: expositor_feria, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id, onDelete: CASCADE }
+    id_usuario: { phpName: IdUsuario, type: INTEGER, required: false, foreignTable: usuario, foreignReference: id, onDelete: CASCADE }
+    id_expositor_feria: { phpName: IdExpositorFeria, type: INTEGER, required: false, foreignTable: expositor_feria, foreignReference: id, onDelete: CASCADE }
     status_actual: { phpName: StatusActual, type: BOOLEAN, required: false }
     pago_aprobado: { phpName: PagoAprobado, type: BOOLEAN, required: false }
     fecha: { phpName: Fecha, type: DATE, required: false, defaultExpr: now() }
-    id_banco: { phpName: IdBanco, type: INTEGER, required: false, foreignTable: banco, foreignReference: id }
+    id_banco: { phpName: IdBanco, type: INTEGER, required: false, foreignTable: banco, foreignReference: id, onDelete: CASCADE }
     numero_deposito: { phpName: NumeroDeposito, type: INTEGER, required: false }
     fecha_pago: { phpName: FechaPago, type: DATE, required: false }
     es_pago_banco_nacional: { phpName: EsPagoBancoNacional, type: BOOLEAN, required: false }
@@ -202,7 +211,7 @@ propel:
     _attributes: { phpName: Parroquia, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '255', required: true }
-    id_municipio: { phpName: IdMunicipio, type: INTEGER, required: false, foreignTable: municipio, foreignReference: id }
+    id_municipio: { phpName: IdMunicipio, type: INTEGER, required: false, foreignTable: municipio, foreignReference: id, onDelete: CASCADE }
   ponente:
     _attributes: { phpName: Ponente, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -211,17 +220,18 @@ propel:
     cedula: { phpName: Cedula, type: VARCHAR, required: false }
     rif: { phpName: Rif, type: VARCHAR, required: false }
     sexo: { phpName: Sexo, type: VARCHAR, required: false }
-    nacionalidad: { phpName: Nacionalidad, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
+    nacionalidad: { phpName: Nacionalidad, type: INTEGER, required: false, foreignTable: pais, foreignReference: id, onDelete: CASCADE }
     telefono_local: { phpName: TelefonoLocal, type: VARCHAR, required: false }
     telefono_celular: { phpName: TelefonoCelular, type: VARCHAR, required: false }
     email: { phpName: Email, type: VARCHAR, required: false }
     observaciones: { phpName: Observaciones, type: LONGVARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
     _indexes: { ponente_cedula_rif_idx: [cedula, rif], ponente_nacionalidad_idx: [nacionalidad] }
   ponente_actividad:
     _attributes: { phpName: PonenteActividad, idMethod: native }
-    id_ponente: { phpName: IdPonente, type: INTEGER, required: false, foreignTable: ponente, foreignReference: id }
-    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_ponente: { phpName: IdPonente, type: INTEGER, required: false, foreignTable: ponente, foreignReference: id, onDelete: CASCADE }
+    id_actividad: { phpName: IdActividad, type: INTEGER, required: false, foreignTable: actividad, foreignReference: id, onDelete: CASCADE }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     _indexes: { ponente_rel_actividad_id_activid: [id_actividad], ponente_rel_actividad_id_ponente: [id_ponente] }
   region:
@@ -232,7 +242,7 @@ propel:
     _attributes: { phpName: SelloEditorial, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     nombre: { phpName: Nombre, type: VARCHAR, size: '255', required: false }
-    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id }
+    id_pais: { phpName: IdPais, type: INTEGER, required: false, foreignTable: pais, foreignReference: id, onDelete: CASCADE }
   sf_guard_group:
     _attributes: { phpName: SfGuardGroup, idMethod: native }
     id: { phpName: Id, type: INTEGER, primaryKey: true, autoIncrement: true, required: true }
@@ -278,21 +288,26 @@ propel:
   stand:
     _attributes: { phpName: Stand, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
     metros: { phpName: Metros, type: VARCHAR, required: false }
     costo_bs: { phpName: CostoBs, type: VARCHAR, required: false }
     costo_ds: { phpName: CostoDs, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   status:
     _attributes: { phpName: Status, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
-    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id }
-    id_status: { phpName: IdStatus, type: INTEGER, required: false, foreignTable: tipo_status, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }
+    id_expositor: { phpName: IdExpositor, type: INTEGER, required: false, foreignTable: expositor, foreignReference: id, onDelete: CASCADE }
+    id_status: { phpName: IdStatus, type: INTEGER, required: false, foreignTable: tipo_status, foreignReference: id, onDelete: CASCADE }
     observaciones: { phpName: Observaciones, type: VARCHAR, required: false }
     fecha: { phpName: Fecha, type: DATE, required: false, defaultExpr: now() }
-    id_expositor_feria: { phpName: IdExpositorFeria, type: INTEGER, required: false, foreignTable: expositor_feria, foreignReference: id }
+    id_expositor_feria: { phpName: IdExpositorFeria, type: INTEGER, required: false, foreignTable: expositor_feria, foreignReference: id, onDelete: CASCADE }
     status_actual: { phpName: StatusActual, type: BOOLEAN, required: false }
-    id_pago_expositor: { phpName: IdPagoExpositor, type: INTEGER, required: false, foreignTable: pago_expositor, foreignReference: id }
+    id_pago_expositor: { phpName: IdPagoExpositor, type: INTEGER, required: false, foreignTable: pago_expositor, foreignReference: id, onDelete: CASCADE }
+  status_feria:
+    _attributes: { phpName: StatusFeria, idMethod: native }
+    id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
+    nombre: { phpName: Nombre, type: VARCHAR, required: false }
   tipo_actividad:
     _attributes: { phpName: TipoActividad, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
@@ -327,9 +342,10 @@ propel:
     unidad_responsable: { phpName: UnidadResponsable, type: VARCHAR, required: false }
     correo: { phpName: Correo, type: VARCHAR, required: false }
     telefono: { phpName: Telefono, type: VARCHAR, required: false }
+    activo: { phpName: Activo, type: BOOLEAN, required: false, defaultValue: true }
   visitante:
     _attributes: { phpName: Visitante, idMethod: native }
     id: { phpName: Id, type: BIGINT, primaryKey: true, autoIncrement: true, required: true }
     fecha: { phpName: Fecha, type: DATE, required: false }
     numero: { phpName: Numero, type: INTEGER, required: false }
-    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id }
+    id_feria: { phpName: IdFeria, type: INTEGER, required: false, foreignTable: feria, foreignReference: id, onDelete: CASCADE }

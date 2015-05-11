@@ -126,7 +126,7 @@ $sf_guard_user = $Usuario->getSfGuardUserGroup();
     }
 ?> 
 <div class="jumbotron">
-<h2>Listado de Ponentes</h2>
+<h2>Listado de Ponentes Registrados en el Sistema</h2>
 <br>
 <?php if ($sf_guard_user == 1 || $condicion) { ?> 
 <table width="100%">

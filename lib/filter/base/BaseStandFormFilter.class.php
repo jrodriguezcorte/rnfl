@@ -16,6 +16,7 @@ abstract class BaseStandFormFilter extends BaseFormFilterPropel
       'metros'   => new sfWidgetFormFilterInput(),
       'costo_bs' => new sfWidgetFormFilterInput(),
       'costo_ds' => new sfWidgetFormFilterInput(),
+      'activo'   => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -23,6 +24,7 @@ abstract class BaseStandFormFilter extends BaseFormFilterPropel
       'metros'   => new sfValidatorPass(array('required' => false)),
       'costo_bs' => new sfValidatorPass(array('required' => false)),
       'costo_ds' => new sfValidatorPass(array('required' => false)),
+      'activo'   => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('stand_filters[%s]');
@@ -45,6 +47,7 @@ abstract class BaseStandFormFilter extends BaseFormFilterPropel
       'metros'   => 'Text',
       'costo_bs' => 'Text',
       'costo_ds' => 'Text',
+      'activo'   => 'Boolean',
     );
   }
 }

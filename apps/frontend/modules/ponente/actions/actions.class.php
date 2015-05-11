@@ -15,7 +15,7 @@ class ponenteActions extends sfActions
   }
   
     public function executeIndexajax(sfWebRequest $request) {
-        $Ponentes = PonenteQuery::create()->orderByNombre('asc')->find();
+        $Ponentes = PonenteQuery::create()->filterByActivo(true)->orderByNombre('asc')->find();
         $id_feria = $request->getParameter('id_feria');
         if ($id_feria != '') {
             $feria = '/id_feria/'.$id_feria;
@@ -95,8 +95,10 @@ class ponenteActions extends sfActions
     $request->checkCSRFProtection();
 
     $Ponente = PonenteQuery::create()->findPk($request->getParameter('id'));
-    $this->forward404Unless($Ponente, sprintf('Object Ponente does not exist (%s).', $request->getParameter('id')));
-    $Ponente->delete();
+   // $this->forward404Unless($Ponente, sprintf('Object Ponente does not exist (%s).', $request->getParameter('id')));
+   // $Ponente->delete();
+    $Ponente->setActivo(false);
+    $Ponente->save();
     
      list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
 

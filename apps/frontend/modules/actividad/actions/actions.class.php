@@ -15,7 +15,11 @@ class actividadActions extends sfActions {
 
     public function executeIndexajax(sfWebRequest $request) {
        $id_feria = $request->getParameter('id_feria');
-       $Actividades = ActividadQuery::create()->filterByIdFeria($id_feria)->orderByFechaSugerida('desc')->find();
+       $Actividades = ActividadQuery::create()->
+               filterByActivo(true)->
+               filterByIdFeria($id_feria)->
+               orderByFechaSugerida('desc')->
+               find();
        $i = 0;
        $miid = sfContext::getInstance()->getUser()->getGuardUser()->getId();
       
@@ -173,9 +177,20 @@ class actividadActions extends sfActions {
         $id_feria = $request->getParameter('id_feria');
         $request->checkCSRFProtection();       
         $Actividad = ActividadQuery::create()->findPk($request->getParameter('id'));
-        $this->forward404Unless($Actividad, sprintf('Object Actividad does not exist (%s).', $request->getParameter('id')));
-        $Actividad->delete();
-
+   //     $this->forward404Unless($Actividad, sprintf('Object Actividad does not exist (%s).', $request->getParameter('id')));
+   //     $Actividad->delete();
+        $Actividad->setActivo(false);
+        $Actividad->save();
+        
+        $ActividadFinalizada = ActividadFinalizadaQuery::create()
+                ->filterByIdActividad($Actividad->getId())
+                ->findOne();
+        
+        if (count($ActividadFinalizada) > 0) {
+            $ActividadFinalizada->setActivo(false);       
+            $ActividadFinalizada->save();
+        }
+        
         $this->redirect('actividad/index?id_feria=' . $id_feria);
     }
 

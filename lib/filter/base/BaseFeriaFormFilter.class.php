@@ -35,6 +35,7 @@ abstract class BaseFeriaFormFilter extends BaseFormFilterPropel
       'costo'                       => new sfWidgetFormFilterInput(),
       'id_usuario'                  => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
       'id_status_feria'             => new sfWidgetFormPropelChoice(array('model' => 'StatusFeria', 'add_empty' => true)),
+      'activo'                      => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -61,6 +62,7 @@ abstract class BaseFeriaFormFilter extends BaseFormFilterPropel
       'costo'                       => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'id_usuario'                  => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Usuario', 'column' => 'id')),
       'id_status_feria'             => new sfValidatorPropelChoice(array('required' => false, 'model' => 'StatusFeria', 'column' => 'id')),
+      'activo'                      => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('feria_filters[%s]');
@@ -102,6 +104,7 @@ abstract class BaseFeriaFormFilter extends BaseFormFilterPropel
       'costo'                       => 'Number',
       'id_usuario'                  => 'ForeignKey',
       'id_status_feria'             => 'ForeignKey',
+      'activo'                      => 'Boolean',
     );
   }
 }

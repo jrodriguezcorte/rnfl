@@ -31,6 +31,7 @@ abstract class BaseExpositorForm extends BaseFormPropel
       'sitio_web'              => new sfWidgetFormInputText(),
       'es_venezolano'          => new sfWidgetFormInputCheckbox(),
       'id_usuario'             => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
+      'activo'                 => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -51,6 +52,7 @@ abstract class BaseExpositorForm extends BaseFormPropel
       'sitio_web'              => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'es_venezolano'          => new sfValidatorBoolean(array('required' => false)),
       'id_usuario'             => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id', 'required' => false)),
+      'activo'                 => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('expositor[%s]');

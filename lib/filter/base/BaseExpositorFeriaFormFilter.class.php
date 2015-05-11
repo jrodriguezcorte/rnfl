@@ -24,6 +24,7 @@ abstract class BaseExpositorFeriaFormFilter extends BaseFormFilterPropel
       'observaciones'        => new sfWidgetFormFilterInput(),
       'id_usuario'           => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
       'nombre_cenefa'        => new sfWidgetFormFilterInput(),
+      'activo'               => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -39,6 +40,7 @@ abstract class BaseExpositorFeriaFormFilter extends BaseFormFilterPropel
       'observaciones'        => new sfValidatorPass(array('required' => false)),
       'id_usuario'           => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Usuario', 'column' => 'id')),
       'nombre_cenefa'        => new sfValidatorPass(array('required' => false)),
+      'activo'               => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('expositor_feria_filters[%s]');
@@ -69,6 +71,7 @@ abstract class BaseExpositorFeriaFormFilter extends BaseFormFilterPropel
       'observaciones'        => 'Text',
       'id_usuario'           => 'ForeignKey',
       'nombre_cenefa'        => 'Text',
+      'activo'               => 'Boolean',
     );
   }
 }

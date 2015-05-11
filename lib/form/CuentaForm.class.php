@@ -13,6 +13,8 @@ class CuentaForm extends BaseCuentaForm
   {
      
         $this->widgetSchema['id_feria'] = new sfWidgetFormInputHidden();
+        
+        $this->widgetSchema['activo'] = new sfWidgetFormInputHidden();
       
         
         $this->setValidators(array(
@@ -22,7 +24,8 @@ class CuentaForm extends BaseCuentaForm
             'swift' => new sfValidatorString(array('required' => false)),
             'aba' => new sfValidatorString(array('required' => false)),
             'beneficiario' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
-            'id_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),   
+            'id_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => false)), 
+            'activo'  => new sfValidatorString(array('required' => false)),
         )); 
         
         $this->widgetSchema->setLabel('numero', 'Número de Cuenta <font color="red">*</font>'); 
@@ -33,6 +36,9 @@ class CuentaForm extends BaseCuentaForm
         
         $this->widgetSchema['numero'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Ingrese el número sin espacios ni guiones'));
       
+  //      $choices = array('1' => 'Activo', '0' => 'Inactivo');
+  //      $this->widgetSchema['activo'] = new sfWidgetFormChoice(array("choices" => $choices, "label" => "Estado"));
+        
         $this->getWidgetSchema()->moveField('numero', sfWidgetFormSchema::AFTER, 'id_banco'); 
         
         $this->getWidgetSchema()->moveField('beneficiario', sfWidgetFormSchema::AFTER, 'numero'); 

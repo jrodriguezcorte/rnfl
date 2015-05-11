@@ -677,7 +677,9 @@ class expositor_feriaActions extends sfActions
     
     $this->form->setDefault('id_tipo_distribuidor', 1);
     
-    $Stands = StandQuery::create()->filterByIdFeria($request->getParameter('id_feria'))->find();
+    $Stands = StandQuery::create()->filterByIdFeria($request->getParameter('id_feria'))
+            ->filterByActivo(true)
+            ->find();
     
     $arreglo = array();
     foreach ($Stands as $Stand) {

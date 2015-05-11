@@ -19,12 +19,13 @@ class feriaActions extends sfActions {
         $sf_guard_user = $Usuario->getSfGuardUserGroup();
         
         if ($sf_guard_user == 1) {
-            $Ferias = FeriaQuery::create()->orderByFechaInicio('desc')->find();
+            $Ferias = FeriaQuery::create()->filterByActivo(true)->orderByFechaInicio('desc')->find();
         }
         if ($sf_guard_user != 1) {
 
             $Ferias = FeriaQuery::create()
                     ->orderByFechaInicio('desc')
+                    ->filterByActivo(true)
                     ->condition('cond1', 'Feria.IdStatusFeria >= ? ', 1)
                     ->condition('cond2', 'Feria.IdUsuario = ? ', $Usuario->getId())
                     ->combine(array('cond1', 'cond2'), 'and', 'cond12')
@@ -38,6 +39,12 @@ class feriaActions extends sfActions {
             $Estado = EstadoQuery::create()->filterById($list->getIdEstado())->findOne();
             $Municipio = MunicipioQuery::create()->filterById($list->getIdMunicipio())->findOne();
             $Region = RegionQuery::create()->filterById($list->getIdRegion())->findOne();
+            $StatusFeria = StatusFeriaQuery::create()->filterById($list->getIdStatusFeria())->findOne();
+            if (count($StatusFeria) > 0) {
+                $StatusFeria =  $StatusFeria->getNombre();
+            } else {
+                $StatusFeria = '';
+            }
             $arreglo[] = array(
                 'Nombre' => $list->getNombre(),
                 'Fecha de Inicio' => implode("-", array_reverse(explode("-", $list->getFechaInicio()))),
@@ -46,6 +53,7 @@ class feriaActions extends sfActions {
                 'Estado' => $Estado->getNombre(),
                 'Municipio' => $Municipio->getNombre(),
                 'Region' => $Region->getNombre(),
+                'StatusFeria' => $StatusFeria,
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/feria/show/id/'.$list->getId().'"><img src="/images/search_mini.png"></a>'
                 . '      <a style="vertical-align:middle;" title="Ingresar" href="/feria/info/id_feria/'.$list->getId().'"><img src="/images/go_mini.png"></a>'
@@ -165,8 +173,52 @@ class feriaActions extends sfActions {
         $request->checkCSRFProtection();
 
         $Feria = FeriaQuery::create()->findPk($request->getParameter('id'));
-        $this->forward404Unless($Feria, sprintf('Object Feria does not exist (%s).', $request->getParameter('id')));
-        $Feria->delete();
+        $id_feria = $request->getParameter('id');
+//        $this->forward404Unless($Feria, sprintf('Object Feria does not exist (%s).', $request->getParameter('id')));
+//        $Feria->delete();
+        $Feria->setActivo(false);
+        $Feria->save();
+        
+        $Actividades = ActividadQuery::create()->filterByIdFeria($id_feria)->find();
+        $ActividadFinalizadas = ActividadFinalizadaQuery::create()->filterByIdFeria($id_feria)->find();
+        $Cuentas = CuentaQuery::create()->filterByIdFeria($id_feria)->find();
+        $ExpositorFerias = ExpositorFeriaQuery::create()->filterByIdFeria($id_feria)->find();
+        $Stands = StandQuery::create()->filterByIdFeria($id_feria)->find();
+        
+        if (count($Actividades) > 0) {
+            foreach($Actividades as $list) {
+                $list->setActivo(false);
+                $list->save();
+            }
+        }
+        
+        if (count($ActividadFinalizadas) > 0) {
+            foreach($ActividadFinalizadas as $list) {
+                $list->setActivo(false);
+                $list->save();
+            }
+        }
+        
+        if (count($Cuentas) > 0) {
+            foreach($Cuentas as $list) {
+                $list->setActivo(false);
+                $list->save();
+            }
+        }
+        
+        if (count($ExpositorFerias) > 0) {
+            foreach($ExpositorFerias as $list) {
+                $list->setActivo(false);
+                $list->save();
+            }
+        }
+        
+        if (count($Stands) > 0) {
+            foreach($Stands as $list) {
+                $list->setActivo(false);
+                $list->save();
+            }
+        }        
 
         $this->redirect('feria/index');
     }

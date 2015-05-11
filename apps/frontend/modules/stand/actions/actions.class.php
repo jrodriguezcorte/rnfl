@@ -16,13 +16,22 @@ class standActions extends sfActions
   
     public function executeIndexajax(sfWebRequest $request) {
        $id_feria = $request->getParameter('id_feria');
-       $Stands = StandQuery::create()->filterByIdFeria($id_feria)->orderById('desc')->find();
+       $Stands = StandQuery::create()->filterByIdFeria($id_feria)->
+               orderById('desc')->
+               find();
        
         foreach ($Stands as $list) {
+            $activo =  $list->getActivo();
+            if ($activo) {
+                $estado = 'Activo';
+            } else {
+                $estado = 'Inactivo';
+            }            
             $arreglo[] = array(
                 'Metros' => $list->getMetros(),
                 'Costo en Bs' => $list->getCostoBs(),
                 'Costo en USD' => $list->getCostoDs(),
+                'Estado' => $estado,
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/stand/show/id_feria/'.$list->getIdFeria().'/id/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'
                . '    ',
@@ -82,10 +91,12 @@ class standActions extends sfActions
     $id_feria = $request->getParameter('id_feria');
     
     $Stand = StandQuery::create()->findPk($request->getParameter('id'));
-    $this->forward404Unless($Stand, sprintf('Object Stand does not exist (%s).', $request->getParameter('id')));
-    $Stand->delete();
+//    $this->forward404Unless($Stand, sprintf('Object Stand does not exist (%s).', $request->getParameter('id')));
+//    $Stand->delete();
+    $Stand->setActivo(false);
+    $Stand->save();
 
-    $this->redirect('stand/index');
+    $this->redirect('stand/index?id_feria='.$id_feria);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)

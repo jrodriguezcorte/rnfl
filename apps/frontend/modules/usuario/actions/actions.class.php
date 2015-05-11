@@ -28,7 +28,7 @@ class usuarioActions extends sfActions
       $id_grupo = $Usuario->getSfGuardUserGroup();
       
       if ($id_grupo == 1) {
-       $Usuarios = UsuarioQuery::create()->orderByLogin('asc')->find();
+       $Usuarios = UsuarioQuery::create()->filterByActivo(true)->orderByLogin('asc')->find();
        
          foreach ($Usuarios as $list) {
             if ($list->getSfGuardUserGroup() == 1) {
@@ -133,9 +133,31 @@ class usuarioActions extends sfActions
     $request->checkCSRFProtection();
 
     $Usuario = UsuarioQuery::create()->findPk($request->getParameter('id'));
+    /*
     $this->forward404Unless($Usuario, sprintf('Object Usuario does not exist (%s).', $request->getParameter('id')));
     $Usuario->delete();
+     * 
+     */
 
+    $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+    $clave_acceso = "";
+    for($i=0;$i<16;$i++) {
+    $clave_acceso .= substr($str,rand(0,62),1);
+    }
+    
+    $login = $Usuario->getLogin();
+    $Usuario->setActivo(false);
+    $Usuario->setContrasena($clave_acceso);
+    $Usuario->setCedula($login);
+    $Usuario->setLogin($login.'_DEL');
+    $Usuario->save();
+            
+    $Sfusuario = SfGuardUserQuery::create()->findOneByUsername($login);
+    $Sfusuario->setPassword($clave_acceso);
+    $Sfusuario->setUsername($login.'_DEL');
+    $Sfusuario->setIsActive(false);
+    $Sfusuario->save();              
+    
     $this->redirect('usuario/index');
   }
 

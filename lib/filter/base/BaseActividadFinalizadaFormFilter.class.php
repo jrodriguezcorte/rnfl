@@ -31,6 +31,7 @@ abstract class BaseActividadFinalizadaFormFilter extends BaseFormFilterPropel
       'id_region'               => new sfWidgetFormPropelChoice(array('model' => 'Region', 'add_empty' => true)),
       'incluir_info_geografica' => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'id_usuario'              => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
+      'activo'                  => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -53,6 +54,7 @@ abstract class BaseActividadFinalizadaFormFilter extends BaseFormFilterPropel
       'id_region'               => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Region', 'column' => 'id')),
       'incluir_info_geografica' => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'id_usuario'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Usuario', 'column' => 'id')),
+      'activo'                  => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('actividad_finalizada_filters[%s]');
@@ -90,6 +92,7 @@ abstract class BaseActividadFinalizadaFormFilter extends BaseFormFilterPropel
       'id_region'               => 'ForeignKey',
       'incluir_info_geografica' => 'Boolean',
       'id_usuario'              => 'ForeignKey',
+      'activo'                  => 'Boolean',
     );
   }
 }

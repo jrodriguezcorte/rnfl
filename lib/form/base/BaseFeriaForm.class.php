@@ -38,6 +38,7 @@ abstract class BaseFeriaForm extends BaseFormPropel
       'costo'                       => new sfWidgetFormInputText(),
       'id_usuario'                  => new sfWidgetFormPropelChoice(array('model' => 'Usuario', 'add_empty' => true)),
       'id_status_feria'             => new sfWidgetFormPropelChoice(array('model' => 'StatusFeria', 'add_empty' => true)),
+      'activo'                      => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -65,6 +66,7 @@ abstract class BaseFeriaForm extends BaseFormPropel
       'costo'                       => new sfValidatorNumber(array('required' => false)),
       'id_usuario'                  => new sfValidatorPropelChoice(array('model' => 'Usuario', 'column' => 'id', 'required' => false)),
       'id_status_feria'             => new sfValidatorPropelChoice(array('model' => 'StatusFeria', 'column' => 'id', 'required' => false)),
+      'activo'                      => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('feria[%s]');

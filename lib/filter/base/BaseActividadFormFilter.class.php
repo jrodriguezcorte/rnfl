@@ -34,6 +34,7 @@ abstract class BaseActividadFormFilter extends BaseFormFilterPropel
       'publico_dirigido'      => new sfWidgetFormFilterInput(),
       'numero_ponentes'       => new sfWidgetFormFilterInput(),
       'actividad_cerrada'     => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'activo'                => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -59,6 +60,7 @@ abstract class BaseActividadFormFilter extends BaseFormFilterPropel
       'publico_dirigido'      => new sfValidatorPass(array('required' => false)),
       'numero_ponentes'       => new sfValidatorPass(array('required' => false)),
       'actividad_cerrada'     => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'activo'                => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('actividad_filters[%s]');
@@ -99,6 +101,7 @@ abstract class BaseActividadFormFilter extends BaseFormFilterPropel
       'publico_dirigido'      => 'Text',
       'numero_ponentes'       => 'Text',
       'actividad_cerrada'     => 'Boolean',
+      'activo'                => 'Boolean',
     );
   }
 }

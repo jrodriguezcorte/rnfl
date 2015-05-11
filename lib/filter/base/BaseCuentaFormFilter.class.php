@@ -18,6 +18,7 @@ abstract class BaseCuentaFormFilter extends BaseFormFilterPropel
       'beneficiario' => new sfWidgetFormFilterInput(),
       'id_feria'     => new sfWidgetFormPropelChoice(array('model' => 'Feria', 'add_empty' => true)),
       'numero'       => new sfWidgetFormFilterInput(),
+      'activo'       => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -27,6 +28,7 @@ abstract class BaseCuentaFormFilter extends BaseFormFilterPropel
       'beneficiario' => new sfValidatorPass(array('required' => false)),
       'id_feria'     => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Feria', 'column' => 'id')),
       'numero'       => new sfValidatorPass(array('required' => false)),
+      'activo'       => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('cuenta_filters[%s]');
@@ -51,6 +53,7 @@ abstract class BaseCuentaFormFilter extends BaseFormFilterPropel
       'beneficiario' => 'Text',
       'id_feria'     => 'ForeignKey',
       'numero'       => 'Text',
+      'activo'       => 'Boolean',
     );
   }
 }

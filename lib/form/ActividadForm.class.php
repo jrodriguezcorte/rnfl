@@ -22,11 +22,11 @@ class ActividadForm extends BaseActividadForm {
                 'years' => array_combine($years, $years),
                 'culture' => 'es'
                     ))
-        ));        
- 
+        ));
+
         $this->widgetSchema['hora'] = new sfWidgetFormTime(array
-            ('label' => 'Hora Sugerida', 'with_seconds' => false)); 
-        
+            ('label' => 'Hora Sugerida', 'with_seconds' => false));
+
         $this->widgetSchema['descripcion_actividad'] = new sfWidgetFormTextareaTinyMCE(array(
             'width' => 600,
             'height' => 200,
@@ -36,19 +36,21 @@ class ActividadForm extends BaseActividadForm {
     theme_advanced_buttons3: "",
     theme_advanced_buttons4: "",theme_advanced_path : false,',
         ));
-        ;  
-        
+        ;
+
         $this->widgetSchema['id_feria'] = new sfWidgetFormInputHidden();
-       
+
         $this->widgetSchema['id_usuario'] = new sfWidgetFormInputHidden();
-        
+
         $this->widgetSchema['actividad_cerrada'] = new sfWidgetFormInputHidden();
-        
+
         $this->getWidgetSchema()->moveField('fecha_sugerida', sfWidgetFormSchema::AFTER, 'email');
         $this->getWidgetSchema()->moveField('hora', sfWidgetFormSchema::AFTER, 'fecha_sugerida');
-        
+
         $this->widgetSchema['telefono_local'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: 0000-0000000'));
-        $this->widgetSchema['telefono_celular'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: 0000-0000000'));        
+        $this->widgetSchema['telefono_celular'] = new sfWidgetFormInputText(array(), array('placeholder' => 'Use el formato: 0000-0000000'));
+
+        $this->widgetSchema['activo'] = new sfWidgetFormInputHidden();
 
         $this->widgetSchema->setLabel('fecha_sugerida', 'Fecha Sugerida <font color="red">*</font>');
         $this->widgetSchema->setLabel('hora', 'Hora Sugerida <font color="red">*</font>');
@@ -70,34 +72,33 @@ class ActividadForm extends BaseActividadForm {
         $this->widgetSchema->setLabel('presente_autor', '¿Estará presente el Autor?');
         $this->widgetSchema->setLabel('publico_dirigido', 'Público Dirigido');
         $this->widgetSchema->setLabel('numero_ponentes', 'N° de Ponentes');
-        
-         $this->setValidators(array(
-            'id'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+
+        $this->setValidators(array(
+            'id' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
             'fecha_sugerida' => new sfValidatorDate(array('required' => false)),
-            'hora' => new sfValidatorDate(array('required' => false)), 
-            'id_feria'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
-            'id_usuario'  => new sfValidatorInteger(array('min' => 1, 'required' => false)),
-            'stand_numero'  => new sfValidatorInteger(array('min' => 1, 'required' => false)), 
-            'nombre_empresa' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
-            'direccion' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
-            'nombre_solicitante' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
-            'nombre_representante' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
-            'telefono_local' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
-            'telefono_celular' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
+            'hora' => new sfValidatorDate(array('required' => false)),
+            'id_feria' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'id_usuario' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'stand_numero' => new sfValidatorInteger(array('min' => 1, 'required' => false)),
+            'nombre_empresa' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
+            'direccion' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
+            'nombre_solicitante' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
+            'nombre_representante' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
+            'telefono_local' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
+            'telefono_celular' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
             'fax' => new sfValidatorString(array('required' => false)),
-            'email' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
+            'email' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
             'id_tipo_actividad' => new sfValidatorInteger(array('min' => 1, 'required' => true), array('required' => 'Debe ingresar un valor')),
-            'titulo' => new sfValidatorString(array(), array('required'   => 'Este campo es requerido',)),
+            'titulo' => new sfValidatorString(array(), array('required' => 'Este campo es requerido',)),
             'autor' => new sfValidatorString(array('required' => false)),
             'editorial' => new sfValidatorString(array('required' => false)),
             'descripcion_actividad' => new sfValidatorString(array('required' => false)),
             'presente_autor' => new sfValidatorString(array('required' => false)),
             'publico_dirigido' => new sfValidatorString(array('required' => false)),
             'numero_ponentes' => new sfValidatorString(array('required' => false)),
-            'actividad_cerrada' => new sfValidatorString(array('required' => false)),                          
-        ));         
-
-        
+            'actividad_cerrada' => new sfValidatorString(array('required' => false)),
+            'activo' => new sfValidatorString(array('required' => false)),
+        ));
     }
 
 }

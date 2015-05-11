@@ -25,6 +25,7 @@ abstract class BasePonenteForm extends BaseFormPropel
       'telefono_celular' => new sfWidgetFormInputText(),
       'email'            => new sfWidgetFormInputText(),
       'observaciones'    => new sfWidgetFormTextarea(),
+      'activo'           => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -39,6 +40,7 @@ abstract class BasePonenteForm extends BaseFormPropel
       'telefono_celular' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'email'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'observaciones'    => new sfValidatorString(array('required' => false)),
+      'activo'           => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('ponente[%s]');

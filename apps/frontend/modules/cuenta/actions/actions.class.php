@@ -18,14 +18,23 @@ class cuentaActions extends sfActions
     public function executeIndexajax(sfWebRequest $request) {
         
         $id_feria = $request->getParameter('id_feria');
-        $Cuentas = CuentaQuery::create()->filterByIdFeria($id_feria)->orderByIdBanco('asc')->find();
+        $Cuentas = CuentaQuery::create()->filterByIdFeria($id_feria)->
+                orderByIdBanco('asc')->
+                find();
         
         foreach ($Cuentas as $list) {
             $Banco = BancoQuery::create()->filterById($list->getIdBanco())->findOne();
+            $activo =  $list->getActivo();
+            if ($activo) {
+                $estado = 'Activo';
+            } else {
+                $estado = 'Inactivo';
+            }
             $arreglo[] = array(
                 'Banco' => $Banco->getNombre(),
                 'Numero' => $list->getNumero(),
                 'Beneficiario' => $list->getBeneficiario(),
+                'Estado' => $estado,
                 '' => ''
                 . '      <a style="vertical-align:middle;" title="Ver" href="/cuenta/show/id_feria/'.$list->getIdFeria().'/id/' . $list->getId() . '"><img src="/images/search_mini.png"></a>'
                 . '    ',
@@ -92,20 +101,24 @@ class cuentaActions extends sfActions
     $request->checkCSRFProtection();
 
     $Cuenta = CuentaQuery::create()->findPk($request->getParameter('id'));
-    $this->forward404Unless($Cuenta, sprintf('Object Cuenta does not exist (%s).', $request->getParameter('id')));
-    $Cuenta->delete();
-
-    $this->redirect('cuenta/index');
+ //   $this->forward404Unless($Cuenta, sprintf('Object Cuenta does not exist (%s).', $request->getParameter('id')));
+ //   $Cuenta->delete();
+    $Cuenta->setActivo(false);
+    $Cuenta->save();
+    
+    $this->redirect('cuenta/index?id_feria='.$id_feria);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+    $params = $request->getParameter($form->getName());
+    
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $Cuenta = $form->save();
 
-      $this->redirect('cuenta/index?id_feria=' . $this->prueba);
+      $this->redirect('cuenta/index?id_feria=' . $params['id_feria']);
     }
   }
 }

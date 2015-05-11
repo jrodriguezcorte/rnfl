@@ -29,12 +29,14 @@ class expositorActions extends sfActions
         if ($sf_guard_user != 1) {
             
                 $Expositores = ExpositorQuery::create()
+                                    ->filterByActivo(true)
                                     ->orderByNombre('asc')
                                         ->filterByIdUsuario($Usuario->getId())
                                     ->find();
         } else {       
         
             $Expositores = ExpositorQuery::create()
+                                        ->filterByActivo(true)
                                         ->orderByNombre('asc')
                                         ->find();
         }
@@ -69,11 +71,13 @@ class expositorActions extends sfActions
         if ($sf_guard_user == 3) {
             
                 $Expositores = ExpositorQuery::create()
+                                    ->filterByActivo(true)
                                     ->orderByNombre('asc')
                                         ->filterByIdUSuario($Usuario->getId())
                                     ->find();
         } else {
                  $Expositores = ExpositorQuery::create()
+                                    ->filterByActivo(true)
                                     ->orderByNombre('asc')
                                     ->useExpositorFeriaQuery()
                                         ->filterByIdFeria($id_feria)
@@ -210,9 +214,11 @@ class expositorActions extends sfActions
     $request->checkCSRFProtection();
 
     $Expositor = ExpositorQuery::create()->findPk($request->getParameter('id'));
-    $this->forward404Unless($Expositor, sprintf('Object Expositor does not exist (%s).', $request->getParameter('id')));
-    $Expositor->delete();
-
+   // $this->forward404Unless($Expositor, sprintf('Object Expositor does not exist (%s).', $request->getParameter('id')));
+   // $Expositor->delete();
+        $Expositor->setActivo(false);
+        $Expositor->save();
+        
      list($resto,$id_feria) = explode("id_feria/", $_SERVER['HTTP_REFERER']);
 
       $this->prueba = $id_feria;
@@ -220,7 +226,7 @@ class expositorActions extends sfActions
       if ($this->prueba != '') {
         $this->redirect('feria/info?id_feria='.$this->prueba);
       } else {
-        $this->redirect('ponente/index');  
+        $this->redirect('expositor/index');  
       }  
   }
 

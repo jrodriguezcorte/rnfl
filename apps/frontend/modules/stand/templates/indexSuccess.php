@@ -26,6 +26,7 @@
                             {name: 'Costo en Bs'},
                             {name: 'Costo en USD'},
                             {name: 'Metros'},
+                            {name: 'Estado'},
                             {name: ''},
                         ],
                         url: "<?php echo url_for('stand/indexajax?id_feria='.$sf_params->get('id_feria')) ?>",
@@ -52,6 +53,7 @@
                             {text: 'Metros Cuadrados (m<sup>2</sup>)', datafield: 'Metros', width: 200  },
                             {text: 'Costo en Bs', datafield: 'Costo en Bs', width: 200 },
                             {text: 'Costo en USD', datafield: 'Costo en USD', width: 200 },
+                            {text: 'Estado', datafield: 'Estado', width: 200 },
                             {text: '', datafield: '', width: 100 ,cellsalign: 'center'},                            
                         ]
                     });

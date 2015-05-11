@@ -27,6 +27,7 @@ abstract class BaseUsuarioFormFilter extends BaseFormFilterPropel
       'unidad_responsable'  => new sfWidgetFormFilterInput(),
       'correo'              => new sfWidgetFormFilterInput(),
       'telefono'            => new sfWidgetFormFilterInput(),
+      'activo'              => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -45,6 +46,7 @@ abstract class BaseUsuarioFormFilter extends BaseFormFilterPropel
       'unidad_responsable'  => new sfValidatorPass(array('required' => false)),
       'correo'              => new sfValidatorPass(array('required' => false)),
       'telefono'            => new sfValidatorPass(array('required' => false)),
+      'activo'              => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('usuario_filters[%s]');
@@ -78,6 +80,7 @@ abstract class BaseUsuarioFormFilter extends BaseFormFilterPropel
       'unidad_responsable'  => 'Text',
       'correo'              => 'Text',
       'telefono'            => 'Text',
+      'activo'              => 'Boolean',
     );
   }
 }
