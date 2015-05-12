@@ -56,7 +56,8 @@ CREATE TABLE actividad (
     presente_autor boolean,
     publico_dirigido character varying,
     numero_ponentes character varying,
-    actividad_cerrada boolean
+    actividad_cerrada boolean,
+    activo boolean DEFAULT true	
 );
 
 
@@ -88,7 +89,8 @@ CREATE TABLE actividad_finalizada (
     id_parroquia integer DEFAULT 1,
     id_region integer DEFAULT 1,
     incluir_info_geografica boolean,
-    id_usuario integer
+    id_usuario integer,
+    activo boolean DEFAULT true
 );
 
 
@@ -240,7 +242,8 @@ CREATE TABLE cuenta (
     aba character varying,
     beneficiario character varying,
     id_feria integer,
-    numero character varying
+    numero character varying,
+    activo boolean DEFAULT true	
 );
 
 
@@ -333,7 +336,8 @@ CREATE TABLE expositor (
     fax character varying,
     email character varying,
     sitio_web character varying,
-    es_venezolano boolean
+    es_venezolano boolean,
+    activo boolean DEFAULT true
 );
 
 
@@ -358,7 +362,8 @@ CREATE TABLE expositor_feria (
     numero_novedades integer,
     observaciones text,
     id_usuario integer,
-    nombre_cenefa character varying
+    nombre_cenefa character varying,
+    activo boolean DEFAULT true	
 );
 
 
@@ -483,7 +488,8 @@ CREATE TABLE feria (
     extension_superficie numeric,
     libro_mas_vendido character varying(255),
     autor_libro_mas_vendido character varying(255),
-    costo numeric
+    costo numeric,
+    activo boolean DEFAULT true
 );
 
 
@@ -941,7 +947,8 @@ CREATE TABLE ponente (
     telefono_local character varying,
     telefono_celular character varying,
     email character varying,
-    observaciones text
+    observaciones text,
+    activo boolean DEFAULT true
 );
 
 
@@ -1262,7 +1269,8 @@ CREATE TABLE stand (
     id_feria integer,
     metros character varying,
     costo_bs character varying,
-    costo_ds character varying
+    costo_ds character varying,
+    activo boolean DEFAULT true
 );
 
 
@@ -1492,7 +1500,8 @@ CREATE TABLE usuario (
     sector boolean DEFAULT true,
     unidad_responsable character varying,
     correo character varying,
-    telefono character varying
+    telefono character varying,
+    activo boolean DEFAULT true
 );
 
 

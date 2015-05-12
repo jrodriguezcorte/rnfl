@@ -673,9 +673,9 @@ class expositor_feriaActions extends sfActions
     
     $this->form->setDefault('id_expositor', $request->getParameter('id_expositor'));
     
-    $this->form->setDefault('id_pais', 1);
+//    $this->form->setDefault('id_pais', 1);
     
-    $this->form->setDefault('id_tipo_distribuidor', 1);
+//    $this->form->setDefault('id_tipo_distribuidor', 1);
     
     $Stands = StandQuery::create()->filterByIdFeria($request->getParameter('id_feria'))
             ->filterByActivo(true)

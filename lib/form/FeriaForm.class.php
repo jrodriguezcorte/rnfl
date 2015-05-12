@@ -49,7 +49,7 @@ class FeriaForm extends BaseFeriaForm
         $this->widgetSchema->setLabel('lema', 'Lema');
         $this->widgetSchema->setLabel('tema', 'Tema');
         $this->widgetSchema->setLabel('id_tipo_feria', 'Tipo de feria <font color="red">*</font>');
-        $this->widgetSchema->setLabel('id_pais_homenajeado', 'Pais invitado'); 
+        $this->widgetSchema->setLabel('id_pais_homenajeado', 'Pais invitado <font color="red">*</font>'); 
         $this->widgetSchema->setLabel('escritor_homenajeado', '¿Un escritor será homenajeado?');
         $this->widgetSchema->setLabel('nombre_escritor_homenajeado', 'Nombre del escritor homenajeado'); 
         $this->widgetSchema->setLabel('fecha_inicio', 'Fecha de Inicio <font color="red">*</font>');

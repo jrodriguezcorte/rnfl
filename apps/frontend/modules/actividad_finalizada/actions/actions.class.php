@@ -91,11 +91,11 @@ class actividad_finalizadaActions extends sfActions
             
     $this->form->setDefault('id_actividad', $request->getParameter('id_actividad'));
     
-    $this->form->setDefault('fecha_ejecucion', date('d-m-Y'));
+//    $this->form->setDefault('fecha_ejecucion', date('d-m-Y'));
     
-    $this->form->setDefault('hora_fin_ejecucion', date('H:i'));
+//    $this->form->setDefault('hora_fin_ejecucion', date('H:i'));
   
-    $this->form->setDefault('hora_ejecucion', date('H:i'));
+//    $this->form->setDefault('hora_ejecucion', date('H:i'));
     
     $this->form->setDefault('incluir_info_geografica', true);
     

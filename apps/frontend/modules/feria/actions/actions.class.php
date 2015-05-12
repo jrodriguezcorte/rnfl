@@ -112,27 +112,27 @@ class feriaActions extends sfActions {
     public function executeNew(sfWebRequest $request) {
         $this->form = new FeriaForm();
         
-        $this->form->setDefault('id_pais_homenajeado', 1);
+    //    $this->form->setDefault('id_pais_homenajeado', 1);
         
-        $this->form->setDefault('id_tipo_feria', 1);
+    //    $this->form->setDefault('id_tipo_feria', 1);
 
-        $this->form->setDefault('id_pais', 1);
+    //    $this->form->setDefault('id_pais', 1);
 
-        $this->form->setDefault('id_estado', 1);
+    //    $this->form->setDefault('id_estado', 1);
 
-        $this->form->setDefault('id_municipio', 1);
+    //    $this->form->setDefault('id_municipio', 1);
 
-        $this->form->setDefault('id_parroquia', 1);
+    //    $this->form->setDefault('id_parroquia', 1);
 
-        $this->form->setDefault('id_region', 1);
+    //    $this->form->setDefault('id_region', 1);
 
-        $this->form->setDefault('fecha_inicio', date("Y-m-d"));
+    //    $this->form->setDefault('fecha_inicio', date("Y-m-d"));
 
-        $this->form->setDefault('fecha_fin', date("Y-m-d"));
+    //    $this->form->setDefault('fecha_fin', date("Y-m-d"));
         
-        $this->form->setDefault('hora_inicio', date("Y-m-d h:m"));
+    //    $this->form->setDefault('hora_inicio', date("Y-m-d h:m"));
          
-        $this->form->setDefault('hora_fin', date("Y-m-d h:m"));
+    //    $this->form->setDefault('hora_fin', date("Y-m-d h:m"));
         
         $this->form->setDefault('id_status_feria', 1);
         
@@ -224,9 +224,10 @@ class feriaActions extends sfActions {
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
+  //      die(var_dump($request));
     //    die(var_dump($request->getParameter($form->getName())));
         $formulario = $request->getParameter($form->getName());
-        
+    //    die(var_dump($formulario));
         $params['hora_inicio']= $formulario['hora_inicio']['hour'].':'. $formulario['hora_inicio']['minute'];
         $params['hora_i']= (string) date("Y-m-d").' '.$params['hora_inicio'];
         $valor_inicio = date('Y-m-d H:i', strtotime($params['hora_i']));

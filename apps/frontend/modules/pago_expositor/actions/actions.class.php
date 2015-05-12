@@ -37,7 +37,7 @@ class pago_expositorActions extends sfActions
     
     $this->form->setDefault('id_usuario', $Usuario->getId());
     
-    $this->form->setDefault('fecha_pago', date("Y-m-d"));
+//    $this->form->setDefault('fecha_pago', date("Y-m-d"));
     
     // Caso Nacional  
     $Bancos = BancoQuery::create()

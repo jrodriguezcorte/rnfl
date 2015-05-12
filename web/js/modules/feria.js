@@ -26,7 +26,8 @@
 		$( "#feria_id_parroquia" ).parents("tr").show();
 		$("#feria_id_region").parents("tr").show();
 		$( "#feria_id_estado" ).prop( "disabled", false );
-		$( "#feria_id_municipio" ).prop( "disabled", true );
+//cambio realizado true a false en municipio
+		$( "#feria_id_municipio" ).prop( "disabled", false );
 		$( "#feria_id_parroquia" ).prop( "disabled", true );
 	    }  else {
 		$( "#feria_id_estado" ).prop( "disabled", true );

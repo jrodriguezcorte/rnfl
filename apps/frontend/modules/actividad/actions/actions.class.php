@@ -128,13 +128,13 @@ class actividadActions extends sfActions {
         
         $this->form = new ActividadForm();
 
-        $this->form->setDefault('id_tipo_actividad', 1);
+    //    $this->form->setDefault('id_tipo_actividad', 1);
 
-        $this->form->setDefault('fecha_sugerida', date("Y-m-d"));
+    //    $this->form->setDefault('fecha_sugerida', date("Y-m-d"));
 
-        $this->form->setDefault('hora', date("Y-m-d H:m"));
+    //    $this->form->setDefault('hora', date("Y-m-d H:m"));
 
-        $this->form->setDefault('alcanzo_tiempo', true);
+    //    $this->form->setDefault('alcanzo_tiempo', true);
         
         $this->form->setDefault('id_feria', $request->getParameter('id_feria'));
         

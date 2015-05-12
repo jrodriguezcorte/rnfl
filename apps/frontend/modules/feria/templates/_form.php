@@ -31,10 +31,14 @@ $Feria = FeriaQuery::create()->filterById($sf_params->get('id'))->findOne();
 <?php echo link_to(image_tag('back.png'), 'feria/index', array('title' => 'Volver al Listado')) ?>
 &nbsp;
 <?php 
-if ($sf_guard_user == 1 || ($sf_guard_user == 2 && ($Feria->getIdUsuario() == $Usuario->getId()))) {
+ if (!$form->getObject()->isNew() ) {
+
+    if ($sf_guard_user == 1 || ($sf_guard_user == 2 && ($Feria->getIdUsuario() == $Usuario->getId()))) {
 ?>
 <?php echo link_to(image_tag('delete.png'), 'feria/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => '¿Desea eliminar esta Feria y todos los elementos asociados a la misma?'))?>
-<?php } ?>
+<?php } 
+  }
+?>
 <script>
     jQuery(document).ready(function() {    
     

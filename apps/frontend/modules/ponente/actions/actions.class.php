@@ -51,7 +51,7 @@ class ponenteActions extends sfActions
   {
     $this->form = new PonenteForm();
     
-    $this->form->setDefault('nacionalidad', 1);
+  //  $this->form->setDefault('nacionalidad', 1);
   }
 
   public function executeCreate(sfWebRequest $request)

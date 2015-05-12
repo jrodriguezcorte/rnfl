@@ -138,9 +138,9 @@ class expositorActions extends sfActions
         
     $this->form = new ExpositorForm();
     
-    $this->form->setDefault('id_pais', 1);
+//    $this->form->setDefault('id_pais', 1);
     
-    $this->form->setDefault('es_venezolano', 1);
+//    $this->form->setDefault('es_venezolano', 1);
     
     $this->form->setDefault('id_usuario', $Usuario->getId());
   }
@@ -153,9 +153,9 @@ class expositorActions extends sfActions
     
     $this->form = new ExpositorForm();
     
-    $this->form->setDefault('id_pais', 1);
+ //   $this->form->setDefault('id_pais', 1);
     
-    $this->form->setDefault('es_venezolano', 1);
+ //   $this->form->setDefault('es_venezolano', 1);
     
     $this->form->setDefault('id_usuario', $Usuario->getId());
             
